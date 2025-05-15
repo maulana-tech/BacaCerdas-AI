@@ -23,7 +23,7 @@ BacaCerdas-AI/
 ### Prerequisites
 
 - Node.js >= 18.x
-- npm >= 8.x
+- pnpm >= 10.10.0
 
 ### Installation
 
