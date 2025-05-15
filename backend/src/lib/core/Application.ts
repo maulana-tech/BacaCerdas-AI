@@ -8,7 +8,7 @@ import Logger from "../middleware/logger";
 export default class Application {
   static app = express();
   static appname = "Baca Cerdas";
-  static port = process.env.PORT || 3000;
+  static port = process.env.PORT || 3030;
 
   constructor() {
     Middleware.init(Application.app);
