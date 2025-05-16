@@ -23,7 +23,7 @@ BacaCerdas-AI/
 ### Prerequisites
 
 - Node.js >= 18.x
-- npm >= 8.x
+- pnpm >= 10.10.0
 
 ### Installation
 
@@ -33,35 +33,20 @@ git clone https://github.com/yourusername/BacaCerdas-AI.git
 cd BacaCerdas-AI
 ```
 
-2. Set up the frontend
+2. Install dependecies
 ```bash
-cd frontend
-npm install
+pnpm install
 ```
 
-3. Set up the backend
-```bash
-cd ../backend
-npm install
-```
+3. Preparing local development by copy `.env.example` into `.env` and fill the missing value
 
 ### Running the Application
 
 #### Development Mode
 
-1. Start the backend server
-```bash
-cd backend
-npm run dev
-```
+To open the development mode on your local machine, use command `pnpm dev` or `pnpm run dev`, this command is going to run both frontend and the backend app simultaneously
 
-2. In a new terminal, start the frontend
-```bash
-cd frontend
-npm run dev
-```
-
-The frontend will be available at http://localhost:3000 and the backend at http://localhost:3001.
+The frontend will be available at http://localhost:3000 and the backend at http://localhost:3030.
 
 ## Technologies Used
 
