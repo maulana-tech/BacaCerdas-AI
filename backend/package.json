@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc",
+    "build": "rollup --config rollup.config.mjs",
     "start": "node dist/index.js",
     "dev": "nodemon --exec ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -28,9 +28,12 @@
     "@types/cors": "^2.8.18",
     "@types/express": "^5.0.1",
     "@types/node": "^22.15.18",
+    "esbuild": "^0.25.4",
     "eslint": "^9.26.0",
     "nodemon": "^3.1.10",
     "prettier": "3.5.3",
+    "rollup": "^4.40.2",
+    "rollup-plugin-esbuild": "^6.2.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.32.1"
