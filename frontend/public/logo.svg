@@ -1,0 +1,35 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Lingkaran latar belakang -->
+  <circle cx="60" cy="60" r="50" fill="url(#gradient)" />
+  
+  <!-- Buku terbuka -->
+  <path d="M35 40C35 38.8954 35.8954 38 37 38H83C84.1046 38 85 38.8954 85 40V80C85 81.1046 84.1046 82 83 82H37C35.8954 82 35 81.1046 35 80V40Z" fill="#1E293B" />
+  
+  <!-- Halaman kiri -->
+  <path d="M37 40H59V78H37C36.4477 78 36 77.5523 36 77V41C36 40.4477 36.4477 40 37 40Z" fill="#F8FAFC" />
+  
+  <!-- Halaman kanan -->
+  <path d="M61 40H83C83.5523 40 84 40.4477 84 41V77C84 77.5523 83.5523 78 83 78H61V40Z" fill="#F8FAFC" />
+  
+  <!-- Garis teks halaman kiri -->
+  <rect x="42" y="50" width="12" height="2" rx="1" fill="#94A3B8" />
+  <rect x="42" y="56" width="10" height="2" rx="1" fill="#94A3B8" />
+  <rect x="42" y="62" width="14" height="2" rx="1" fill="#94A3B8" />
+  
+  <!-- Garis teks halaman kanan -->
+  <rect x="66" y="50" width="12" height="2" rx="1" fill="#94A3B8" />
+  <rect x="66" y="56" width="10" height="2" rx="1" fill="#94A3B8" />
+  <rect x="66" y="62" width="14" height="2" rx="1" fill="#94A3B8" />
+  
+  <!-- Ikon AI -->
+  <circle cx="60" cy="60" r="15" fill="#3B82F6" />
+  <path d="M54 60L58 64L66 56" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Definisi gradient -->
+  <defs>
+    <linearGradient id="gradient" x1="10" y1="10" x2="110" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#1E40AF" />
+    </linearGradient>
+  </defs>
+</svg>
