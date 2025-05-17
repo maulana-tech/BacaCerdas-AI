@@ -72,13 +72,13 @@ export default function RootLayout({
                   <Link href="/dashboard" className="text-zinc-300 hover:text-white transition-colors">
                     Dashboard
                   </Link>
-                </nav>
-                <div className="flex items-center gap-3">
                   <SignOutButton>
-                    <button className="text-zinc-300 hover:text-white text-sm px-3 py-2 rounded-md transition-colors">
+                    <button className="ttext-zinc-300 hover:text-white transition-colors">
                       Keluar
                     </button>
                   </SignOutButton>
+                </nav>
+                <div className="flex items-center gap-3">
                   <UserButton afterSignOutUrl="/" />
                 </div>
               </SignedIn>

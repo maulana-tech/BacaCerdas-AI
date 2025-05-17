@@ -26,7 +26,7 @@ export default function HomePage() {
                   </Button>
                 </Link>
                 <Link href="/about">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto text-black hover:text-gray">
                     Pelajari Lebih Lanjut
                   </Button>
                 </Link>
