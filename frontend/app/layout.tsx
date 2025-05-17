@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider, SignedOut, SignInButton, SignedIn, UserButton, SignUpButton, SignOutButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
@@ -22,10 +22,14 @@ export const metadata: Metadata = {
   keywords: ["membaca", "AI", "pembelajaran", "pendidikan", "pemahaman"],
   authors: [{ name: "Tim BacaCerdas-AI" }],
   creator: "BacaCerdas-AI",
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#000000",
   robots: "index, follow",
 };
+
+export const viewport: Viewport = {
+  themeColor: "#000000",
+  width: "device-width",
+  initialScale: 1,
+}
 
 export default function RootLayout({
   children,
