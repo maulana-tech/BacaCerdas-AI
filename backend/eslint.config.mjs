@@ -11,7 +11,7 @@ export default tseslint.config(
       "**/dist/**",
       "**/node_modules/**",
       "**/coverage/**",
-      "**/build/**"
-    ]
-  }
+      "**/build/**",
+    ],
+  },
 );
