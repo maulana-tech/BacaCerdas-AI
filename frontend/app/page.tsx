@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/ui/navbar";
 
 export default function HomePage() {
-
   return (
     <div className="flex flex-col min-h-screen">
+      <Navbar />
+      
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-zinc-950 z-0"></div>
