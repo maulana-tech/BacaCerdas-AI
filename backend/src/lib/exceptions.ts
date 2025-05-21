@@ -6,7 +6,9 @@ export class BaseException extends Error {
     public readonly name: string,
     public readonly statusCode: number,
     public readonly message: string,
-    public readonly details?: unknown,
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public readonly details?: any,
   ) {
     super(message);
     Object.setPrototypeOf(this, new.target.prototype);
