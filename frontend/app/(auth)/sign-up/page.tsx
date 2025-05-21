@@ -73,7 +73,7 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-950 px-4 py-12">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-white to-gray-100 px-4 py-12">
       <div className="flex flex-col items-center mb-8 space-y-2">
         <Link href="/" className="mb-6">
           <Image 
@@ -85,8 +85,8 @@ export default function SignUpPage() {
             priority
           />
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight text-white">Bergabung dengan BacaCerdas-AI</h1>
-        <p className="text-zinc-400">Buat akun Anda untuk memulai</p>
+        <h1 className="text-3xl font-bold tracking-tight text-zinc-900">Bergabung dengan BacaCerdas-AI</h1>
+        <p className="text-zinc-600">Buat akun Anda untuk memulai</p>
       </div>
 
       <div className="w-full max-w-md">

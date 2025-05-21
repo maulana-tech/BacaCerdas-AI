@@ -65,7 +65,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-zinc-900 to-zinc-950 px-4 py-12">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-white to-gray-100 px-4 py-12">
       <div className="flex flex-col items-center mb-8 space-y-2">
         <Link href="/" className="mb-6">
           <Image 
@@ -77,12 +77,12 @@ export default function SignInPage() {
             priority
           />
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight text-white">Selamat Datang Kembali</h1>
-        <p className="text-zinc-400">Masuk ke akun BacaCerdas-AI Anda</p>
+        <h1 className="text-3xl font-bold tracking-tight text-zinc-900">Selamat Datang Kembali</h1>
+        <p className="text-zinc-600">Masuk ke akun BacaCerdas-AI Anda</p>
       </div>
-
+    
       <div className="w-full max-w-md">
-        <div className="overflow-hidden rounded-lg border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm shadow-xl transition-all duration-200">
+        <div className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xl transition-all duration-200">
           <div className="px-6 py-8">
             <form onSubmit={handleSubmit} className="space-y-4">
               {error && (
