@@ -4,17 +4,17 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: oklch(0.92 0.00 48.72);
+  --background: oklch(1.00 0.00 0.00);
   --foreground: oklch(0.28 0.04 260.03);
-  --card: oklch(0.97 0.00 106.42);
+  --card: oklch(1.00 0.00 0.00);
   --card-foreground: oklch(0.28 0.04 260.03);
-  --popover: oklch(0.97 0.00 106.42);
+  --popover: oklch(1.00 0.00 0.00);
   --popover-foreground: oklch(0.28 0.04 260.03);
   --primary: oklch(0.59 0.20 277.12);
   --primary-foreground: oklch(1.00 0 0);
-  --secondary: oklch(0.87 0.00 56.37);
+  --secondary: oklch(0.95 0.00 0.00);
   --secondary-foreground: oklch(0.45 0.03 256.80);
-  --muted: oklch(0.92 0.00 48.72);
+  --muted: oklch(0.95 0.00 0.00);
   --muted-foreground: oklch(0.55 0.02 264.36);
   --accent: oklch(0.94 0.03 321.94);
   --accent-foreground: oklch(0.37 0.03 259.73);

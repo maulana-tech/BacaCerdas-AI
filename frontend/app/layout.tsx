@@ -40,7 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
-      <body className={`${plusJakartaSans.variable} ${lora.variable} antialiased bg-zinc-950 text-zinc-100`}>
+      <body className={`${plusJakartaSans.variable} ${lora.variable} antialiased bg-white text-zinc-900`}>
         <main>
           {children}
         </main>
