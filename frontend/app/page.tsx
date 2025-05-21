@@ -1,45 +1,47 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Navbar } from "@/components/ui/navbar";
 
 export default function HomePage() {
-
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white">
+      <Navbar />
+      
       {/* Hero Section */}
-      <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-zinc-950 z-0"></div>
+      <section className="relative py-20 px-4 overflow-hidden bg-white">
+        <div className="absolute inset-0 bg-gradient-to-b from-blue-100/20 to-white z-0"></div>
         <div className="absolute inset-0 bg-[url('/hero-pattern.svg')] opacity-10 z-0"></div>
         
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="flex flex-col gap-6">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white">
-                Membaca Lebih Cerdas dengan <span className="text-blue-500">AI</span>
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-zinc-900">
+                Membaca Lebih Cerdas dengan <span className="text-blue-500 hover:text-blue-600 transition-colors">AI</span>
               </h1>
-              <p className="text-lg text-zinc-300 max-w-xl">
+              <p className="text-lg text-zinc-700 max-w-xl">
                 Platform membaca berbasis AI yang membantu Anda memahami, menganalisis, dan mempelajari konten dengan lebih efektif dan mendalam.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mt-4">
                 <Link href="/sign-up">
-                  <Button size="lg" className="w-full sm:w-auto">
+                  <Button size="lg" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
                     Mulai Gratis
                   </Button>
                 </Link>
                 <Link href="/about">
-                  <Button variant="outline" size="lg" className="w-full sm:w-auto text-black hover:text-gray">
+                  <Button variant="outline" size="lg" className="w-full sm:w-auto text-zinc-800 border-zinc-300 hover:bg-zinc-100 hover:border-zinc-400 transition-all duration-300 transform hover:scale-105">
                     Pelajari Lebih Lanjut
                   </Button>
                 </Link>
               </div>
             </div>
-            <div className="hidden lg:block">
+            <div className="hidden lg:block transform transition-transform duration-500 hover:scale-105">
               <Image
                 src="/hero-image.svg"
                 width={600}
                 height={500}
                 alt="BacaCerdas-AI Platform"
-                className="w-full h-auto"
+                className="w-full h-auto drop-shadow-xl"
                 priority
               />
             </div>
@@ -48,11 +50,11 @@ export default function HomePage() {
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 bg-zinc-900/50">
+      <section className="py-20 px-4 bg-blue-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Fitur Unggulan</h2>
-            <p className="text-zinc-400 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold mb-4 text-zinc-900">Fitur Unggulan</h2>
+            <p className="text-zinc-600 max-w-2xl mx-auto">
               Tingkatkan pengalaman membaca Anda dengan teknologi AI canggih
             </p>
           </div>
@@ -75,10 +77,13 @@ export default function HomePage() {
                 icon: "🧠"
               }
             ].map((feature, index) => (
-              <div key={index} className="bg-zinc-800/50 p-6 rounded-xl border border-zinc-700 hover:border-blue-500/50 transition-all duration-300">
+              <div 
+                key={index} 
+                className="bg-white p-6 rounded-xl border border-blue-100 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md transform hover:scale-105"
+              >
                 <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                <p className="text-zinc-400">{feature.description}</p>
+                <h3 className="text-xl font-semibold mb-2 text-zinc-900">{feature.title}</h3>
+                <p className="text-zinc-600">{feature.description}</p>
               </div>
             ))}
           </div>
@@ -86,11 +91,11 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Apa Kata Pengguna Kami</h2>
-            <p className="text-zinc-400 max-w-2xl mx-auto">
+            <h2 className="text-3xl font-bold mb-4 text-zinc-900">Apa Kata Pengguna Kami</h2>
+            <p className="text-zinc-600 max-w-2xl mx-auto">
               Bergabunglah dengan ribuan pengguna yang telah meningkatkan kemampuan membaca mereka
             </p>
           </div>
@@ -98,29 +103,32 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                name: "Budi Santoso",
+                name: "Catur Setyono",
                 role: "Mahasiswa",
                 quote: "BacaCerdas-AI membantu saya memahami materi kuliah yang kompleks dengan lebih mudah."
               },
               {
-                name: "Siti Rahayu",
+                name: "Muh Maulana F",
                 role: "Peneliti",
                 quote: "Saya menggunakan platform ini untuk menganalisis paper penelitian dan hasilnya sangat memuaskan."
               },
               {
-                name: "Ahmad Hidayat",
+                name: "Fawaz",
                 role: "Profesional",
                 quote: "Fitur ringkasan menghemat banyak waktu saya dalam membaca laporan panjang."
               }
             ].map((testimonial, index) => (
-              <div key={index} className="bg-zinc-900/80 p-6 rounded-xl border border-zinc-800">
-                <p className="text-zinc-300 mb-4">"{testimonial.quote}"</p>
+              <div 
+                key={index} 
+                className="bg-blue-50 p-6 rounded-xl border border-blue-100 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md transform hover:translate-y-[-5px]"
+              >
+                <p className="text-zinc-700 mb-4 italic">"{testimonial.quote}"</p>
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
+                  <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-md">
                     {testimonial.name.charAt(0)}
                   </div>
                   <div>
-                    <p className="font-medium">{testimonial.name}</p>
+                    <p className="font-medium text-zinc-900">{testimonial.name}</p>
                     <p className="text-sm text-zinc-500">{testimonial.role}</p>
                   </div>
                 </div>
@@ -131,16 +139,19 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-900/30 to-purple-900/30">
+      <section className="py-20 px-4 bg-gradient-to-r from-blue-50 to-purple-50">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-zinc-900">
             Siap untuk Meningkatkan Pengalaman Membaca Anda?
           </h2>
-          <p className="text-xl text-zinc-300 mb-8">
+          <p className="text-xl text-zinc-600 mb-8">
             Bergabunglah dengan BacaCerdas-AI dan mulai perjalanan membaca cerdas Anda hari ini.
           </p>
           <Link href="/sign-up">
-            <Button size="lg" className="px-8">
+            <Button 
+              size="lg" 
+              className="px-8 py-6 bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg text-lg"
+            >
               Mulai Sekarang
             </Button>
           </Link>
