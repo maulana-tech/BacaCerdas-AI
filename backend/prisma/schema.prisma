@@ -22,15 +22,21 @@ model User {
   id        String   @id @default(cuid())
   email     String   @unique
   username  String   @unique
-  clerkId   String   @unique
 
-  name      String?
-  role      String?
+  name      String
+  role      Role @default(STUDENT)
   image     String?
   location  String?
+  password  String
   
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("users")
+}
+
+enum Role {
+  STUDENT
+  TEACHER
+  ROOT
 }

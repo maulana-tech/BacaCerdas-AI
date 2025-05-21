@@ -2,6 +2,7 @@ declare global {
     namespace NodeJS {
         interface ProcessEnv {
             NEXT_OUTPUT?: "standalone" | "export";
+            NEXT_PUBLIC_API_URL?: string;
         }
     }
 

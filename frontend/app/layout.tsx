@@ -6,7 +6,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
   preload: true,
   display: "swap",
-  weight: ["600"],
+  weight: ["400", "600"],
   subsets: ["latin"],
 });
 
