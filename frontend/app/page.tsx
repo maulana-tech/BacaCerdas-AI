@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Navbar } from "@/components/ui/navbar";
+import { Navbar } from "@/components/navbar";
 
 export default function HomePage() {
   return (
@@ -23,7 +23,7 @@ export default function HomePage() {
                 Platform membaca berbasis AI yang membantu Anda memahami, menganalisis, dan mempelajari konten dengan lebih efektif dan mendalam.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mt-4">
-                <Link href="/sign-up">
+                <Link href="/auth/login">
                   <Button size="lg" className="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg">
                     Mulai Gratis
                   </Button>

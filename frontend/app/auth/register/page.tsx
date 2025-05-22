@@ -1,36 +1,8 @@
-"use client";
-
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import RegisterForm from "@/components/auth/register-form";
-import { useAuth } from "@/components/auth/auth-context";
-import { useEffect } from "react";
-
 export default function RegisterPage() {
-  const router = useRouter();
-  const { isAuthenticated } = useAuth();
-  
-  // Redirect ke halaman utama jika sudah login
-  useEffect(() => {
-    if (isAuthenticated) {
-      router.push("/");
-    }
-  }, [isAuthenticated, router]);
-  
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-white px-4">
-      <div className="w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-8 text-zinc-900">BacaCerdas AI</h1>
-        
-        <RegisterForm />
-        
-        <p className="mt-6 text-center text-sm text-gray-600">
-          Sudah punya akun?{" "}
-          <Link href="/auth/login" className="text-blue-600 hover:text-blue-800 font-medium">
-            Login sekarang
-          </Link>
-        </p>
-      </div>
-    </div>
-  );
+    return (
+        <div>
+            <h1>Register Page</h1>
+            <p>Register page content goes here.</p>
+        </div>
+    )
 }

@@ -6,4 +6,8 @@ export default class UserService {
   async getAllUsers() {
     return await this.userRepository.findAll();
   }
+
+  async getUserByEmailOrUsername(emailOrUsername: string) {
+    return await this.userRepository.findByEmailOrUsername(emailOrUsername);
+  }
 }

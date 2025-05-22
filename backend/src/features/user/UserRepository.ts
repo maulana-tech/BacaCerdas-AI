@@ -1,3 +1,4 @@
+import type { Role } from "@prisma/client";
 import prisma from "../../lib/prisma";
 
 import Repository from "../../lib/types/Repository";
@@ -18,6 +19,17 @@ export default class UserRepository extends Repository {
     return await this.model.findUnique({
       where: { id },
     });
+  }
+
+  async findByEmailOrUsername(emailOrUsername: string, role?: Role) {
+    const user = await this.model.findFirst({
+      where: {
+        OR: [{ email: emailOrUsername }, { username: emailOrUsername }],
+        ...(role && { role }),
+      },
+    });
+
+    return user;
   }
 
   async findAll() {
