@@ -23,27 +23,19 @@ interface CardInfo {
 interface UserProfile {
   name: string
   email: string
-  company: string
+  role: string
   phone: string
   accountNumber: string
-  bankName: string
-  cards: CardInfo[]
 }
 
 export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [userProfile, setUserProfile] = useState<UserProfile>({
-    name: "Dollar Gill",
-    email: "dollar@example.com",
-    company: "Acme Inc.",
+    name: "Students",
+    email: "students@example.com",
+    role: "Siswa",
     phone: "+1 (555) 123-4567",
-    accountNumber: "1234567890",
-    bankName: "Global Bank",
-    cards: [
-      { type: "Visa", number: "************1387", expiry: "12/24" },
-      { type: "Amex", number: "***********2468", expiry: "06/25" },
-      { type: "Mastercard", number: "************9876", expiry: "03/26" },
-    ],
+    accountNumber: "1234567890"
   })
 
   const handleInputChange = (field: keyof UserProfile, value: string) => {
@@ -56,12 +48,6 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
     console.log("Saving profile:", userProfile)
   }
 
-  const handleRemoveCard = (index: number) => {
-    setUserProfile((prev) => ({
-      ...prev,
-      cards: prev.cards.filter((_, i) => i !== index),
-    }))
-  }
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
@@ -116,12 +102,12 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="company">Company</Label>
+                <Label htmlFor="company">Role</Label>
                 <Input
                   id="company"
-                  value={userProfile.company}
+                  value={userProfile.role}
                   readOnly={!isEditing}
-                  onChange={(e) => handleInputChange("company", e.target.value)}
+                  onChange={(e) => handleInputChange("role", e.target.value)}
                 />
               </div>
               <div>
@@ -139,10 +125,6 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                 <Label htmlFor="accountNumber">Account Number</Label>
                 <Input id="accountNumber" value={userProfile.accountNumber} readOnly />
               </div>
-              <div>
-                <Label htmlFor="bankName">Bank Name</Label>
-                <Input id="bankName" value={userProfile.bankName} readOnly />
-              </div>
             </div>
           </div>
           <Card>
@@ -150,23 +132,6 @@ export function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
               <CardTitle>Cards</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                {userProfile.cards.map((card, index) => (
-                  <div key={index} className="flex items-center gap-4">
-                    <CreditCard className="h-6 w-6" />
-                    <div>
-                      <p className="font-medium">{card.type}</p>
-                      <p className="text-sm text-muted-foreground">{card.number}</p>
-                    </div>
-                    <p className="ml-auto text-sm">Expires: {card.expiry}</p>
-                    {isEditing && (
-                      <Button variant="destructive" size="icon" onClick={() => handleRemoveCard(index)}>
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    )}
-                  </div>
-                ))}
-              </div>
             </CardContent>
           </Card>
         </div>
