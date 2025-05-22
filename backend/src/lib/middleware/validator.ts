@@ -8,7 +8,6 @@ import { ValidationException } from "../exceptions";
  * @returns
  */
 const validator = {
-   
   validateBody:
     (schema: ZodSchema) =>
     (req: Request, res: Response, next: NextFunction) => {
