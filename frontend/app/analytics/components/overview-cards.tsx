@@ -1,33 +1,33 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { DollarSign, Users, CreditCard, TrendingUp } from "lucide-react"
+import { BookOpen, Users, Trophy, TrendingUp } from "lucide-react"
 
 const cards = [
   {
-    title: "Total Revenue",
-    icon: DollarSign,
-    amount: "$45,231.89",
-    description: "+20.1% from last month",
-    trend: "up",
-  },
-  {
-    title: "New Customers",
+    title: "Total Siswa Aktif",
     icon: Users,
-    amount: "2,350",
-    description: "+180.1% from last month",
+    amount: "2,847",
+    description: "+12.5% dari bulan lalu",
     trend: "up",
   },
   {
-    title: "Active Accounts",
-    icon: CreditCard,
-    amount: "12,234",
-    description: "+19% from last month",
+    title: "Materi Diselesaikan",
+    icon: BookOpen,
+    amount: "15,234",
+    description: "+8.2% dari bulan lalu",
     trend: "up",
   },
   {
-    title: "Growth Rate",
+    title: "Pencapaian Prestasi",
+    icon: Trophy,
+    amount: "1,847",
+    description: "+15.3% dari bulan lalu",
+    trend: "up",
+  },
+  {
+    title: "Tingkat Penyelesaian",
     icon: TrendingUp,
-    amount: "18.6%",
-    description: "+5.4% from last month",
+    amount: "87.5%",
+    description: "+2.1% dari bulan lalu",
     trend: "up",
   },
 ]
@@ -44,16 +44,6 @@ export function OverviewCards() {
           <CardContent>
             <div className="text-2xl font-bold">{card.amount}</div>
             <p className="text-xs text-muted-foreground">{card.description}</p>
-            <div
-              className={`mt-2 flex items-center text-xs ${card.trend === "up" ? "text-green-500" : "text-red-500"}`}
-            >
-              {card.trend === "up" ? (
-                <TrendingUp className="mr-1 h-3 w-3" />
-              ) : (
-                <TrendingUp className="mr-1 h-3 w-3 transform rotate-180" />
-              )}
-              {card.description.split(" ")[0]}
-            </div>
           </CardContent>
         </Card>
       ))}

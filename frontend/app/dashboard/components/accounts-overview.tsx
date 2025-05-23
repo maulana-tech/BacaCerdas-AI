@@ -3,93 +3,61 @@
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Wallet, Plus, Send, CreditCard, MoreHorizontal } from "lucide-react"
-import { AddMoneyModal } from "./add-money-modal"
-import { SendMoneyModal } from "./send-money-modal"
-import { RequestMoneyModal } from "./request-money-modal"
+import { BookOpen, Trophy, MoreHorizontal, Plus, Folder } from "lucide-react"
 
-const initialAccounts = [
-  { name: "Checking", balance: 7500 },
-  { name: "Savings", balance: 560000 },
-  { name: "Investment", balance: 5879000 },
+const initialProgress = [
+  { subject: "Matematika", progress: 75, totalLessons: 20, completedLessons: 15 },
+  { subject: "Bahasa Indonesia", progress: 90, totalLessons: 18, completedLessons: 16 },
+  { subject: "IPA", progress: 60, totalLessons: 25, completedLessons: 15 },
 ]
 
 export function AccountsOverview() {
-  const [accounts, setAccounts] = useState(initialAccounts)
-  const [isAddMoneyModalOpen, setIsAddMoneyModalOpen] = useState(false)
-  const [isSendMoneyModalOpen, setIsSendMoneyModalOpen] = useState(false)
-  const [isRequestMoneyModalOpen, setIsRequestMoneyModalOpen] = useState(false)
+  const [subjects] = useState(initialProgress)
+  const [isAddSubjectModalOpen, setIsAddSubjectModalOpen] = useState(false)
 
-  const totalBalance = accounts.reduce((sum, account) => sum + account.balance, 0)
-
-  const handleAddMoney = (amount) => {
-    setAccounts(
-      accounts.map((account) =>
-        account.name === "Checking" ? { ...account, balance: account.balance + amount } : account,
-      ),
-    )
-  }
-
-  const handleSendMoney = (amount, fromAccount) => {
-    setAccounts(
-      accounts.map((account) =>
-        account.name === fromAccount ? { ...account, balance: account.balance - amount } : account,
-      ),
-    )
-  }
-
-  const handleRequestMoney = (amount, contact) => {
-    console.log(`Requested $${amount} from ${contact.name}`)
-  }
+  const totalProgress = Math.round(subjects.reduce((sum, subject) => sum + subject.progress, 0) / subjects.length)
+  const totalLessons = subjects.reduce((sum, subject) => sum + subject.totalLessons, 0)
+  const completedLessons = subjects.reduce((sum, subject) => sum + subject.completedLessons, 0)
 
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-sm font-medium">Accounts Overview</CardTitle>
-        <Wallet className="h-4 w-4 text-muted-foreground" />
+        <CardTitle className="text-sm font-medium">Progress Belajar</CardTitle>
+        <BookOpen className="h-4 w-4 text-muted-foreground" />
       </CardHeader>
       <CardContent>
-        <div className="text-2xl font-bold">${totalBalance.toLocaleString()}</div>
-        <p className="text-xs text-muted-foreground">Total balance across all accounts</p>
+        <div className="text-2xl font-bold">{totalProgress}%</div>
+        <p className="text-xs text-muted-foreground">Progress keseluruhan pembelajaran</p>
         <div className="mt-4 space-y-2">
-          {accounts.map((account) => (
-            <div key={account.name} className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">{account.name}</span>
-              <span className="text-sm font-medium">${account.balance.toLocaleString()}</span>
+          {subjects.map((subject) => (
+            <div key={subject.subject} className="flex justify-between items-center">
+              <span className="text-sm text-muted-foreground">{subject.subject}</span>
+              <div className="text-right">
+                <span className="text-sm font-medium">{subject.progress}%</span>
+                <p className="text-xs text-muted-foreground">{subject.completedLessons}/{subject.totalLessons} pelajaran</p>
+              </div>
             </div>
           ))}
         </div>
         <div className="mt-4 grid grid-cols-2 gap-2">
-          <Button size="sm" onClick={() => setIsAddMoneyModalOpen(true)}>
-            <Plus className="mr-2 h-4 w-4" /> Add
-          </Button>
-          <Button size="sm" onClick={() => setIsSendMoneyModalOpen(true)}>
-            <Send className="mr-2 h-4 w-4" /> Send
-          </Button>
-          <Button size="sm" onClick={() => setIsRequestMoneyModalOpen(true)}>
-            <CreditCard className="mr-2 h-4 w-4" /> Request
+          <Button size="sm" onClick={() => setIsAddSubjectModalOpen(true)}>
+            <Plus className="mr-2 h-4 w-4" /> Add Study
           </Button>
           <Button size="sm" variant="outline">
-            <MoreHorizontal className="mr-2 h-4 w-4" /> More
+            <Trophy className="mr-2 h-4 w-4" /> Prestasi
+          </Button>
+          <Button size="sm" variant="outline">
+            <Folder className="mr-2 h-4 w-4" /> Project
+          </Button>
+          <Button size="sm" variant="outline">
+            <MoreHorizontal className="mr-2 h-4 w-4" /> Lainnya
           </Button>
         </div>
+        <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-950 rounded-lg">
+          <p className="text-sm font-medium text-blue-900 dark:text-blue-100">Total Pembelajaran</p>
+          <p className="text-xs text-blue-700 dark:text-blue-300">{completedLessons} dari {totalLessons} pelajaran selesai</p>
+        </div>
       </CardContent>
-      <AddMoneyModal
-        isOpen={isAddMoneyModalOpen}
-        onClose={() => setIsAddMoneyModalOpen(false)}
-        onAddMoney={handleAddMoney}
-      />
-      <SendMoneyModal
-        isOpen={isSendMoneyModalOpen}
-        onClose={() => setIsSendMoneyModalOpen(false)}
-        onSendMoney={handleSendMoney}
-        accounts={accounts}
-      />
-      <RequestMoneyModal
-        isOpen={isRequestMoneyModalOpen}
-        onClose={() => setIsRequestMoneyModalOpen(false)}
-        onRequestMoney={handleRequestMoney}
-      />
     </Card>
   )
 }

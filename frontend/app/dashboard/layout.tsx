@@ -3,7 +3,7 @@ import { SettingsProvider } from "../settings/contexts/settings-context"
 
 import type React from "react"
 import { TopNav } from "./components/top-nav"
-import { Sidebar } from "./components/sidebar"
+import { Sidebar } from "../../components/ui/sidebar"
 
 
 export default function RootLayout({
