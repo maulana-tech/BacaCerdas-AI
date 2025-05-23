@@ -15,7 +15,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import React from "react"
-import ActionSearchBar from "./action-search-bar"
 
 export function TopNav() {
   const pathname = usePathname()
@@ -40,7 +39,6 @@ export function TopNav() {
             ))}
           </nav>
         </div>
-        <ActionSearchBar />
         <div className="flex items-center gap-4">
           <Notifications />
           <DropdownMenu>

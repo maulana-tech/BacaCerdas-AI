@@ -1,40 +1,40 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { TrendingUp, Users, DollarSign, ArrowRight } from "lucide-react"
+import { BookOpen, Trophy, Target, ArrowRight } from "lucide-react"
 
 const metrics = [
   {
     id: 1,
-    title: "Revenue Growth",
-    subtitle: "Monthly revenue target",
-    icon: TrendingUp,
+    title: "Progress Belajar",
+    subtitle: "Target pembelajaran bulanan",
+    icon: BookOpen,
     status: "On Track",
     progress: 75,
-    target: 100000,
-    current: 75000,
-    unit: "$",
+    target: 100,
+    current: 75,
+    unit: "%",
   },
   {
     id: 2,
-    title: "Customer Acquisition",
-    subtitle: "New customers this quarter",
-    icon: Users,
+    title: "Tugas Diselesaikan",
+    subtitle: "Tugas selesai bulan ini",
+    icon: Target,
     status: "Behind",
     progress: 60,
-    target: 1000,
-    current: 600,
+    target: 25,
+    current: 15,
     unit: "",
   },
   {
     id: 3,
-    title: "Average Order Value",
-    subtitle: "Target AOV for Q3",
-    icon: DollarSign,
+    title: "Pencapaian Poin",
+    subtitle: "Target poin pembelajaran",
+    icon: Trophy,
     status: "Ahead",
     progress: 110,
-    target: 150,
-    current: 165,
-    unit: "$",
+    target: 1000,
+    current: 1100,
+    unit: "",
   },
 ]
 
@@ -48,9 +48,9 @@ export function BusinessMetrics() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Business Metrics</h2>
+        <h2 className="text-lg font-semibold">Metrik Pembelajaran</h2>
         <Button variant="outline" size="sm">
-          View Details <ArrowRight className="ml-2 h-4 w-4" />
+          Lihat Detail <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
@@ -64,7 +64,7 @@ export function BusinessMetrics() {
               <p className="text-xs text-muted-foreground">{metric.subtitle}</p>
               <div className="mt-2 space-y-2">
                 <div className="flex items-center justify-between text-xs">
-                  <span className={`px-2 py-1 rounded-full ${statusColors[metric.status]}`}>{metric.status}</span>
+                  <span className={`px-2 py-1 rounded-full ${statusColors[metric.status as keyof typeof statusColors]}`}>{metric.status}</span>
                   <span className="text-muted-foreground">
                     {metric.current} / {metric.target} {metric.unit}
                   </span>

@@ -29,12 +29,7 @@ const navigation = [
   { name: "Analytics", href: "/analytics", icon: BarChart2 },
   { name: "Organization", href: "/organization", icon: Building2 },
   { name: "Projects", href: "/projects", icon: Folder },
-  { name: "Transactions", href: "/transactions", icon: Wallet },
-  { name: "Invoices", href: "/invoices", icon: Receipt },
-  { name: "Payments", href: "/payments", icon: CreditCard },
-  { name: "Members", href: "/members", icon: Users2 },
   { name: "Chat", href: "/chat", icon: MessagesSquare },
-  { name: "Meetings", href: "/meetings", icon: Video },
 ]
 
 const bottomNavigation = [

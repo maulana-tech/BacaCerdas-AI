@@ -1,7 +1,7 @@
 import { AccountsOverview } from "./components/accounts-overview";
 import { BusinessMetrics } from "./components/business-metrics";
-import { QuickBillPay } from "./components/quick-bill-pay";
-import { RecentTransactions } from "./components/recent-transactions";
+import { QuickBillPay } from "./components/quick-assignnment-submission";
+import { RecentTransactions } from "./components/recent-learning-activities";
 
 
 export default function Dashboard() {
@@ -20,7 +20,6 @@ export default function Dashboard() {
           <QuickBillPay />
         </div>
       </div>
-
       <BusinessMetrics />
     </div>
   )
