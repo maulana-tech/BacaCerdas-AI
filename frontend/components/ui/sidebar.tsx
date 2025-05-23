@@ -12,7 +12,6 @@ import {
   Settings,
   HelpCircle,
   Menu,
-  ChevronLeft,
   PanelLeft,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -37,7 +36,7 @@ export function Sidebar() {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
 
-  const NavItem = ({ item, isBottom = false }: { item: { name: string; href: string; icon: any }; isBottom?: boolean }) => (
+  const NavItem = ({ item, isBottom= false }: { item: { name: string; href: string; icon: any }; isBottom?: boolean }) => (
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
         <Link

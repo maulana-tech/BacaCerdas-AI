@@ -1,17 +1,31 @@
+import { TopNav } from "@/app/dashboard/components/top-nav"
+import { SettingsProvider } from "@/app/settings/contexts/settings-context"
+import { Sidebar } from "@/components/ui/sidebar"
+import { TooltipProvider } from "@radix-ui/react-tooltip"
 
-import { SidebarProvider } from "../../../components/ui/sidebar";
-import { Sidebar } from "@/app/dashboard/components/sidebar";
+
+import type React from "react"
 
 
-interface DefaultDashboardLayoutProps {
-    children: React.ReactNode;
-}
 
-export default function DefaultDashboardLayout({ children }: DefaultDashboardLayoutProps) {
-    return (
-        <SidebarProvider>
-            <Sidebar />
-            {children}
-        </SidebarProvider>
-    )
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+          <SettingsProvider>
+            <TooltipProvider delayDuration={0}>
+              <div className="min-h-screen flex">
+                <Sidebar />
+                <div className="flex-1">
+                  <TopNav/>
+                  <div className="container mx-auto p-6 max-w-7xl">
+                    <main className="w-full">{children}</main>
+                  </div>
+                </div>
+              </div>
+            </TooltipProvider>
+          </SettingsProvider>
+  )
 }
