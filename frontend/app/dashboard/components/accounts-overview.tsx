@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { BookOpen, Trophy, Target, MoreHorizontal, Plus } from "lucide-react"
+import { BookOpen, Trophy, MoreHorizontal, Plus, Folder } from "lucide-react"
 
 const initialProgress = [
   { subject: "Matematika", progress: 75, totalLessons: 20, completedLessons: 15 },
@@ -47,7 +47,7 @@ export function AccountsOverview() {
             <Trophy className="mr-2 h-4 w-4" /> Prestasi
           </Button>
           <Button size="sm" variant="outline">
-            <Target className="mr-2 h-4 w-4" /> Target
+            <Folder className="mr-2 h-4 w-4" /> Project
           </Button>
           <Button size="sm" variant="outline">
             <MoreHorizontal className="mr-2 h-4 w-4" /> Lainnya
