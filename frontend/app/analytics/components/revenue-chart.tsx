@@ -5,30 +5,30 @@ import { Card, CardContent } from "@/components/ui/card"
 import { useTheme } from "next-themes"
 
 const data = [
-  { month: "Jan", revenue: 2000 },
-  { month: "Feb", revenue: 2200 },
-  { month: "Mar", revenue: 2700 },
-  { month: "Apr", revenue: 2400 },
-  { month: "May", revenue: 2800 },
-  { month: "Jun", revenue: 3200 },
-  { month: "Jul", revenue: 3100 },
-  { month: "Aug", revenue: 3400 },
-  { month: "Sep", revenue: 3700 },
-  { month: "Oct", revenue: 3500 },
-  { month: "Nov", revenue: 3800 },
-  { month: "Dec", revenue: 4200 },
+  { month: "Jan", progress: 78 },
+  { month: "Feb", progress: 82 },
+  { month: "Mar", progress: 85 },
+  { month: "Apr", progress: 88 },
+  { month: "May", progress: 91 },
+  { month: "Jun", progress: 94 },
+  { month: "Jul", progress: 92 },
+  { month: "Aug", progress: 96 },
+  { month: "Sep", progress: 98 },
+  { month: "Oct", progress: 95 },
+  { month: "Nov", progress: 97 },
+  { month: "Dec", progress: 99 },
 ]
 
 export function RevenueChart() {
   const { theme } = useTheme()
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: any[]; label?: string }) => {
     if (active && payload && payload.length) {
       return (
         <Card className="border-none shadow-lg">
           <CardContent className="p-2">
             <p className="text-sm font-semibold">{label}</p>
-            <p className="text-sm text-muted-foreground">Revenue: ${payload[0].value.toLocaleString()}</p>
+            <p className="text-sm text-muted-foreground">Kemajuan Pembelajaran: {payload[0].value}%</p>
           </CardContent>
         </Card>
       )
@@ -51,15 +51,14 @@ export function RevenueChart() {
           fontSize={12}
           tickLine={false}
           axisLine={false}
-          tickFormatter={(value) => `$${value}`}
         />
         <Tooltip content={<CustomTooltip />} />
         <Line
           type="monotone"
-          dataKey="revenue"
-          stroke={theme === "dark" ? "#adfa1d" : "#0ea5e9"}
+          dataKey="progress"
+          stroke={theme === "dark" ? "#3b82f6" : "#2563eb"}
           strokeWidth={2}
-          dot={false}
+          dot={{ fill: theme === "dark" ? "#3b82f6" : "#2563eb" }}
         />
       </LineChart>
     </ResponsiveContainer>

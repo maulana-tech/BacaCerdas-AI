@@ -6,29 +6,29 @@ import { useTheme } from "next-themes"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { useState } from "react"
 
-const customerSegmentationData = [
-  { segment: "High Value", count: 1200 },
-  { segment: "Medium Value", count: 5300 },
-  { segment: "Low Value", count: 8500 },
-  { segment: "At Risk", count: 1700 },
-  { segment: "Lost", count: 800 },
+const studentPerformanceData = [
+  { kategori: "Sangat Baik", jumlah: 450 },
+  { kategori: "Baik", jumlah: 1200 },
+  { kategori: "Cukup", jumlah: 800 },
+  { kategori: "Perlu Perbaikan", jumlah: 300 },
+  { kategori: "Kurang", jumlah: 97 },
 ]
 
-const retentionRateData = [
-  { month: "Jan", rate: 95 },
-  { month: "Feb", rate: 93 },
-  { month: "Mar", rate: 94 },
-  { month: "Apr", rate: 95 },
-  { month: "May", rate: 97 },
-  { month: "Jun", rate: 98 },
+const learningProgressData = [
+  { bulan: "Jan", tingkat: 78 },
+  { bulan: "Feb", tingkat: 82 },
+  { bulan: "Mar", tingkat: 85 },
+  { bulan: "Apr", tingkat: 88 },
+  { bulan: "May", tingkat: 91 },
+  { bulan: "Jun", tingkat: 94 },
 ]
 
-const channelPerformanceData = [
-  { channel: "Direct", acquisitions: 1200, revenue: 50000 },
-  { channel: "Organic Search", acquisitions: 2500, revenue: 75000 },
-  { channel: "Paid Search", acquisitions: 1800, revenue: 60000 },
-  { channel: "Social Media", acquisitions: 1500, revenue: 45000 },
-  { channel: "Email", acquisitions: 900, revenue: 30000 },
+const subjectPerformanceData = [
+  { mata_pelajaran: "Matematika", siswa_aktif: 1200, nilai_rata: 85 },
+  { mata_pelajaran: "Bahasa Indonesia", siswa_aktif: 1100, nilai_rata: 88 },
+  { mata_pelajaran: "IPA", siswa_aktif: 950, nilai_rata: 82 },
+  { mata_pelajaran: "IPS", siswa_aktif: 800, nilai_rata: 86 },
+  { mata_pelajaran: "Bahasa Inggris", siswa_aktif: 750, nilai_rata: 79 },
 ]
 
 export function AnalyticsTab() {
@@ -38,93 +38,67 @@ export function AnalyticsTab() {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
-        <h3 className="text-2xl font-semibold">Detailed Analytics</h3>
+        <h3 className="text-2xl font-semibold">Analitik Pembelajaran Detail</h3>
         <Select value={timeFrame} onValueChange={setTimeFrame}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Select time frame" />
+            <SelectValue placeholder="Pilih periode waktu" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="last_7_days">Last 7 Days</SelectItem>
-            <SelectItem value="last_30_days">Last 30 Days</SelectItem>
-            <SelectItem value="last_90_days">Last 90 Days</SelectItem>
-            <SelectItem value="last_12_months">Last 12 Months</SelectItem>
+            <SelectItem value="last_7_days">7 Hari Terakhir</SelectItem>
+            <SelectItem value="last_30_days">30 Hari Terakhir</SelectItem>
+            <SelectItem value="last_90_days">90 Hari Terakhir</SelectItem>
+            <SelectItem value="last_12_months">12 Bulan Terakhir</SelectItem>
           </SelectContent>
         </Select>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
         <Card className="col-span-4">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold">Customer Segmentation</CardTitle>
+            <CardTitle className="text-xl font-semibold">Segmentasi Performa Siswa</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={customerSegmentationData}>
-                <XAxis dataKey="segment" />
+              <BarChart data={studentPerformanceData}>
+                <XAxis dataKey="kategori" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="count" fill={theme === "dark" ? "#adfa1d" : "#0ea5e9"} />
+                <Bar dataKey="jumlah" fill={theme === "dark" ? "#3b82f6" : "#2563eb"} />
               </BarChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
         <Card className="col-span-3">
           <CardHeader>
-            <CardTitle className="text-xl font-semibold">Customer Retention Rate</CardTitle>
+            <CardTitle className="text-xl font-semibold">Tingkat Kemajuan Belajar</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={retentionRateData}>
-                <XAxis dataKey="month" />
+              <LineChart data={learningProgressData}>
+                <XAxis dataKey="bulan" />
                 <YAxis />
                 <Tooltip />
-                <Line type="monotone" dataKey="rate" stroke={theme === "dark" ? "#adfa1d" : "#0ea5e9"} />
+                <Line type="monotone" dataKey="tingkat" stroke={theme === "dark" ? "#10b981" : "#059669"} strokeWidth={2} />
               </LineChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold">Channel Performance</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={channelPerformanceData}>
-                <XAxis dataKey="channel" />
-                <YAxis yAxisId="left" />
-                <YAxis yAxisId="right" orientation="right" />
-                <Tooltip />
-                <Bar yAxisId="left" dataKey="acquisitions" fill={theme === "dark" ? "#adfa1d" : "#0ea5e9"} />
-                <Bar yAxisId="right" dataKey="revenue" fill={theme === "dark" ? "#1e40af" : "#3b82f6"} />
-              </BarChart>
-            </ResponsiveContainer>
-          </CardContent>
-        </Card>
-        <Card className="col-span-3">
-          <CardHeader>
-            <CardTitle className="text-xl font-semibold">Key Metrics</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <p className="text-sm font-medium text-muted-foreground">Customer Lifetime Value</p>
-              <p className="text-2xl font-bold">$1,250</p>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-muted-foreground">Net Promoter Score</p>
-              <p className="text-2xl font-bold">72</p>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-muted-foreground">Customer Acquisition Cost</p>
-              <p className="text-2xl font-bold">$75</p>
-            </div>
-            <div>
-              <p className="text-sm font-medium text-muted-foreground">Average Order Value</p>
-              <p className="text-2xl font-bold">$120</p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-xl font-semibold">Performa Mata Pelajaran</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={subjectPerformanceData}>
+              <XAxis dataKey="mata_pelajaran" />
+              <YAxis />
+              <Tooltip />
+              <Bar dataKey="siswa_aktif" fill={theme === "dark" ? "#8b5cf6" : "#7c3aed"} />
+              <Bar dataKey="nilai_rata" fill={theme === "dark" ? "#f59e0b" : "#d97706"} />
+            </BarChart>
+          </ResponsiveContainer>
+        </CardContent>
+      </Card>
     </div>
   )
 }
