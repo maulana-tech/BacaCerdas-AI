@@ -8,28 +8,28 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Download, Printer } from "lucide-react"
 
 const reportTypes = [
-  "Financial Summary",
-  "Customer Acquisition",
-  "Product Performance",
-  "Risk Assessment",
-  "Marketing Campaign Analysis",
-  "Operational Efficiency",
+  "Ringkasan Pembelajaran",
+  "Kemajuan Siswa",
+  "Performa Mata Pelajaran",
+  "Analisis Prestasi",
+  "Laporan Aktivitas",
+  "Efektivitas Pembelajaran",
 ]
 
 const dummyReportData = {
-  "Financial Summary": [
-    { id: 1, metric: "Total Revenue", value: "$1,234,567" },
-    { id: 2, metric: "Net Profit", value: "$345,678" },
-    { id: 3, metric: "Operating Expenses", value: "$567,890" },
-    { id: 4, metric: "Gross Margin", value: "28%" },
-    { id: 5, metric: "Return on Investment", value: "15%" },
+  "Ringkasan Pembelajaran": [
+    { id: 1, metric: "Total Siswa Aktif", value: "2,847" },
+    { id: 2, metric: "Materi Diselesaikan", value: "15,234" },
+    { id: 3, metric: "Rata-rata Nilai", value: "85.7" },
+    { id: 4, metric: "Tingkat Penyelesaian", value: "87.5%" },
+    { id: 5, metric: "Prestasi Diraih", value: "1,847" },
   ],
-  "Customer Acquisition": [
-    { id: 1, metric: "New Customers", value: "1,234" },
-    { id: 2, metric: "Customer Acquisition Cost", value: "$50" },
-    { id: 3, metric: "Conversion Rate", value: "3.5%" },
-    { id: 4, metric: "Customer Lifetime Value", value: "$1,200" },
-    { id: 5, metric: "Churn Rate", value: "2.3%" },
+  "Kemajuan Siswa": [
+    { id: 1, metric: "Siswa Baru", value: "234" },
+    { id: 2, metric: "Tingkat Retensi", value: "92.3%" },
+    { id: 3, metric: "Kemajuan Rata-rata", value: "94.2%" },
+    { id: 4, metric: "Sertifikat Diterbitkan", value: "456" },
+    { id: 5, metric: "Tingkat Kepuasan", value: "4.8/5" },
   ],
   // Add more report types here
 }
@@ -51,57 +51,64 @@ export function ReportsTab() {
 
   return (
     <div className="space-y-4">
+      <div className="flex justify-between items-center">
+        <h3 className="text-2xl font-semibold">Laporan Pembelajaran</h3>
+        <div className="flex items-center space-x-2">
+          <Button onClick={handleDownloadReport} variant="outline" size="sm">
+            <Download className="mr-2 h-4 w-4" />
+            Unduh
+          </Button>
+          <Button onClick={handlePrintReport} variant="outline" size="sm">
+            <Printer className="mr-2 h-4 w-4" />
+            Cetak
+          </Button>
+        </div>
+      </div>
+      
       <Card>
         <CardHeader>
-          <CardTitle className="text-xl font-semibold">Generate Report</CardTitle>
+          <CardTitle>Generator Laporan</CardTitle>
         </CardHeader>
-        <CardContent className="flex items-center space-x-4">
-          <Select value={selectedReport} onValueChange={setSelectedReport}>
-            <SelectTrigger className="w-[240px]">
-              <SelectValue placeholder="Select report type" />
-            </SelectTrigger>
-            <SelectContent>
-              {reportTypes.map((type) => (
-                <SelectItem key={type} value={type}>
-                  {type}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          <Button onClick={handleGenerateReport}>Generate Report</Button>
+        <CardContent className="space-y-4">
+          <div className="flex items-center space-x-4">
+            <Select value={selectedReport} onValueChange={setSelectedReport}>
+              <SelectTrigger className="w-[300px]">
+                <SelectValue placeholder="Pilih jenis laporan" />
+              </SelectTrigger>
+              <SelectContent>
+                {reportTypes.map((type) => (
+                  <SelectItem key={type} value={type}>
+                    {type}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Button onClick={handleGenerateReport}>Generate Laporan</Button>
+          </div>
         </CardContent>
       </Card>
+
       <Card>
         <CardHeader>
-          <CardTitle className="text-xl font-semibold">{selectedReport} Report</CardTitle>
+          <CardTitle>{selectedReport}</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Metric</TableHead>
-                <TableHead>Value</TableHead>
+                <TableHead>Metrik</TableHead>
+                <TableHead>Nilai</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {dummyReportData[selectedReport]?.map((row) => (
-                <TableRow key={row.id}>
-                  <TableCell>{row.metric}</TableCell>
-                  <TableCell>{row.value}</TableCell>
+              {(dummyReportData[selectedReport as keyof typeof dummyReportData] || []).map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>{item.metric}</TableCell>
+                  <TableCell>{item.value}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
           </Table>
-          <div className="flex justify-end space-x-2 mt-4">
-            <Button variant="outline" onClick={handleDownloadReport}>
-              <Download className="mr-2 h-4 w-4" />
-              Download
-            </Button>
-            <Button variant="outline" onClick={handlePrintReport}>
-              <Printer className="mr-2 h-4 w-4" />
-              Print
-            </Button>
-          </div>
         </CardContent>
       </Card>
     </div>

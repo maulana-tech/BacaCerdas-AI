@@ -4,32 +4,31 @@ import { Card, CardContent } from "@/components/ui/card"
 const userActivities = [
   {
     id: "1",
-    user: "Fiona Garcia",
-    action: "Logged in",
-    time: "2 minutes ago",
-    avatar: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/9720029.jpg-Yf9h2a3kT7rYyCb648iLIeHThq5wEy.jpeg",
+    user: "Sari Dewi",
+    action: "Menyelesaikan Matematika Bab 5",
+    time: "2 menit yang lalu",
+    avatar: "https://github.com/shadcn.png",
   },
   {
     id: "2",
-    user: "George Lee",
-    action: "Updated profile",
-    time: "10 minutes ago",
-    avatar:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/27470341_7294795.jpg-XE0zf7R8tk4rfA1vm4fAHeZ1QoVEOo.jpeg",
+    user: "Ahmad Rizki",
+    action: "Mengumpulkan tugas Bahasa Indonesia",
+    time: "10 menit yang lalu",
+    avatar: "https://github.com/shadcn.png",
   },
   {
     id: "3",
-    user: "Hannah Kim",
-    action: "Made a transfer",
-    time: "15 minutes ago",
-    avatar: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/799.jpg-0tEi4Xvg5YsFoGoQfQc698q4Dygl1S.jpeg",
+    user: "Maya Sari",
+    action: "Meraih prestasi IPA tingkat lanjut",
+    time: "15 menit yang lalu",
+    avatar: "https://github.com/shadcn.png",
   },
   {
     id: "4",
-    user: "Ian Foster",
-    action: "Opened new account",
-    time: "30 minutes ago",
-    avatar: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/9334228.jpg-eOsHCkvVrVAwcPHKYSs5sQwVKsqWpC.jpeg",
+    user: "Budi Santoso",
+    action: "Memulai kursus Bahasa Inggris",
+    time: "30 menit yang lalu",
+    avatar: "https://github.com/shadcn.png",
   },
 ]
 
