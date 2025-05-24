@@ -1,4 +1,4 @@
-import type { Role } from "@prisma/client";
+import type { Role, User } from "@prisma/client";
 import prisma from "../../lib/prisma";
 
 import Repository from "../../lib/types/Repository";
@@ -34,5 +34,13 @@ export default class UserRepository extends Repository {
 
   async findAll() {
     return await this.model.findMany();
+  }
+
+  async create(data: Omit<User, "id" | "createdAt" | "updatedAt">) {
+    return await this.model.create({
+      data: {
+        ...data,
+      },
+    });
   }
 }

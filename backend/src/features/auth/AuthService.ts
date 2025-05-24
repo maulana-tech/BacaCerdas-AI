@@ -50,10 +50,29 @@ export default class AuthService {
   }
 
   // Example method to register a new user
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async registerUser(userData: unknown) {
+  async registerUser(userData: Omit<User, "createdAt" | "updatedAt">) {
     // Logic to register a new user
     // This might involve hashing the password and saving the user data to a database
+    const userRepository = new UserRepository();
+
+    const existingUser = await userRepository.findByEmailOrUsername(
+      userData.email,
+      userData.role,
+    );
+
+    if (existingUser) {
+      throw new UnauthorizedException("User already exists");
+    }
+
+    const hashedPassword = bcrypt.hashSync(userData.password, 10);
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...newUser } = await userRepository.create({
+      ...userData,
+      password: hashedPassword,
+    });
+
+    return newUser;
   }
 
   generateToken(user: Omit<User, "password">) {

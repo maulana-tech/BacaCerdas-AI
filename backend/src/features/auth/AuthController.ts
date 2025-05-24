@@ -12,8 +12,6 @@ import AuthService from "./AuthService";
 export default class AuthController {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async login(req: Request, res: Response, next: NextFunction) {
-    // ! Important: change this logic to store a new user
-
     const user = await new AuthService().authenticateUser(req.body.data);
 
     res.status(200).json({
@@ -23,11 +21,12 @@ export default class AuthController {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async register(req: Request, res: Response, next: NextFunction) {
-    // ! Important: change this logic to store a new user
-    // const users = new UserService().createNewUser();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { confirmPassword, acceptTerms, ...data } = req.body.data;
+    const user = await new AuthService().registerUser(data);
 
     res.status(201).json({
-      data: {},
+      data: user,
     });
   }
 }

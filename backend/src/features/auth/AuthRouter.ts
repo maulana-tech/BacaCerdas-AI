@@ -14,6 +14,10 @@ export default class AuthRouter implements APIRouter {
         validator.validateBody(AuthSchema.login()),
         expressAsyncHandler(new AuthController().login),
       )
-      .post("/register", expressAsyncHandler(new AuthController().register));
+      .post(
+        "/register",
+        validator.validateBody(AuthSchema.register()),
+        expressAsyncHandler(new AuthController().register),
+      );
   }
 }
