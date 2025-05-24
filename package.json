@@ -7,8 +7,7 @@
 	"lint-staged": {
 		"backend/**/*.ts": [
 			"pnpm --filter backend pretty",
-			"pnpm --filter backend lint",
-			"git add"
+			"pnpm --filter backend lint"
 		]
 	},
 	"devDependencies": {

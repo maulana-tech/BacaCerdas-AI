@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 
 import { Eye, EyeClosed, LoaderCircle } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import Link from "next/link";
 
 export default function LoginPage() {
 
@@ -100,7 +101,7 @@ export default function LoginPage() {
                 )}
               />
 
-              <FormField 
+              <FormField
                 control={form.control}
                 name="role"
                 render={({ field }) => (
@@ -126,7 +127,11 @@ export default function LoginPage() {
                 <p className="text-sm w-full relative before:content-[''] before:block before:h-0.5 before:w-1/3 before:bg-muted before:absolute before:top-1/2 before:left-1/24 after:content-[''] after:block after:h-0.5 after:w-1/3 after:bg-muted after:absolute after:top-1/2 after:right-1/24 text-center">
                   atau
                 </p>
-                <Button className="text-xs" size="sm" variant="secondary">Buat akun</Button>
+                <Button asChild className="text-xs" size="sm" variant="secondary">
+                  <Link href="/auth/register">
+                    Buat akun
+                  </Link>
+                </Button>
               </div>
 
             </CardContent>
