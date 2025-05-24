@@ -114,7 +114,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth(() => {
             signIn: "/auth/login",
         },
         callbacks: {
+            authorized: async ({ auth }) => {
+                if (auth?.user) {
+                    return true;
+                }
 
+                return false;
+            },
             jwt: async ({ token, user }) => {
                 if (user) {
                     token = {
