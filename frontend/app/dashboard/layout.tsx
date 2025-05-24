@@ -1,5 +1,5 @@
 import { TooltipProvider } from "@radix-ui/react-tooltip"
-import { SettingsProvider } from "../settings/contexts/settings-context"
+import { SettingsProvider } from "./settings/contexts/settings-context"
 
 import type React from "react"
 import { TopNav } from "./components/top-nav"

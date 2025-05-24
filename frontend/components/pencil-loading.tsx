@@ -1,4 +1,4 @@
-import "../css/pencil-loading.css";
+import "./css/pencil-loading.css";
 
 
 /**

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Lora, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import ThemeProvider from "@/components/theme-provider";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -39,10 +40,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
       <body className={`${plusJakartaSans.variable} ${lora.variable} antialiased bg-white text-zinc-900`}>
         <main>
-          {children}
+          <ThemeProvider>
+            {children}
+          </ThemeProvider>
         </main>
       </body>
     </html>

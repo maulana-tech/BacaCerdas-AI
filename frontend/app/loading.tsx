@@ -1,4 +1,4 @@
-import PencilLoading from "@/components/ui/pencil-loading";
+import PencilLoading from "@/components/pencil-loading";
 
 export default function RootLoadingPage() {
     return (

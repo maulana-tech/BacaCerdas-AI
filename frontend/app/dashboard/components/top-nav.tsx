@@ -1,9 +1,10 @@
 "use client"
 
+import React from "react"
 import { Notifications } from "./notifications"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { useSettings } from "@/app/settings/contexts/settings-context" 
+import { usePathname, useRouter } from "next/navigation"
+import { useSettings } from "@/app/dashboard/settings/contexts/settings-context" 
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,12 +15,19 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
-import React from "react"
+import { signOut } from "next-auth/react"
 
 export function TopNav() {
+  const router = useRouter();
   const pathname = usePathname()
   const pathSegments = pathname.split("/").filter(Boolean)
-  const { settings } = useSettings()
+  const { settings } = useSettings();
+
+  const onHandleSignOut = () => {
+    signOut();
+    router.push("/auth/login")
+    console.log("User signed out")
+  }
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background">
@@ -69,7 +77,7 @@ export function TopNav() {
               <DropdownMenuItem asChild>
                 <Link href="/settings">Settings</Link>
               </DropdownMenuItem>
-              <DropdownMenuItem>Log out</DropdownMenuItem>
+              <DropdownMenuItem onClick={onHandleSignOut}>Log out</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
