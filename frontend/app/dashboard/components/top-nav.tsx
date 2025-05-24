@@ -34,7 +34,7 @@ export function TopNav() {
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <div className="hidden md:block">
           <nav className="flex items-center space-x-2">
-            <Link href="/" className="text-sm font-medium">
+            <Link href="/home" className="text-sm font-medium">
               Home
             </Link>
             {pathSegments.map((segment, index) => (
