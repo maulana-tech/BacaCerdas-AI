@@ -122,7 +122,7 @@ export default function HomePage() {
                 key={index} 
                 className="bg-blue-50 p-6 rounded-xl border border-blue-100 hover:border-blue-300 transition-all duration-300 shadow-sm hover:shadow-md transform hover:translate-y-[-5px]"
               >
-                <p className="text-zinc-700 mb-4 italic">"{testimonial.quote}"</p>
+                <p className="text-zinc-700 mb-4 italic">" {testimonial.quote} " </p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-md">
                     {testimonial.name.charAt(0)}
@@ -147,7 +147,7 @@ export default function HomePage() {
           <p className="text-xl text-zinc-600 mb-8">
             Bergabunglah dengan BacaCerdas-AI dan mulai perjalanan membaca cerdas Anda hari ini.
           </p>
-          <Link href="/sign-up">
+          <Link href="/auth/login">
             <Button 
               size="lg" 
               className="px-8 py-6 bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg text-lg"
