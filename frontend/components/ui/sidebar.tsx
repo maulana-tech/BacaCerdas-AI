@@ -102,7 +102,7 @@ export function Sidebar() {
             <div className="border-b border-border/50">
               <div className={cn("flex h-16 items-center gap-2 px-4", isCollapsed && "justify-center px-2")}>
                 {!isCollapsed && (
-                  <Link href="/" className="flex items-center font-bold text-foreground hover:text-primary transition-colors">
+                  <Link href="/home" className="flex items-center font-bold text-foreground hover:text-primary transition-colors">
                     <div className="w-8 h-8 bg-gradient-to-br from-primary to-primary/70 rounded-lg flex items-center justify-center mr-2">
                       <span className="text-primary-foreground font-bold text-sm">BC</span>
                     </div>
