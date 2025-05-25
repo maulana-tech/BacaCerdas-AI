@@ -31,7 +31,6 @@ export const metadata: Metadata = {
   creator: "BacaCerdas-AI",
   robots: "index, follow",
   manifest: "/manifest.webmanifest",
-  themeColor: "#000000",
   icons: {
     icon: [{ url: "/favicon-196.png", sizes: "196x196", type: "image/png" }],
     apple: [{ url: "/apple-icon-180.png" }],
