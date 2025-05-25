@@ -14,15 +14,15 @@ export default function PopularContentSection({
   if (!popularContent || popularContent.length === 0) {
     return (
       <section className="mb-12">
-        <h2 className="text-xl font-semibold mb-6 text-gray-800">Populer</h2>
-        <p className="text-gray-600">Belum ada konten populer saat ini.</p>
+        <h2 className="text-xl font-semibold mb-6">Populer</h2>
+        <p className="text-muted-foreground">Belum ada konten populer saat ini.</p>
       </section>
     );
   }
 
   return (
     <section className="mb-12">
-      <h2 className="text-xl font-semibold mb-6 text-gray-800">Populer</h2>
+      <h2 className="text-xl font-semibold mb-6">Populer</h2>
       <div className="relative">
         <div className="flex overflow-x-auto snap-x scrollbar-hide pb-4 p-6 mx-4 m-6 px-4">
           <div className="flex space-x-6">

@@ -14,8 +14,8 @@ export default function RecentContentSection({
   if (!recentContent || recentContent.length === 0) {
     return (
         <section className="mb-12">
-            <h2 className="text-xl font-semibold mb-6 text-gray-800">Terakhir Dilihat</h2>
-            <p className="text-gray-600">Belum ada konten yang dilihat.</p>
+            <h2 className="text-xl font-semibold mb-6">Terakhir Dilihat</h2>
+            <p className="text-muted-foreground">Belum ada konten yang dilihat.</p>
         </section>
     );
   }
@@ -25,7 +25,7 @@ export default function RecentContentSection({
 
   return (
     <section className="mb-12">
-      <h2 className="text-xl font-semibold mb-6 text-gray-800">Terakhir Dilihat</h2>
+      <h2 className="text-xl font-semibold mb-6">Terakhir Dilihat</h2>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {displayedContent.map((item) => (
           <div 
