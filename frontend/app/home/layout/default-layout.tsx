@@ -1,5 +1,5 @@
 import { TopNav } from "@/app/dashboard/components/top-nav"
-import { SettingsProvider } from "@/app/settings/contexts/settings-context"
+import { SettingsProvider } from "@/app/dashboard/settings/contexts/settings-context"
 import { Sidebar } from "@/components/ui/sidebar"
 import { TooltipProvider } from "@radix-ui/react-tooltip"
 

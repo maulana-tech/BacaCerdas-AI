@@ -16,6 +16,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { signOut } from "next-auth/react"
+import ThemeToggler from "@/components/theme-toggler"
 
 export function TopNav() {
   const router = useRouter();
@@ -34,13 +35,13 @@ export function TopNav() {
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <div className="hidden md:block">
           <nav className="flex items-center space-x-2">
-            <Link href="/home" className="text-sm font-medium">
+            <Link href="/home" className="text-sm font-medium text-foreground">
               Home
             </Link>
             {pathSegments.map((segment, index) => (
               <React.Fragment key={segment}>
                 <span className="text-muted-foreground">/</span>
-                <Link href={`/${pathSegments.slice(0, index + 1).join("/")}`} className="text-sm font-medium">
+                <Link href={`/${pathSegments.slice(0, index + 1).join("/")}`} className="text-sm font-medium text-foreground">
                   {segment.charAt(0).toUpperCase() + segment.slice(1)}
                 </Link>
               </React.Fragment>
@@ -48,6 +49,7 @@ export function TopNav() {
           </nav>
         </div>
         <div className="flex items-center gap-4">
+          <ThemeToggler />
           <Notifications />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -72,10 +74,10 @@ export function TopNav() {
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/settings">Profile</Link>
+                <Link href="/dashboard/settings">Profile</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/settings">Settings</Link>
+                <Link href="/dashboard/settings">Settings</Link>
               </DropdownMenuItem>
               <DropdownMenuItem onClick={onHandleSignOut}>Log out</DropdownMenuItem>
             </DropdownMenuContent>

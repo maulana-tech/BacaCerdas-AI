@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 import { Button } from "@/components/ui/button"
 import { Download } from "lucide-react"
-import { DateRangePicker } from "../dashboard/components/date-range-picker"
+import { DateRangePicker } from "@/app/dashboard/components/date-range-picker"
 import { OverviewTab } from "./components/overview-tab"
 import { AnalyticsTab } from "./components/analytics-tab"
 import { ReportsTab } from "./components/reports-tab"
@@ -17,7 +17,7 @@ export default function AnalyticsPage() {
   }
 
   return (
-    <div className="flex-1 space-y-4 p-8 pt-6">
+    <div className="flex-1 space-y-4 p-8 pt-6 text-foreground">
       <div className="flex items-center justify-between space-y-2">
         <h2 className="text-3xl font-bold tracking-tight">Analitik Pembelajaran</h2>
         <div className="flex items-center space-x-2">

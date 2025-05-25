@@ -145,7 +145,7 @@ export default function HomePage() {
           <p className="text-xl text-muted-foreground mb-8">
             Bergabunglah dengan BacaCerdas-AI dan mulai perjalanan membaca cerdas Anda hari ini.
           </p>
-          <Link href="/sign-up">
+          <Link href="/auth/login">
             <Button
               size="lg"
               className="px-8 py-6 transition-transform duration-300 hover:scale-105 shadow-md hover:shadow-lg text-lg"

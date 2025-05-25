@@ -57,7 +57,7 @@ export function Notifications() {
       <Button
         variant="ghost"
         size="icon"
-        className="relative"
+        className="relative text-foreground"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Notifications"
       >

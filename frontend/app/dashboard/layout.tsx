@@ -16,7 +16,7 @@ export default function RootLayout({
             <TooltipProvider delayDuration={0}>
               <div className="min-h-screen flex">
                 <Sidebar />
-                <div className="flex-1">
+                <div className="flex-1 bg-background">
                   <TopNav />
                   <div className="container mx-auto p-6 max-w-7xl">
                     <main className="w-full">{children}</main>

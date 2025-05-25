@@ -20,10 +20,10 @@ import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/comp
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
-  { name: "Analytics", href: "/analytics", icon: BarChart2 },
-  { name: "Organization", href: "/organization", icon: Building2 },
-  { name: "Projects", href: "/projects", icon: Folder },
-  { name: "Chat", href: "/chat", icon: MessagesSquare },
+  { name: "Analytics", href: "/dashboard/analytics", icon: BarChart2 },
+  { name: "Organization", href: "/dashboard/organization", icon: Building2 },
+  { name: "Projects", href: "/dashboard/projects", icon: Folder },
+  { name: "Chat", href: "/dashboard/chat", icon: MessagesSquare },
 ]
 
 const bottomNavigation = [
@@ -81,7 +81,7 @@ export function Sidebar() {
           <div className="border-b border-border">
             <div className={cn("flex h-16 items-center gap-2 px-4", isCollapsed && "justify-center px-2")}>
               {!isCollapsed && (
-                <Link href="/" className="flex items-center font-semibold">
+                <Link href="/" className="flex items-center font-semibold text-foreground">
                   <span className="text-lg">BacaCerdas.AI</span>
                 </Link>
               )}
@@ -91,7 +91,7 @@ export function Sidebar() {
                 className={cn("ml-auto h-8 w-8", isCollapsed && "ml-0")}
                 onClick={() => setIsCollapsed(!isCollapsed)}
               >
-                <PanelLeft className={cn("h-4 w-4 transition-transform", isCollapsed && "rotate-180")} />
+                <PanelLeft className={cn("h-4 w-4 transition-transform text-foreground", isCollapsed && "rotate-180")} />
                 <span className="sr-only">{isCollapsed ? "Expand" : "Collapse"} Sidebar</span>
               </Button>
             </div>
