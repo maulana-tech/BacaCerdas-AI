@@ -2,7 +2,8 @@
 	"name": "baca-cerdas",
 	"scripts": {
 		"prepare": "husky",
-		"dev": "concurrently \"pnpm --filter backend dev\" \"pnpm --filter frontend dev\""
+		"dev": "pnpm run -r --parallel --aggregate-output dev",
+		"lint": "pnpm run -r --parallel lint"
 	},
 	"lint-staged": {
 		"backend/**/*.ts": [
@@ -11,7 +12,6 @@
 		]
 	},
 	"devDependencies": {
-		"concurrently": "^9.1.2",
 		"husky": "^9.1.7",
 		"lint-staged": "^16.0.0"
 	},
