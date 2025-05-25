@@ -2,8 +2,7 @@ import type { NextConfig } from "next";
 import PWAConfig from "next-pwa";
 
 const withPWA = PWAConfig({
-  dest: "public",
-  swSrc: "service-worker.ts",
+  dest: "public"
 });
 
 const nextConfig: NextConfig = {

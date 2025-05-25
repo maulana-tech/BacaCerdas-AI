@@ -41,3 +41,6 @@ yarn-error.log*
 
 # clerk configuration (can include secrets)
 /.clerk/
+
+public/sw.js
+public/workbox-*.js
