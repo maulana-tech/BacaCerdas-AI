@@ -14,7 +14,7 @@ export interface AuthError {
 export const login = async (data: LoginSchema) => {
     await signIn("credentials", {
         ...data,
-        redirectTo: "/dashboard"
+        redirectTo: "/home"
     });
 }
 
