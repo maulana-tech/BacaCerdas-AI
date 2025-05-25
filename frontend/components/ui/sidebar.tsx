@@ -99,7 +99,7 @@ export function Sidebar() {
             )}
           >
             {/* Header */}
-            <div className="border-b border-border/50">
+            <div className="border-border/50">
               <div className={cn("flex h-16 items-center gap-2 px-4", isCollapsed && "justify-center px-2")}>
                 {!isCollapsed && (
                   <Link href="/" className="flex items-center font-bold text-foreground hover:text-primary transition-colors">
