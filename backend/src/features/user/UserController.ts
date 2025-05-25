@@ -8,7 +8,7 @@ import UserService from "./UserService";
 export default class UserController {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async index(req: Request, res: Response, next: NextFunction) {
-    const users = new UserService().getAllUsers();
+    const users = await new UserService().getAllUsers();
 
     res.status(200).json({
       data: users,
