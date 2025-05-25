@@ -1,10 +1,11 @@
 "use client"
 
-import React from "react"
+import React, { useContext } from "react"
 import { Notifications } from "./notifications"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { useSettings } from "@/app/dashboard/settings/contexts/settings-context" 
+import { SidebarContext } from "@/components/ui/sidebar"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,12 +18,15 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { signOut } from "next-auth/react"
 import ThemeToggler from "@/components/theme-toggler"
+import { ChevronRight, LogOut, Settings, User } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 export function TopNav() {
   const router = useRouter();
   const pathname = usePathname()
   const pathSegments = pathname.split("/").filter(Boolean)
   const { settings } = useSettings();
+  const { isCollapsed } = useContext(SidebarContext);
 
   const onHandleSignOut = () => {
     signOut();
@@ -31,32 +35,54 @@ export function TopNav() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-background">
-      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <div className="hidden md:block">
-          <nav className="flex items-center space-x-2">
-            <Link href="/home" className="text-sm font-medium text-foreground">
+    <header className="sticky top-0 z-30 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ease-in-out">
+      <div 
+        className="flex h-16 items-center justify-between px-4 md:px-6 transition-all duration-300 ease-in-out"
+        style={{ 
+          marginLeft: isCollapsed ? '72px' : '288px',
+          paddingLeft: '16px'
+        }}
+      >
+        {/* Breadcrumb Navigation */}
+        <div className="flex items-center space-x-2 min-w-0 flex-1">
+          <nav className="flex items-center space-x-1 text-sm text-muted-foreground">
+            <Link 
+              href="/home" 
+              className="font-medium text-foreground hover:text-primary transition-colors duration-200 flex items-center gap-1"
+            >
               Home
             </Link>
             {pathSegments.map((segment, index) => (
               <React.Fragment key={segment}>
-                <span className="text-muted-foreground">/</span>
-                <Link href={`/${pathSegments.slice(0, index + 1).join("/")}`} className="text-sm font-medium text-foreground">
+                <ChevronRight className="h-4 w-4 text-muted-foreground/50" />
+                <Link 
+                  href={`/${pathSegments.slice(0, index + 1).join("/")}`} 
+                  className={cn(
+                    "font-medium transition-colors duration-200 hover:text-primary truncate",
+                    index === pathSegments.length - 1 
+                      ? "text-foreground" 
+                      : "text-muted-foreground"
+                  )}
+                >
                   {segment.charAt(0).toUpperCase() + segment.slice(1)}
                 </Link>
               </React.Fragment>
             ))}
           </nav>
         </div>
-        <div className="flex items-center gap-4">
+        
+        {/* Right Side Actions */}
+        <div className="flex items-center gap-3">
           <ThemeToggler />
           <Notifications />
+          
+          {/* User Menu */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-                <Avatar className="h-8 w-8">
+              <Button variant="ghost" className="relative h-9 w-9 rounded-full ring-offset-background transition-all hover:ring-2 hover:ring-ring hover:ring-offset-2">
+                <Avatar className="h-9 w-9">
                   <AvatarImage src={settings.avatar} alt={settings.fullName} />
-                  <AvatarFallback>
+                  <AvatarFallback className="bg-gradient-to-br from-primary to-primary/70 text-primary-foreground font-semibold">
                     {settings.fullName
                       .split(" ")
                       .map((n) => n[0])
@@ -65,21 +91,44 @@ export function TopNav() {
                 </Avatar>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56" align="end" forceMount>
+            <DropdownMenuContent className="w-64" align="end" forceMount>
               <DropdownMenuLabel className="font-normal">
-                <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium leading-none">{settings.fullName}</p>
-                  <p className="text-xs leading-none text-muted-foreground">{settings.email}</p>
+                <div className="flex flex-col space-y-2 p-2">
+                  <div className="flex items-center gap-3">
+                    <Avatar className="h-10 w-10">
+                      <AvatarImage src={settings.avatar} alt={settings.fullName} />
+                      <AvatarFallback className="bg-gradient-to-br from-primary to-primary/70 text-primary-foreground font-semibold">
+                        {settings.fullName
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div className="flex flex-col">
+                      <p className="text-sm font-semibold leading-none">{settings.fullName}</p>
+                      <p className="text-xs leading-none text-muted-foreground mt-1">{settings.email}</p>
+                    </div>
+                  </div>
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/dashboard/settings">Profile</Link>
+                <Link href="/dashboard/settings" className="flex items-center gap-2 cursor-pointer">
+                  <User className="h-4 w-4" />
+                  Profile
+                </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/dashboard/settings">Settings</Link>
+                <Link href="/dashboard/settings" className="flex items-center gap-2 cursor-pointer">
+                  <Settings className="h-4 w-4" />
+                  Settings
+                </Link>
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={onHandleSignOut}>Log out</DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={onHandleSignOut} className="flex items-center gap-2 cursor-pointer text-destructive focus:text-destructive">
+                <LogOut className="h-4 w-4" />
+                Log out
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
