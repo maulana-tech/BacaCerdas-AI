@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useContext } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { Notifications } from "./notifications"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
@@ -27,6 +27,17 @@ export function TopNav() {
   const pathSegments = pathname.split("/").filter(Boolean)
   const { settings } = useSettings();
   const { isCollapsed } = useContext(SidebarContext);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const onHandleSignOut = () => {
     signOut();
@@ -35,16 +46,16 @@ export function TopNav() {
   }
 
   return (
-    <header className="sticky top-0 z-30 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ease-in-out">
+    <header className="sticky top-0 z-30 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 transition-all duration-300 ease-in-out">
       <div 
-        className="flex h-16 items-center justify-between px-4 md:px-6 transition-all duration-300 ease-in-out"
+        className="flex h-16 items-center justify-between px-3 sm:px-4 md:px-6 transition-all duration-300 ease-in-out"
         style={{ 
-          marginLeft: isCollapsed ? '72px' : '288px',
-          paddingLeft: '16px'
+          marginLeft: isMobile ? '0px' : (isCollapsed ? '72px' : '288px'),
+          paddingLeft: isMobile ? '60px' : '16px'
         }}
       >
-        {/* Breadcrumb Navigation */}
-        <div className="flex items-center space-x-2 min-w-0 flex-1">
+        {/* Breadcrumb Navigation - Hidden on mobile */}
+        <div className="hidden lg:flex items-center space-x-2 min-w-0 flex-1">
           <nav className="flex items-center space-x-1 text-sm text-muted-foreground">
             <Link 
               href="/home" 
@@ -72,7 +83,7 @@ export function TopNav() {
         </div>
         
         {/* Right Side Actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 ml-auto">
           <ThemeToggler />
           <Notifications />
           
@@ -134,5 +145,5 @@ export function TopNav() {
         </div>
       </div>
     </header>
-  )
+  );
 }
