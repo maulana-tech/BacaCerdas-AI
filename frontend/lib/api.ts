@@ -72,58 +72,58 @@ export const fetchWithAuth = async (
   return fetch(url, mergedOptions);
 };
 
-// Fungsi helper untuk permintaan GET
-export const getRequest = async (url: string): Promise<any> => {
-  const response = await fetchWithAuth(url);
+// // Fungsi helper untuk permintaan GET
+// export const getRequest = async (url: string): Promise<any> => {
+//   const response = await fetchWithAuth(url);
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Terjadi kesalahan saat mengambil data');
-  }
+//   if (!response.ok) {
+//     const error = await response.json();
+//     throw new Error(error.message || 'Terjadi kesalahan saat mengambil data');
+//   }
 
-  return response.json();
-};
+//   return response.json();
+// };
 
-// Fungsi helper untuk permintaan POST
-export const postRequest = async (url: string, data: any): Promise<any> => {
-  const response = await fetchWithAuth(url, {
-    method: 'POST',
-    body: JSON.stringify(data),
-  });
+// // Fungsi helper untuk permintaan POST
+// export const postRequest = async (url: string, data: any): Promise<any> => {
+//   const response = await fetchWithAuth(url, {
+//     method: 'POST',
+//     body: JSON.stringify(data),
+//   });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Terjadi kesalahan saat mengirim data');
-  }
+//   if (!response.ok) {
+//     const error = await response.json();
+//     throw new Error(error.message || 'Terjadi kesalahan saat mengirim data');
+//   }
 
-  return response.json();
-};
+//   return response.json();
+// };
 
-// Fungsi helper untuk permintaan PUT
-export const putRequest = async (url: string, data: any): Promise<any> => {
-  const response = await fetchWithAuth(url, {
-    method: 'PUT',
-    body: JSON.stringify(data),
-  });
+// // Fungsi helper untuk permintaan PUT
+// export const putRequest = async (url: string, data: any): Promise<any> => {
+//   const response = await fetchWithAuth(url, {
+//     method: 'PUT',
+//     body: JSON.stringify(data),
+//   });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Terjadi kesalahan saat memperbarui data');
-  }
+//   if (!response.ok) {
+//     const error = await response.json();
+//     throw new Error(error.message || 'Terjadi kesalahan saat memperbarui data');
+//   }
 
-  return response.json();
-};
+//   return response.json();
+// };
 
-// Fungsi helper untuk permintaan DELETE
-export const deleteRequest = async (url: string): Promise<any> => {
-  const response = await fetchWithAuth(url, {
-    method: 'DELETE',
-  });
+// // Fungsi helper untuk permintaan DELETE
+// export const deleteRequest = async (url: string): Promise<any> => {
+//   const response = await fetchWithAuth(url, {
+//     method: 'DELETE',
+//   });
 
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message || 'Terjadi kesalahan saat menghapus data');
-  }
+//   if (!response.ok) {
+//     const error = await response.json();
+//     throw new Error(error.message || 'Terjadi kesalahan saat menghapus data');
+//   }
 
-  return response.json();
-};
+//   return response.json();
+// };

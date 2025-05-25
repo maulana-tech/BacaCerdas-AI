@@ -180,7 +180,7 @@ export default function SettingsPage() {
             <Card className="md:col-span-2">
               <CardHeader>
                 <CardTitle>Security Settings</CardTitle>
-                <CardDescription>Manage your account's security settings</CardDescription>
+                <CardDescription>Manage your account&apos;s security settings</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">

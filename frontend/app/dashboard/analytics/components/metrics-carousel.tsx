@@ -70,6 +70,7 @@ export function MetricsCarousel() {
   useEffect(() => {
     const interval = setInterval(nextSlide, 5000)
     return () => clearInterval(interval)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAnimating])
 
   const transitionEndHandler = () => {

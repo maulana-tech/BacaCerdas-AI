@@ -13,6 +13,7 @@ const initialProgress = [
 
 export function AccountsOverview() {
   const [subjects] = useState(initialProgress)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isAddSubjectModalOpen, setIsAddSubjectModalOpen] = useState(false)
 
   const totalProgress = Math.round(subjects.reduce((sum, subject) => sum + subject.progress, 0) / subjects.length)

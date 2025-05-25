@@ -6,8 +6,8 @@ import type { Provider } from "next-auth/providers"
 import ApiClient from "./lib/api"
 
 // Don't remove this line, unless you want to break TypeScript.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type { JWT } from "next-auth/jwt"
-import { AxiosError } from "axios"
 
 /** 
  * ref: https://authjs.dev/getting-started/typescript#module-augmentation
@@ -79,6 +79,7 @@ const providers: Provider[] = [
                 type: "text"
             }
         },
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         async authorize(credentials, req) {
             const { identifier, password, role } = credentials;
 
@@ -98,6 +99,7 @@ const providers: Provider[] = [
                 const user = response.data.data;
 
                 return user;
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
             } catch (error) {
                 throw new InvalidCredentialsError()
             }

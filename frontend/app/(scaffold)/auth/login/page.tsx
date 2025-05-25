@@ -121,7 +121,9 @@ export default function LoginPage() {
             />
 
             <div className="flex flex-col items-center gap-2 gap-y-2">
-              <Button className="text-xs" size="sm" variant="link"> Lupa pasword?</Button>
+              <Button asChild className="text-xs" size="sm" variant="link">
+                <Link href="/auth/forgot-password">Lupa pasword?</Link>
+              </Button>
               <p className="text-sm w-full relative before:content-[''] before:block before:h-0.5 before:w-1/3 before:bg-accent before:absolute before:top-1/2 before:left-1/24 after:content-[''] after:block after:h-0.5 after:w-1/3 after:bg-accent after:absolute after:top-1/2 after:right-1/24 text-center">
                 atau
               </p>

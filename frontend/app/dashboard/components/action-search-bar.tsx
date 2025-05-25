@@ -63,10 +63,12 @@ const allActions = [
   },
 ]
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function ActionSearchBar({ actions = allActions }: { actions?: Action[] }) {
   const [query, setQuery] = useState("")
   const [result, setResult] = useState<SearchResult | null>(null)
   const [isFocused, setIsFocused] = useState(false)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isTyping, setIsTyping] = useState(false)
   const [selectedAction, setSelectedAction] = useState<Action | null>(null)
   const debouncedQuery = useDebounce(query, 200)

@@ -35,8 +35,10 @@ const initialAssignments = [
 
 export function QuickBillPay() {
   const [assignments, setAssignments] = useState(initialAssignments)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedAssignment, setSelectedAssignment] = useState(null)
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSubmissionSuccess = (submittedAssignmentId: number) => {
     setAssignments(assignments.map(assignment => 
       assignment.id === submittedAssignmentId 
@@ -100,6 +102,7 @@ export function QuickBillPay() {
                     <Button 
                       variant="outline" 
                       size="sm" 
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
                       onClick={() => setSelectedAssignment(assignment as any)}
                     >
                       Kerjakan

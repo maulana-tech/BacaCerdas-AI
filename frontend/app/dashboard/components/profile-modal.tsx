@@ -7,17 +7,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { CreditCard, Edit2, Save, Trash2 } from "lucide-react"
+import { Edit2, Save } from "lucide-react"
 
 interface ProfileModalProps {
   isOpen: boolean
   onClose: () => void
-}
-
-interface CardInfo {
-  type: string
-  number: string
-  expiry: string
 }
 
 interface UserProfile {

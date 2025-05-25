@@ -16,6 +16,7 @@ const data = [
 export function AccountGrowth() {
   const { theme } = useTheme()
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: any[]; label?: string }) => {
     if (active && payload && payload.length) {
       return (

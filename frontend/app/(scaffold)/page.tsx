@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
@@ -32,16 +31,6 @@ export default function HomePage() {
                   </Button>
                 </Link>
               </div>
-            </div>
-            <div className="hidden lg:block transform transition-transform duration-500 hover:scale-105">
-              {/* <Image
-                src="/hero-image.svg"
-                width={600}
-                height={500}
-                alt="BacaCerdas-AI Platform"
-                className="w-full h-auto drop-shadow-xl"
-                priority
-              /> */}
             </div>
           </div>
         </div>
@@ -120,7 +109,7 @@ export default function HomePage() {
                 key={index}
                 className="bg-card p-6 rounded-xl transition-transform duration-300 shadow-sm hover:shadow-md transform hover:translate-y-[-5px]"
               >
-                <p className="text-foreground mb-4 italic">"{testimonial.quote}"</p>
+                <p className="text-foreground mb-4 italic">&quot;{testimonial.quote}&quot;</p>
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold shadow-md">
                     {testimonial.name.charAt(0)}
