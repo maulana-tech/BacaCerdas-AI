@@ -49,7 +49,7 @@ export function BusinessMetrics() {
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold">Metrik Pembelajaran</h2>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="sm" className="text-foreground">
           Lihat Detail <ArrowRight className="ml-2 h-4 w-4" />
         </Button>
       </div>
