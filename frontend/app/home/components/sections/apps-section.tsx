@@ -23,8 +23,8 @@ export function AppsSection() {
       />
 
       {/* Filters and Search */}
-      <div className="flex flex-wrap gap-3 mb-6">
-        <Button variant="outline" className="rounded-2xl">
+      <div className="flex flex-wrap gap-3 mb-6 text-foreground">
+        <Button variant="outline" className="rounded-2xl text-primary">
           All Categories
         </Button>
         <Button variant="outline" className="rounded-2xl">

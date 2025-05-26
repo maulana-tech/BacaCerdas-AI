@@ -45,7 +45,7 @@ export function HomeSection() {
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-semibold">Recent Apps</h2>
-          <Button variant="ghost" className="rounded-2xl">
+          <Button variant="ghost" className="rounded-2xl text-primary">
             View All
           </Button>
         </div>
@@ -89,7 +89,7 @@ export function HomeSection() {
               {projects.slice(0, 3).map((project) => (
                 <motion.div key={project.name} whileHover={{ backgroundColor: "rgba(0,0,0,0.02)" }} className="p-4">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-medium">{project.name}</h3>
+                    <h3 className="font-medium text-foreground">{project.name}</h3>
                     <Badge variant="outline" className="rounded-xl">
                       Due {project.dueDate}
                     </Badge>
@@ -97,7 +97,7 @@ export function HomeSection() {
                   <p className="text-sm text-muted-foreground mb-3">{project.description}</p>
                   <div className="space-y-2">
                     <div className="flex items-center justify-between text-sm">
-                      <span>Progress</span>
+                      <span className="text-muted-foreground">Progress</span>
                       <span>{project.progress}%</span>
                     </div>
                     <Progress value={project.progress} className="h-2 rounded-xl" />
@@ -122,8 +122,8 @@ export function HomeSection() {
       {/* Community Highlights */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-semibold">Community Highlights</h2>
-          <Button variant="ghost" className="rounded-2xl">
+          <h2 className="text-2xl font-semibold text-foreground">Community Highlights</h2>
+          <Button variant="ghost" className="rounded-2xl text-primary">
             Explore
           </Button>
         </div>
