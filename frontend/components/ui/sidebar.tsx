@@ -1,8 +1,9 @@
+// components/ui/sidebar.tsx
 "use client";
 
-import { useState, createContext, useContext } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { useState, createContext, useContext, useEffect } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Home,
   BarChart2,
@@ -11,20 +12,19 @@ import {
   MessagesSquare,
   Settings,
   HelpCircle,
-  Menu,
-  PanelLeft,
-  X,
-} from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip"
+} from "lucide-react";
+import { cn } from "@/lib/utils";
+import { Tooltip, TooltipContent, TooltipTrigger, TooltipProvider } from "@/components/ui/tooltip";
 
-// Buat context untuk state sidebar
+// Buat context untuk state sidebar dan fungsi untuk mengubahnya
 type SidebarContextType = {
   isCollapsed: boolean;
-}
+  setIsCollapsed: (isCollapsed: boolean) => void;
+  isMobileOpen: boolean;
+  setIsMobileOpen: (isMobileOpen: boolean) => void;
+};
 
-export const SidebarContext = createContext<SidebarContextType>({ isCollapsed: false });
+export const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: Home },
@@ -32,19 +32,26 @@ const navigation = [
   { name: "Organization", href: "/dashboard/organization", icon: Building2 },
   { name: "Projects", href: "/dashboard/projects", icon: Folder },
   { name: "Chat", href: "/dashboard/chat", icon: MessagesSquare },
-]
+];
 
 const bottomNavigation = [
   { name: "Settings", href: "/dashboard/settings", icon: Settings },
   { name: "Help", href: "/help", icon: HelpCircle },
-]
+];
 
-export function Sidebar() {
-  const pathname = usePathname()
-  const [isCollapsed, setIsCollapsed] = useState(false)
-  const [isMobileOpen, setIsMobileOpen] = useState(false)
+export function Sidebar({ children }: { children: React.ReactNode }) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
+  const pathname = usePathname();
+  // Effect untuk menutup mobile sidebar saat navigasi berubah
+  useEffect(() => {
+    // Pastikan ini hanya menutup jika memang mobile sidebar sedang terbuka
+    if (isMobileOpen) {
+      setIsMobileOpen(false);
+    }
+  }, [pathname, isMobileOpen, setIsMobileOpen]); // Tambahkan setIsMobileOpen ke dependencies
+
   const NavItem = ({ item, isBottom = false }: { item: { name: string; href: string; icon: any }; isBottom?: boolean }) => (
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
@@ -68,38 +75,38 @@ export function Sidebar() {
         </TooltipContent>
       )}
     </Tooltip>
-  )
+  );
 
   return (
-    <SidebarContext.Provider value={{ isCollapsed }}>
+    <SidebarContext.Provider value={{ isCollapsed, setIsCollapsed, isMobileOpen, setIsMobileOpen }}>
       <TooltipProvider>
         <>
           {/* Mobile overlay */}
           {isMobileOpen && (
-            <div 
-              className="fixed inset-0 z-40 bg-black/50 lg:hidden" 
+            <div
+              className="fixed inset-0 z-40 bg-black/50 lg:hidden"
               onClick={() => setIsMobileOpen(false)}
             />
           )}
-          
-          {/* Mobile toggle button */}
-          <button
-            className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-background rounded-md shadow-lg border"
-            onClick={() => setIsMobileOpen(!isMobileOpen)}
-            aria-label="Toggle sidebar"
-          >
-            {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-          
+
           <div
             className={cn(
-              "fixed inset-y-0 z-50 flex flex-col bg-background/95 backdrop-blur-sm transition-all duration-300 ease-in-out border-r border-border/50 shadow-lg lg:shadow-none lg:bg-background lg:backdrop-blur-none",
-              isCollapsed ? "w-[72px]" : "w-72",
-              isMobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
+              "fixed inset-y-0 z-50 flex flex-col bg-background/95 backdrop-blur-sm transition-all duration-300 ease-in-out border-r border-border/50 shadow-lg",
+              // Desktop styles: no shadow, standard background
+              "lg:shadow-none lg:bg-background lg:backdrop-blur-none",
+              // Desktop width based on isCollapsed state (managed by TopNav)
+              // `data-[state]` is a Tailwind variant that works with arbitrary data attributes
+              "lg:w-[72px] lg:data-[state=expanded]:w-72", // desktop collapsed: 72px, expanded: 288px
+              // Mobile behavior: always w-72, but controlled by translate-x
+              "w-72 transform",
+              isMobileOpen ? "translate-x-0" : "-translate-x-full", // Mobile slide in/out
+              "lg:translate-x-0", // Ensure it's always visible on desktop (override mobile translate)
             )}
+            // Add data-state for desktop styling (e.g., using data-[state=expanded])
+            data-state={isCollapsed ? "collapsed" : "expanded"}
           >
-            {/* Header */}
-            <div className="border-b border-border/50">
+            {/* Header branding / Logo */}
+            <div className="border-border/50">
               <div className={cn("flex h-16 items-center gap-2 px-4", isCollapsed && "justify-center px-2")}>
                 {!isCollapsed && (
                   <Link href="/home" className="flex items-center font-bold text-foreground hover:text-primary transition-colors">
@@ -111,24 +118,10 @@ export function Sidebar() {
                     </span>
                   </Link>
                 )}
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className={cn(
-                    "ml-auto h-8 w-8 hover:bg-accent transition-all duration-200", 
-                    isCollapsed && "ml-0"
-                  )}
-                  onClick={() => setIsCollapsed(!isCollapsed)}
-                >
-                  <PanelLeft className={cn(
-                    "h-4 w-4 transition-transform duration-300 text-foreground", 
-                    isCollapsed && "rotate-180"
-                  )} />
-                  <span className="sr-only">{isCollapsed ? "Expand" : "Collapse"} Sidebar</span>
-                </Button>
+                {/* No toggle button here, it's in TopNav */}
               </div>
             </div>
-            
+
             {/* Main Navigation */}
             <div className="flex-1 overflow-auto scrollbar-thin scrollbar-thumb-border scrollbar-track-transparent">
               <nav className="flex-1 space-y-1 px-3 py-4">
@@ -137,7 +130,7 @@ export function Sidebar() {
                 ))}
               </nav>
             </div>
-            
+
             {/* Bottom Navigation */}
             <div className="border-t border-border/50 p-3">
               <nav className="space-y-1">
@@ -147,8 +140,17 @@ export function Sidebar() {
               </nav>
             </div>
           </div>
+          {children} {/* This renders the rest of the layout (TopNav, HomeContent) */}
         </>
       </TooltipProvider>
     </SidebarContext.Provider>
-  )
+  );
+}
+
+export function useSidebar() {
+  const context = useContext(SidebarContext);
+  if (context === undefined) {
+    throw new Error('useSidebar must be used within a SidebarProvider');
+  }
+  return context;
 }

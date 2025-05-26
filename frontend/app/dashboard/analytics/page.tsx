@@ -12,19 +12,19 @@ import { NotificationsTab } from "./components/notifications-tab"
 
 export default function AnalyticsPage() {
   const handleExportData = () => {
-    // Implement export functionality here
     console.log("Exporting data...")
   }
 
   return (
-    <div className="flex-1 space-y-4 p-8 pt-6 text-foreground">
-      <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Analitik Pembelajaran</h2>
-        <div className="flex items-center space-x-2">
+    <div className="flex-1 space-y-4 p-4 sm:p-6 lg:p-8 pt-4 sm:pt-6 text-foreground">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between space-y-4 sm:space-y-2">
+        <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Analitik Pembelajaran</h2>
+        <div className="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
           <DateRangePicker />
-          <Button onClick={handleExportData} className="flex items-center gap-2">
+          <Button onClick={handleExportData} className="flex items-center gap-2 w-full sm:w-auto">
             <Download className="h-4 w-4" />
-            Ekspor Data
+            <span className="hidden sm:inline">Ekspor Data</span>
+            <span className="sm:hidden">Ekspor</span>
           </Button>
         </div>
       </div>
