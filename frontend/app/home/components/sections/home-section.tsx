@@ -15,12 +15,6 @@ import { apps, recentFiles, projects, communityPosts } from "@/lib/data/sample-d
 
 import { Heart, MessageSquare, FileText, Users } from "lucide-react";
 
-/**
- * Home section component
- * Displays overview of recent apps, files, projects, and community highlights
- */
-
-
 export function HomeSection() {
   return (
     <div className="space-y-8">
@@ -28,12 +22,12 @@ export function HomeSection() {
         title="Welcome to BacaCerdas AI Creative Suite"
         description="Unleash your creativity with our comprehensive AI of tools and resources."
         primaryAction={
-          <Button asChild className="bg-white text-black hover:bg-gray-200">
+          <Button className="bg-white text-black hover:bg-gray-200">
             Explore Plans
           </Button>
         }
         secondaryAction={
-          <Button asChild variant="outline" className="text-white border-white/50 hover:bg-white/10">
+          <Button className="bg-white text-black hover:bg-gray-200">
             Take a Tour
           </Button>
         }
