@@ -2,17 +2,7 @@
 import { SettingsProvider } from "@/app/dashboard/settings/contexts/settings-context";
 import { TooltipProvider } from "@radix-ui/react-tooltip"; // Atau "@/components/ui/tooltip"
 
-import { Sidebar } from "@/components/ui/sidebar"; // Impor Sidebar sebagai provider
-import { TopNav } from "@/app/dashboard/components/top-nav"; // Impor TopNav
-
-
-import type React from "react";
-
-export default function RootLayout({
-  children, 
-}: {
-  children: React.ReactNode;
-}) {
+export default function HomeLayout({ children }: DefaultPageProps) {
   return (
     <SettingsProvider>
       <TooltipProvider delayDuration={0}>

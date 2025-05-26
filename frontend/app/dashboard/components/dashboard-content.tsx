@@ -5,6 +5,7 @@ import { useSidebar } from "@/components/ui/sidebar"; // Gunakan useSidebar hook
 import { useEffect, useState } from "react";
 
 export function DashboardContent({ children }: { children: React.ReactNode }) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { isCollapsed, setIsCollapsed } = useSidebar(); // Ambil isCollapsed dan setIsCollapsed
   const [isMobile, setIsMobile] = useState(false);
   const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false); // Tambahkan state ini

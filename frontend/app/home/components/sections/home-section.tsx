@@ -1,6 +1,7 @@
 // components/home-section.tsx
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { HeroSection } from "./hero-section"; // Ensure this points to your HeroSection component
 import { AppCard } from "../cards/app-card";
@@ -9,8 +10,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { Heart, MessageSquare, FileText, Users } from "lucide-react";
+
 import { apps, recentFiles, projects, communityPosts } from "@/lib/data/sample-data";
+
+import { Heart, MessageSquare, FileText, Users } from "lucide-react";
 
 /**
  * Home section component
@@ -25,12 +28,12 @@ export function HomeSection() {
         title="Welcome to BacaCerdas AI Creative Suite"
         description="Unleash your creativity with our comprehensive AI of tools and resources."
         primaryAction={
-          <Button className="bg-white text-black hover:bg-gray-200">
+          <Button asChild className="bg-white text-black hover:bg-gray-200">
             Explore Plans
           </Button>
         }
         secondaryAction={
-          <Button variant="outline" className="text-white border-white/50 hover:bg-white/10">
+          <Button asChild variant="outline" className="text-white border-white/50 hover:bg-white/10">
             Take a Tour
           </Button>
         }
@@ -129,7 +132,9 @@ export function HomeSection() {
             <motion.div key={post.title} whileHover={{ scale: 1.02, y: -5 }} whileTap={{ scale: 0.98 }}>
               <Card className="overflow-hidden rounded-3xl">
                 <div className="aspect-[4/3] overflow-hidden bg-muted">
-                  <img
+                  <Image
+                    height={300}
+                    width={400}
                     src={post.image || "/placeholder.svg"}
                     alt={post.title}
                     className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"

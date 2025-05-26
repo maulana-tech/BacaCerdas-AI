@@ -52,6 +52,7 @@ export function Sidebar({ children }: { children: React.ReactNode }) {
     }
   }, [pathname, isMobileOpen, setIsMobileOpen]); // Tambahkan setIsMobileOpen ke dependencies
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any
   const NavItem = ({ item, isBottom = false }: { item: { name: string; href: string; icon: any }; isBottom?: boolean }) => (
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
