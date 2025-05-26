@@ -26,7 +26,7 @@ export function HeroSection({ title, description, primaryAction, secondaryAction
       className={`overflow-hidden rounded-3xl ${gradient} p-8 text-white`}
     >
       <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-        <div className="space-y-4">
+      <div className="space-y-4">
           {badge && <Badge className="bg-white/20 text-white hover:bg-white/30 rounded-xl">{badge}</Badge>}
           <h2 className="text-3xl font-bold">{title}</h2>
           <p className="max-w-[600px] text-white/80">{description}</p>
@@ -34,8 +34,7 @@ export function HeroSection({ title, description, primaryAction, secondaryAction
             <Button className="rounded-2xl bg-white text-indigo-700 hover:bg-white/90">{primaryAction}</Button>
             {secondaryAction && (
               <Button
-                variant="outline"
-                className="rounded-2xl bg-transparent border-white text-white hover:bg-white/10"
+                className="rounded-2xl bg-white text-indigo-700 hover:bg-white/90"
               >
                 {secondaryAction}
               </Button>
