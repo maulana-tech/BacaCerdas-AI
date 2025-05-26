@@ -19,24 +19,226 @@ generator zod {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  username  String   @unique
+  id       String @id @default(cuid())
+  email    String @unique
+  username String @unique
 
-  name      String
-  role      Role @default(STUDENT)
-  image     String?
-  location  String?
-  password  String
-  
+  name     String
+  password String
+  role     Role   @default(STUDENT)
+
+  Course             Course[]
+  CourseEnrollment   CourseEnrollment[]
+  QuizzAnswer        QuizzAnswer[]
+  SummarizedCourse   SummarizedCourse[]
+  UserProfilePicture UserProfilePicture[]
+  UserQuizz          UserQuizz[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@map("users")
 }
 
+model Asset {
+  id String @id @default(cuid())
+
+  name     String
+  // The MIME type of the asset, e.g., "image/png", "application/pdf"
+  mimeType String
+  // The size of the asset in bytes
+  size     Int
+  type     String
+  url      String
+
+  UserProfilePicture UserProfilePicture[]
+  CourseAsset        CourseAsset[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("assets")
+}
+
+model UserProfilePicture {
+  id      String @id @default(cuid())
+  userId  String
+  assetId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  User  User  @relation(fields: [userId], references: [id])
+  Asset Asset @relation(fields: [assetId], references: [id])
+
+  @@map("user_profile_pictures")
+}
+
+model Course {
+  id            String @id @default(cuid())
+  slug          String @unique
+  teacherId     String
+  courseAssetId String
+
+  name        String
+  description String?
+  type        CourseLessonType
+  tags        String[] // Array of tags for the course, e.g., ["math", "science"]
+
+  CourseAsset      CourseAsset[]
+  SummarizedCourse SummarizedCourse[]
+
+  User User @relation(fields: [teacherId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("courses")
+}
+
+model CourseAsset {
+  id       String @id @default(cuid())
+  courseId String
+  assetId  String
+
+  isThumbnail Boolean @default(false)
+
+  Asset  Asset  @relation(fields: [assetId], references: [id])
+  Course Course @relation(fields: [courseId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("course_assets")
+}
+
+model CourseEnrollment {
+  id       String @id @default(cuid())
+  userId   String
+  courseId String
+
+  status   CompletionStatus @default(NOT_STARTED)
+  progress Int              @default(0) // percentage of course completed
+
+  lastAccessedAt DateTime? // when the user last accessed the course
+
+  User User @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("course_enrollments")
+}
+
+model Quizz {
+  id       String @id @default(cuid())
+  userId   String
+  courseId String
+
+  title       String
+  description String?
+
+  QuizzAnswer  QuizzAnswer[]
+  QuizzAttempt QuizzAttempt[]
+  UserQuizz    UserQuizz[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("quizzes")
+}
+
+model QuizzAnswer {
+  id      String @id @default(cuid())
+  quizzId String
+  userId  String
+
+  question  String
+  answer    String
+  isCorrect Boolean
+
+  Quizz Quizz @relation(fields: [quizzId], references: [id])
+  User  User  @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("quizz_answers")
+}
+
+model UserQuizz {
+  id      String @id @default(cuid())
+  userId  String
+  quizzId String
+
+  highestScore  Int @default(0)
+  totalAttempts Int @default(0)
+
+  User  User  @relation(fields: [userId], references: [id])
+  Quizz Quizz @relation(fields: [quizzId], references: [id])
+
+  QuizzAttempt QuizzAttempt[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("user_quizzes")
+}
+
+model QuizzAttempt {
+  id      String @id @default(cuid())
+  userId  String
+  quizzId String
+
+  score     Int     @default(0)
+  attempt   Int
+  timeTaken Int // in seconds
+  answers   Json // store the selected answers, could include isCorrect flags etc
+  feedback  String?
+  rating    Int? // 1 to 5 stars
+
+  UserQuizz UserQuizz @relation(fields: [userId], references: [id])
+  Quizz     Quizz     @relation(fields: [quizzId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("quizz_attempts")
+}
+
+model SummarizedCourse {
+  id       String @id @default(cuid())
+  courseId String
+  userId   String
+
+  summary  String
+  rating   Int? // 1 to 5 stars
+  feedback String?
+
+  User   User   @relation(fields: [userId], references: [id])
+  Course Course @relation(fields: [courseId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("summarized_courses")
+}
+
 enum Role {
   STUDENT
   TEACHER
   ROOT
+}
+
+enum CourseLessonType {
+  VIDEO
+  QUIZ
+  ASSIGNMENT
+  DISCUSSION
+}
+
+enum CompletionStatus {
+  NOT_STARTED
+  IN_PROGRESS
+  COMPLETED
 }

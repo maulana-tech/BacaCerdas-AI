@@ -1,15 +1,44 @@
 import * as z from "zod";
 import { Role } from "@prisma/client";
+import {
+  CompleteCourse,
+  RelatedCourseModel,
+  CompleteSummarizedCourse,
+  RelatedSummarizedCourseModel,
+  CompleteUserProfilePicture,
+  RelatedUserProfilePictureModel,
+  CompleteUserQuizz,
+  RelatedUserQuizzModel,
+} from "./index";
 
 export const UserModel = z.object({
   id: z.string(),
   email: z.string(),
   username: z.string(),
   name: z.string(),
-  role: z.nativeEnum(Role),
-  image: z.string().nullish(),
-  location: z.string().nullish(),
   password: z.string(),
+  role: z.nativeEnum(Role),
   createdAt: z.date(),
   updatedAt: z.date(),
 });
+
+export interface CompleteUser extends z.infer<typeof UserModel> {
+  Course: CompleteCourse[];
+  SummarizedCourse: CompleteSummarizedCourse[];
+  UserProfilePicture: CompleteUserProfilePicture[];
+  UserQuizz: CompleteUserQuizz[];
+}
+
+/**
+ * RelatedUserModel contains all relations on your model in addition to the scalars
+ *
+ * NOTE: Lazy required in case of potential circular dependencies within schema
+ */
+export const RelatedUserModel: z.ZodSchema<CompleteUser> = z.lazy(() =>
+  UserModel.extend({
+    Course: RelatedCourseModel.array(),
+    SummarizedCourse: RelatedSummarizedCourseModel.array(),
+    UserProfilePicture: RelatedUserProfilePictureModel.array(),
+    UserQuizz: RelatedUserQuizzModel.array(),
+  }),
+);
