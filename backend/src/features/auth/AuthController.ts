@@ -1,5 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import AuthService from "./AuthService";
+
+import type { LoginRequest, RegisterRequest } from "./AuthSchema";
 // import UserService from "../user/UserService";
 
 /**
@@ -10,8 +12,13 @@ import AuthService from "./AuthService";
  * so it not follow the same pattern as other controllers.
  * */
 export default class AuthController {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async login(req: Request, res: Response, next: NextFunction) {
+  async login(
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    req: Request<{}, {}, LoginRequest>,
+    res: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    next: NextFunction,
+  ) {
     const user = await new AuthService().authenticateUser(req.body.data);
 
     res.status(200).json({
@@ -19,8 +26,13 @@ export default class AuthController {
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async register(req: Request, res: Response, next: NextFunction) {
+  async register(
+    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+    req: Request<{}, {}, RegisterRequest>,
+    res: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    next: NextFunction,
+  ) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, acceptTerms, ...data } = req.body.data;
     const user = await new AuthService().registerUser(data);

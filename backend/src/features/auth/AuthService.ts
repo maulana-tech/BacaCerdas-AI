@@ -50,7 +50,7 @@ export default class AuthService {
   }
 
   // Example method to register a new user
-  async registerUser(userData: Omit<User, "createdAt" | "updatedAt">) {
+  async registerUser(userData: Omit<User, "id" | "createdAt" | "updatedAt">) {
     // Logic to register a new user
     // This might involve hashing the password and saving the user data to a database
     const userRepository = new UserRepository();
