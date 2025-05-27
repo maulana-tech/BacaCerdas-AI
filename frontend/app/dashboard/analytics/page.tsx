@@ -1,3 +1,4 @@
+// app/dashboard/analytics/page.tsx
 "use client"
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -9,8 +10,12 @@ import { OverviewTab } from "./components/overview-tab"
 import { AnalyticsTab } from "./components/analytics-tab"
 import { ReportsTab } from "./components/reports-tab"
 import { NotificationsTab } from "./components/notifications-tab"
+import { DashboardContent } from "../components/dashboard-content"
 
-export default function AnalyticsPage() {
+
+
+// Konten spesifik untuk halaman Analytics
+function AnalyticsPageContent() {
   const handleExportData = () => {
     console.log("Exporting data...")
   }
@@ -50,4 +55,13 @@ export default function AnalyticsPage() {
       </Tabs>
     </div>
   )
+}
+
+// Halaman utama untuk rute /dashboard/analytics
+export default function AnalyticsPage() { // Tetap menggunakan nama AnalyticsPage
+  return (
+    <DashboardContent>
+      <AnalyticsPageContent />
+    </DashboardContent>
+  );
 }

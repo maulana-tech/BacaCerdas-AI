@@ -48,7 +48,7 @@ export function AppsSection() {
 
       {/* New Releases */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">New Releases</h2>
+        <h2 className="text-2xl font-semibold text-foreground">New Releases</h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {apps
             .filter((app) => app.new)
@@ -58,9 +58,8 @@ export function AppsSection() {
         </div>
       </section>
 
-      {/* All Apps */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">All Apps</h2>
+        <h2 className="text-2xl font-semibold text-foreground">All Apps</h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {apps.map((app) => (
             <AppCard key={app.name} app={app} showCategory />

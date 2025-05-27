@@ -1,8 +1,33 @@
 "use client"
 
+import { isValidElement } from "react";
+
 import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+
+
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface ComposedButtonProps extends React.ComponentProps<typeof Button> {}
+
+export function ComposedButton({ children, ...props }: ComposedButtonProps) {
+  // If the children is a valid react element and its type is a function (i.e. a component),
+  // set the asChild prop to true.
+
+  if (isValidElement(children) && typeof children.type === "function") {
+    return (
+      <Button asChild {...props}>
+        {children}
+      </Button>
+    );
+  }
+  
+  return (
+    <Button {...props}>
+      {children}
+    </Button>
+  );
+}
 
 interface HeroSectionProps {
   title: string;
@@ -31,13 +56,13 @@ export function HeroSection({ title, description, primaryAction, secondaryAction
           <h2 className="text-3xl font-bold">{title}</h2>
           <p className="max-w-[600px] text-white/80">{description}</p>
           <div className="flex flex-wrap gap-3">
-            <Button className="rounded-2xl bg-white text-indigo-700 hover:bg-white/90">{primaryAction}</Button>
+            <ComposedButton className="rounded-2xl bg-white text-indigo-700 hover:bg-white/90">{primaryAction}</ComposedButton>
             {secondaryAction && (
-              <Button
+              <ComposedButton
                 className="rounded-2xl bg-white text-indigo-700 hover:bg-white/90"
               >
                 {secondaryAction}
-              </Button>
+              </ComposedButton>
             )}
           </div>
         </div>
