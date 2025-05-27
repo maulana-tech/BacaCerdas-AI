@@ -285,7 +285,7 @@ import {
       author: "Alex Morgan",
       likes: 342,
       comments: 28,
-      image: "/placeholder.svg?height=300&width=400", // Contoh path gambar placeholder
+      image: "", // Contoh path gambar placeholder
       time: "2 days ago",
     },
     {
@@ -293,7 +293,7 @@ import {
       author: "Priya Sharma",
       likes: 518,
       comments: 47,
-      image: "/placeholder.svg?height=300&width=400", // Contoh path gambar placeholder
+      image: "", // Contoh path gambar placeholder
       time: "1 week ago",
     },
     {
@@ -301,7 +301,7 @@ import {
       author: "Thomas Wright",
       likes: 276,
       comments: 32,
-      image: "/placeholder.svg?height=300&width=400", // Contoh path gambar placeholder
+      image: "", // Contoh path gambar placeholder
       time: "3 days ago",
     },
     {

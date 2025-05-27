@@ -38,7 +38,7 @@ export function HomeSection() {
       {/* Recent Apps */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-semibold">Recent Apps</h2>
+          <h2 className="text-2xl font-semibold text-foreground">Recent Apps</h2>
           <Button variant="ghost" className="rounded-2xl text-primary">
             View All
           </Button>
@@ -56,8 +56,8 @@ export function HomeSection() {
         {/* Recent Files */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold">Recent Files</h2>
-            <Button variant="ghost" className="rounded-2xl">
+            <h2 className="text-2xl font-semibold text-foreground">Recent Files</h2>
+            <Button variant="ghost" className="rounded-2xl text-primary">
               View All
             </Button>
           </div>
@@ -73,8 +73,8 @@ export function HomeSection() {
         {/* Active Projects */}
         <section className="space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold">Active Projects</h2>
-            <Button variant="ghost" className="rounded-2xl">
+            <h2 className="text-2xl font-semibold text-foreground">Active Projects</h2>
+            <Button variant="ghost" className="rounded-2xl text-primary">
               View All
             </Button>
           </div>
