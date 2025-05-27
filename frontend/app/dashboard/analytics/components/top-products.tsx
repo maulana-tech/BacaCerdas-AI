@@ -49,25 +49,6 @@ const topCourses = [
 export function KontenUnggulanBacaCerdas() {
   return (
     <div className="space-y-8">
-      {/* Bagian untuk Fitur Unggulan */}
-      <div>
-        <h3 className="mb-4 text-lg font-medium text-gray-800 dark:text-gray-200">
-          Fitur Unggulan Kami
-        </h3>
-        <div className="space-y-4">
-          {topFeatures.map((feature) => (
-            <div key={feature.name} className="flex items-center rounded-md border p-3 shadow-sm dark:border-gray-700">
-              <feature.icon className="mr-3 h-5 w-5 text-blue-600 dark:text-blue-500" /> {/* Memberi warna pada ikon */}
-              <div className="flex-grow space-y-1">
-                <p className="text-sm font-semibold leading-none text-gray-900 dark:text-white">{feature.name}</p>
-                <p className="text-xs text-muted-foreground dark:text-gray-400">{feature.metric}</p>
-              </div>
-              <div className="ml-auto text-sm font-medium text-green-600 dark:text-green-400">{feature.growth}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Bagian untuk Kursus Populer */}
       <div>
         <h3 className="mb-4 text-lg font-medium text-gray-800 dark:text-gray-200">

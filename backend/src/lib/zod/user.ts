@@ -3,6 +3,10 @@ import { Role } from "@prisma/client";
 import {
   CompleteCourse,
   RelatedCourseModel,
+  CompleteCourseEnrollment,
+  RelatedCourseEnrollmentModel,
+  CompleteQuizzAnswer,
+  RelatedQuizzAnswerModel,
   CompleteSummarizedCourse,
   RelatedSummarizedCourseModel,
   CompleteUserProfilePicture,
@@ -24,6 +28,8 @@ export const UserModel = z.object({
 
 export interface CompleteUser extends z.infer<typeof UserModel> {
   Course: CompleteCourse[];
+  CourseEnrollment: CompleteCourseEnrollment[];
+  QuizzAnswer: CompleteQuizzAnswer[];
   SummarizedCourse: CompleteSummarizedCourse[];
   UserProfilePicture: CompleteUserProfilePicture[];
   UserQuizz: CompleteUserQuizz[];
@@ -37,6 +43,8 @@ export interface CompleteUser extends z.infer<typeof UserModel> {
 export const RelatedUserModel: z.ZodSchema<CompleteUser> = z.lazy(() =>
   UserModel.extend({
     Course: RelatedCourseModel.array(),
+    CourseEnrollment: RelatedCourseEnrollmentModel.array(),
+    QuizzAnswer: RelatedQuizzAnswerModel.array(),
     SummarizedCourse: RelatedSummarizedCourseModel.array(),
     UserProfilePicture: RelatedUserProfilePictureModel.array(),
     UserQuizz: RelatedUserQuizzModel.array(),

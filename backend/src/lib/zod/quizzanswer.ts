@@ -1,5 +1,10 @@
 import * as z from "zod";
-import { CompleteQuizz, RelatedQuizzModel } from "./index";
+import {
+  CompleteQuizz,
+  RelatedQuizzModel,
+  CompleteUser,
+  RelatedUserModel,
+} from "./index";
 
 export const QuizzAnswerModel = z.object({
   id: z.string(),
@@ -14,6 +19,7 @@ export const QuizzAnswerModel = z.object({
 
 export interface CompleteQuizzAnswer extends z.infer<typeof QuizzAnswerModel> {
   Quizz: CompleteQuizz;
+  User: CompleteUser;
 }
 
 /**
@@ -25,5 +31,6 @@ export const RelatedQuizzAnswerModel: z.ZodSchema<CompleteQuizzAnswer> = z.lazy(
   () =>
     QuizzAnswerModel.extend({
       Quizz: RelatedQuizzModel,
+      User: RelatedUserModel,
     }),
 );
