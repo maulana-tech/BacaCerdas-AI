@@ -1,17 +1,23 @@
+// dashboard-content.tsx
 "use client";
 
 import React, { useState, useEffect } from "react";
-
+// Impor komponen Sidebar dan TopNav
 import { Sidebar, useSidebar } from "@/components/ui/sidebar";
 import { TopNav } from "@/app/dashboard/components/top-nav"; // Pastikan path benar
 
-import { AccountsOverview } from "./accounts-overview";
-import { BusinessMetrics } from "./business-metrics";
-import { QuickBillPay } from "./quick-assignnment-submission";
-import { RecentTransactions } from "./recent-learning-activities";
+import { cn } from "@/lib/utils";
+
+// Hapus import komponen konten spesifik dashboard dari sini
+// import { AccountsOverview } from "./components/accounts-overview";
+// import { BusinessMetrics } from "./components/business-metrics";
+// import { QuickBillPay } from "./components/quick-assignnment-submission";
+// import { RecentTransactions } from "./components/recent-learning-activities";
 
 
-function DashboardLayoutContent() {
+// --- Komponen Helper Baru untuk Konten Layout Dashboard ---
+// Sekarang DashboardLayoutContent akan menerima `children`
+function DashboardLayoutContent({ children }: { children: React.ReactNode }) {
   const { isCollapsed, isMobileOpen } = useSidebar();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -38,39 +44,25 @@ function DashboardLayoutContent() {
       className="flex flex-col min-h-screen w-full bg-background transition-all duration-300 ease-in-out"
       style={{ paddingLeft: contentPaddingLeft }}
     >
-      {/* TopNav akan tetap di atas dan mengambil padding kiri dari style prop */}
       <TopNav className="w-full" style={{ paddingLeft: contentPaddingLeft }} />
 
-      {/* Div ini adalah flex-1 mengisi sisa ruang vertikal */}
       <div className="flex-1">
-        {/* Tambahkan padding-top untuk menggeser konten ke bawah TopNav yang fixed */}
         <main className="w-full p-3 sm:p-4 md:p-6 pr-4 md:pr-6" style={{ paddingTop: topNavHeight }}>
-          {/* Konten spesifik dashboard */}
-          <div className="space-y-4 sm:space-y-6">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Dashboard</h1>
-            <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              <div className="lg:col-span-1">
-                <AccountsOverview />
-              </div>
-              <div className="lg:col-span-1">
-                <RecentTransactions />
-              </div>
-              <div className="lg:col-span-1">
-                <QuickBillPay />
-              </div>
-            </div>
-            <BusinessMetrics />
-          </div>
+          {/* Render children di sini, yang akan menjadi konten dari halaman seperti AnalyticsPage */}
+          {children}
         </main>
       </div>
     </div>
   );
 }
 
-export function DashboardContent() {
+// --- Komponen DashboardContent Utama ---
+// Komponen ini akan menyediakan SidebarContext.Provider
+// dan merender DashboardLayoutContent dengan children-nya.
+export function DashboardContent({ children }: { children: React.ReactNode }) {
   return (
-    <Sidebar> {/* Sidebar adalah provider untuk SidebarContext */}
-      <DashboardLayoutContent /> {/* Render komponen helper di sini */}
+    <Sidebar>
+      <DashboardLayoutContent>{children}</DashboardLayoutContent> {/* Meneruskan children ke DashboardLayoutContent */}
     </Sidebar>
   );
 }
