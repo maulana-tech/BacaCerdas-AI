@@ -1,70 +1,76 @@
-// components/dashboard-content.tsx
 "use client";
 
-import { useSidebar } from "@/components/ui/sidebar"; // Gunakan useSidebar hook
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export function DashboardContent({ children }: { children: React.ReactNode }) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { isCollapsed, setIsCollapsed } = useSidebar(); // Ambil isCollapsed dan setIsCollapsed
+import { Sidebar, useSidebar } from "@/components/ui/sidebar";
+import { TopNav } from "@/app/dashboard/components/top-nav"; // Pastikan path benar
+
+import { AccountsOverview } from "./accounts-overview";
+import { BusinessMetrics } from "./business-metrics";
+import { QuickBillPay } from "./quick-assignnment-submission";
+import { RecentTransactions } from "./recent-learning-activities";
+
+
+function DashboardLayoutContent() {
+  const { isCollapsed, isMobileOpen } = useSidebar();
   const [isMobile, setIsMobile] = useState(false);
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false); // Tambahkan state ini
+
+  const sidebarWidthCollapsed = '72px';
+  const sidebarWidthExpanded = '288px'; // Asumsi lebar sidebar expanded
+  const topNavHeight = '64px'; // h-16 = 64px
+
+  const contentPaddingLeft = isMobile
+    ? (isMobileOpen ? sidebarWidthExpanded : '0px')
+    : (isCollapsed ? sidebarWidthCollapsed : sidebarWidthExpanded);
 
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 1024);
-      // Jika di desktop dan sidebar mobile terbuka, tutup
-      if (window.innerWidth >= 1024 && isMobileSidebarOpen) {
-        setIsMobileSidebarOpen(false);
-      }
     };
 
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
-  }, [isMobileSidebarOpen]);
-
-  // useEffect untuk memastikan isMobileSidebarOpen disinkronkan dengan Sidebar (jika ada perubahan dari TopNav)
-  // Ini penting agar `paddingLeft` di DashboardContent menyesuaikan dengan sidebar mobile
-  useEffect(() => {
-    // Anda mungkin perlu cara untuk mendapatkan status isMobileOpen dari Sidebar internal
-    // Untuk saat ini, asumsikan kita bisa mendapatkan efek yang sama dengan memeriksa lebar layar
-    // dan mengasumsikan toggle mobile dikelola oleh TopNav yang memanggil setIsCollapsed
-    // Untuk sidebar mobile, kita perlu 'state' yang terpisah yang diatur oleh tombol mobile di TopNav.
-    // Jika TopNav mengontrol setIsCollapsed, maka Sidebar akan mengikuti.
-    // Untuk mobile, paddingLeft harusnya 0 saat sidebar mobile tertutup, dan 288px saat terbuka.
-    // TopNav harus memicu setIsCollapsed(true) atau setIsCollapsed(false) untuk mobile.
-    // KITA AKAN MODIFIKASI INI SAAT INTEGRASI PENUH.
-  }, [isCollapsed, isMobile]); // isCollapsed di sini akan datang dari SidebarContext
-  
-  // Efek samping untuk menentukan apakah sidebar mobile sedang terbuka berdasarkan isCollapsed di TopNav
-  // Ini adalah solusi sementara jika state isMobileOpen tidak bisa diakses langsung dari Sidebar
-  useEffect(() => {
-    if (isMobile) {
-      // Di mobile, jika isCollapsed (yang dikontrol TopNav) adalah false, anggap sidebar terbuka
-      setIsMobileSidebarOpen(!isCollapsed);
-    } else {
-      setIsMobileSidebarOpen(false); // Di desktop, sidebar mobile selalu tertutup
-    }
-  }, [isMobile, isCollapsed]);
-
+  }, []);
 
   return (
     <div
-      className="flex-1 bg-background transition-all duration-300 ease-in-out"
-      style={{
-        // Sesuaikan paddingLeft berdasarkan isMobile dan isCollapsed/isMobileSidebarOpen
-        // Jika mobile, paddingLeft akan 0 jika sidebar mobile tertutup, atau 288px jika terbuka
-        // Jika desktop, paddingLeft akan 72px jika collapsed, atau 288px jika expanded
-        paddingLeft: isMobile
-          ? (isMobileSidebarOpen ? '288px' : '0px')
-          : (isCollapsed ? '72px' : '288px'),
-      }}
+      className="flex flex-col min-h-screen w-full bg-background transition-all duration-300 ease-in-out"
+      style={{ paddingLeft: contentPaddingLeft }}
     >
-      {/* TopNav TELAH DIHILANGKAN DARI SINI, AKAN DIRENDER DI LAYOUT */}
-      <div className="container mx-auto p-3 sm:p-4 md:p-6 max-w-7xl">
-        <main className="w-full">{children}</main>
+      {/* TopNav akan tetap di atas dan mengambil padding kiri dari style prop */}
+      <TopNav className="w-full" style={{ paddingLeft: contentPaddingLeft }} />
+
+      {/* Div ini adalah flex-1 mengisi sisa ruang vertikal */}
+      <div className="flex-1">
+        {/* Tambahkan padding-top untuk menggeser konten ke bawah TopNav yang fixed */}
+        <main className="w-full p-3 sm:p-4 md:p-6 pr-4 md:pr-6" style={{ paddingTop: topNavHeight }}>
+          {/* Konten spesifik dashboard */}
+          <div className="space-y-4 sm:space-y-6">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">Dashboard</h1>
+            <div className="grid gap-4 sm:gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+              <div className="lg:col-span-1">
+                <AccountsOverview />
+              </div>
+              <div className="lg:col-span-1">
+                <RecentTransactions />
+              </div>
+              <div className="lg:col-span-1">
+                <QuickBillPay />
+              </div>
+            </div>
+            <BusinessMetrics />
+          </div>
+        </main>
       </div>
     </div>
+  );
+}
+
+export function DashboardContent() {
+  return (
+    <Sidebar> {/* Sidebar adalah provider untuk SidebarContext */}
+      <DashboardLayoutContent /> {/* Render komponen helper di sini */}
+    </Sidebar>
   );
 }
