@@ -18,7 +18,7 @@ declare module "next-auth" {
         email: string,
         username: string,
         name: string,
-        // role: ,
+        role: Role,
         image?: string,
         location?: string,
         createdAt: Date,
@@ -31,7 +31,7 @@ declare module "next-auth" {
         email: string,
         username: string,
         name: string,
-        // role: ,
+        role: Role,
         image?: string,
         location?: string,
         createdAt: Date,
@@ -49,7 +49,7 @@ declare module "next-auth/jwt" {
         email: string,
         username: string,
         name: string,
-        // role: ,
+        role: Role,
         image?: string,
         location?: string,
         createdAt: Date,
@@ -131,6 +131,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth(() => {
                 }
 
                 return token;
+            },
+            session: async ({ session, token }) => {
+                if (token) {
+                    session.id = token.id;
+                    session.email = token.email;
+                    session.username = token.username;
+                    session.name = token.name;
+                    session.role = token.role;
+                    session.image = token.image;
+                    session.location = token.location;
+                    session.createdAt = token.createdAt;
+                    session.updatedAt = token.updatedAt;
+                    session.token = token.token;
+                }
+
+                return session;
             }
         }
     }

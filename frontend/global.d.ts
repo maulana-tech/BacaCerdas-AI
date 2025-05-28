@@ -1,4 +1,9 @@
 declare global {
+    enum Role {
+        SISWA = "STUDENT",
+        GURU = "TEACHER",
+        ROOT = "ROOT"
+    }
     namespace NodeJS {
         interface ProcessEnv {
             NEXT_OUTPUT?: "standalone" | "export";
