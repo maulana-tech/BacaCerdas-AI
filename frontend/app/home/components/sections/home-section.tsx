@@ -1,16 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { HeroSection } from "./hero-section";
 import { AppCard } from "../cards/app-card";
 import { FileRow } from "../cards/file-row";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { apps, recentFiles, projects, communityPosts } from "@/lib/data/sample-data";
-import { Heart, MessageSquare, FileText, Users } from "lucide-react";
+import { apps, recentFiles, projects } from "@/lib/data/sample-data";
+import { FileText, Users, ArrowRight } from "lucide-react";
+
+import Link from "next/link";
+import { TeacherProjectsDisplay } from "../cards/teacher-project-card";
+
 
 export function HomeSection() {
   const studentVisibleApps = apps.filter(
@@ -100,32 +102,16 @@ export function HomeSection() {
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-semibold text-foreground">Sorotan Komunitas</h2>
-          <Button variant="ghost" className="rounded-2xl text-primary">Jelajahi</Button>
+        <Button asChild variant="outline" className="w-full md:w-auto">
+          <Link href="#">
+            View All Courses
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+        </Button>
         </div>
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {communityPosts.map((post) => (
-            <motion.div key={post.title} whileHover={{ scale: 1.02, y: -5 }} whileTap={{ scale: 0.98 }}>
-              {/* ... detail post ... */}
-              <Card className="overflow-hidden rounded-3xl">
-                <div className="aspect-[4/3] overflow-hidden bg-muted">
-                  <Image height={300} width={400} src={post.image || "/placeholder.svg"} alt={post.title} className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"/>
-                </div>
-                <CardContent className="p-4">
-                  <h3 className="font-semibold">{post.title}</h3>
-                  <p className="text-sm text-muted-foreground">oleh {post.author}</p>
-                  <div className="mt-2 flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-2">
-                      <Heart className="h-4 w-4 text-red-500" /> {post.likes}
-                      <MessageSquare className="ml-2 h-4 w-4 text-blue-500" /> {post.comments}
-                    </div>
-                    <span className="text-muted-foreground">{post.time}</span>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-           {communityPosts.length === 0 && <p className="p-4 text-muted-foreground col-span-full">Tidak ada sorotan komunitas.</p>}
-        </div>
+        <TeacherProjectsDisplay 
+          speed="fast"
+        />
       </section>
     </div>
   );
