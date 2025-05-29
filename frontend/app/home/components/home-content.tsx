@@ -22,18 +22,17 @@ const LoadingScreen = () => (
 
 function HomeLayoutContent() {
   const { data: session, status } = useSession();
-  const { isCollapsed, isMobileOpen } = useSidebar(); // Sidebar hooks
-  const [isMobile, setIsMobile] = useState(false); // Mobile state
+  const { isCollapsed, isMobileOpen } = useSidebar();
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Menggunakan session.role sesuai dengan auth.ts Anda
+
   const userRole = status === "loading" ? null : session?.role || "STUDENT";
 
-  // State untuk activeTab. Akan diinisialisasi di useEffect setelah userRole diketahui.
+
   const [activeTab, setActiveTab] = useState<string | null>(null);
 
   useEffect(() => {
-    // Inisialisasi activeTab berdasarkan userRole ketika userRole sudah tersedia
-    // dan activeTab belum di-set.
+
     if (userRole && activeTab === null) {
       setActiveTab(userRole === "TEACHER" ? "apps" : "home");
     }
@@ -47,7 +46,6 @@ function HomeLayoutContent() {
   }, [userRole, activeTab]);
 
 
-  // Sidebar & Mobile logic (tetap sama)
   const sidebarWidthCollapsed = '72px';
   const sidebarWidthExpanded = '288px';
   const topNavHeight = '64px';
@@ -63,7 +61,6 @@ function HomeLayoutContent() {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Tampilkan loading jika status masih loading atau activeTab belum terinisialisasi
   if (status === "loading" || !activeTab) {
     return (
        <div
@@ -89,26 +86,19 @@ function HomeLayoutContent() {
 
       <div className="flex-1">
         <main className="w-full p-3 sm:p-4 md:p-6 pr-4 md:pr-6" style={{ paddingTop: topNavHeight }}>
-          {/* `value` dikontrol oleh state `activeTab`, `onValueChange` mengupdate state */}
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              {/* MODIFIKASI TabsList: Tambahkan class 'flex' dan 'w-full' (atau 'w-auto' jika tidak ingin mengisi penuh parentnya) */}
-              {/* max-w-[600px] akan membatasi lebar maksimum TabsList */}
               <TabsList className="flex w-full max-w-[600px] rounded-2xl p-1">
                 {userRole === "STUDENT" && (
-                  // MODIFIKASI TabsTrigger: Tambahkan class 'flex-1'
                   <TabsTrigger value="home" className="flex-1 rounded-xl data-[state=active]:rounded-xl">
                     Home
                   </TabsTrigger>
                 )}
                 {userRole === "TEACHER" && (
-                  // MODIFIKASI TabsTrigger: Tambahkan class 'flex-1'
                   <TabsTrigger value="apps" className="flex-1 rounded-xl data-[state=active]:rounded-xl">
                     Apps
                   </TabsTrigger>
                 )}
-                {/* Tab lain yang umum untuk semua role */}
-                {/* MODIFIKASI TabsTrigger: Tambahkan class 'flex-1' */}
                 <TabsTrigger value="files" className="flex-1 rounded-xl data-[state=active]:rounded-xl">
                   Files
                 </TabsTrigger>
@@ -120,7 +110,6 @@ function HomeLayoutContent() {
                 </TabsTrigger>
               </TabsList>
 
-              {/* Tombol hanya untuk TEACHER (tetap sama) */}
               {userRole === "TEACHER" && (
                 <div className="hidden md:flex gap-2">
                   <Button variant="outline" className="rounded-2xl text-foreground">
@@ -143,7 +132,6 @@ function HomeLayoutContent() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
               >
-                {/* Render TabsContent secara kondisional berdasarkan peran DAN activeTab */}
                 {userRole === "STUDENT" && activeTab === "home" && (
                   <TabsContent value="home" className="mt-0" forceMount>
                     <HomeSection />

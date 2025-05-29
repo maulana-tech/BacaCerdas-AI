@@ -85,10 +85,7 @@ export function AppCard({ app, showProgress = false, showCategory = false }: App
           {showProgress && app.progress !== undefined && app.progress < 100 && (
             <div className="mt-2">
               <div className="flex items-center justify-between text-sm text-muted-foreground">
-                <span>{userRole === "TEACHER" ? "Persiapan Template" : "Progres Aplikasi"}</span>
-                <span>{app.progress}%</span>
               </div>
-              <Progress value={app.progress} className="h-2 mt-1 rounded-xl" />
             </div>
           )}
         </CardContent>
