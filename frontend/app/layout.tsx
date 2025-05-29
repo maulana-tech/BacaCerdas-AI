@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Lora, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import ThemeProvider from "@/components/theme-provider";
+import { SessionProvider } from "next-auth/react"; // Tambahkan import ini
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -227,9 +228,11 @@ export default function RootLayout({
     <html lang="id" suppressHydrationWarning>
       <body className={`${plusJakartaSans.variable} ${lora.variable} antialiased bg-white text-zinc-900`}>
         <main>
-          <ThemeProvider>
-            {children}
-          </ThemeProvider>
+          <SessionProvider> {/* Tambahkan SessionProvider di sini */}
+            <ThemeProvider>
+              {children}
+            </ThemeProvider>
+          </SessionProvider>
         </main>
       </body>
     </html>

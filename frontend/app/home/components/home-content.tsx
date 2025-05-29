@@ -1,86 +1,138 @@
-// components/home-content.tsx (hanya bagian HomeLayoutContent yang relevan)
 "use client";
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Download, Plus } from "lucide-react";
+import { useSession } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
-import { Sidebar } from "@/components/ui/sidebar";
-import { TopNav } from "@/app/dashboard/components/top-nav"; // Pastikan path benar
+import { Sidebar, useSidebar } from "@/components/ui/sidebar";
+import { TopNav } from "@/app/dashboard/components/top-nav";
 
 import { HomeSection } from "./sections/home-section";
 import { AppsSection } from "./sections/apps-section";
 
-import { useSidebar } from "@/components/ui/sidebar";
-
+const LoadingScreen = () => (
+  <div className="flex items-center justify-center min-h-screen w-full">
+    <p>Memuat data pengguna...</p>
+  </div>
+);
 
 function HomeLayoutContent() {
-  const { isCollapsed, isMobileOpen } = useSidebar();
-  const [activeTab, setActiveTab] = useState("home");
-  const [isMobile, setIsMobile] = useState(false);
+  const { data: session, status } = useSession();
+  const { isCollapsed, isMobileOpen } = useSidebar(); // Sidebar hooks
+  const [isMobile, setIsMobile] = useState(false); // Mobile state
 
+  // Menggunakan session.role sesuai dengan auth.ts Anda
+  const userRole = status === "loading" ? null : session?.role || "STUDENT";
+
+  // State untuk activeTab. Akan diinisialisasi di useEffect setelah userRole diketahui.
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Inisialisasi activeTab berdasarkan userRole ketika userRole sudah tersedia
+    // dan activeTab belum di-set.
+    if (userRole && activeTab === null) {
+      setActiveTab(userRole === "TEACHER" ? "apps" : "home");
+    }
+    if (userRole && activeTab) {
+      if (userRole === "STUDENT" && activeTab === "apps") {
+        setActiveTab("home");
+      } else if (userRole === "TEACHER" && activeTab === "home") {
+        setActiveTab("apps");
+      }
+    }
+  }, [userRole, activeTab]);
+
+
+  // Sidebar & Mobile logic (tetap sama)
   const sidebarWidthCollapsed = '72px';
-  const sidebarWidthExpanded = '288px'; // Asumsi lebar sidebar expanded
-  const topNavHeight = '64px'; // h-16 = 64px
+  const sidebarWidthExpanded = '288px';
+  const topNavHeight = '64px';
 
   const contentPaddingLeft = isMobile
     ? (isMobileOpen ? sidebarWidthExpanded : '0px')
     : (isCollapsed ? sidebarWidthCollapsed : sidebarWidthExpanded);
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
+  // Tampilkan loading jika status masih loading atau activeTab belum terinisialisasi
+  if (status === "loading" || !activeTab) {
+    return (
+       <div
+        className="flex flex-col min-h-screen w-full bg-background transition-all duration-300 ease-in-out"
+        style={{ paddingLeft: contentPaddingLeft }}
+      >
+        <TopNav className="w-full" style={{ paddingLeft: contentPaddingLeft }} />
+        <div className="flex-1" style={{ paddingTop: topNavHeight }}>
+          <div className="flex items-center justify-center h-[calc(100vh-var(--top-nav-height))]">
+             <p>Memuat data pengguna dan tampilan...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div
       className="flex flex-col min-h-screen w-full bg-background transition-all duration-300 ease-in-out"
-      // Padding kiri untuk seluruh area konten (termasuk TopNav dan main)
       style={{ paddingLeft: contentPaddingLeft }}
     >
-      {/* TopNav akan tetap di atas dan mengambil padding kiri dari style prop */}
       <TopNav className="w-full" style={{ paddingLeft: contentPaddingLeft }} />
 
       <div className="flex-1">
-        {/* Tambahkan padding-top untuk menggeser konten ke bawah TopNav yang fixed */}
         <main className="w-full p-3 sm:p-4 md:p-6 pr-4 md:pr-6" style={{ paddingTop: topNavHeight }}>
-          <Tabs defaultValue="home" value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-              <TabsList className="grid w-full max-w-[600px] grid-cols-5 rounded-2xl p-1">
-                <TabsTrigger value="home" className="rounded-xl data-[state=active]:rounded-xl">
-                  Home
-                </TabsTrigger>
-                <TabsTrigger value="apps" className="rounded-xl data-[state=active]:rounded-xl">
-                  Apps
-                </TabsTrigger>
-                <TabsTrigger value="files" className="rounded-xl data-[state=active]:rounded-xl">
+          {/* `value` dikontrol oleh state `activeTab`, `onValueChange` mengupdate state */}
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+              {/* MODIFIKASI TabsList: Tambahkan class 'flex' dan 'w-full' (atau 'w-auto' jika tidak ingin mengisi penuh parentnya) */}
+              {/* max-w-[600px] akan membatasi lebar maksimum TabsList */}
+              <TabsList className="flex w-full max-w-[600px] rounded-2xl p-1">
+                {userRole === "STUDENT" && (
+                  // MODIFIKASI TabsTrigger: Tambahkan class 'flex-1'
+                  <TabsTrigger value="home" className="flex-1 rounded-xl data-[state=active]:rounded-xl">
+                    Home
+                  </TabsTrigger>
+                )}
+                {userRole === "TEACHER" && (
+                  // MODIFIKASI TabsTrigger: Tambahkan class 'flex-1'
+                  <TabsTrigger value="apps" className="flex-1 rounded-xl data-[state=active]:rounded-xl">
+                    Apps
+                  </TabsTrigger>
+                )}
+                {/* Tab lain yang umum untuk semua role */}
+                {/* MODIFIKASI TabsTrigger: Tambahkan class 'flex-1' */}
+                <TabsTrigger value="files" className="flex-1 rounded-xl data-[state=active]:rounded-xl">
                   Files
                 </TabsTrigger>
-                <TabsTrigger value="projects" className="rounded-xl data-[state=active]:rounded-xl">
+                <TabsTrigger value="projects" className="flex-1 rounded-xl data-[state=active]:rounded-xl">
                   Projects
                 </TabsTrigger>
-                <TabsTrigger value="learn" className="rounded-xl data-[state=active]:rounded-xl">
+                <TabsTrigger value="learn" className="flex-1 rounded-xl data-[state=active]:rounded-xl">
                   Learn
                 </TabsTrigger>
               </TabsList>
-              <div className="hidden md:flex gap-2">
-                <Button variant="outline" className="rounded-2xl text-foreground">
-                  <Download className="mr-2 h-4 w-4" />
-                  Install App
-                </Button>
-                <Button className="rounded-2xl">
-                  <Plus className="mr-2 h-4 w-4" />
-                  New Project
-                </Button>
-              </div>
+
+              {/* Tombol hanya untuk TEACHER (tetap sama) */}
+              {userRole === "TEACHER" && (
+                <div className="hidden md:flex gap-2">
+                  <Button variant="outline" className="rounded-2xl text-foreground">
+                    <Download className="mr-2 h-4 w-4" />
+                    Install App
+                  </Button>
+                  <Button className="rounded-2xl">
+                    <Plus className="mr-2 h-4 w-4" />
+                    New Project
+                  </Button>
+                </div>
+              )}
             </div>
 
             <AnimatePresence mode="wait">
@@ -91,34 +143,44 @@ function HomeLayoutContent() {
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.2 }}
               >
-                <TabsContent value="home" className="mt-0">
-                  <HomeSection />
-                </TabsContent>
+                {/* Render TabsContent secara kondisional berdasarkan peran DAN activeTab */}
+                {userRole === "STUDENT" && activeTab === "home" && (
+                  <TabsContent value="home" className="mt-0" forceMount>
+                    <HomeSection />
+                  </TabsContent>
+                )}
 
-                <TabsContent value="apps" className="mt-0">
-                  <AppsSection />
-                </TabsContent>
+                {userRole === "TEACHER" && activeTab === "apps" && (
+                  <TabsContent value="apps" className="mt-0" forceMount>
+                    <AppsSection />
+                  </TabsContent>
+                )}
 
-                <TabsContent value="files" className="mt-0">
-                  <div className="text-center py-12 space-y-4">
-                    <h2 className="text-2xl font-semibold mb-2">Files Section</h2>
-                    <p className="text-muted-foreground">Files management interface coming soon...</p>
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="projects" className="mt-0">
-                  <div className="text-center py-12 space-y-4">
-                    <h2 className="text-2xl font-semibold">Projects Section</h2>
-                    <p className="text-muted-foreground">Project management interface coming soon...</p>
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="learn" className="mt-0">
-                  <div className="text-center py-12 space-y-4">
-                    <h2 className="text-2xl font-semibold">Learn Section</h2>
-                    <p className="text-muted-foreground">Learning platform interface coming soon...</p>
-                  </div>
-                </TabsContent>
+                {/* Konten untuk tab lain yang umum */}
+                {activeTab === "files" && (
+                  <TabsContent value="files" className="mt-0" forceMount>
+                    <div className="text-center py-12 space-y-4">
+                      <h2 className="text-2xl font-semibold mb-2">Files Section</h2>
+                      <p className="text-muted-foreground">Files management interface coming soon...</p>
+                    </div>
+                  </TabsContent>
+                )}
+                {activeTab === "projects" && (
+                  <TabsContent value="projects" className="mt-0" forceMount>
+                    <div className="text-center py-12 space-y-4">
+                      <h2 className="text-2xl font-semibold">Projects Section</h2>
+                      <p className="text-muted-foreground">Project management interface coming soon...</p>
+                    </div>
+                  </TabsContent>
+                )}
+                {activeTab === "learn" && (
+                  <TabsContent value="learn" className="mt-0" forceMount>
+                    <div className="text-center py-12 space-y-4">
+                      <h2 className="text-2xl font-semibold">Learn Section</h2>
+                      <p className="text-muted-foreground">Learning platform interface coming soon...</p>
+                    </div>
+                  </TabsContent>
+                )}
               </motion.div>
             </AnimatePresence>
           </Tabs>
@@ -128,7 +190,6 @@ function HomeLayoutContent() {
   );
 }
 
-// --- Komponen HomeContent Utama (Tidak Berubah) ---
 export function HomeContent() {
   return (
     <Sidebar>
