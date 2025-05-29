@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { HeroSection } from "./hero-section";
-import { AppCard } from "../cards/app-card"; // AppCard yang sudah dimodifikasi
+import { AppCard } from "../cards/app-card";
 import { FileRow } from "../cards/file-row";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,7 +15,7 @@ import { Heart, MessageSquare, FileText, Users } from "lucide-react";
 export function HomeSection() {
   const studentVisibleApps = apps.filter(
     (app) => app.category === "Quiz" || app.category === "Summary" || app.new
-  ).slice(0, 4); // Ambil 4 contoh
+  ).slice(0, 4);
 
   return (
     <div className="space-y-8">
@@ -32,7 +32,7 @@ export function HomeSection() {
             Lihat Panduan
           </Button>
         }
-        gradient="bg-gradient-to-r from-green-500 via-teal-500 to-cyan-500" // Warna berbeda untuk siswa
+        gradient="bg-gradient-to-r from-green-500 via-teal-500 to-cyan-500" 
       />
 
       <section className="space-y-4">
@@ -49,9 +49,6 @@ export function HomeSection() {
           )}
         </div>
       </section>
-
-      {/* Bagian Recent Files, Active Projects, Community Highlights bisa tetap sama */}
-      {/* atau disesuaikan lebih lanjut datanya untuk siswa */}
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <section className="space-y-4">
           <div className="flex items-center justify-between">

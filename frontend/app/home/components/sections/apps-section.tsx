@@ -1,13 +1,19 @@
 "use client";
 
-import { Download, Search, PlusCircle } from "lucide-react";
+import { Download, Search, PlusCircle, Users, FileText } from "lucide-react";
+import { motion } from "framer-motion";
+
+
 import { HeroSection } from "./hero-section";
 import { AppCard } from "../cards/app-card"; 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { apps as allAppsData } from "@/lib/data/sample-data";
+import { apps as allAppsData, projects, recentFiles } from "@/lib/data/sample-data";
 import { useSession } from "next-auth/react";
 import type { App } from "@/lib/types";
+import { FileRow } from "../cards/file-row";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@radix-ui/react-progress";
 
 export function AppsSection() {
   const { data: session, status } = useSession(); 
@@ -75,6 +81,54 @@ export function AppsSection() {
           )}
         </div>
       </section>
+
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-semibold text-foreground">File Terbaru</h2>
+            <Button variant="ghost" className="rounded-2xl text-primary">Lihat Semua</Button>
+          </div>
+          <div className="rounded-3xl border">
+            <div className="grid grid-cols-1 divide-y">
+              {recentFiles.slice(0, 4).map((file) => ( <FileRow key={file.name} file={file} /> ))}
+            </div>
+            {recentFiles.length === 0 && <p className="p-4 text-muted-foreground">Tidak ada file terbaru.</p>}
+          </div>
+        </section>
+
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-2xl font-semibold text-foreground">Proyek Aktif</h2>
+            <Button variant="ghost" className="rounded-2xl text-primary">Lihat Semua</Button>
+          </div>
+          <div className="rounded-3xl border">
+            <div className="grid grid-cols-1 divide-y">
+              {projects.slice(0, 3).map((project) => (
+                <motion.div key={project.name} whileHover={{ backgroundColor: "rgba(0,0,0,0.02)" }} className="p-4">
+                  {/* ... detail proyek ... */}
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="font-medium text-foreground">{project.name}</h3>
+                    <Badge variant="outline" className="rounded-xl">Tenggat {project.dueDate}</Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-3">{project.description}</p>
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-sm">
+                      <span className="text-muted-foreground">Progress</span>
+                      <span>{project.progress}%</span>
+                    </div>
+                    <Progress value={project.progress} className="h-2 rounded-xl" />
+                  </div>
+                  <div className="flex items-center justify-between mt-3 text-sm text-muted-foreground">
+                    <div className="flex items-center"><Users className="mr-1 h-4 w-4" />{project.members} anggota</div>
+                    <div className="flex items-center"><FileText className="mr-1 h-4 w-4" />{project.files} file</div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+             {projects.length === 0 && <p className="p-4 text-muted-foreground">Tidak ada proyek aktif.</p>}
+          </div>
+        </section>
+      </div>
 
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-foreground">Semua Template Aplikasi</h2>

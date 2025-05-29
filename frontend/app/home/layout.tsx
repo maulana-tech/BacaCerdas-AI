@@ -6,7 +6,6 @@ export default function HomeLayout({ children }: DefaultPageProps) {
   return (
     <SettingsProvider>
       <TooltipProvider delayDuration={0}>
-        {/* children di sini akan menjadi HomeContent, yang kini bertindak sebagai aplikasi shell penuh */}
         {children}
       </TooltipProvider>
     </SettingsProvider>
