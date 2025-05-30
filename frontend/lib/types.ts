@@ -59,3 +59,37 @@ export interface SidebarItem {
     badge?: string
   }>
 }
+
+export interface Story {
+  id: string
+  title: string
+  content: string
+  created_at: string
+  updated_at: string
+}
+
+export interface Quiz {
+  id: string
+  title: string
+  content: QuizQuestion[]
+  source_document?: string
+  created_at: string
+  updated_at: string
+}
+
+export interface QuizQuestion {
+  question: string
+  options: string[]
+  correct_answer: number
+  explanation?: string
+}
+
+export interface Summary {
+  id: string
+  title: string
+  content: string
+  source_document?: string
+  created_at: string
+  updated_at: string
+}
+
