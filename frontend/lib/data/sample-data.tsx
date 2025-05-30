@@ -24,6 +24,7 @@ import {
   
   export const apps: App[] = [
     {
+      id: 1,
       name: "Baca Cerita",
       icon: <GraduationCap className="text-fuchsia-500" />,
       description: "Membuat cerita yang menarik",
@@ -33,6 +34,7 @@ import {
       progress: 85,
     },
     {
+      id : 2,
       name: "Kuis",
       icon: <NotebookPen className="text-emerald-500" />,
       description: "Membuat kuis yang efektif",
@@ -42,6 +44,7 @@ import {
       progress: 70,
     },
     {
+      id : 3,
       name: "Rangkuman",
       icon: <BookOpen className="text-indigo-500" />,
       description: "Membuat rangkuman dari dokumen",

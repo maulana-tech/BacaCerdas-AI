@@ -22,7 +22,7 @@ export function HomeSection() {
   return (
     <div className="space-y-8">
       <HeroSection
-        title="Selamat Datang di Dasbor Belajarmu!"
+        title="Selamat Datang di Dasboard Belajarmu!"
         description="Temukan materi, kuis, dan proyek yang telah disiapkan untukmu."
         primaryAction={
           <Button className="bg-white text-black hover:bg-gray-200 rounded-2xl">
