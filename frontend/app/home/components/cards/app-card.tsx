@@ -5,9 +5,9 @@ import { Plus, Star, Eye } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import type { App } from "@/lib/types";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface AppCardProps {
   app: App;
@@ -17,6 +17,7 @@ interface AppCardProps {
 
 export function AppCard({ app, showProgress = false, showCategory = false }: AppCardProps) {
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   const userRole = status === "loading" ? "STUDENT" : session?.role || "STUDENT";
 
@@ -29,9 +30,21 @@ export function AppCard({ app, showProgress = false, showCategory = false }: App
 
   const handleButtonClick = () => {
     if (userRole === "TEACHER") {
-      console.log(`TEACHER action: Triggering creation/management for app "${app.name}"`);
-    } else { // STUDENT atau peran lain
-      console.log(`STUDENT/User action: Triggering view for app "${app.name}"`);
+      if (app.id === 1) {
+        router.push("/home/generate/guru/");
+      } else if (app.id === 2) {
+        router.push("/home/quiz/guru/");
+      } else if (app.id === 3) {
+        router.push("/home/summarize/guru/");
+      }
+    } else {
+      if (app.id === 1) {
+        router.push("/home/generate/siswa/");
+      } else if (app.id === 2) {
+        router.push("/home/quiz/siswa/");
+      } else if (app.id === 3) {
+        router.push("/home/summarize/siswa/");
+      }
     }
   };
 

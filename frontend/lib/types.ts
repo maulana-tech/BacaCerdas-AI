@@ -1,5 +1,6 @@
 import type React from "react"
 export interface App {
+  id: number
   name: string
   icon: React.ReactNode
   description: string
