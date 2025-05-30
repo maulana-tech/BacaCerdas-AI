@@ -35,7 +35,7 @@ export function AppCard({ app, showProgress = false, showCategory = false }: App
       } else if (app.id === 2) {
         router.push("/home/quiz/guru/");
       } else if (app.id === 3) {
-        router.push("/home/summarize/guru/");
+        router.push("/home/summary/guru/");
       }
     } else {
       if (app.id === 1) {
@@ -43,7 +43,7 @@ export function AppCard({ app, showProgress = false, showCategory = false }: App
       } else if (app.id === 2) {
         router.push("/home/quiz/siswa/");
       } else if (app.id === 3) {
-        router.push("/home/summarize/siswa/");
+        router.push("/home/summary/siswa/");
       }
     }
   };
