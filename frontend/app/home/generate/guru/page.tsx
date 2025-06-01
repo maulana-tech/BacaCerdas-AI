@@ -33,13 +33,9 @@ export default function StoryPageGuru() { // Consider a more specific name if "S
   }, [searchParams]);
 
   const loadStory = async (id: string) => {
-    // Database interaction logic removed as per original file's comments
     console.log(
       `loadStory called for ID: ${id}, but database fetching is disabled.`
     );
-    // alert(
-    //   `Cannot load story with ID: ${id}. Database interaction is disabled.`
-    // );
   };
 
   const handleUseAIStory = (aiContent: string, aiTitle?: string) => {
@@ -92,7 +88,6 @@ export default function StoryPageGuru() { // Consider a more specific name if "S
 
   return (
     <HomeAppLayout> {/* Wrap the page content with HomeAppLayout */}
-      {/* Original page content starts here, container/spacing might need adjustment */}
       <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{storyId ? "Edit Story" : "Create New Story"}</h1>

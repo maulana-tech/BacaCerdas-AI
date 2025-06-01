@@ -64,7 +64,7 @@ export default function FileUpload({ onFileSelect, accept = ".pdf,.doc,.docx", m
           onDragLeave={() => setDragOver(false)}
         >
           <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-          <p className="text-lg font-medium text-gray-900 mb-2">Drag & drop file atau klik untuk upload</p>
+          <p className="text-lg font-medium text-primary mb-2">Drag & drop file atau klik untuk upload</p>
           <p className="text-sm text-gray-500 mb-4">Mendukung PDF, DOC, DOCX (maksimal {maxSize}MB)</p>
           <Button onClick={() => fileInputRef.current?.click()} variant="outline">
             Pilih File
