@@ -96,7 +96,7 @@ export default function StoryPageGuru() { // Consider a more specific name if "S
           </p>
         </div>
         <Link href="/home">
-          <Button variant="outline">
+          <Button variant="default">
             <Home className="h-4 w-4 mr-2" />
             Home
           </Button>

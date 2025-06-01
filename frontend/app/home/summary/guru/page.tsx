@@ -105,7 +105,7 @@ export default function SummaryPageGuru() {
           <p className="text-gray-600 dark:text-gray-300">Create summaries from documents or manually.</p>
         </div>
         <Link href="/home">
-          <Button variant="outline">
+          <Button variant="default">
             <Home className="h-4 w-4 mr-2" />
             Home
           </Button>
