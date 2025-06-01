@@ -24,10 +24,7 @@ interface StoryAIAssistantProps {
 export default function StoryAIAssistant({ onUseStory }: StoryAIAssistantProps) {
   const [storyType, setStoryType] = useState("umum")
   const [quickPrompts] = useState([
-    "Buatkan cerita pendek tentang persahabatan",
-    "Cerita petualangan di hutan yang misterius",
     "Kisah inspiratif tentang mengejar mimpi",
-    "Cerita fantasi dengan karakter penyihir muda",
     "Dongeng modern untuk anak-anak",
   ])
 
@@ -61,7 +58,6 @@ export default function StoryAIAssistant({ onUseStory }: StoryAIAssistantProps) 
   }
 
   const extractStoryContent = (content: string) => {
-    // Extract potential title from the content
     const titleMatch = content.match(/<h[1-3]>(.*?)<\/h[1-3]>/)
     const title = titleMatch ? titleMatch[1].replace(/<[^>]*>/g, "") : ""
 
@@ -95,8 +91,6 @@ export default function StoryAIAssistant({ onUseStory }: StoryAIAssistantProps) 
                   <SelectItem value="umum">Umum</SelectItem>
                   <SelectItem value="anak">Anak-anak</SelectItem>
                   <SelectItem value="remaja">Remaja</SelectItem>
-                  <SelectItem value="dewasa">Dewasa</SelectItem>
-                  <SelectItem value="fantasi">Fantasi</SelectItem>
                   <SelectItem value="petualangan">Petualangan</SelectItem>
                   <SelectItem value="inspiratif">Inspiratif</SelectItem>
                 </SelectContent>
