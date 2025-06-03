@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import EnhancedSearchBar from "./enhanced-search-bar";
-import ModernHeader from "./modern-header";
+
 
 // Interface untuk data cerita
 export interface Story {
@@ -119,15 +119,9 @@ const StoryList = ({
   }, [currentStories]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 transition-colors duration-300">
-      {/* Modern Header Component */}
-      <ModernHeader onBackClick={onBackClick} totalStories={stories.length} />
-
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
       {/* Content */}
-      <main className="max-w-4xl mx-auto p-4 md:p-6 space-y-6 md:space-y-8">
-        {/* Featured Stories Component */}
-        
-
+      <main className="max-w-6xl mx-auto p-4 md:p-6 space-y-6 md:space-y-8">
         {/* Enhanced Search Bar */}
         <EnhancedSearchBar
           value={searchQuery}
@@ -139,7 +133,7 @@ const StoryList = ({
 
         {/* Search Results Info */}
         {searchQuery && (
-          <div className="text-sm text-gray-600 dark:text-gray-300 bg-blue-50 dark:bg-blue-900/30 px-4 py-3 rounded-xl border-l-4 border-blue-400 dark:border-blue-500">
+          <div className="text-sm text-slate-600 dark:text-slate-300 bg-blue-50/80 dark:bg-blue-900/20 px-4 py-3 rounded-xl border-l-4 border-blue-400 dark:border-blue-500">
             Ditemukan{" "}
             <span className="font-semibold text-blue-600 dark:text-blue-400">
               {filteredStories.length}
@@ -157,7 +151,7 @@ const StoryList = ({
                 ref={(el) => {
                   if (el) cardsRef.current[index] = el;
                 }}
-                className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-md hover:shadow-lg dark:shadow-gray-900/30 transition-all duration-500 overflow-hidden border-0 dark:border dark:border-gray-700/50 rounded-2xl group"
+                className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm shadow-md hover:shadow-lg dark:shadow-slate-900/30 transition-all duration-500 overflow-hidden border border-white/60 dark:border-white/10 rounded-2xl group"
               >
                 <CardContent className="p-4 sm:p-6 md:p-8">
                   <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8">
@@ -166,31 +160,31 @@ const StoryList = ({
                       <div className="flex items-start justify-between mb-3 md:mb-4">
                         <Badge
                           variant="secondary"
-                          className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/40 dark:to-purple-900/40 text-blue-700 dark:text-blue-300 border-0 px-3 py-1 rounded-full text-xs font-medium"
+                          className="bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 text-blue-700 dark:text-blue-300 border border-blue-200/50 dark:border-blue-700/50 px-3 py-1 rounded-full text-xs font-medium"
                         >
                           {story.category}
                         </Badge>
                       </div>
 
                       <Link href={`/story/${story.id}`}>
-                        <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-gray-100 mb-3 md:mb-4 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400">
+                        <h2 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-slate-100 mb-3 md:mb-4 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400">
                           {story.title}
                         </h2>
                       </Link>
 
-                      <p className="text-gray-600 dark:text-gray-300 text-sm md:text-base mb-4 md:mb-6 line-clamp-2 md:line-clamp-3 leading-relaxed">
+                      <p className="text-slate-600 dark:text-slate-300 text-sm md:text-base mb-4 md:mb-6 line-clamp-2 md:line-clamp-3 leading-relaxed">
                         {story.subtitle}
                       </p>
 
-                      <div className="text-xs md:text-sm text-gray-500 dark:text-gray-400 mb-3 md:mb-4">
+                      <div className="text-xs md:text-sm text-slate-500 dark:text-slate-400 mb-3 md:mb-4">
                         oleh{" "}
-                        <span className="font-medium text-gray-700 dark:text-gray-300">
+                        <span className="font-medium text-slate-700 dark:text-slate-300">
                           {story.author}
                         </span>
                       </div>
 
                       {/* Metadata with Summarize Button */}
-                      <div className="flex flex-wrap items-center gap-3 md:gap-6 text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                      <div className="flex flex-wrap items-center gap-3 md:gap-6 text-xs md:text-sm text-slate-500 dark:text-slate-400">
                         <div className="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                           <Calendar className="h-3 w-3 md:h-4 md:w-4" />
                           <span>{story.publishDate}</span>
@@ -203,21 +197,13 @@ const StoryList = ({
                           <MessageCircle className="h-3 w-3 md:h-4 md:w-4" />
                           <span>{story.comments}</span>
                         </div>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => onSummarize(story.id)}
-                          className="flex items-center gap-2 text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-all duration-300 px-2 md:px-3 py-1 rounded-full"
-                        >
-                          <Sparkles className="h-3 w-3 md:h-4 md:w-4" />
-                          <span className="text-xs font-medium">Summarize</span>
-                        </Button>
+                    
                       </div>
                     </div>
 
                     {/* Image */}
                     <div className="flex-shrink-0 order-1 sm:order-2 mx-auto sm:mx-0">
-                      <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-lg dark:shadow-gray-900/30 dark:hover:shadow-gray-900/40 transition-all duration-500 transform group-hover:translate-y-[-3px]">
+                      <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-lg dark:shadow-slate-900/30 dark:hover:shadow-slate-900/40 transition-all duration-500 transform group-hover:translate-y-[-3px]">
                         <Image
                           src={story.image || "/placeholder.svg"}
                           alt={story.title}
@@ -237,13 +223,13 @@ const StoryList = ({
           </div>
         ) : (
           <div className="text-center py-12 md:py-16">
-            <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 md:mb-6 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center">
+            <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-4 md:mb-6 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center">
               <span className="text-3xl md:text-4xl">📚</span>
             </div>
-            <p className="text-gray-500 dark:text-gray-400 text-lg md:text-xl mb-2">
+            <p className="text-slate-500 dark:text-slate-400 text-lg md:text-xl mb-2">
               Tidak ada cerita yang ditemukan
             </p>
-            <p className="text-gray-400 dark:text-gray-500 text-sm">
+            <p className="text-slate-400 dark:text-slate-500 text-sm">
               Coba gunakan kata kunci yang berbeda
             </p>
           </div>
@@ -254,7 +240,7 @@ const StoryList = ({
           <div className="mt-12 md:mt-16 space-y-4 md:space-y-6">
             {/* Main Pagination Controls */}
             <div className="flex items-center justify-center">
-              <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md rounded-2xl shadow-md dark:shadow-gray-900/30 border border-gray-200/50 dark:border-gray-700/50 p-1.5 md:p-2 flex items-center gap-1 md:gap-2">
+              <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md rounded-2xl shadow-md dark:shadow-slate-900/30 border border-white/60 dark:border-white/10 p-1.5 md:p-2 flex items-center gap-1 md:gap-2">
                 {/* Previous Button */}
                 <Button
                   variant="ghost"
@@ -263,8 +249,8 @@ const StoryList = ({
                   disabled={currentPage === 1}
                   className={`px-3 md:px-4 py-1.5 md:py-2 rounded-xl transition-all duration-300 ${
                     currentPage === 1
-                      ? "text-gray-400 dark:text-gray-600 cursor-not-allowed"
-                      : "text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-105"
+                      ? "text-slate-400 dark:text-slate-600 cursor-not-allowed"
+                      : "text-slate-700 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-105"
                   }`}
                 >
                   <ChevronLeft className="h-4 w-4 mr-1" />
@@ -290,7 +276,7 @@ const StoryList = ({
                           return (
                             <span
                               key={page}
-                              className="px-2 text-gray-400 dark:text-gray-500 text-sm"
+                              className="px-2 text-slate-400 dark:text-slate-500 text-sm"
                             >
                               ...
                             </span>
@@ -303,7 +289,7 @@ const StoryList = ({
                           return (
                             <span
                               key={page}
-                              className="px-2 text-gray-400 dark:text-gray-500 text-sm"
+                              className="px-2 text-slate-400 dark:text-slate-500 text-sm"
                             >
                               ...
                             </span>
@@ -322,8 +308,8 @@ const StoryList = ({
                           onClick={() => handlePageChange(page)}
                           className={`w-8 h-8 md:w-10 md:h-10 rounded-xl transition-all duration-300 font-medium ${
                             isCurrentPage
-                              ? "bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white shadow-md dark:shadow-gray-900/30 scale-105 hover:scale-110"
-                              : "text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-105"
+                              ? "bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white shadow-md dark:shadow-slate-900/30 scale-105 hover:scale-110"
+                              : "text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-105"
                           }`}
                         >
                           {page}
@@ -341,8 +327,8 @@ const StoryList = ({
                   disabled={currentPage === totalPages}
                   className={`px-3 md:px-4 py-1.5 md:py-2 rounded-xl transition-all duration-300 ${
                     currentPage === totalPages
-                      ? "text-gray-400 dark:text-gray-600 cursor-not-allowed"
-                      : "text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-105"
+                      ? "text-slate-400 dark:text-slate-600 cursor-not-allowed"
+                      : "text-slate-700 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-105"
                   }`}
                 >
                   <span className="hidden sm:inline">Selanjutnya</span>
@@ -357,7 +343,7 @@ const StoryList = ({
               {/* Left: Page Info */}
               <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-3">
                 <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200/50 dark:border-blue-700/30 px-3 md:px-4 py-1.5 md:py-2 rounded-xl">
-                  <span className="text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300">
+                  <span className="text-xs md:text-sm font-medium text-slate-700 dark:text-slate-300">
                     Halaman{" "}
                     <span className="text-blue-600 dark:text-blue-400 font-bold">
                       {currentPage}
@@ -369,17 +355,17 @@ const StoryList = ({
                   </span>
                 </div>
 
-                <div className="hidden sm:block w-px h-6 bg-gray-300 dark:bg-gray-700"></div>
+                <div className="hidden sm:block w-px h-6 bg-slate-300 dark:bg-slate-700"></div>
 
-                <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 px-3 md:px-4 py-1.5 md:py-2 rounded-xl">
-                  <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
+                <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-white/60 dark:border-white/10 px-3 md:px-4 py-1.5 md:py-2 rounded-xl">
+                  <span className="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                     Menampilkan{" "}
-                    <span className="font-semibold text-gray-800 dark:text-gray-200">
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">
                       {startIndex + 1}-
                       {Math.min(endIndex, filteredStories.length)}
                     </span>{" "}
                     dari{" "}
-                    <span className="font-semibold text-gray-800 dark:text-gray-200">
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">
                       {filteredStories.length}
                     </span>{" "}
                     cerita
@@ -389,8 +375,8 @@ const StoryList = ({
 
               {/* Right: Quick Jump */}
               <div className="flex items-center gap-2">
-                <span className="text-xs md:text-sm text-gray-500 dark:text-gray-400">Lompat ke:</span>
-                <div className="flex items-center gap-1 dark:text-gray-200">
+                <span className="text-xs md:text-sm text-slate-500 dark:text-slate-400">Lompat ke:</span>
+                <div className="flex items-center gap-1 dark:text-slate-200">
                   {[1, Math.ceil(totalPages / 2), totalPages].map(
                     (page, index) => {
                       if (
@@ -404,7 +390,7 @@ const StoryList = ({
                           variant="outline"
                           size="sm"
                           onClick={() => handlePageChange(page)}
-                          className="w-6 h-6 md:w-8 md:h-8 p-0 text-xs rounded-lg border-gray-300 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
+                          className="w-6 h-6 md:w-8 md:h-8 p-0 text-xs rounded-lg border-slate-300 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
                         >
                           {page}
                         </Button>
@@ -418,10 +404,10 @@ const StoryList = ({
             {/* Progress Bar */}
             <div className="w-full max-w-md mx-auto">
               <div className="flex items-center gap-3">
-                <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                   Progress
                 </span>
-                <div className="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 md:h-2 overflow-hidden">
+                <div className="flex-1 bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 md:h-2 overflow-hidden">
                   <div
                     className="h-full bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600 rounded-full transition-all duration-500 ease-out"
                     style={{
@@ -429,7 +415,7 @@ const StoryList = ({
                     }}
                   />
                 </div>
-                <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                   {Math.round((currentPage / totalPages) * 100)}%
                 </span>
               </div>

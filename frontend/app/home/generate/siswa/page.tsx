@@ -1,5 +1,7 @@
 "use client";
-import StoryList, { Story } from "./components/ui/story-list";
+import StoryList, { Story } from "../../../../components/ui/story-list";
+import { HomeAppLayout } from "../../components/home-app-layout";
+
 
 // Data dummy untuk cerita pendek (diperbanyak untuk demonstrasi pagination)
 const allStories: Story[] = [
@@ -177,12 +179,14 @@ const Page = () => {
   };
 
   return (
-    <StoryList
-      stories={allStories}
-      storiesPerPage={5}
-      searchSuggestions={searchSuggestions}
-      onSummarize={handleSummarize}
-    />
+    <HomeAppLayout>
+      <StoryList
+        stories={allStories}
+        storiesPerPage={5}
+        searchSuggestions={searchSuggestions}
+        onSummarize={handleSummarize}
+      />
+    </HomeAppLayout>
   );
 };
 

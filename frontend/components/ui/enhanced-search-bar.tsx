@@ -53,7 +53,7 @@ export default function EnhancedSearchBar({
     .slice(0, 5)
 
   return (
-    <div ref={searchRef} className="relative w-full max-w-2xl mx-auto">
+    <div ref={searchRef} className="relative w-full max-w-4xl mx-auto">
       {/* Main Search Container */}
       <div
         className={`relative bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl dark:shadow-gray-900/30 border transition-all duration-300 ${
