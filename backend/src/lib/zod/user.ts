@@ -7,6 +7,8 @@ import {
   RelatedCourseEnrollmentModel,
   CompleteQuizzAnswer,
   RelatedQuizzAnswerModel,
+  CompleteStory,
+  RelatedStoryModel,
   CompleteSummarizedCourse,
   RelatedSummarizedCourseModel,
   CompleteUserProfilePicture,
@@ -30,6 +32,7 @@ export interface CompleteUser extends z.infer<typeof UserModel> {
   Course: CompleteCourse[];
   CourseEnrollment: CompleteCourseEnrollment[];
   QuizzAnswer: CompleteQuizzAnswer[];
+  Story: CompleteStory[];
   SummarizedCourse: CompleteSummarizedCourse[];
   UserProfilePicture: CompleteUserProfilePicture[];
   UserQuizz: CompleteUserQuizz[];
@@ -45,6 +48,7 @@ export const RelatedUserModel: z.ZodSchema<CompleteUser> = z.lazy(() =>
     Course: RelatedCourseModel.array(),
     CourseEnrollment: RelatedCourseEnrollmentModel.array(),
     QuizzAnswer: RelatedQuizzAnswerModel.array(),
+    Story: RelatedStoryModel.array(),
     SummarizedCourse: RelatedSummarizedCourseModel.array(),
     UserProfilePicture: RelatedUserProfilePictureModel.array(),
     UserQuizz: RelatedUserQuizzModel.array(),
