@@ -1,12 +1,10 @@
-import fs from "fs";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
 
 import UserRepository from "../user/UserRepository";
 
 import { UnauthorizedException } from "../../lib/exceptions";
 import type { Role, User } from "@prisma/client";
-import path from "path";
+import { generateToken } from "../../lib/jwt";
 
 export default class AuthService {
   // This class is responsible for handling authentication logic
@@ -41,7 +39,7 @@ export default class AuthService {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password, ...userWithoutPassword } = user;
 
-    const token = this.generateToken(userWithoutPassword);
+    const token = generateToken(userWithoutPassword);
 
     return {
       ...userWithoutPassword,
@@ -73,15 +71,5 @@ export default class AuthService {
     });
 
     return newUser;
-  }
-
-  generateToken(user: Omit<User, "password">) {
-    const pkey = fs.readFileSync(
-      path.resolve(__dirname, "../../../key", "jwt.pem"),
-    );
-
-    const token = jwt.sign(user, pkey, { algorithm: "RS256", expiresIn: "8w" }); // 2 months
-
-    return token;
   }
 }
