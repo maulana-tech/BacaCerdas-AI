@@ -16,15 +16,18 @@ export function isUserAllowed(role: Role[]) {
       );
     }
 
-    const getRoleFromToken = decodeJwt(token);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { iat, exp, ...user } = decodeJwt(token);
 
-    if (!role.includes(getRoleFromToken.role)) {
+    if (!role.includes(user.role)) {
       return next(
         new UnauthorizedException(
           "You're not authorized to access this resource",
         ),
       );
     }
+
+    req = Object.assign(req, { user });
 
     return next();
   };

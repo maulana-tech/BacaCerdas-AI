@@ -6,12 +6,29 @@ export default class StoryRepository extends Repository {
   model = prisma.story;
 
   async findAll() {
-    return await this.model.findMany();
+    return await this.model.findMany({
+      include: {
+        User: {
+          omit: {
+            password: true,
+          },
+        },
+        Tag: true,
+      },
+    });
   }
 
   async findById(id: string) {
     return await this.model.findUnique({
       where: { id },
+      include: {
+        User: {
+          omit: {
+            password: true,
+          },
+        },
+        Tag: true,
+      },
     });
   }
 

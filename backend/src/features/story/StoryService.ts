@@ -5,7 +5,21 @@ export default class StoryService {
   private storyRepository = new StoryRepository();
 
   async getAllStories() {
-    return await this.storyRepository.findAll();
+    const stories = await this.storyRepository.findAll();
+
+    return stories.map((story) => ({
+      ...story,
+      relationships: {
+        user: {
+          type: "user",
+          data: story.User,
+        },
+        tag: {
+          type: "tag",
+          data: story.Tag,
+        },
+      },
+    }));
   }
 
   async postStory(body: StoryStoreSchema) {
