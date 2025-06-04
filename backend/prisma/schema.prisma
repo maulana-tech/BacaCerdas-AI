@@ -30,6 +30,7 @@ model User {
   Course             Course[]
   CourseEnrollment   CourseEnrollment[]
   QuizzAnswer        QuizzAnswer[]
+  Story              Story[]
   SummarizedCourse   SummarizedCourse[]
   UserProfilePicture UserProfilePicture[]
   UserQuizz          UserQuizz[]
@@ -222,6 +223,35 @@ model SummarizedCourse {
   updatedAt DateTime @updatedAt
 
   @@map("summarized_courses")
+}
+
+model Story {
+  id     String @id @default(cuid())
+  userId String
+  tagId  String
+
+  title   String
+  content String
+
+  User User     @relation(fields: [userId], references: [id])
+  Tag  StoryTag @relation(fields: [tagId], references: [id]) // Array of tags for the story, e.g., ["inspiration", "adventure", "kids"]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("stories")
+}
+
+model StoryTag {
+  id      String @id @default(cuid())
+  tag     String
+
+  Story Story[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("story_tags")
 }
 
 enum Role {

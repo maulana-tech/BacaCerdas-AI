@@ -1,7 +1,8 @@
+import type { APIRouter } from "../../lib/types/Router";
+
 import { Router } from "express";
 import expressAsyncHandler from "express-async-handler";
 
-import { APIRouter } from "../../lib/types/Router";
 import AuthController from "./AuthController";
 import validator from "../../lib/middleware/validator";
 import AuthSchema from "./AuthSchema";

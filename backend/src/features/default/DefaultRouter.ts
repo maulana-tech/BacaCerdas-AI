@@ -1,7 +1,8 @@
+import type { APIRouter } from "../../lib/types/Router";
+
 import { Router } from "express";
 import { Role } from "@prisma/client";
 
-import type { APIRouter } from "../../lib/types/Router";
 import DefaultController from "./DefaultController";
 import { isUserAllowed } from "../../lib/middleware/auth";
 

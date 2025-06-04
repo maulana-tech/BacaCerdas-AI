@@ -80,6 +80,8 @@ CREATE TABLE "course_enrollments" (
     "userId" TEXT NOT NULL,
     "courseId" TEXT NOT NULL,
     "status" "CompletionStatus" NOT NULL DEFAULT 'NOT_STARTED',
+    "progress" INTEGER NOT NULL DEFAULT 0,
+    "lastAccessedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -157,6 +159,29 @@ CREATE TABLE "summarized_courses" (
     CONSTRAINT "summarized_courses_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "stories" (
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
+    "tagId" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "stories_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "story_tags" (
+    "id" TEXT NOT NULL,
+    "tag" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "story_tags_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
@@ -182,7 +207,13 @@ ALTER TABLE "course_assets" ADD CONSTRAINT "course_assets_assetId_fkey" FOREIGN 
 ALTER TABLE "course_assets" ADD CONSTRAINT "course_assets_courseId_fkey" FOREIGN KEY ("courseId") REFERENCES "courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
+ALTER TABLE "course_enrollments" ADD CONSTRAINT "course_enrollments_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
 ALTER TABLE "quizz_answers" ADD CONSTRAINT "quizz_answers_quizzId_fkey" FOREIGN KEY ("quizzId") REFERENCES "quizzes"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "quizz_answers" ADD CONSTRAINT "quizz_answers_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "user_quizzes" ADD CONSTRAINT "user_quizzes_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -201,3 +232,9 @@ ALTER TABLE "summarized_courses" ADD CONSTRAINT "summarized_courses_userId_fkey"
 
 -- AddForeignKey
 ALTER TABLE "summarized_courses" ADD CONSTRAINT "summarized_courses_courseId_fkey" FOREIGN KEY ("courseId") REFERENCES "courses"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "stories" ADD CONSTRAINT "stories_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "stories" ADD CONSTRAINT "stories_tagId_fkey" FOREIGN KEY ("tagId") REFERENCES "story_tags"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

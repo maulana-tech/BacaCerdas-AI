@@ -1,0 +1,36 @@
+@token = eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNtYmV4MXpwczAwMDFjbXhlYmN1bTI0cXAiLCJlbWFpbCI6InRlYWNoZXJAYmFjYWNlcmRhcy5haSIsInVzZXJuYW1lIjoidGVhY2hlciIsIm5hbWUiOiJUZWFjaGVyIiwicm9sZSI6IlRFQUNIRVIiLCJjcmVhdGVkQXQiOiIyMDI1LTA2LTAyVDA5OjU3OjQyLjU0NVoiLCJ1cGRhdGVkQXQiOiIyMDI1LTA2LTAyVDA5OjU3OjQyLjU0NVoiLCJpYXQiOjE3NDg5NjQ5MjIsImV4cCI6MTc1MzgwMzMyMn0.hg8ixJnGLNuulY3aGvXMW7pMii9kY9egFjY6lx_4sdfibHv6GDQ-4Hdm7sCPFxuLfxbs-6c6qkn31nyvBy74ljg2Gua4bn02pEqlObDQlxt1OMJGcMBl4vrtiOm3A8arC70ZbNQjwgrBGOnj5rBl_vN1dAGhWFnfufNCdtL9p_zRBa2YwlFKTLxDP6Y2dFcpy9QPIOiBn5FsVjYqbi4MiBcKt8YtcgC11An1SKuV198p9oZoPsozPQwIAGfgZmXfYNeELo__6TQBk7QZVcrYzCohkCdNiGA2gJinc_krrqa6dBE6muWkPjvU0iJE7pR6eYaH2VjgsnGembwb1NDkQQjGwSpwK1co8D4uAQsy6Bgjgx-wu1EiBQqC2hrHlNCQbDlQETpZfGAbgrQJJI31EJmtg47ZyfiEtGblT8ETMG0Ww0vD3V1mBvviUgUz6TTJl-DGv6XT-Qoe6Y1wWPcjFV2IRpKGe1fHB7h1QipWQr0yDjCFecrS6uT82ud2uQbfS7NaVvKmTK4MMjYQ2cxWbFAbeMk-b_kXbMC0B8KXar2hlasDkQVQ3ry4sjSQUi4OwlXdy6cuzdc9qHu90RZJFZq7gYZBtjO9y-CWJITTsYBHtsOuornhcSSw5VSIDoYmmjbF_V9nmfmz7jvJFlXY3HLbbhEaUX6eskNjPoogA-I
+@userId = cmbex1zps0001cmxebcum24qp
+@tagId = cmbex205o0003cmxey1sk7kxt
+
+###
+GET http://localhost:3030/api/v1/story-tags HTTP/1.1
+
+###
+GET http://localhost:3030/api/v1/stories HTTP/1.1
+
+###
+POST http://localhost:3030/api/v1/stories HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+ "data": {
+    "title": "My First Story",
+    "content": "<h1>My First Story</h1><p>This is the content of my first story.</p>"
+ },
+ "relationships": {
+    "user": {
+        "data": {
+            "id": "{{userId}}"
+        }
+    },
+    "tag": {
+        "data":{
+            "id": "{{tagId}}"
+        }
+    }
+  }
+}
+
+###
+GET http://localhost:3030/api/v1/users/stories HTTP/1.1

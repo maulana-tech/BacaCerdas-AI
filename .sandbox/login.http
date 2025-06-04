@@ -12,8 +12,21 @@ Content-Type: application/json
 
 {
   "data": {
-    "identifier": "students",
-    "password": "students"
+    "identifier": "student",
+    "password": "studentbcai",
+    "role": "STUDENT"
+  }
+}
+
+###
+POST http://localhost:3030/api/v1/login HTTP/1.1
+Content-Type: application/json
+
+{
+  "data": {
+    "identifier": "teacher",
+    "password": "teacherbcai",
+    "role": "TEACHER"
   }
 }
 
