@@ -1,26 +1,43 @@
-import type { Role } from "@prisma/client";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import type { User } from "@prisma/client";
 
-export interface JWTPayload extends JwtPayload {
-  id: string;
-  email: string;
-  username: string;
-  name: string;
-  role: Role;
-  createdAt: string;
-  updatedAt: string;
+import fs from "fs";
+import path from "path";
+import jwt, { type JwtPayload } from "jsonwebtoken";
+import { UnauthorizedException } from "./exceptions";
+
+declare module "jsonwebtoken" {
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
+  export interface JwtPayload extends User {}
 }
 
-export function decodeJwt(token: string): JWTPayload {
+export function decodeJwt(token: string): JwtPayload {
   if (!token) {
     throw new Error("Token is required");
   }
 
-  const decoded = jwt.decode(token);
+  const pkey = getPemFile();
 
-  if (!decoded || typeof decoded !== "object") {
-    throw new Error("Invalid JWT token");
+  try {
+    const verified = jwt.verify(token, pkey, { algorithms: ["RS256"] });
+
+    return verified as JwtPayload;
+  } catch (error) {
+    throw new UnauthorizedException(
+      error instanceof Error ? error.message : "Invalid token",
+    );
   }
+}
 
-  return decoded as JWTPayload;
+export function generateToken(user: Omit<User, "password">) {
+  const pkey = getPemFile();
+
+  const token = jwt.sign(user, pkey, { algorithm: "RS256", expiresIn: "8w" }); // 2 months
+
+  return token;
+}
+
+export function getPemFile() {
+  const pkey = fs.readFileSync(path.resolve(__dirname, "../../key", "jwt.pem"));
+
+  return pkey;
 }
