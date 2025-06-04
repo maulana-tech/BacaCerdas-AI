@@ -9,3 +9,5 @@ export * from "./quizzanswer";
 export * from "./userquizz";
 export * from "./quizzattempt";
 export * from "./summarizedcourse";
+export * from "./story";
+export * from "./storytag";
