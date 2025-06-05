@@ -12,8 +12,9 @@ import { generateSummaryPDF } from "@/lib/pdf-utils" //
 import { Save, Download, Home, Eye } from "lucide-react"
 import Link from "next/link"
 import { HomeAppLayout } from "@/app/home/components/home-app-layout"
+import useTiptapEditor from "@/hooks/use-tiptap-editor"
 
-export default function SummaryPageGuru() { 
+export default function SummaryPageGuru() {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
   const [generating, setGenerating] = useState(false)
@@ -22,6 +23,15 @@ export default function SummaryPageGuru() {
   const [activeTab, setActiveTab] = useState("upload")
   const searchParams = useSearchParams()
   const router = useRouter()
+
+  const editor = useTiptapEditor({
+    options: {
+      content,
+      onUpdate: ({ editor }) => {
+        setContent(editor.getHTML())
+      }
+    }
+  });
 
   useEffect(() => {
     const id = searchParams.get("id")
@@ -98,7 +108,7 @@ export default function SummaryPageGuru() {
   }
 
   return (
-    <HomeAppLayout> 
+    <HomeAppLayout>
       <div className="flex justify-between items-center mb-6">
         <div>
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{summaryId ? "Edit Summary" : "Create New Summary"}</h1>
@@ -157,9 +167,7 @@ export default function SummaryPageGuru() {
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Summary Content</label>
                     <TipTapEditor
-                      content={content}
-                      onChange={setContent}
-                      placeholder="Start writing your summary here..."
+                      editor={editor}
                     /> {/* */}
                   </div>
 

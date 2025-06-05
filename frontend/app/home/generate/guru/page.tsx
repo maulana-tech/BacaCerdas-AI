@@ -12,6 +12,7 @@ import { generateStoryPDF } from "@/lib/pdf-utils"; //
 import { Save, Download, Home, Eye, Sparkles, Edit } from "lucide-react";
 import Link from "next/link";
 import { HomeAppLayout } from "@/app/home/components/home-app-layout"; // Import the new layout
+import useTiptapEditor from "@/hooks/use-tiptap-editor";
 
 export default function StoryPageGuru() { // Consider a more specific name if "StoryPage" is generic
   const [title, setTitle] = useState("");
@@ -22,6 +23,15 @@ export default function StoryPageGuru() { // Consider a more specific name if "S
   const [activeTab, setActiveTab] = useState("ai-assistant");
   const searchParams = useSearchParams();
   const router = useRouter();
+
+  const editor = useTiptapEditor({
+    options: {
+      content,
+      onUpdate: ({ editor }) => {
+        setContent(editor.getHTML());
+      },
+    }
+  });
 
   useEffect(() => {
     const id = searchParams.get("id");
@@ -143,11 +153,17 @@ export default function StoryPageGuru() { // Consider a more specific name if "S
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Story Content</label>
-                    <TipTapEditor
-                      content={content}
-                      onChange={setContent}
-                      placeholder="Start writing your story here..."
-                    /> {/* */}
+                    {
+                      editor ? (
+                        <TipTapEditor
+                          editor={editor}
+                        />
+                      ) : (
+                        <div className="border rounded-lg p-4 min-h-[400px] bg-gray-100 dark:bg-slate-800">
+                          <p className="text-gray-500 dark:text-gray-400 italic">Loading editor...</p>
+                        </div>
+                      )
+                    }
                   </div>
 
                   <div className="flex gap-2">
