@@ -1,102 +1,163 @@
-"use client";
-import { useState, useMemo, useEffect, useRef } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import {
-  MessageCircle,
-  Eye,
-  Calendar,
-  ChevronLeft,
-  ChevronRight,
-  Sparkles,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import EnhancedSearchBar from "./enhanced-search-bar";
+"use client"
+import { useState, useMemo, useEffect, useRef } from "react"
+import Link from "next/link"
+import Image from "next/image"
+import { MessageCircle, Eye, Calendar, ChevronLeft, ChevronRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import EnhancedSearchBar from "./enhanced-search-bar"
+import ApiClient from "@/lib/api" // Menggunakan ApiClient yang sudah ada
 
-
-// Interface untuk data cerita
+// Interface untuk data cerita yang digunakan komponen
 export interface Story {
-  id: string;
-  title: string;
-  subtitle: string;
-  author: string;
-  image: string;
-  publishDate: string;
-  views: string;
-  comments: number;
-  category: string;
+  id: string
+  title: string
+  subtitle?: string
+  author: string
+  image?: string
+  publishDate?: string
+  views?: string | number
+  comments?: number
+  category?: string
+  description?: string
+  createdAt?: string
+  updatedAt?: string
+  tags?: string[]
+  content?: string
+  status?: string
+}
+
+// Interface untuk respons API
+interface StoryApiResponse {
+  id?: string
+  title?: string
+  subtitle?: string
+  description?: string
+  author?: string
+  image?: string
+  publishDate?: string
+  views?: number | string
+  comments?: number
+  category?: string
 }
 
 // Interface untuk props komponen
 export interface StoryListProps {
-  stories: Story[];
-  storiesPerPage?: number;
-  searchSuggestions?: string[];
-  onBackClick?: () => void;
-  onFilterClick?: () => void;
-  onSortClick?: () => void;
-  onSummarize?: (storyId: string) => void;
-  showFeaturedStories?: boolean;
-  title?: string;
+  stories?: Story[]
+  storiesPerPage?: number
+  onBackClick?: () => void
+  onFilterClick?: () => void
+  onSortClick?: () => void
+  onSummarizeProp?: (storyId: string) => void
+  showFeaturedStories?: boolean
+  title?: string
 }
 
 const StoryList = ({
-  stories,
+  stories = [],
   storiesPerPage = 5,
-  searchSuggestions = [],
-  onBackClick = () => console.log("Back button clicked"),
   onFilterClick = () => console.log("Filter clicked"),
   onSortClick = () => console.log("Sort clicked"),
-  onSummarize = (storyId: string) => alert(`Merangkum cerita ${storyId}...`),
-  showFeaturedStories = true,
-  title = "All Stories",
+
 }: StoryListProps) => {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const cardsRef = useRef<HTMLDivElement[]>([]);
-  const storiesContentRef = useRef<HTMLDivElement>(null);
+  const [internalStories, setInternalStories] = useState<Story[]>(stories)
+  const [isLoading, setIsLoading] = useState<boolean>(stories.length === 0)
+  const [error, setError] = useState<string | null>(null)
+  const [searchQuery, setSearchQuery] = useState("")
+  const [currentPage, setCurrentPage] = useState(1)
 
-  // Filter stories based on search query
+  const cardsRef = useRef<HTMLDivElement[]>([])
+  const storiesContentRef = useRef<HTMLDivElement>(null)
+  const apiClient = new ApiClient() // Menggunakan ApiClient yang sudah ada
+
+  
+
+  const fetchData = async () => {
+    setIsLoading(true)
+    setError(null)
+    try {
+      // Menggunakan ApiClient untuk mengambil data
+      const response = await apiClient.instance.get("/stories", {
+        params: {
+          search: searchQuery.trim() || undefined,
+          limit: storiesPerPage * 3, // Ambil lebih banyak data untuk demo pagination
+        }
+      })
+
+      // Format data langsung seperti di page.tsx
+      if (response.data && Array.isArray(response.data)) {
+        const formattedStories: Story[] = response.data.map((item: StoryApiResponse) => ({
+          id: item.id || `story-${Math.random().toString(36).substring(2, 9)}`,
+          title: item.title || "Judul tidak tersedia",
+          subtitle: item.subtitle || item.description || "Deskripsi tidak tersedia",
+          author: item.author || "Penulis tidak diketahui",
+          image: item.image || "/placeholder.svg?height=120&width=200",
+          publishDate: item.publishDate
+            ? new Date(item.publishDate).toLocaleDateString("id-ID", {
+                month: "short",
+                day: "numeric",
+              })
+            : new Date().toLocaleDateString("id-ID", {
+                month: "short",
+                day: "numeric",
+              }),
+          views: typeof item.views === "number" ? item.views.toString() : item.views || "0",
+          comments: item.comments || 0,
+          category: item.category || "Umum",
+        }))
+        setInternalStories(formattedStories)
+      } else {
+        console.warn("Format data API tidak sesuai:", response.data)
+        setInternalStories([])
+      }
+    } catch (err) {
+      console.error("Error fetching stories:", err)
+      setError(err instanceof Error ? err.message : "Gagal mengambil data cerita.")
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [searchQuery]) // Re-fetch ketika search query berubah
+
+  // Filter stories based on search query (client-side filtering untuk demo)
   const filteredStories = useMemo(() => {
-    if (!searchQuery.trim()) return stories;
-
-    return stories.filter(
+    if (!searchQuery.trim()) return internalStories
+    return internalStories.filter(
       (story) =>
         story.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        story.subtitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (story.subtitle?.toLowerCase() || "").includes(searchQuery.toLowerCase()) ||
         story.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        story.category.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [searchQuery, stories]);
+        (story.category?.toLowerCase() || "").includes(searchQuery.toLowerCase()),
+    )
+  }, [searchQuery, internalStories])
 
   // Calculate pagination
-  const totalPages = Math.ceil(filteredStories.length / storiesPerPage);
-  const startIndex = (currentPage - 1) * storiesPerPage;
-  const endIndex = startIndex + storiesPerPage;
-  const currentStories = filteredStories.slice(startIndex, endIndex);
+  const totalPages = Math.ceil(filteredStories.length / storiesPerPage)
+  const startIndex = (currentPage - 1) * storiesPerPage
+  const endIndex = startIndex + storiesPerPage
+  const currentStories = filteredStories.slice(startIndex, endIndex)
 
   // Reset to page 1 when search changes
   const handleSearchChange = (value: string) => {
-    setSearchQuery(value);
-    setCurrentPage(1);
-  };
+    setSearchQuery(value)
+    setCurrentPage(1)
+  }
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-    // Scroll to stories content instead of top
+    setCurrentPage(page)
     if (storiesContentRef.current) {
-      storiesContentRef.current.scrollIntoView({ behavior: "smooth" });
+      storiesContentRef.current.scrollIntoView({ behavior: "smooth" })
     }
-  };
+  }
 
   // GSAP Animations for content
   useEffect(() => {
     const loadGSAP = async () => {
-      const { gsap } = await import("gsap");
-
-      // Cards animation
+      const { gsap } = await import("gsap")
       cardsRef.current.forEach((card, index) => {
         if (card) {
           gsap.fromTo(
@@ -107,55 +168,82 @@ const StoryList = ({
               opacity: 1,
               scale: 1,
               duration: 0.6,
-              delay: 0.9 + index * 0.1,
+              delay: 0.1 + index * 0.05,
               ease: "power2.out",
-            }
-          );
+            },
+          )
         }
-      });
-    };
+      })
+    }
 
-    loadGSAP();
-  }, [currentStories]);
+    if (currentStories.length > 0 && !isLoading) {
+      loadGSAP()
+    }
+  }, [currentStories, isLoading])
+
+  // Tampilkan loading state
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[calc(100vh-200px)]">
+        <div className="text-center space-y-4">
+          <div className="w-16 h-16 border-4 border-t-blue-500 border-b-purple-500 border-l-transparent border-r-transparent rounded-full animate-spin mx-auto"></div>
+          <p className="text-slate-600 dark:text-slate-300">Memuat cerita...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // Tampilkan error state
+  if (error) {
+    return (
+      <div className="flex items-center justify-center min-h-[calc(100vh-200px)]">
+        <div className="text-center space-y-4 max-w-md mx-auto p-6 bg-white/90 dark:bg-slate-800/90 rounded-2xl shadow-md">
+          <div className="w-16 h-16 bg-red-100 dark:bg-red-900/30 text-red-500 dark:text-red-400 rounded-full flex items-center justify-center mx-auto">
+            <span className="text-2xl">⚠️</span>
+          </div>
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-200">Terjadi Kesalahan</h3>
+          <p className="text-slate-600 dark:text-slate-300">{error}</p>
+          <button
+            onClick={fetchData}
+            className="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-xl transition-colors"
+          >
+            Coba Lagi
+          </button>
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300">
-      {/* Content */}
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/30 to-indigo-50/50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 transition-colors duration-300 pt-6 md:pt-8">
       <main className="max-w-6xl mx-auto p-4 md:p-6 space-y-6 md:space-y-8">
-        {/* Enhanced Search Bar */}
         <EnhancedSearchBar
           value={searchQuery}
           onChange={handleSearchChange}
           onFilterClick={onFilterClick}
           onSortClick={onSortClick}
-          suggestions={searchSuggestions}
+          suggestions={searchSuggestionsList}
         />
 
-        {/* Search Results Info */}
         {searchQuery && (
           <div className="text-sm text-slate-600 dark:text-slate-300 bg-blue-50/80 dark:bg-blue-900/20 px-4 py-3 rounded-xl border-l-4 border-blue-400 dark:border-blue-500">
-            Ditemukan{" "}
-            <span className="font-semibold text-blue-600 dark:text-blue-400">
-              {filteredStories.length}
-            </span>{" "}
+            Ditemukan <span className="font-semibold text-blue-600 dark:text-blue-400">{filteredStories.length}</span>{" "}
             cerita untuk "<span className="font-medium">{searchQuery}</span>"
           </div>
         )}
 
-        {/* Stories List */}
         {currentStories.length > 0 ? (
           <div ref={storiesContentRef} className="space-y-6 md:space-y-8">
             {currentStories.map((story, index) => (
               <Card
                 key={story.id}
                 ref={(el) => {
-                  if (el) cardsRef.current[index] = el;
+                  if (el) cardsRef.current[index] = el
                 }}
                 className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm shadow-md hover:shadow-lg dark:shadow-slate-900/30 transition-all duration-500 overflow-hidden border border-white/60 dark:border-white/10 rounded-2xl group"
               >
                 <CardContent className="p-4 sm:p-6 md:p-8">
                   <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-8">
-                    {/* Content */}
                     <div className="flex-1 order-2 sm:order-1">
                       <div className="flex items-start justify-between mb-3 md:mb-4">
                         <Badge
@@ -177,13 +265,9 @@ const StoryList = ({
                       </p>
 
                       <div className="text-xs md:text-sm text-slate-500 dark:text-slate-400 mb-3 md:mb-4">
-                        oleh{" "}
-                        <span className="font-medium text-slate-700 dark:text-slate-300">
-                          {story.author}
-                        </span>
+                        oleh <span className="font-medium text-slate-700 dark:text-slate-300">{story.author}</span>
                       </div>
 
-                      {/* Metadata with Summarize Button */}
                       <div className="flex flex-wrap items-center gap-3 md:gap-6 text-xs md:text-sm text-slate-500 dark:text-slate-400">
                         <div className="flex items-center gap-2 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                           <Calendar className="h-3 w-3 md:h-4 md:w-4" />
@@ -197,11 +281,9 @@ const StoryList = ({
                           <MessageCircle className="h-3 w-3 md:h-4 md:w-4" />
                           <span>{story.comments}</span>
                         </div>
-                    
                       </div>
                     </div>
 
-                    {/* Image */}
                     <div className="flex-shrink-0 order-1 sm:order-2 mx-auto sm:mx-0">
                       <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-lg dark:shadow-slate-900/30 dark:hover:shadow-slate-900/40 transition-all duration-500 transform group-hover:translate-y-[-3px]">
                         <Image
@@ -230,18 +312,15 @@ const StoryList = ({
               Tidak ada cerita yang ditemukan
             </p>
             <p className="text-slate-400 dark:text-slate-500 text-sm">
-              Coba gunakan kata kunci yang berbeda
+              Coba gunakan kata kunci yang berbeda atau filter lain.
             </p>
           </div>
         )}
 
-        {/* Enhanced Pagination */}
         {totalPages > 1 && (
           <div className="mt-12 md:mt-16 space-y-4 md:space-y-6">
-            {/* Main Pagination Controls */}
             <div className="flex items-center justify-center">
               <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-md rounded-2xl shadow-md dark:shadow-slate-900/30 border border-white/60 dark:border-white/10 p-1.5 md:p-2 flex items-center gap-1 md:gap-2">
-                {/* Previous Button */}
                 <Button
                   variant="ghost"
                   size="sm"
@@ -258,68 +337,51 @@ const StoryList = ({
                   <span className="sm:hidden">Prev</span>
                 </Button>
 
-                {/* Page Numbers */}
                 <div className="flex items-center gap-1 mx-1 md:mx-2">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                    (page) => {
-                      const isCurrentPage = currentPage === page;
-                      const isNearCurrentPage =
-                        Math.abs(page - currentPage) <= 1;
-                      const isFirstOrLast = page === 1 || page === totalPages;
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                    const isCurrentPage = currentPage === page
+                    const isNearCurrentPage = Math.abs(page - currentPage) <= 1
+                    const isFirstOrLast = page === 1 || page === totalPages
+                    const showEllipsisStart = page === 2 && currentPage > 4 && totalPages > 5
+                    const showEllipsisEnd = page === totalPages - 1 && currentPage < totalPages - 3 && totalPages > 5
 
-                      if (
-                        !isNearCurrentPage &&
-                        !isFirstOrLast &&
-                        totalPages > 5
-                      ) {
-                        if (page === 2 && currentPage > 4) {
-                          return (
-                            <span
-                              key={page}
-                              className="px-2 text-slate-400 dark:text-slate-500 text-sm"
-                            >
-                              ...
-                            </span>
-                          );
-                        }
-                        if (
-                          page === totalPages - 1 &&
-                          currentPage < totalPages - 3
-                        ) {
-                          return (
-                            <span
-                              key={page}
-                              className="px-2 text-slate-400 dark:text-slate-500 text-sm"
-                            >
-                              ...
-                            </span>
-                          );
-                        }
-                        if (page !== 2 && page !== totalPages - 1) {
-                          return null;
-                        }
-                      }
-
-                      return (
-                        <Button
-                          key={page}
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handlePageChange(page)}
-                          className={`w-8 h-8 md:w-10 md:h-10 rounded-xl transition-all duration-300 font-medium ${
-                            isCurrentPage
-                              ? "bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white shadow-md dark:shadow-slate-900/30 scale-105 hover:scale-110"
-                              : "text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-105"
-                          }`}
-                        >
-                          {page}
-                        </Button>
-                      );
+                    if (
+                      !isNearCurrentPage &&
+                      !isFirstOrLast &&
+                      totalPages > 5 &&
+                      !showEllipsisStart &&
+                      !showEllipsisEnd
+                    ) {
+                      if (page < currentPage && page !== 2 && page !== 1) return null
+                      if (page > currentPage && page !== totalPages - 1 && page !== totalPages) return null
                     }
-                  )}
+
+                    if (showEllipsisStart || showEllipsisEnd) {
+                      return (
+                        <span key={`ellipsis-${page}`} className="px-2 text-slate-400 dark:text-slate-500 text-sm">
+                          ...
+                        </span>
+                      )
+                    }
+
+                    return (
+                      <Button
+                        key={page}
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handlePageChange(page)}
+                        className={`w-8 h-8 md:w-10 md:h-10 rounded-xl transition-all duration-300 font-medium ${
+                          isCurrentPage
+                            ? "bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-500 dark:to-purple-500 text-white shadow-md dark:shadow-slate-900/30 scale-105 hover:scale-110"
+                            : "text-slate-600 dark:text-slate-300 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 hover:scale-105"
+                        }`}
+                      >
+                        {page}
+                      </Button>
+                    )
+                  })}
                 </div>
 
-                {/* Next Button */}
                 <Button
                   variant="ghost"
                   size="sm"
@@ -338,85 +400,42 @@ const StoryList = ({
               </div>
             </div>
 
-            {/* Enhanced Pagination Info */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-3 md:gap-4">
-              {/* Left: Page Info */}
               <div className="flex flex-col sm:flex-row items-center gap-2 md:gap-3">
                 <div className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200/50 dark:border-blue-700/30 px-3 md:px-4 py-1.5 md:py-2 rounded-xl">
                   <span className="text-xs md:text-sm font-medium text-slate-700 dark:text-slate-300">
-                    Halaman{" "}
-                    <span className="text-blue-600 dark:text-blue-400 font-bold">
-                      {currentPage}
-                    </span>{" "}
-                    dari{" "}
-                    <span className="text-purple-600 dark:text-purple-400 font-bold">
-                      {totalPages}
-                    </span>
+                    Halaman <span className="text-blue-600 dark:text-blue-400 font-bold">{currentPage}</span> dari{" "}
+                    <span className="text-purple-600 dark:text-purple-400 font-bold">{totalPages}</span>
                   </span>
                 </div>
-
                 <div className="hidden sm:block w-px h-6 bg-slate-300 dark:bg-slate-700"></div>
-
                 <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border border-white/60 dark:border-white/10 px-3 md:px-4 py-1.5 md:py-2 rounded-xl">
                   <span className="text-xs md:text-sm text-slate-600 dark:text-slate-400">
                     Menampilkan{" "}
                     <span className="font-semibold text-slate-800 dark:text-slate-200">
-                      {startIndex + 1}-
-                      {Math.min(endIndex, filteredStories.length)}
+                      {startIndex + 1}-{Math.min(endIndex, filteredStories.length)}
                     </span>{" "}
                     dari{" "}
-                    <span className="font-semibold text-slate-800 dark:text-slate-200">
-                      {filteredStories.length}
-                    </span>{" "}
+                    <span className="font-semibold text-slate-800 dark:text-slate-200">{filteredStories.length}</span>{" "}
                     cerita
                   </span>
                 </div>
               </div>
-
-              {/* Right: Quick Jump */}
-              <div className="flex items-center gap-2">
-                <span className="text-xs md:text-sm text-slate-500 dark:text-slate-400">Lompat ke:</span>
-                <div className="flex items-center gap-1 dark:text-slate-200">
-                  {[1, Math.ceil(totalPages / 2), totalPages].map(
-                    (page, index) => {
-                      if (
-                        page === currentPage ||
-                        (index === 1 && totalPages < 3)
-                      )
-                        return null;
-                      return (
-                        <Button
-                          key={page}
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handlePageChange(page)}
-                          className="w-6 h-6 md:w-8 md:h-8 p-0 text-xs rounded-lg border-slate-300 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
-                        >
-                          {page}
-                        </Button>
-                      );
-                    }
-                  )}
-                </div>
-              </div>
             </div>
 
-            {/* Progress Bar */}
             <div className="w-full max-w-md mx-auto">
               <div className="flex items-center gap-3">
-                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                  Progress
-                </span>
+                <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Progress</span>
                 <div className="flex-1 bg-slate-200 dark:bg-slate-700 rounded-full h-1.5 md:h-2 overflow-hidden">
                   <div
                     className="h-full bg-gradient-to-r from-blue-500 to-purple-500 dark:from-blue-600 dark:to-purple-600 rounded-full transition-all duration-500 ease-out"
                     style={{
-                      width: `${(currentPage / totalPages) * 100}%`,
+                      width: `${totalPages > 0 ? (currentPage / totalPages) * 100 : 0}%`,
                     }}
                   />
                 </div>
                 <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                  {Math.round((currentPage / totalPages) * 100)}%
+                  {totalPages > 0 ? Math.round((currentPage / totalPages) * 100) : 0}%
                 </span>
               </div>
             </div>
@@ -424,7 +443,19 @@ const StoryList = ({
         )}
       </main>
     </div>
-  );
-};
+  )
+}
 
-export default StoryList;
+// Daftar saran pencarian (bisa diambil dari API atau hardcoded)
+const searchSuggestionsList = [
+  "Cerita inspiratif",
+  "Dongeng anak",
+  "Kisah petualangan",
+  "Cerita rakyat",
+  "Fabel",
+  "Cerita sejarah",
+  "Kisah motivasi",
+  "Cerita pendidikan",
+]
+
+export default StoryList
