@@ -10,8 +10,6 @@ export default class UserController {
   async index(req: Request, res: Response, next: NextFunction) {
     const users = await new UserService().getAllUsers();
 
-    res.status(200).json({
-      data: users,
-    });
+    res.status(200).json(users);
   }
 }

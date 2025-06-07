@@ -1,4 +1,15 @@
 import type React from "react"
+
+export type APIResponse<
+  Type extends string,
+  Attributes,
+  Relationships = unknown,
+> = {
+  type: Type;
+  attributes: Attributes;
+  relationships?: Relationships;
+};
+
 export interface App {
   id: number
   name: string
@@ -64,8 +75,15 @@ export interface Story {
   id: string
   title: string
   content: string
-  created_at: string
-  updated_at: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface StoryTag {
+  id: string
+  tag: string
+  createdAt: string
+  updatedAt: string
 }
 
 export interface Quiz {
@@ -73,8 +91,8 @@ export interface Quiz {
   title: string
   content: QuizQuestion[]
   source_document?: string
-  created_at: string
-  updated_at: string
+  createdAt: string
+  updatedAt: string
 }
 
 export interface QuizQuestion {
@@ -89,7 +107,7 @@ export interface Summary {
   title: string
   content: string
   source_document?: string
-  created_at: string
-  updated_at: string
+  createdAt: string
+  updatedAt: string
 }
 

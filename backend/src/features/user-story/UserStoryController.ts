@@ -19,8 +19,6 @@ export default class UserStoryController {
 
     const stories = await new UserStoryService().getAllUserStories(user.id);
 
-    res.status(200).json({
-      data: stories,
-    });
+    res.status(200).json(stories);
   }
 }

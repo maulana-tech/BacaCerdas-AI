@@ -18,9 +18,7 @@ export default class StoryController {
   ) {
     const stories = await new StoryService().getAllStories();
 
-    res.status(200).json({
-      data: stories,
-    });
+    res.status(200).json(stories);
   }
 
   async store(
@@ -32,8 +30,17 @@ export default class StoryController {
   ) {
     const story = await new StoryService().postStory(req.body);
 
-    res.status(201).json({
-      data: story,
-    });
+    res.status(201).json(story);
+  }
+
+  async show(
+    req: Request<{ id: string }>,
+    res: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    next: NextFunction,
+  ) {
+    const story = await new StoryService().getStoryById(req.params.id);
+
+    res.status(200).json(story);
   }
 }

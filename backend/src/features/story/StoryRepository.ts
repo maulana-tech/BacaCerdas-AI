@@ -35,6 +35,14 @@ export default class StoryRepository extends Repository {
   async create(data: Prisma.StoryCreateArgs["data"]) {
     return await this.model.create({
       data,
+      include: {
+        User: {
+          omit: {
+            password: true,
+          },
+        },
+        Tag: true,
+      },
     });
   }
 }

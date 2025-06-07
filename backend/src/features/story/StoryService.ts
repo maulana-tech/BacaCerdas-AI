@@ -1,3 +1,5 @@
+import { NotFoundException } from "../../lib/exceptions";
+import ResponseBuilder from "../../lib/response-builder";
 import StoryRepository from "./StoryRepository";
 import { StoryStoreSchema } from "./StorySchema";
 
@@ -7,25 +9,15 @@ export default class StoryService {
   async getAllStories() {
     const stories = await this.storyRepository.findAll();
 
-    return stories.map((story) => ({
-      ...story,
-      relationships: {
-        user: {
-          type: "user",
-          data: story.User,
-        },
-        tag: {
-          type: "tag",
-          data: story.Tag,
-        },
-      },
-    }));
+    return new ResponseBuilder(stories)
+      .setExcludedFields(["userId", "tagId"])
+      .setRelationships(["User", "Tag"])
+      .build("stories");
   }
 
   async postStory(body: StoryStoreSchema) {
     const { data, relationships } = body;
-
-    return await this.storyRepository.create({
+    const story = await this.storyRepository.create({
       ...data,
       User: {
         connect: {
@@ -38,5 +30,23 @@ export default class StoryService {
         },
       },
     });
+
+    return new ResponseBuilder(story)
+      .setExcludedFields(["userId", "tagId"])
+      .setRelationships(["User", "Tag"])
+      .build("stories");
+  }
+
+  async getStoryById(id: string) {
+    const story = await this.storyRepository.findById(id);
+
+    if (!story) {
+      throw new NotFoundException(`Story with id ${id} not found`);
+    }
+
+    return new ResponseBuilder(story)
+      .setExcludedFields(["userId", "tagId"])
+      .setRelationships(["User", "Tag"])
+      .build("stories");
   }
 }

@@ -106,7 +106,7 @@ export function TopNav({ className, style }: TopNavProps) {
         </Button>
 
         {/* Breadcrumb Navigation */}
-        <div className="flex items-center space-x-2 min-w-0 flex-1 ml-4 hidden sm:flex">
+        <div className="items-center space-x-2 min-w-0 flex-1 ml-4 hidden sm:flex">
           <nav className="flex items-center space-x-1 text-sm text-muted-foreground">
             <Link
               href="/home"
@@ -144,10 +144,11 @@ export function TopNav({ className, style }: TopNavProps) {
                 <Avatar className="h-9 w-9">
                   <AvatarImage src={settings.avatar} alt={settings.fullName} />
                   <AvatarFallback className="bg-gradient-to-br from-primary to-primary/70 text-primary-foreground font-semibold">
-                    {settings.fullName
+                    {/* {settings.fullName
                       .split(" ")
                       .map((n) => n[0])
-                      .join("")}
+                      .join("")} */
+                      "ST"}
                   </AvatarFallback>
                 </Avatar>
               </Button>
