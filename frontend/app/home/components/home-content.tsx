@@ -26,7 +26,7 @@ function HomeLayoutContent() {
   const [isMobile, setIsMobile] = useState(false);
 
 
-  const userRole = status === "loading" ? null : session?.role || "STUDENT";
+  const userRole = status === "loading" ? null : session?.user.role || "STUDENT";
 
 
   const [activeTab, setActiveTab] = useState<string | null>(null);

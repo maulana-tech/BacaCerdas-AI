@@ -18,7 +18,7 @@ import { StudentProjectCard } from "../cards/student-project-card";
 
 export function AppsSection() {
   const { data: session, status } = useSession(); 
-  const userRole = status === "loading" ? null : session?.role; 
+  const userRole = status === "loading" ? null : session?.user.role; 
 
   const getVisibleApps = (appList: App[]): App[] => {
     if (status === "loading" || !userRole) return []; // Tunggu role jelas

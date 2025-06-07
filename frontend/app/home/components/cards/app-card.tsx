@@ -19,7 +19,7 @@ export function AppCard({ app, showProgress = false, showCategory = false }: App
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  const userRole = status === "loading" ? "STUDENT" : session?.role || "STUDENT";
+  const userRole = status === "loading" ? "STUDENT" : session?.user.role || "STUDENT";
 
   const getButtonText = () => {
     if (userRole === "TEACHER") {

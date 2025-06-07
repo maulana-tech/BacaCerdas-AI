@@ -20,7 +20,7 @@ export default class ApiClient {
     this.instance.interceptors.request.use(
       (config) => {
         if (session?.user) {
-          config.headers['Authorization'] = `Bearer ${session.token}`;
+          config.headers['Authorization'] = `Bearer ${session.user.token}`;
         }
         return config;
       }

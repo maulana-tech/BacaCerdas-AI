@@ -1,6 +1,5 @@
 import NextAuth, { CredentialsSignin, type DefaultSession, type User } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
-// import GoogleProvider from "next-auth/providers/google"
 
 import type { Provider } from "next-auth/providers"
 import ApiClient from "./lib/api"
