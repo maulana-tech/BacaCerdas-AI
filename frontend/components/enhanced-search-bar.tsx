@@ -53,7 +53,7 @@ export default function EnhancedSearchBar({
     .slice(0, 5)
 
   return (
-    <div ref={searchRef} className="relative w-full max-w-2xl mx-auto">
+    <div ref={searchRef} className="relative w-full max-w-4xl mx-auto">
       {/* Main Search Container */}
       <div
         className={`relative bg-white/95 dark:bg-gray-800/95 backdrop-blur-md rounded-2xl shadow-xl dark:shadow-gray-900/30 border transition-all duration-300 ${
@@ -63,7 +63,7 @@ export default function EnhancedSearchBar({
         }`}
       >
         {/* Search Input Section */}
-        <div className="flex items-center gap-3 p-4">
+        <div className="flex items-center gap-3 p-4 ">
           {/* Search Icon */}
           <div className={`transition-colors duration-300 ${
             isFocused ? "text-blue-500 dark:text-blue-400" : "text-gray-400 dark:text-gray-500"
@@ -150,7 +150,7 @@ export default function EnhancedSearchBar({
       {value && (
         <div className="mt-3 text-center">
           <span className="text-sm text-gray-500 dark:text-gray-400 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-sm dark:shadow-gray-900/30">
-            Mencari: <span className="font-medium text-gray-700 dark:text-gray-200">"{value}"</span>
+            Mencari: <span className="font-medium text-gray-700 dark:text-gray-200">{value}</span>
           </span>
         </div>
       )}
