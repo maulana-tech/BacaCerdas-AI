@@ -21,9 +21,7 @@ export default class AuthController {
   ) {
     const user = await new AuthService().authenticateUser(req.body.data);
 
-    res.status(200).json({
-      data: user,
-    });
+    res.status(200).json(user);
   }
 
   async register(
@@ -37,8 +35,6 @@ export default class AuthController {
     const { confirmPassword, acceptTerms, ...data } = req.body.data;
     const user = await new AuthService().registerUser(data);
 
-    res.status(201).json({
-      data: user,
-    });
+    res.status(201).json(user);
   }
 }

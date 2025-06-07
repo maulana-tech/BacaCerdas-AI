@@ -20,6 +20,7 @@ export default class StoryRouter implements APIRouter {
           validator.validateBody(StorySchema.store()),
         ],
         expressAsyncHandler(new StoryController().store),
-      );
+      )
+      .get("/stories/:id", expressAsyncHandler(new StoryController().show));
   }
 }

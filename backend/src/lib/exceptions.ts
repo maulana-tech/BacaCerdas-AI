@@ -16,6 +16,12 @@ export class BaseException extends Error {
   }
 }
 
+export class LogicException extends BaseException {
+  constructor(message: string) {
+    super("LogicException", 500, message);
+  }
+}
+
 export class NotFoundException extends BaseException {
   constructor(message: string) {
     super("NotFoundException", 404, message);

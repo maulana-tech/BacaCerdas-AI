@@ -17,8 +17,6 @@ export default class StoryTagController {
   ) {
     const storyTags = await new StoryTagService().getAllStoryTags();
 
-    res.status(200).json({
-      data: storyTags,
-    });
+    res.status(200).json(storyTags);
   }
 }

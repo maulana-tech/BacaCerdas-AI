@@ -5,6 +5,7 @@ import UserRepository from "../user/UserRepository";
 import { UnauthorizedException } from "../../lib/exceptions";
 import type { Role, User } from "@prisma/client";
 import { generateToken } from "../../lib/jwt";
+import ResponseBuilder from "../../lib/response-builder";
 
 export default class AuthService {
   // This class is responsible for handling authentication logic
@@ -41,10 +42,10 @@ export default class AuthService {
 
     const token = generateToken(userWithoutPassword);
 
-    return {
+    return new ResponseBuilder({
       ...userWithoutPassword,
       token,
-    };
+    }).build("users");
   }
 
   // Example method to register a new user
@@ -64,12 +65,13 @@ export default class AuthService {
 
     const hashedPassword = bcrypt.hashSync(userData.password, 10);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { password, ...newUser } = await userRepository.create({
+    const user = await userRepository.create({
       ...userData,
       password: hashedPassword,
     });
 
-    return newUser;
+    return new ResponseBuilder(user)
+      .setExcludedFields(["password"])
+      .build("users");
   }
 }

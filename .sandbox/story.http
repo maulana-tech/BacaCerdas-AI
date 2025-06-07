@@ -9,6 +9,12 @@ GET http://localhost:3030/api/v1/story-tags HTTP/1.1
 GET http://localhost:3030/api/v1/stories HTTP/1.1
 
 ###
+GET http://localhost:3030/api/v1/stories/cmbhl1zq5000bfuc2q52j4kw0 HTTP/1.1
+
+###
+GET http://localhost:3030/api/v1/stories/dmbhl1zq5000bfuc2q52j4kw0 HTTP/1.1
+
+###
 POST http://localhost:3030/api/v1/stories HTTP/1.1
 Content-Type: application/json
 Authorization: Bearer {{token}}

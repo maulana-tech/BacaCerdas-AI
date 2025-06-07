@@ -8,6 +8,10 @@ export default class UserStoryRepository extends StoryRepository {
           id: userId,
         },
       },
+      include: {
+        User: true,
+        Tag: true,
+      },
     });
   }
 }
