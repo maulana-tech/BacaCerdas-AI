@@ -1,0 +1,509 @@
+17
+DAFTAR ISI
+DAFTAR ISI i
+DAFTAR GAMBAR ii
+DAFTAR TABEL iii
+BAB 1. PENDAHULUAN 1
+Latar Belakang 1
+Identifikasi Masalah 2
+Manfaat 2
+Luaran 2
+BAB 2. TINJAUAN PUSTAKA 3
+Mesin Penetas Telur 3
+Syarat - Syarat Penetasan Telur 3
+Komponen – Komponen Mesin Penetas Telur 3
+Pembangkit Listrik Tenaga Surya 4
+Komponen Pembangkit Listrik Tenaga Surya 5
+BAB 3. TAHAP PELAKSANAAN 5
+Desain Mesin Inkubator Penetas Telur Otomatis 5
+Diagram Alir 6
+Alat Dan Bahan 6
+Langkah Kerja 7
+BAB 4. BIAYA DAN JADWAL KEGIATAN 7
+Anggaran Biaya 7
+Jadwal Kegiatan 8
+DAFTAR PUSTAKA 9
+LAMPIRAN-LAMPIRAN 10
+Lampiran 1. Biodata Ketua dan Anggota serta Dosen Pendamping
+Lampiran 2. Justifikasi Anggaran Kegiatan
+Lampiran 3. Susunan Organisasi Tim Kegiatan dan Pembagian Tugas
+Lampiran 4. Surat Pernyataan Ketua Pelaksana
+Lampiran 5. Gambaran Konsep Karya Inovatif Yang Akan Dihasilkan.
+DAFTAR GAMBAR
+Gambar 3. 1 3D Assembly Mesin Penetas 5
+DAFTAR TABEL
+Tabel 4. 1 Rekapitulasi Rencana Anggaran Biaya 7
+Tabel 4. 2 Jadwal Kegiatan PKM-Karya Inovatif 8
+BAB 1. PENDAHULUAN
+Latar Belakang
+Seiring dengan pertumbuhan dan perkembangan penduduk di Indonesia harus diimbangi juga dengan persediaan yang mencukupi untuk memenuhi ketersediaan pangan, sehingga kebutuhan pangan yang mengandung protein tinggi ini terpenuhi. Khususnya produk unggas lebih diminati jika dibandingkan dengan ternak besar, selain itu pangan yang mengandung protein lebih tinggi ada pada ungags (Ferry Budhi Susetyo, 2020). Badan Pusat Statistik (BPS) mencatat, konsumsi daging ayam ras atau kampung oleh penduduk Indonesia dalam seminggu hanya sebesar 0,14 kilogram pada 2021.
+Ayam merupakan komoditas peternakan yang sangat disukai oleh masyarakat, dimana jika dibandingkan dengan ternak lain, namun ternak ini mempunyai produktivitas masih rendah sebagai akibat dari pemeliharaan yang masih sederhana dan belum memperhatikan tata laksana atau manajemen pemeliharaan yang baik, pemberian pakan yang belum seimbang baik kualitas maupun kuantitasnya. Penetasan telur dapat dilakukan dengan dua cara yaitu penetasan alami dan penetasan buatan (Sugita, Firmansah, Sobirin, & Ardianto, 2019).
+Pengeraman telur secara alami sepenuhnya dilakukan oleh induk ayam itu sendiri, sedangkan penetasan buatan dilakukan dengan menggunakan alat yang disebut mesin tetas atau inkubator. Penetasan alami kurang efektif dalam menetaskan telur karena satu induk hanya bisa mengerami sekitar 10 butir telur, sedangkan penetasan buatan mampu menetaskan jumlah telur dalam jumlah ratusan bahkan ribuan butir, tergantung kapasitas tampung mesin tetas (Sugita, Firmansah, Sobirin, & Ardianto, 2019).
+Mesin penetas telur dengan menggunakan pemanas dari bola lampu telah banyak digunakan baik oleh industri sekala kecil maupun besar, juga oleh masyarkat umumnya, keberhasilan penetasan telur ayam sangat dipengaruhi oleh temperatur dan kelembaban, dimana temperatur yang baik untuk penetasan telur ayam berkisar antaran 36oC sampai dengan 40oC, dengan kelembaban relatif antara 50% sampai dengan 60%. Temperatur yang terlalu tinggi akan menyebabkan kematian embrio ataupun abnormalitas embrio, sedangkan kelembapan mempengaruhi pertumbuhan normal dari embrio (Zulhajji, 2020).
+Selain temperatur dan kelembapan, pemadaman listrik juga termasuk dampak gagalnya dalam keberhasilan penetasan telur, yang dimana untuk mengoperasikan mesin penetas telur memelurkan suplai dari energi listrik agar dapat menghangatkan suhu pada telur. Apabila terjadi pemadaman listrik maka mesin penetas telur tidak dapat beroperasi sehingga suhu dalam ruangan akan turun dan pertumbuhan embrio pada telur akan menjadi terhambat dan mati. (Ilham Farisi Almadani, 2021).
+Upaya untuk memenuhi kebutuhan listrik yang kontinu dan guna menekan penggunaan energi listrik berbasis fosil yang cadangan bahan bakar energinya semakin berkurang sehingga dapat menimbulkan masalah pada kehidupan manusia di masa depan, memacu dikembangkannya pembangkit listrik alternatif dengan sumber energi baru terbarukan. Pembangkit Listrik Tenaga Surya (PLTS) merupakan salah satu pembangkit listrik yang memanfaatkan energi baru terbarukan yaitu matahari. Alasannya ialah sumber energi matahari yang melimpah dan dalam prosesnya tidak menghasilkan emisi gas buang dan limbah cair atau padat yang berbahaya (Ilham Farisi Almadani, 2021).
+Identifikasi Masalah
+Berdasarkan uraian latar belakang diatas, maka kami mengidentifikasi dan merumuskan masalah yang ada adalah merancang dan membuat mesin inkubator penetas telur ayam otomatis dengan menggunakan teknologi hybrid yang merupakan penggabungan antara PLTS dengan listrik PLN. Yang dimana PLTS sebagai energi utama dan PLN sebagai energi cadangan merupakan solusi guna meningkatkan keandalan dalam menjamin ketersediaan atau kontinuitas suplai listrik ke beban.
+Manfaat
+Perancangan dan pembuatan alat ini diharapkan dapat berfungsi sebagai alat penetas telur otomatis terprogram yang bertenaga hybrid, sehingga dapat mempermudah para peternak dalam menetaskan telur ayam dalam jumlah yang besar.
+Memudahkan bagi pengguna untuk pemantauan temperatur dan kelembapan di dalam ruangan mesin penetas telur agar terus tetap terjaga pada nilai suhu dan nilai kelembapan tertentu.
+Dengan berteknologi hybrid ini diharapkan mesin penetas telur terus dapat terus beroperasi walaupun sedang terjadi seperti pemadangan listrik secara tiba-tiba.
+Luaran
+Luaran yang diharapkan dari pembuatan proposal ini yaitu:
+Laporan kemajuan dan laporan akhir.
+Membuat paten/hak kekayaan intelektual.
+Produk mesin inkubator penetas telur otomatis bertenaga hybrid penggabungan antara PLTS dan listrik PLN.
+BAB 2. TINJAUAN PUSTAKA
+Mesin Penetas Telur
+Mesin penetas telur pada awalnya merupakan alat sederhana yang hanya menggunakan lampu untuk menghasilkan panasnya tanpa alat-alat pendukung lainnya yang hanya digunakan oleh para peternak tradisional dengan kapasitas yang kecil, namun seiring dengan perkembangan teknologi mesin ini dikembangkan untuk meningkatkan kemampuan dan kemudahan dalam penetasan telur.
+Syarat - Syarat Penetasan Telur
+Suhu dan perkembangan embrio
+Embrio dalam telur unggas akan cepat berkembang selama suhu telur berada pada kondisi yang sesuai dan akan berhenti berkembang jika suhunya kurang dari yang dibutuhkan. Suhu yang dibutuhkan untuk penetasan telur setiap unggas berbeda-beda. Suhu untuk perkembangan embrio dalam telur ayam antara 38,33o - 40,55o C (101o - 105o F), itik 37,78o - 39,45o C (100o - 103o F), puyuh 39,5o C (102o F), dan wallet 32,22o - 31o C (90o - 96o F). Untuk itu, sebelum telur tetas dimasukan ke dalam bok penetasan suhu ruang tersebut harus sesuai dengan yang dibutuhkan.
+Kelembaban
+Selama penetasan berlangsung, diperlukan kelembaban udara yang sesuai dengan perkembangan dan pertumbuhan embrio, seperti suhu dan kelembaban yang umum untuk penetasan telur setiap jenis unggas juga berbeda-beda. Bahkan, kelembapan pada awal penetasan berbeda dengan hari-hari selanjutnya. Kelembapan untuk telur pada saat awal penetasan sekitar 52%-55% dan menjelang menetas sekitar 60%-70%, Itik pada minggu pertama 70% dan minggu selanjutnya 60%-65%, puyuh minggu pertama 55%-70% selanjutnya 65% dan walet 65%-70% pada setiap minggunya.
+Ventilasi
+Dalam perkembangan normal, embrio membutuhkan oksigen (O2) dan mengeluarkan karbondioksida (CO2) melalui pori-pori kerabang telur. Untuk itu, dalam pembuatan alat penetas telur/mesin tetas harus diperhatikan cukup tidaknya oksigen yang ada dalam bok/ruangan, karena jika tidak ada oksigen yang cukup dalam bok/ruangan dikhawatirkan embrio gagal berkembang.
+Waktu Penetasan Telur
+Penetasan telur ayam biasanya diperlukan waktu sekitar 20 - 23 hari untuk menetas dengan sempurna (sehat).
+Komponen – Komponen Mesin Penetas Telur
+Thermostat digital
+Thermostat adalah alat yang berfungsi untuk mengatur temperature dalam mesin penetassecara otomatis. Apabila alat ini terkena panas maka kapsul akan mengembang sehingga akan menekan sakelar (mikroswitch) dan aliran listrik akan terputus, sebaliknya apabila temperatur turun maka kapsul akan mengempis dan akan menyalakan kembali lampu pijar sebagai sumber panas.
+Thermo-hygrometer digital
+Thermo hygrometer adalah alat yang mempunyai dua indikator pengukuran yaitu thermometer dan hygrometer. Thermometer berfungsi untuk mengukur suhu pada suatu ruangan, sedangkan hygrometer berfungsi untuk mengukur kelembaban pada suatu ruangan.
+Lampu pijar
+Lampu pijar adalah sumber cahaya buatan yang dihasilkan dengan penyaluran arus listrik melalui filamen yang kemudian memanas dan menghasilkan cahaya. Lampu pijar digunakan karena pancaran cahaya lampu pijar lebih merata dari pada menggunakan heater/pemanas, serta bila dihitung secara ekonomis lampu pijar lebih mudah di dapat dan murah harganya dari pada heater/pemanas.
+Rak telur
+Rak Telur berfungsi sebagai tempat telur yang akan ditetaskan, rak telur diisi sesuai dengan kapasitasnya.
+Motor pemutar rak
+Motor pemutar rak telur, mempunyai tujuan untuk memberikan panas secara merata pada permukaan telur, Selain itu untuk mencegah agar embrio tidak menempel pada salah satu sisi kerabang telur. Pemutaran telur dilakukan dengan mengubah posisi telur dari kiri ke kanan atau sebaliknya, untuk telur dengan posisi mendatar yang bawah diputar menjadi diatas, apabila telur diberdirikan bagian yang tumpul harus diatas.
+Timer
+Timer ini dimaksudkan untuk mengatur waktu pada motor pemutar rak agar dapat memberikan panas secara merata terhadap permukaan telur.
+Pembangkit Listrik Tenaga Surya
+Pembangkit listrik tenaga surya (PLTS) adalah suatu pembangkit yang mengkonversikan energi foton dari surya maenjadi energi listrik. Konversi energi ini terjadi pada panel surya yang terdiri dari sel-sel surya. PLTS memanfaatkan cahaya matahari untuk menghasilkan listrik DC (Direct Current), yang dapat di ubah menjadi listrik AC (Alternating Current) apabila diperlukan. PLTS pada dasarnya adalah pencatu daya yang dapat dirancang untuk mencatu kebutuhan listrik mulai dari skala kecil maupun skala besar, baik secara mandiri maupun hibrida.
+Komponen Pembangkit Listrik Tenaga Surya
+Modul Surya
+Modul surya ialah komponen utama dalam sistem Photovoltaic (PV) yang mengubah sinar matahari menjadi energi listrik, listrik yang dihasilkan berupa arus DC.
+Battery Charge Regulator (BCR)
+Controller pada sistem PLTS berfungsi sebagai pengatur arus listrik, baik terhadap arus input maupun arus yang digunakan. BCR digunakan untuk mengatur aliran listrik dari modul surya ke-baterai atau aki dan dari baterai atau aki ke-beban.
+Baterai
+Baterai ialah peralatan yang sangat penting bagi suatu sistem pembangkit listrik tenaga surya. Baterai dapat menyimpan energi listrik yang diterima pada siang hari dan dapat digunakan pada malam hari untuk melayani beban atau peralatan listrik.
+Inverter
+Inverter adalah converter tegangan arus searah (DC) ke tegangan bolak balik (AC). Fungsi dari sebuah inverter adalah untuk mengubah tegangan masukan DC menjadi tegangan keluaran AC yang simetris dengan besar magnitude dan frekuensi yang diinginkan.
+BAB 3. TAHAP PELAKSANAAN
+Desain Mesin Inkubator Penetas Telur Otomatis
+Desain bentuk rumahan mesin inkubator penetas telur otomatis ini dibuat dengan menggunakan aplikasi SolidWorks 2013, Desain bentuk rumahan mesin inkubator penetas telur otomatis ini dapat dilihat pada gambar 3.1.
+Gambar 3. 1 3D Assembly Mesin Penetas
+Diagram AlirMulai
+Studi Literatur
+Analisa dan Identifikasi
+Kebutuhan Perancangan
+Perancangan dan pembuatan mesin
+Pengujian mesin
+Periksa kesesuaian?
+T
+Y
+Pengumpulan data
+Pengolahan data
+Laporan
+Selesai
+Alat Dan Bahan
+Alat
+Alat-alat yang digunakan dalam pembuatan ini adalah Mesin bor tangan, Gergaji, Pengaris, Meteran, Cutter, Obeng, Palu, Amplas, Gunting, Tang, Stapler, dan Pensil
+Bahan
+Adapun bahan-bahan yang akan digunakan dalam pembuatan adalah kayu kecil (reng), multiplek, kaca, paku, engsel pintu, kabel listik, fiting lampu, lem kayu secukupnya, saklar on/off, klem kabel (penjepit kabel), isolasi secukupnya, batang lem bakar, nampan air, lampu pijar, kipas, thermometer, thermostat digital,thermo-hygrometer digital, motor pemutar rak, timer, modul surya, controller, inverter, dan baterai/aki.
+Langkah Kerja
+Pembuatan mesin inkubator penetas telur
+Mesin tetas memiliki ukuran yaitu panjang 65 cm, lebar 63 cm, tinggi 112 cm, sistem otomotis pada pengaturan suhu, dan rak telur yang dapat bergerak. Tenaga listrik DC yang diperlukan, dihitung untuk menyesuaikan dengan panel solar yang akan dipasang.
+Pembuatan rangkaian panel surya
+Rangkaian tenaga surya dipasang sesuai kebutuhan daya pada operasional mesin tetas.
+BAB 4. BIAYA DAN JADWAL KEGIATAN
+Anggaran Biaya
+Anggaran biaya dari program PKM-Karsa Cipta sebagai berikut:
+Tabel 4. 1 Rekapitulasi Rencana Anggaran Biaya
+No.
+Jenis Pengeluaran
+Sumber Dana
+Besaran dana
+1.
+Bahan habis pakai
+Belmawa
+Perguruan tinggi
+Instansi lain (jika ada)
+-
+2.
+Sewa dan jasa
+Belmawa
+Perguruan tinggi
+Instansi lain (jika ada)
+-
+3.
+Perjalanan lokal
+Belmawa
+Perguruan tinggi
+Instansi lain (jika ada)
+-
+4.
+Lain-lain
+Belmawa
+Perguruan tinggi
+Instansi lain (jika ada)
+-
+Jumlah
+Rekap sumber dana
+Belmawa
+Perguruan tinggi
+Instansi lain (jika ada)
+-
+Jumlah
+Jadwal Kegiatan
+Jadwal pelaksanaan program PKM-Karsa Cipta dapat dilihat pada Tabel 4.2 di bawah ini:
+Tabel 4. 2 Jadwal Kegiatan PKM-Karya Inovatif
+No
+Jenis Kegiatan
+Bulan
+Penanggungjawab
+1
+2
+3
+4
+1
+Survei
+Handi Cahya Iman
+2
+Analisis
+Muhammad Hafiid Nurichsan
+Handi Cahya Iman
+3
+Desain
+Muhammad Hafiid Nurichsan Gilang Doresa
+4
+Perancangan pembuatan meja
+Muhammad Hafiid Nurichsan
+Gilang Doresa
+Handi Cahya Iman
+Ari Pratama
+5
+Pengujian keberhasilan
+Ari Pratama
+6
+Kesimpulan
+Muhammad Hafiid Nurichsan
+Ari Pratama
+DAFTAR PUSTAKA
+Azis, M. N. (2021). Analisa Laju Aliran Kalor Pada Inkubator Penetas Telur Ayam Otomatis Menggunakan Thermostats Digital. skripsi. Universitas Islam Riau Pekanbaru.
+Haryudo, S. I., Kartini, U. T., Joko, & Almadani, I. F. (2021). Rancang Bangun Sistem Automatic Transfer Switch Antara Listrik PLN Dan PLTS Skala Kecil Untuk Alat Penetas Telur Berbasis Internet Of Things. Jurnal Teknik Elektro, 10(03), 565-575.
+Jaelani, A., Widaningsih, N., & Firman, M. (2017, April 2). Mesin Tetas Tenaga Surya Pada Peternakan Itik Alabio Di Kecamatan Gambut Kabupaten Banjar. Jurnal Al-Ikhlas, 2(2), 68-75.
+Mawazir, A. (2019). Rancang Bangun Inkubator Penetas Telur Bekapasitas Kecil. skripsi. Universitas Muhammadiyah Sumatera Utara.
+Ramadhana, R. R., M, M. I., Hafid, A., & Adriani. (2022, Februari). Analisis PLTS On GRID. Jurnal Tekni Elektro UNISMUH, 14(1), 12-25.
+Sugita, I. W., Firmansah, F., Sobirin, R., & Ardianto, M. R. (2019, April). Rancang Bangun Mesin Penetas Telur Tenaga Hybrid. Jurnal Konversi Energi dan Manufaktur UNJ, 30-36.
+Susetyo, F. B., Sugita, I. W., Basori, Rifqi, M. N., Wardiana, R., & Prasetyo, J. (2020, November). Rancang Bangun Rak Penetas Telur Otomatis Pada Mesin Tetas Bertenaga Hybrid. Jurnal Ilmiah GIGA, 23(2), 69-75.
+Zulhajji. (2020, Desember). Analisis Perbandingan Temperatur Dalam Dan Luar Serta Kelembaban Relatif Pada Mesin Penetas Telur Tenaga Listrik. Media Elektrik, 18, 69-75.
+Bayu, D. 2022. Penduduk RI Konsumsi Daging Ayam 0,14 Kg per Minggu pada 2021. URL: https://dataindonesia.id/Sektor%20Riil/detail/penduduk-ri-konsumsi-daging-ayam-014-kg-per-minggu-pada-2021 diakses pada tanggal 29 Januari 2023
+Identitas Diri Dosen Pendamping
+1
+Nama Lengkap (dengan gelar)
+Muhammad Firman, S.T, M.T
+2
+Jenis Kelamin
+Laki-laki
+3
+Program Studi
+Teknik Mesin
+4
+NIP/NIDN
+19720226 2005 011 003/0026027201
+5
+Tempat dan Tanggal Lahir
+Banjarmasin, 26 Februari 1972
+6
+Alamat E-mail
+firmanuniska99@gmail.com
+7
+Nomor Telepon/HP
+081349354898
+Riwayat Pendidikan
+No.
+Gelar akademik
+Bidang Ilmu
+Institusi
+Tahun Lulus
+1
+Sarjana(S1)
+Teknik Mesin
+Universitas Muhammadiyah Malang
+1996
+2
+Magister(S2)
+Teknik Mesin
+Universitas Pancasila Jakarta
+2012
+3
+Doktor(S3)
+-
+-
+-
+Rekam Jejak Tri Dharma PT
+Pendidikan/Pengajaran
+No.
+Nama Mata Kuliah
+Wajib/Pilihan
+SKS
+1.
+Mekanika Teknik
+Wajib
+2
+2.
+Perpindahan Panas
+Wajib
+2
+Penelitian
+No.
+Judul Penelitian
+Penyandang Dana
+Tahun
+1.
+Optimasi Sudut Kemiringan Solar Cell Untuk Mesin Penetas Telur Itik Alabio Dengan Daya 100 Watt (Ketua)
+UNISKA
+2015
+2.
+Pengembangan Turbin Angin Horisontal Kapasitas 1000 W (Anggota)
+UNISKA
+2015
+3.
+Perencanaan Sistem Hybrid Pembangkit Listrik Tenaga Surya Dengan Genset Pada LaboratoriumLapangan UNISKA Bentok Bati- Bati (Ketua)
+UNISKA
+2016
+4.
+Optimasi Sudu Turbin Angin Vertikal Empat Sudu Kapasitas 125 W (Anggota)
+UNISKA
+2016
+5.
+Analisis Penghematan Air Untuk Wudhu Pada Mesjid Di Kota Banjarmasin (Ketua)
+UNISKA
+2017
+6.
+Pengaruh Penambahan Sudu Tipe V Pada Sudu Naca 4412 Turbin Angin Vertikal (Anggota)
+UNISKA
+2017
+7.
+Perancangan Perahu Pembersih Sampah Di Aliran Sungai Kota Banjarmasin (Ketua)
+UNISKA
+2019
+8.
+Perancangan Sistem Hybrid Pembangkit Listrik Tenaga Surya Dengan Turbin Angin Terapung (Ketua)
+UNISKA
+2020
+9.
+Pengaruh Variasi Suhu Destilasi Oli Bekas Terhadap Kuantitas Dan Kualitas Destilatnya (Ketua)
+UNISKA
+2021
+Pengabdian Kepada Masyarakat
+No.
+Judul Pengabdian Kepada Masyarakat
+Penyandang Dana
+Tahun
+1.
+Pelatihan Komputer Dengan Program Microsoft Office, Excell, Power Point Sebagai Penunjang Media Pembelajaran Bagi Siswa/i Dan Guru MTS Al Furqon Banjarmasin (Anggota)
+UNISKA
+2015
+2.
+Pelatihan Perakitan Dan Perawatan Pembangkit Listrik Tenaga Surya (PLTS) Di DesaJejangkit Muara Kabupaten Batola (Ketua)
+UNISKA
+2016
+3.
+IBm Kelompok Pembibitan Ternak Itik Alabio Di Kecamatan Gambut Kabupaten Banjar (Anggota)
+DIKTI
+2016
+4.
+Desain Ulang Instalasi Perpipaan Pada Mesjid Noor Banjarmasin (Ketua)
+UNISKA
+2017
+5.
+Pelatihan Perakitan Gabungan Sistem Pembangkit Listrik Tenaga Angin Dan Tenaga Surya (Anggota)
+UNISKA
+2017
+6.
+Pengolahan Air Di Desa Karang Buah Kecamatan Belawang Kabupaten Barito Kuala (Ketua)
+UNISKA
+2018
+7.
+Pelatihan Modernisasi Menggambar Mesin Dengan Solidwork Di SMK Syuhada Teknologi Kota Banjarmasin (Ketua)
+UNISKA
+2019
+8.
+Peningkatan Keterampilan Pengelasan Bagi Masyrakat Di Desa Muara Halayung Kecamatan Beruntung Baru Kabupaten Banjar (Ketua)
+UNISKA
+2020
+Lampiran 2. Justifikasi Anggaran Kegiatan
+No.
+Jenis pengeluaran
+Volume
+Harga Satuan (Rp)
+Total (Rp)
+1
+Belanja Bahan (maks. 60%)
+Kertas A4 70gr
+1 rim
+Rp 40.000
+Rp 40.000
+ATK
+1 set
+Rp 300.000
+Rp 300.000
+Kayu reng 2 x 3 panjang 4 m
+4 buah
+Rp 40.000
+Rp 160.000
+Kayu reng 3 x 4 panajng 4 m
+4 buah
+Rp 50.000
+Rp 200.000
+Triplek meranti tebal 4 mm
+3 lembar
+Rp 150.000
+Rp 450.000
+Triplek meranti tebal 18 mm
+2 lembar
+Rp 250.000
+Rp 500.000
+Sekrup kayu SIP ½” x 6
+1 set
+Rp 25.000
+Rp 25.000
+Paku kayu 2,5 cm
+1 set
+Rp 20.000
+Rp 20.000
+Paku kayu 4 cm
+1 set
+Rp 30.000
+Rp.30.000
+Lem aica aibon 70 G
+3 buah
+Rp 20.000
+Rp 60.000
+Stand holder HP
+2 buah
+Rp 125.000
+Rp 250.000
+Cooling pad laptop
+1 buah
+RP 500.000
+Rp 500.000
+Lampu belajar
+1 buah
+Rp 200.000
+Rp 200.000
+Cat
+3 buah
+Rp 30.000
+Rp 90.000
+Kuas
+2 buah
+Rp 20.000
+Rp 40.000
+Amplas roll kayu
+1 set
+Rp 10.000
+Rp 10.000
+Mata gerinda kayu
+2 buah
+Rp 50.000
+Rp 100.000
+Mata gerinda amplas kayu
+1 buah
+Rp 125.000
+Rp 125.000
+SUB TOTAL
+Rp 3.100.000
+2
+Belanja Sewa (maks. 15%)
+Sewa alat-alat (seperti gerinda tangan, bor tangan, gergaji, meteran, dan alat yang hanya dibutuhkan)
+8 kali
+Rp 50.000
+Rp 400.000
+Biaya sewa jasa pembuatan
+1 orang
+Rp 650.000
+Rp 650.000
+SUB TOTAL
+Rp 1.050.000
+3
+Perjalanan Lokal (maks. 30%)
+Perjalanan survei
+4 kali
+Rp 60.000
+Rp 240.000
+perjalanan untuk pembimbingan atau berkonsultasi ke dosen pendamping
+8 kali
+Rp 20.000
+Rp 160.000
+Perjalanan pembelian alat dan bahan
+4 kali
+Rp 80.000
+Rp 320.000
+Perjalanan untuk perakitan
+8 kali
+Rp 100.000
+Rp 800.000
+Perjalanan untuk administrasi
+4 kali
+Rp 50.000
+Rp 200.000
+perjalanan ujicoba
+1 kali
+Rp 80.000
+Rp 80.000
+SUB TOTAL
+Rp 1.800.000
+4
+Lain-lain (maks. 15%)
+Protokol Kesehatan (masker, sanitizer, dll)
+1 set
+Rp 250.000
+Rp 250.000
+Biaya akses publikasi
+1 kali
+Rp 800.000
+Rp 800.000
+SUB TOTAL
+Rp 1.050.000
+GRAND TOTAL
+Rp 7.000.000
+GRAND TOTAL (Tujuh Juta Rupiah)
+Lampiran 3. Susunan Organisasi Tim Kegiatan dan Pembagian Tugas
+No
+Nama/NPM
+Program Studi
+Bidang Ilmu
+Alokasi
+Waktu
+(jam/ minggu)
+Uraian Tugas
+1
+Muhammad Hafiid Nurichsan/ 19620179
+Teknik Mesin
+Teknik Mesin
+20
+Bertugas sebagai ketua yang dapat mengkoordinir setiap anggota, memberi arahan kerja, dan mengerjakan rangkaian.
+2
+Gilang Doresa/
+19620214
+Teknik Mesin
+Teknik Mesin
+20
+Bertugas untuk membuat sebuah desain, membuat pembagian jadwal, dan mengerjakan rangkaian.
+3
+Handi Cahya Iman/ 19620042
+Teknik Mesin
+Teknik Mesin
+20
+Bertugas dalam mensurvei, menganalisis dan membeli bahan yang akan digunakan. Dan juga mengerjakan rangkaian.
+4
+Ari Pratama/ 19620220
+Teknik Mesin
+Teknik Mesin
+20
+Bertugas dalam menganalisa hasil dari rangkaian, membuat dokumentasi, dan mengerjakan rangkaian.
+Lampiran 4. Surat Pernyataan Ketua Pelaksanan
+ii
