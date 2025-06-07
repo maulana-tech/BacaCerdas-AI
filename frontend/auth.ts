@@ -1,4 +1,4 @@
-import NextAuth, { CredentialsSignin } from "next-auth"
+import NextAuth, { CredentialsSignin, type DefaultSession, type User } from "next-auth"
 import Credentials from "next-auth/providers/credentials"
 // import GoogleProvider from "next-auth/providers/google"
 
@@ -27,17 +27,9 @@ declare module "next-auth" {
     }
 
     interface Session {
-        id: string,
-        email: string,
-        username: string,
-        name: string,
-        role: Role,
-        image?: string,
-        location?: string,
-        createdAt: Date,
-        updatedAt: Date,
-        token: string
+        user: User & DefaultSession["user"]
     }
+
 }
 
 /** 
@@ -88,7 +80,11 @@ const providers: Provider[] = [
             try {
                 const response = await apiClient
                     .instance
-                    .post("/login", {
+                    .post<{
+                        data: {
+                            attributes: User
+                        }
+                    }>("/login", {
                         data: {
                             identifier,
                             password,
@@ -96,7 +92,7 @@ const providers: Provider[] = [
                         }
                     });
 
-                const user = response.data.data;
+                const user = response.data.data.attributes;
 
                 return user;
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -134,16 +130,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth(() => {
             },
             session: async ({ session, token }) => {
                 if (token) {
-                    session.id = token.id;
-                    session.email = token.email;
-                    session.username = token.username;
-                    session.name = token.name;
-                    session.role = token.role;
-                    session.image = token.image;
-                    session.location = token.location;
-                    session.createdAt = token.createdAt;
-                    session.updatedAt = token.updatedAt;
-                    session.token = token.token;
+                    session.user = {
+                        ...session.user,
+                        ...token,
+                    }
                 }
 
                 return session;

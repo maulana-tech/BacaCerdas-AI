@@ -1,5 +1,6 @@
 "use client"
 
+import { useSession } from "next-auth/react"
 import { createContext, useContext, useEffect, useState } from "react"
 
 export interface UserSettings {
@@ -14,6 +15,7 @@ export interface UserSettings {
   fontSize: number
   theme: "light" | "dark" | "system"
   layout: "default" | "compact" | "expanded"
+  role: "STUDENT" | "TEACHER" | "ROOT"
   notifications: {
     email: boolean
     push: boolean
@@ -45,6 +47,7 @@ const defaultSettings: UserSettings = {
   fontSize: 16,
   theme: "system",
   layout: "default",
+  role: "STUDENT",
   notifications: {
     email: true,
     push: true,
@@ -74,6 +77,8 @@ interface SettingsContextType {
 const SettingsContext = createContext<SettingsContextType | undefined>(undefined)
 
 export function SettingsProvider({ children }: { children: React.ReactNode }) {
+  const session = useSession();
+
   const [settings, setSettings] = useState<UserSettings>(() => {
     // Try to load settings from localStorage during initialization
     if (typeof window !== "undefined") {
@@ -84,6 +89,18 @@ export function SettingsProvider({ children }: { children: React.ReactNode }) {
     }
     return defaultSettings
   })
+
+  useEffect(() => {
+    const user = session.data?.user;
+    
+    if (!user) return;
+    
+    updateSettings({
+      fullName: user.name,
+      email: user.email,
+      role: user.role,
+    })
+  }, [session.data])
 
   // Save settings to localStorage whenever they change
   useEffect(() => {

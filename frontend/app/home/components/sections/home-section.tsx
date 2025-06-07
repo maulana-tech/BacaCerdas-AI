@@ -102,7 +102,7 @@ export function HomeSection() {
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-semibold text-foreground">Sorotan Komunitas</h2>
-        <Button asChild variant="outline" className="w-full md:w-auto">
+        <Button asChild variant="outline" className="w-auto text-foreground">
           <Link href="#">
             View All Courses
             <ArrowRight className="ml-2 h-4 w-4" />
