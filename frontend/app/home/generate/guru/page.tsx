@@ -13,6 +13,8 @@ import { Save, Download, Home, Eye, Sparkles, Edit } from "lucide-react";
 import Link from "next/link";
 import { HomeAppLayout } from "@/app/home/components/home-app-layout"; 
 import useTiptapEditor from "@/hooks/use-tiptap-editor";
+import { useSession } from "next-auth/react";
+import ApiClient from "@/lib/api";
 
 import TurndownService from "turndown";
 
@@ -25,6 +27,7 @@ export default function StoryPageGuru() {
   const [activeTab, setActiveTab] = useState("ai-assistant");
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { data: session } = useSession();
   
   // Hapus konfigurasi TurndownService
   // const turndownService = new TurndownService({...});
@@ -48,9 +51,26 @@ export default function StoryPageGuru() {
   }, [searchParams]);
 
   const loadStory = async (id: string) => {
-    console.log(
-      `loadStory called for ID: ${id}, but database fetching is disabled.`
-    );
+    try {
+      setLoading(true);
+      const apiClient = new ApiClient();
+      const response = await apiClient.instance.get(`/stories/${id}`);
+      
+      if (response.data?.data) {
+        const story = response.data.data;
+        setTitle(story.attributes.title || "");
+        setContent(story.attributes.content || "");
+        
+        if (editor) {
+          editor.commands.setContent(story.attributes.content || "", false);
+        }
+      }
+    } catch (error) {
+      console.error("Error loading story:", error);
+      alert("Gagal memuat cerita. Silakan coba lagi.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleUseAIStory = (aiContent: string, aiTitle?: string) => {
@@ -75,13 +95,75 @@ export default function StoryPageGuru() {
       alert("Story title cannot be empty.");
       return;
     }
+
+    if (!content.trim()) {
+      alert("Story content cannot be empty.");
+      return;
+    }
+
+    if (!session?.user) {
+      alert("You must be logged in to save a story.");
+      return;
+    }
+
     setSaving(true);
     try {
-      console.log("Simulating story save (Supabase logic removed)...");
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      // alert("Story saved successfully! (Simulation)");
-    } catch (error) {
-      console.error("Error during simulated save:", error);
+      const apiClient = new ApiClient();
+      
+      // Prepare the request body according to the backend schema
+      const requestBody = {
+        data: {
+          title: title.trim(),
+          content: content.trim(),
+        },
+        relationships: {
+          user: {
+            data: {
+              id: session.user.id,
+            },
+          },
+          tag: {
+            data: {
+              // You might want to add a way to select tags or use a default tag
+              // For now, using a default tag ID - you should replace this with actual tag selection
+              id: "cmbhl1yh80003fuc2mjyxnk14", // This should be dynamic based on user selection
+            },
+          },
+        },
+      };
+
+      let response;
+      if (storyId) {
+        // Update existing story
+        response = await apiClient.instance.put(`/stories/${storyId}`, requestBody);
+        alert("Story updated successfully!");
+      } else {
+        // Create new story
+        response = await apiClient.instance.post("/stories", requestBody);
+        alert("Story saved successfully!");
+        
+        // Set the story ID for future updates
+        if (response.data?.data?.attributes?.id) {
+          setStoryId(response.data.data.attributes.id);
+          // Update URL to include the story ID
+          const newUrl = new URL(window.location.href);
+          newUrl.searchParams.set("id", response.data.data.attributes.id);
+          window.history.replaceState({}, "", newUrl.toString());
+        }
+      }
+    } catch (error: any) {
+      console.error("Error saving story:", error);
+      
+      // Handle different types of errors
+      if (error.response?.status === 401) {
+        alert("You are not authorized to save stories. Please log in again.");
+      } else if (error.response?.status === 422) {
+        alert("Invalid data. Please check your input and try again.");
+      } else if (error.response?.data?.error?.message) {
+        alert(`Error: ${error.response.data.error.message}`);
+      } else {
+        alert("Failed to save story. Please try again.");
+      }
     } finally {
       setSaving(false);
     }
@@ -195,9 +277,9 @@ export default function StoryPageGuru() {
                   </div>
 
                   <div className="flex gap-2">
-                    <Button onClick={handleSave} disabled={saving}>
+                    <Button onClick={handleSave} disabled={saving || !session?.user}>
                       <Save className="h-4 w-4 mr-2" />
-                      {saving ? "Saving..." : "Save"}
+                      {saving ? "Saving..." : storyId ? "Update" : "Save"}
                     </Button>
                     <Button variant="outline" onClick={handleDownload}>
                       <Download className="h-4 w-4 mr-2" />

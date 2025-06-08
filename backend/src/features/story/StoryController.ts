@@ -43,4 +43,26 @@ export default class StoryController {
 
     res.status(200).json(story);
   }
+
+  async update(
+    req: Request<{ id: string }, {}, StoryStoreSchema>,
+    res: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    next: NextFunction,
+  ) {
+    const story = await new StoryService().updateStory(req.params.id, req.body);
+
+    res.status(200).json(story);
+  }
+
+  async destroy(
+    req: Request<{ id: string }>,
+    res: Response,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    next: NextFunction,
+  ) {
+    await new StoryService().deleteStory(req.params.id);
+
+    res.status(204).send();
+  }
 }
