@@ -7,14 +7,14 @@ import { Input } from "@/components/ui/input"; //
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; //
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"; //
 import TipTapEditor from "@/components/tiptap-editor"; //
-import StoryAIAssistant from "@/components/story-ai-assistant"; //
-import { generateStoryPDF } from "@/lib/pdf-utils"; //
+import StoryAIAssistant from "@/components/story-ai-assistant";
+import { generateStoryPDF } from "@/lib/pdf-utils"; 
 import { Save, Download, Home, Eye, Sparkles, Edit } from "lucide-react";
 import Link from "next/link";
-import { HomeAppLayout } from "@/app/home/components/home-app-layout"; // Import the new layout
+import { HomeAppLayout } from "@/app/home/components/home-app-layout"; 
 import useTiptapEditor from "@/hooks/use-tiptap-editor";
 
-export default function StoryPageGuru() { // Consider a more specific name if "StoryPage" is generic
+export default function StoryPageGuru() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [saving, setSaving] = useState(false);
@@ -69,7 +69,6 @@ export default function StoryPageGuru() { // Consider a more specific name if "S
       // alert("Story saved successfully! (Simulation)");
     } catch (error) {
       console.error("Error during simulated save:", error);
-      // alert("Failed to save story (database operations disabled).");
     } finally {
       setSaving(false);
     }
