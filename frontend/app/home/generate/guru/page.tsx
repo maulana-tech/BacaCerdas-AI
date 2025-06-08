@@ -60,14 +60,13 @@ export default function StoryPageGuru() {
 
     const cleanedContent = aiContent.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
       .replace(/style=\"[^\"]*\"/gi, '');
-    
-    // Konversi HTML ke markdown menggunakan Turndown
-    const markdownContent = turndownService.turndown(cleanedContent);
-    setContent(markdownContent);
+
+    // Simpan langsung HTML ke content (bukan markdown)
+    setContent(cleanedContent);
     setActiveTab("editor");
-    
+
     if (editor) {
-      editor.commands.setContent(markdownContent);
+      editor.commands.setContent(cleanedContent, false);
     }
   };
 
@@ -88,17 +87,27 @@ export default function StoryPageGuru() {
     }
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!title.trim()) {
       alert("Story title cannot be empty.");
       return;
     }
-    
-    if (editor) {
-      generateStoryPDFFromEditor(title, editor);
-    } else {
-      // Fallback ke fungsi lama jika editor tidak tersedia
-      generateStoryPDF(title, content);
+
+    try {
+      // Set loading state
+      setLoading(true);
+
+      const htmlContent = editor ? editor.getHTML() : content;
+      if (!htmlContent) {
+        throw new Error("Konten cerita kosong");
+      }
+
+      await generateStoryPDF(title, htmlContent);
+    } catch (error) {
+      console.error("Error in handleDownload:", error);
+      alert(error instanceof Error ? error.message : "Gagal memproses konten. Silakan coba lagi.");
+    } finally {
+      setLoading(false);
     }
   };
 
