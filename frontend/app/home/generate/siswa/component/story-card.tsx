@@ -22,7 +22,7 @@ export default function StoryCard(props: StoryApiResponse) {
                             </Badge>
                         </div>
 
-                        <Link href={`/story/#`}>
+                        <Link href={`/home/generate/siswa/story/${props.attributes.id}`}>
                             <h2 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-slate-100 mb-3 md:mb-4 hover:text-blue-600 dark:hover:text-blue-400 transition-colors cursor-pointer line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400">
                                 {props.attributes.title || "Untitled Story"}
                             </h2>

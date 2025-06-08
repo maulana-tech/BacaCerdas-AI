@@ -8,10 +8,13 @@ declare global {
         interface ProcessEnv {
             NEXT_OUTPUT?: "standalone" | "export";
             NEXT_PUBLIC_API_URL?: string;
-            AZUREI_OPENAI_BASE_URL?: string;
+            NEXT_PUBLIC_BASE_URL?: string;
+            AZURE_OPENAI_BASE_URL?: string;
             AZURE_OPENAI_DEPLOYMENT_NAME?: string
             AZURE_OPENAI_RESOURCE_NAME?: string;
             AZURE_OPENAI_API_KEY?: string;
+            AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT?: string;
+            AZURE_DOCUMENT_INTELLIGENCE_API_KEY?: string;
         }
     }
 

@@ -226,9 +226,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id" suppressHydrationWarning>
-      <body className={`${plusJakartaSans.variable} ${lora.variable} antialiased bg-white text-zinc-900`}>
+      <body className={`${plusJakartaSans.variable} ${lora.variable} antialiased bg-white text-zinc-900`} suppressHydrationWarning>
         <main>
-          <SessionProvider> {/* Tambahkan SessionProvider di sini */}
+          <SessionProvider>
             <ThemeProvider>
               {children}
             </ThemeProvider>

@@ -72,11 +72,19 @@ export interface SidebarItem {
 }
 
 export interface Story {
-  id: string
-  title: string
-  content: string
-  createdAt: string
-  updatedAt: string
+  id: string;
+  title: string;
+  content: string;
+  type: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface StoryResponse {
+  data: {
+    attributes: Story;
+  };
 }
 
 export interface StoryTag {
@@ -109,5 +117,11 @@ export interface Summary {
   source_document?: string
   createdAt: string
   updatedAt: string
+}
+
+export enum ItemType {
+  STORY = 'STORY',
+  QUIZ = 'QUIZ',
+  SUMMARY = 'SUMMARY'
 }
 

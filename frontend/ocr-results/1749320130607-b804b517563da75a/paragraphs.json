@@ -1,0 +1,4583 @@
+[
+  {
+    "spans": [
+      {
+        "offset": 0,
+        "length": 2
+      }
+    ],
+    "content": "17"
+  },
+  {
+    "spans": [
+      {
+        "offset": 3,
+        "length": 10
+      }
+    ],
+    "content": "DAFTAR ISI"
+  },
+  {
+    "spans": [
+      {
+        "offset": 14,
+        "length": 12
+      }
+    ],
+    "content": "DAFTAR ISI i"
+  },
+  {
+    "spans": [
+      {
+        "offset": 27,
+        "length": 16
+      }
+    ],
+    "content": "DAFTAR GAMBAR ii"
+  },
+  {
+    "spans": [
+      {
+        "offset": 44,
+        "length": 16
+      }
+    ],
+    "content": "DAFTAR TABEL iii"
+  },
+  {
+    "spans": [
+      {
+        "offset": 61,
+        "length": 20
+      }
+    ],
+    "content": "BAB 1. PENDAHULUAN 1"
+  },
+  {
+    "spans": [
+      {
+        "offset": 82,
+        "length": 16
+      }
+    ],
+    "content": "Latar Belakang 1"
+  },
+  {
+    "spans": [
+      {
+        "offset": 99,
+        "length": 22
+      }
+    ],
+    "content": "Identifikasi Masalah 2"
+  },
+  {
+    "spans": [
+      {
+        "offset": 122,
+        "length": 9
+      }
+    ],
+    "content": "Manfaat 2"
+  },
+  {
+    "spans": [
+      {
+        "offset": 132,
+        "length": 8
+      }
+    ],
+    "content": "Luaran 2"
+  },
+  {
+    "spans": [
+      {
+        "offset": 141,
+        "length": 25
+      }
+    ],
+    "content": "BAB 2. TINJAUAN PUSTAKA 3"
+  },
+  {
+    "spans": [
+      {
+        "offset": 167,
+        "length": 21
+      }
+    ],
+    "content": "Mesin Penetas Telur 3"
+  },
+  {
+    "spans": [
+      {
+        "offset": 189,
+        "length": 33
+      }
+    ],
+    "content": "Syarat - Syarat Penetasan Telur 3"
+  },
+  {
+    "spans": [
+      {
+        "offset": 223,
+        "length": 41
+      }
+    ],
+    "content": "Komponen – Komponen Mesin Penetas Telur 3"
+  },
+  {
+    "spans": [
+      {
+        "offset": 265,
+        "length": 33
+      }
+    ],
+    "content": "Pembangkit Listrik Tenaga Surya 4"
+  },
+  {
+    "spans": [
+      {
+        "offset": 299,
+        "length": 42
+      }
+    ],
+    "content": "Komponen Pembangkit Listrik Tenaga Surya 5"
+  },
+  {
+    "spans": [
+      {
+        "offset": 342,
+        "length": 26
+      }
+    ],
+    "content": "BAB 3. TAHAP PELAKSANAAN 5"
+  },
+  {
+    "spans": [
+      {
+        "offset": 369,
+        "length": 47
+      }
+    ],
+    "content": "Desain Mesin Inkubator Penetas Telur Otomatis 5"
+  },
+  {
+    "spans": [
+      {
+        "offset": 417,
+        "length": 14
+      }
+    ],
+    "content": "Diagram Alir 6"
+  },
+  {
+    "spans": [
+      {
+        "offset": 432,
+        "length": 16
+      }
+    ],
+    "content": "Alat Dan Bahan 6"
+  },
+  {
+    "spans": [
+      {
+        "offset": 449,
+        "length": 15
+      }
+    ],
+    "content": "Langkah Kerja 7"
+  },
+  {
+    "spans": [
+      {
+        "offset": 465,
+        "length": 34
+      }
+    ],
+    "content": "BAB 4. BIAYA DAN JADWAL KEGIATAN 7"
+  },
+  {
+    "spans": [
+      {
+        "offset": 500,
+        "length": 16
+      }
+    ],
+    "content": "Anggaran Biaya 7"
+  },
+  {
+    "spans": [
+      {
+        "offset": 517,
+        "length": 17
+      }
+    ],
+    "content": "Jadwal Kegiatan 8"
+  },
+  {
+    "spans": [
+      {
+        "offset": 535,
+        "length": 16
+      }
+    ],
+    "content": "DAFTAR PUSTAKA 9"
+  },
+  {
+    "spans": [
+      {
+        "offset": 552,
+        "length": 20
+      }
+    ],
+    "content": "LAMPIRAN-LAMPIRAN 10"
+  },
+  {
+    "spans": [
+      {
+        "offset": 573,
+        "length": 60
+      }
+    ],
+    "content": "Lampiran 1. Biodata Ketua dan Anggota serta Dosen Pendamping"
+  },
+  {
+    "spans": [
+      {
+        "offset": 634,
+        "length": 41
+      }
+    ],
+    "content": "Lampiran 2. Justifikasi Anggaran Kegiatan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 676,
+        "length": 63
+      }
+    ],
+    "content": "Lampiran 3. Susunan Organisasi Tim Kegiatan dan Pembagian Tugas"
+  },
+  {
+    "spans": [
+      {
+        "offset": 740,
+        "length": 44
+      }
+    ],
+    "content": "Lampiran 4. Surat Pernyataan Ketua Pelaksana"
+  },
+  {
+    "spans": [
+      {
+        "offset": 785,
+        "length": 64
+      }
+    ],
+    "content": "Lampiran 5. Gambaran Konsep Karya Inovatif Yang Akan Dihasilkan."
+  },
+  {
+    "spans": [
+      {
+        "offset": 850,
+        "length": 13
+      }
+    ],
+    "content": "DAFTAR GAMBAR"
+  },
+  {
+    "spans": [
+      {
+        "offset": 864,
+        "length": 39
+      }
+    ],
+    "content": "Gambar 3. 1 3D Assembly Mesin Penetas 5"
+  },
+  {
+    "spans": [
+      {
+        "offset": 904,
+        "length": 12
+      }
+    ],
+    "content": "DAFTAR TABEL"
+  },
+  {
+    "spans": [
+      {
+        "offset": 917,
+        "length": 48
+      }
+    ],
+    "content": "Tabel 4. 1 Rekapitulasi Rencana Anggaran Biaya 7"
+  },
+  {
+    "spans": [
+      {
+        "offset": 966,
+        "length": 47
+      }
+    ],
+    "content": "Tabel 4. 2 Jadwal Kegiatan PKM-Karya Inovatif 8"
+  },
+  {
+    "spans": [
+      {
+        "offset": 1014,
+        "length": 18
+      }
+    ],
+    "content": "BAB 1. PENDAHULUAN"
+  },
+  {
+    "spans": [
+      {
+        "offset": 1033,
+        "length": 14
+      }
+    ],
+    "content": "Latar Belakang"
+  },
+  {
+    "spans": [
+      {
+        "offset": 1048,
+        "length": 559
+      }
+    ],
+    "content": "Seiring dengan pertumbuhan dan perkembangan penduduk di Indonesia harus diimbangi juga dengan persediaan yang mencukupi untuk memenuhi ketersediaan pangan, sehingga kebutuhan pangan yang mengandung protein tinggi ini terpenuhi. Khususnya produk unggas lebih diminati jika dibandingkan dengan ternak besar, selain itu pangan yang mengandung protein lebih tinggi ada pada ungags (Ferry Budhi Susetyo, 2020). Badan Pusat Statistik (BPS) mencatat, konsumsi daging ayam ras atau kampung oleh penduduk Indonesia dalam seminggu hanya sebesar 0,14 kilogram pada 2021."
+  },
+  {
+    "spans": [
+      {
+        "offset": 1608,
+        "length": 511
+      }
+    ],
+    "content": "Ayam merupakan komoditas peternakan yang sangat disukai oleh masyarakat, dimana jika dibandingkan dengan ternak lain, namun ternak ini mempunyai produktivitas masih rendah sebagai akibat dari pemeliharaan yang masih sederhana dan belum memperhatikan tata laksana atau manajemen pemeliharaan yang baik, pemberian pakan yang belum seimbang baik kualitas maupun kuantitasnya. Penetasan telur dapat dilakukan dengan dua cara yaitu penetasan alami dan penetasan buatan (Sugita, Firmansah, Sobirin, & Ardianto, 2019)."
+  },
+  {
+    "spans": [
+      {
+        "offset": 2120,
+        "length": 486
+      }
+    ],
+    "content": "Pengeraman telur secara alami sepenuhnya dilakukan oleh induk ayam itu sendiri, sedangkan penetasan buatan dilakukan dengan menggunakan alat yang disebut mesin tetas atau inkubator. Penetasan alami kurang efektif dalam menetaskan telur karena satu induk hanya bisa mengerami sekitar 10 butir telur, sedangkan penetasan buatan mampu menetaskan jumlah telur dalam jumlah ratusan bahkan ribuan butir, tergantung kapasitas tampung mesin tetas (Sugita, Firmansah, Sobirin, & Ardianto, 2019)."
+  },
+  {
+    "spans": [
+      {
+        "offset": 2607,
+        "length": 574
+      }
+    ],
+    "content": "Mesin penetas telur dengan menggunakan pemanas dari bola lampu telah banyak digunakan baik oleh industri sekala kecil maupun besar, juga oleh masyarkat umumnya, keberhasilan penetasan telur ayam sangat dipengaruhi oleh temperatur dan kelembaban, dimana temperatur yang baik untuk penetasan telur ayam berkisar antaran 36oC sampai dengan 40oC, dengan kelembaban relatif antara 50% sampai dengan 60%. Temperatur yang terlalu tinggi akan menyebabkan kematian embrio ataupun abnormalitas embrio, sedangkan kelembapan mempengaruhi pertumbuhan normal dari embrio (Zulhajji, 2020)."
+  },
+  {
+    "spans": [
+      {
+        "offset": 3182,
+        "length": 469
+      }
+    ],
+    "content": "Selain temperatur dan kelembapan, pemadaman listrik juga termasuk dampak gagalnya dalam keberhasilan penetasan telur, yang dimana untuk mengoperasikan mesin penetas telur memelurkan suplai dari energi listrik agar dapat menghangatkan suhu pada telur. Apabila terjadi pemadaman listrik maka mesin penetas telur tidak dapat beroperasi sehingga suhu dalam ruangan akan turun dan pertumbuhan embrio pada telur akan menjadi terhambat dan mati. (Ilham Farisi Almadani, 2021)."
+  },
+  {
+    "spans": [
+      {
+        "offset": 3652,
+        "length": 644
+      }
+    ],
+    "content": "Upaya untuk memenuhi kebutuhan listrik yang kontinu dan guna menekan penggunaan energi listrik berbasis fosil yang cadangan bahan bakar energinya semakin berkurang sehingga dapat menimbulkan masalah pada kehidupan manusia di masa depan, memacu dikembangkannya pembangkit listrik alternatif dengan sumber energi baru terbarukan. Pembangkit Listrik Tenaga Surya (PLTS) merupakan salah satu pembangkit listrik yang memanfaatkan energi baru terbarukan yaitu matahari. Alasannya ialah sumber energi matahari yang melimpah dan dalam prosesnya tidak menghasilkan emisi gas buang dan limbah cair atau padat yang berbahaya (Ilham Farisi Almadani, 2021)."
+  },
+  {
+    "spans": [
+      {
+        "offset": 4297,
+        "length": 20
+      }
+    ],
+    "content": "Identifikasi Masalah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 4318,
+        "length": 454
+      }
+    ],
+    "content": "Berdasarkan uraian latar belakang diatas, maka kami mengidentifikasi dan merumuskan masalah yang ada adalah merancang dan membuat mesin inkubator penetas telur ayam otomatis dengan menggunakan teknologi hybrid yang merupakan penggabungan antara PLTS dengan listrik PLN. Yang dimana PLTS sebagai energi utama dan PLN sebagai energi cadangan merupakan solusi guna meningkatkan keandalan dalam menjamin ketersediaan atau kontinuitas suplai listrik ke beban."
+  },
+  {
+    "spans": [
+      {
+        "offset": 4773,
+        "length": 7
+      }
+    ],
+    "content": "Manfaat"
+  },
+  {
+    "spans": [
+      {
+        "offset": 4781,
+        "length": 225
+      }
+    ],
+    "content": "Perancangan dan pembuatan alat ini diharapkan dapat berfungsi sebagai alat penetas telur otomatis terprogram yang bertenaga hybrid, sehingga dapat mempermudah para peternak dalam menetaskan telur ayam dalam jumlah yang besar."
+  },
+  {
+    "spans": [
+      {
+        "offset": 5007,
+        "length": 176
+      }
+    ],
+    "content": "Memudahkan bagi pengguna untuk pemantauan temperatur dan kelembapan di dalam ruangan mesin penetas telur agar terus tetap terjaga pada nilai suhu dan nilai kelembapan tertentu."
+  },
+  {
+    "spans": [
+      {
+        "offset": 5184,
+        "length": 159
+      }
+    ],
+    "content": "Dengan berteknologi hybrid ini diharapkan mesin penetas telur terus dapat terus beroperasi walaupun sedang terjadi seperti pemadangan listrik secara tiba-tiba."
+  },
+  {
+    "spans": [
+      {
+        "offset": 5344,
+        "length": 6
+      }
+    ],
+    "content": "Luaran"
+  },
+  {
+    "spans": [
+      {
+        "offset": 5351,
+        "length": 57
+      }
+    ],
+    "content": "Luaran yang diharapkan dari pembuatan proposal ini yaitu:"
+  },
+  {
+    "spans": [
+      {
+        "offset": 5409,
+        "length": 35
+      }
+    ],
+    "content": "Laporan kemajuan dan laporan akhir."
+  },
+  {
+    "spans": [
+      {
+        "offset": 5445,
+        "length": 39
+      }
+    ],
+    "content": "Membuat paten/hak kekayaan intelektual."
+  },
+  {
+    "spans": [
+      {
+        "offset": 5485,
+        "length": 104
+      }
+    ],
+    "content": "Produk mesin inkubator penetas telur otomatis bertenaga hybrid penggabungan antara PLTS dan listrik PLN."
+  },
+  {
+    "spans": [
+      {
+        "offset": 5590,
+        "length": 23
+      }
+    ],
+    "content": "BAB 2. TINJAUAN PUSTAKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 5614,
+        "length": 19
+      }
+    ],
+    "content": "Mesin Penetas Telur"
+  },
+  {
+    "spans": [
+      {
+        "offset": 5634,
+        "length": 362
+      }
+    ],
+    "content": "Mesin penetas telur pada awalnya merupakan alat sederhana yang hanya menggunakan lampu untuk menghasilkan panasnya tanpa alat-alat pendukung lainnya yang hanya digunakan oleh para peternak tradisional dengan kapasitas yang kecil, namun seiring dengan perkembangan teknologi mesin ini dikembangkan untuk meningkatkan kemampuan dan kemudahan dalam penetasan telur."
+  },
+  {
+    "spans": [
+      {
+        "offset": 5997,
+        "length": 31
+      }
+    ],
+    "content": "Syarat - Syarat Penetasan Telur"
+  },
+  {
+    "spans": [
+      {
+        "offset": 6029,
+        "length": 28
+      }
+    ],
+    "content": "Suhu dan perkembangan embrio"
+  },
+  {
+    "spans": [
+      {
+        "offset": 6058,
+        "length": 555
+      }
+    ],
+    "content": "Embrio dalam telur unggas akan cepat berkembang selama suhu telur berada pada kondisi yang sesuai dan akan berhenti berkembang jika suhunya kurang dari yang dibutuhkan. Suhu yang dibutuhkan untuk penetasan telur setiap unggas berbeda-beda. Suhu untuk perkembangan embrio dalam telur ayam antara 38,33o - 40,55o C (101o - 105o F), itik 37,78o - 39,45o C (100o - 103o F), puyuh 39,5o C (102o F), dan wallet 32,22o - 31o C (90o - 96o F). Untuk itu, sebelum telur tetas dimasukan ke dalam bok penetasan suhu ruang tersebut harus sesuai dengan yang dibutuhkan."
+  },
+  {
+    "spans": [
+      {
+        "offset": 6614,
+        "length": 10
+      }
+    ],
+    "content": "Kelembaban"
+  },
+  {
+    "spans": [
+      {
+        "offset": 6625,
+        "length": 539
+      }
+    ],
+    "content": "Selama penetasan berlangsung, diperlukan kelembaban udara yang sesuai dengan perkembangan dan pertumbuhan embrio, seperti suhu dan kelembaban yang umum untuk penetasan telur setiap jenis unggas juga berbeda-beda. Bahkan, kelembapan pada awal penetasan berbeda dengan hari-hari selanjutnya. Kelembapan untuk telur pada saat awal penetasan sekitar 52%-55% dan menjelang menetas sekitar 60%-70%, Itik pada minggu pertama 70% dan minggu selanjutnya 60%-65%, puyuh minggu pertama 55%-70% selanjutnya 65% dan walet 65%-70% pada setiap minggunya."
+  },
+  {
+    "spans": [
+      {
+        "offset": 7165,
+        "length": 9
+      }
+    ],
+    "content": "Ventilasi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 7175,
+        "length": 356
+      }
+    ],
+    "content": "Dalam perkembangan normal, embrio membutuhkan oksigen (O2) dan mengeluarkan karbondioksida (CO2) melalui pori-pori kerabang telur. Untuk itu, dalam pembuatan alat penetas telur/mesin tetas harus diperhatikan cukup tidaknya oksigen yang ada dalam bok/ruangan, karena jika tidak ada oksigen yang cukup dalam bok/ruangan dikhawatirkan embrio gagal berkembang."
+  },
+  {
+    "spans": [
+      {
+        "offset": 7532,
+        "length": 21
+      }
+    ],
+    "content": "Waktu Penetasan Telur"
+  },
+  {
+    "spans": [
+      {
+        "offset": 7554,
+        "length": 106
+      }
+    ],
+    "content": "Penetasan telur ayam biasanya diperlukan waktu sekitar 20 - 23 hari untuk menetas dengan sempurna (sehat)."
+  },
+  {
+    "spans": [
+      {
+        "offset": 7661,
+        "length": 39
+      }
+    ],
+    "content": "Komponen – Komponen Mesin Penetas Telur"
+  },
+  {
+    "spans": [
+      {
+        "offset": 7701,
+        "length": 18
+      }
+    ],
+    "content": "Thermostat digital"
+  },
+  {
+    "spans": [
+      {
+        "offset": 7720,
+        "length": 362
+      }
+    ],
+    "content": "Thermostat adalah alat yang berfungsi untuk mengatur temperature dalam mesin penetassecara otomatis. Apabila alat ini terkena panas maka kapsul akan mengembang sehingga akan menekan sakelar (mikroswitch) dan aliran listrik akan terputus, sebaliknya apabila temperatur turun maka kapsul akan mengempis dan akan menyalakan kembali lampu pijar sebagai sumber panas."
+  },
+  {
+    "spans": [
+      {
+        "offset": 8083,
+        "length": 25
+      }
+    ],
+    "content": "Thermo-hygrometer digital"
+  },
+  {
+    "spans": [
+      {
+        "offset": 8109,
+        "length": 242
+      }
+    ],
+    "content": "Thermo hygrometer adalah alat yang mempunyai dua indikator pengukuran yaitu thermometer dan hygrometer. Thermometer berfungsi untuk mengukur suhu pada suatu ruangan, sedangkan hygrometer berfungsi untuk mengukur kelembaban pada suatu ruangan."
+  },
+  {
+    "spans": [
+      {
+        "offset": 8352,
+        "length": 11
+      }
+    ],
+    "content": "Lampu pijar"
+  },
+  {
+    "spans": [
+      {
+        "offset": 8364,
+        "length": 371
+      }
+    ],
+    "content": "Lampu pijar adalah sumber cahaya buatan yang dihasilkan dengan penyaluran arus listrik melalui filamen yang kemudian memanas dan menghasilkan cahaya. Lampu pijar digunakan karena pancaran cahaya lampu pijar lebih merata dari pada menggunakan heater/pemanas, serta bila dihitung secara ekonomis lampu pijar lebih mudah di dapat dan murah harganya dari pada heater/pemanas."
+  },
+  {
+    "spans": [
+      {
+        "offset": 8736,
+        "length": 9
+      }
+    ],
+    "content": "Rak telur"
+  },
+  {
+    "spans": [
+      {
+        "offset": 8746,
+        "length": 106
+      }
+    ],
+    "content": "Rak Telur berfungsi sebagai tempat telur yang akan ditetaskan, rak telur diisi sesuai dengan kapasitasnya."
+  },
+  {
+    "spans": [
+      {
+        "offset": 8853,
+        "length": 17
+      }
+    ],
+    "content": "Motor pemutar rak"
+  },
+  {
+    "spans": [
+      {
+        "offset": 8871,
+        "length": 411
+      }
+    ],
+    "content": "Motor pemutar rak telur, mempunyai tujuan untuk memberikan panas secara merata pada permukaan telur, Selain itu untuk mencegah agar embrio tidak menempel pada salah satu sisi kerabang telur. Pemutaran telur dilakukan dengan mengubah posisi telur dari kiri ke kanan atau sebaliknya, untuk telur dengan posisi mendatar yang bawah diputar menjadi diatas, apabila telur diberdirikan bagian yang tumpul harus diatas."
+  },
+  {
+    "spans": [
+      {
+        "offset": 9283,
+        "length": 5
+      }
+    ],
+    "content": "Timer"
+  },
+  {
+    "spans": [
+      {
+        "offset": 9289,
+        "length": 133
+      }
+    ],
+    "content": "Timer ini dimaksudkan untuk mengatur waktu pada motor pemutar rak agar dapat memberikan panas secara merata terhadap permukaan telur."
+  },
+  {
+    "spans": [
+      {
+        "offset": 9423,
+        "length": 31
+      }
+    ],
+    "content": "Pembangkit Listrik Tenaga Surya"
+  },
+  {
+    "spans": [
+      {
+        "offset": 9455,
+        "length": 543
+      }
+    ],
+    "content": "Pembangkit listrik tenaga surya (PLTS) adalah suatu pembangkit yang mengkonversikan energi foton dari surya maenjadi energi listrik. Konversi energi ini terjadi pada panel surya yang terdiri dari sel-sel surya. PLTS memanfaatkan cahaya matahari untuk menghasilkan listrik DC (Direct Current), yang dapat di ubah menjadi listrik AC (Alternating Current) apabila diperlukan. PLTS pada dasarnya adalah pencatu daya yang dapat dirancang untuk mencatu kebutuhan listrik mulai dari skala kecil maupun skala besar, baik secara mandiri maupun hibrida."
+  },
+  {
+    "spans": [
+      {
+        "offset": 9999,
+        "length": 40
+      }
+    ],
+    "content": "Komponen Pembangkit Listrik Tenaga Surya"
+  },
+  {
+    "spans": [
+      {
+        "offset": 10040,
+        "length": 11
+      }
+    ],
+    "content": "Modul Surya"
+  },
+  {
+    "spans": [
+      {
+        "offset": 10052,
+        "length": 156
+      }
+    ],
+    "content": "Modul surya ialah komponen utama dalam sistem Photovoltaic (PV) yang mengubah sinar matahari menjadi energi listrik, listrik yang dihasilkan berupa arus DC."
+  },
+  {
+    "spans": [
+      {
+        "offset": 10209,
+        "length": 30
+      }
+    ],
+    "content": "Battery Charge Regulator (BCR)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 10240,
+        "length": 238
+      }
+    ],
+    "content": "Controller pada sistem PLTS berfungsi sebagai pengatur arus listrik, baik terhadap arus input maupun arus yang digunakan. BCR digunakan untuk mengatur aliran listrik dari modul surya ke-baterai atau aki dan dari baterai atau aki ke-beban."
+  },
+  {
+    "spans": [
+      {
+        "offset": 10479,
+        "length": 7
+      }
+    ],
+    "content": "Baterai"
+  },
+  {
+    "spans": [
+      {
+        "offset": 10487,
+        "length": 244
+      }
+    ],
+    "content": "Baterai ialah peralatan yang sangat penting bagi suatu sistem pembangkit listrik tenaga surya. Baterai dapat menyimpan energi listrik yang diterima pada siang hari dan dapat digunakan pada malam hari untuk melayani beban atau peralatan listrik."
+  },
+  {
+    "spans": [
+      {
+        "offset": 10732,
+        "length": 8
+      }
+    ],
+    "content": "Inverter"
+  },
+  {
+    "spans": [
+      {
+        "offset": 10741,
+        "length": 248
+      }
+    ],
+    "content": "Inverter adalah converter tegangan arus searah (DC) ke tegangan bolak balik (AC). Fungsi dari sebuah inverter adalah untuk mengubah tegangan masukan DC menjadi tegangan keluaran AC yang simetris dengan besar magnitude dan frekuensi yang diinginkan."
+  },
+  {
+    "spans": [
+      {
+        "offset": 10990,
+        "length": 24
+      }
+    ],
+    "content": "BAB 3. TAHAP PELAKSANAAN"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11015,
+        "length": 45
+      }
+    ],
+    "content": "Desain Mesin Inkubator Penetas Telur Otomatis"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11061,
+        "length": 212
+      }
+    ],
+    "content": "Desain bentuk rumahan mesin inkubator penetas telur otomatis ini dibuat dengan menggunakan aplikasi SolidWorks 2013, Desain bentuk rumahan mesin inkubator penetas telur otomatis ini dapat dilihat pada gambar 3.1."
+  },
+  {
+    "spans": [
+      {
+        "offset": 11274,
+        "length": 37
+      }
+    ],
+    "content": "Gambar 3. 1 3D Assembly Mesin Penetas"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11312,
+        "length": 17
+      }
+    ],
+    "content": "Diagram AlirMulai"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11330,
+        "length": 15
+      }
+    ],
+    "content": "Studi Literatur"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11346,
+        "length": 24
+      }
+    ],
+    "content": "Analisa dan Identifikasi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11371,
+        "length": 21
+      }
+    ],
+    "content": "Kebutuhan Perancangan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11393,
+        "length": 31
+      }
+    ],
+    "content": "Perancangan dan pembuatan mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11425,
+        "length": 15
+      }
+    ],
+    "content": "Pengujian mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11441,
+        "length": 19
+      }
+    ],
+    "content": "Periksa kesesuaian?"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11461,
+        "length": 1
+      }
+    ],
+    "content": "T"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11463,
+        "length": 1
+      }
+    ],
+    "content": "Y"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11465,
+        "length": 16
+      }
+    ],
+    "content": "Pengumpulan data"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11482,
+        "length": 15
+      }
+    ],
+    "content": "Pengolahan data"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11498,
+        "length": 7
+      }
+    ],
+    "content": "Laporan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11506,
+        "length": 7
+      }
+    ],
+    "content": "Selesai"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11514,
+        "length": 14
+      }
+    ],
+    "content": "Alat Dan Bahan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11529,
+        "length": 4
+      }
+    ],
+    "content": "Alat"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11534,
+        "length": 161
+      }
+    ],
+    "content": "Alat-alat yang digunakan dalam pembuatan ini adalah Mesin bor tangan, Gergaji, Pengaris, Meteran, Cutter, Obeng, Palu, Amplas, Gunting, Tang, Stapler, dan Pensil"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11696,
+        "length": 5
+      }
+    ],
+    "content": "Bahan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 11702,
+        "length": 417
+      }
+    ],
+    "content": "Adapun bahan-bahan yang akan digunakan dalam pembuatan adalah kayu kecil (reng), multiplek, kaca, paku, engsel pintu, kabel listik, fiting lampu, lem kayu secukupnya, saklar on/off, klem kabel (penjepit kabel), isolasi secukupnya, batang lem bakar, nampan air, lampu pijar, kipas, thermometer, thermostat digital,thermo-hygrometer digital, motor pemutar rak, timer, modul surya, controller, inverter, dan baterai/aki."
+  },
+  {
+    "spans": [
+      {
+        "offset": 12120,
+        "length": 13
+      }
+    ],
+    "content": "Langkah Kerja"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12134,
+        "length": 39
+      }
+    ],
+    "content": "Pembuatan mesin inkubator penetas telur"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12174,
+        "length": 251
+      }
+    ],
+    "content": "Mesin tetas memiliki ukuran yaitu panjang 65 cm, lebar 63 cm, tinggi 112 cm, sistem otomotis pada pengaturan suhu, dan rak telur yang dapat bergerak. Tenaga listrik DC yang diperlukan, dihitung untuk menyesuaikan dengan panel solar yang akan dipasang."
+  },
+  {
+    "spans": [
+      {
+        "offset": 12426,
+        "length": 31
+      }
+    ],
+    "content": "Pembuatan rangkaian panel surya"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12458,
+        "length": 83
+      }
+    ],
+    "content": "Rangkaian tenaga surya dipasang sesuai kebutuhan daya pada operasional mesin tetas."
+  },
+  {
+    "spans": [
+      {
+        "offset": 12542,
+        "length": 32
+      }
+    ],
+    "content": "BAB 4. BIAYA DAN JADWAL KEGIATAN"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12575,
+        "length": 14
+      }
+    ],
+    "content": "Anggaran Biaya"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12590,
+        "length": 60
+      }
+    ],
+    "content": "Anggaran biaya dari program PKM-Karsa Cipta sebagai berikut:"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12651,
+        "length": 46
+      }
+    ],
+    "content": "Tabel 4. 1 Rekapitulasi Rencana Anggaran Biaya"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12698,
+        "length": 3
+      }
+    ],
+    "content": "No."
+  },
+  {
+    "spans": [
+      {
+        "offset": 12702,
+        "length": 17
+      }
+    ],
+    "content": "Jenis Pengeluaran"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12720,
+        "length": 11
+      }
+    ],
+    "content": "Sumber Dana"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12732,
+        "length": 12
+      }
+    ],
+    "content": "Besaran dana"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12745,
+        "length": 2
+      }
+    ],
+    "content": "1."
+  },
+  {
+    "spans": [
+      {
+        "offset": 12748,
+        "length": 17
+      }
+    ],
+    "content": "Bahan habis pakai"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12766,
+        "length": 7
+      }
+    ],
+    "content": "Belmawa"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12774,
+        "length": 16
+      }
+    ],
+    "content": "Perguruan tinggi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12791,
+        "length": 24
+      }
+    ],
+    "content": "Instansi lain (jika ada)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12816,
+        "length": 1
+      }
+    ],
+    "content": "-"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12818,
+        "length": 2
+      }
+    ],
+    "content": "2."
+  },
+  {
+    "spans": [
+      {
+        "offset": 12821,
+        "length": 13
+      }
+    ],
+    "content": "Sewa dan jasa"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12835,
+        "length": 7
+      }
+    ],
+    "content": "Belmawa"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12843,
+        "length": 16
+      }
+    ],
+    "content": "Perguruan tinggi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12860,
+        "length": 24
+      }
+    ],
+    "content": "Instansi lain (jika ada)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12885,
+        "length": 1
+      }
+    ],
+    "content": "-"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12887,
+        "length": 2
+      }
+    ],
+    "content": "3."
+  },
+  {
+    "spans": [
+      {
+        "offset": 12890,
+        "length": 16
+      }
+    ],
+    "content": "Perjalanan lokal"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12907,
+        "length": 7
+      }
+    ],
+    "content": "Belmawa"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12915,
+        "length": 16
+      }
+    ],
+    "content": "Perguruan tinggi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12932,
+        "length": 24
+      }
+    ],
+    "content": "Instansi lain (jika ada)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12957,
+        "length": 1
+      }
+    ],
+    "content": "-"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12959,
+        "length": 2
+      }
+    ],
+    "content": "4."
+  },
+  {
+    "spans": [
+      {
+        "offset": 12962,
+        "length": 9
+      }
+    ],
+    "content": "Lain-lain"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12972,
+        "length": 7
+      }
+    ],
+    "content": "Belmawa"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12980,
+        "length": 16
+      }
+    ],
+    "content": "Perguruan tinggi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 12997,
+        "length": 24
+      }
+    ],
+    "content": "Instansi lain (jika ada)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13022,
+        "length": 1
+      }
+    ],
+    "content": "-"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13024,
+        "length": 6
+      }
+    ],
+    "content": "Jumlah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13031,
+        "length": 17
+      }
+    ],
+    "content": "Rekap sumber dana"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13049,
+        "length": 7
+      }
+    ],
+    "content": "Belmawa"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13057,
+        "length": 16
+      }
+    ],
+    "content": "Perguruan tinggi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13074,
+        "length": 24
+      }
+    ],
+    "content": "Instansi lain (jika ada)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13099,
+        "length": 1
+      }
+    ],
+    "content": "-"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13101,
+        "length": 6
+      }
+    ],
+    "content": "Jumlah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13108,
+        "length": 15
+      }
+    ],
+    "content": "Jadwal Kegiatan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13124,
+        "length": 85
+      }
+    ],
+    "content": "Jadwal pelaksanaan program PKM-Karsa Cipta dapat dilihat pada Tabel 4.2 di bawah ini:"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13210,
+        "length": 45
+      }
+    ],
+    "content": "Tabel 4. 2 Jadwal Kegiatan PKM-Karya Inovatif"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13256,
+        "length": 2
+      }
+    ],
+    "content": "No"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13259,
+        "length": 14
+      }
+    ],
+    "content": "Jenis Kegiatan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13274,
+        "length": 5
+      }
+    ],
+    "content": "Bulan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13280,
+        "length": 15
+      }
+    ],
+    "content": "Penanggungjawab"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13296,
+        "length": 1
+      }
+    ],
+    "content": "1"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13298,
+        "length": 1
+      }
+    ],
+    "content": "2"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13300,
+        "length": 1
+      }
+    ],
+    "content": "3"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13302,
+        "length": 1
+      }
+    ],
+    "content": "4"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13304,
+        "length": 1
+      }
+    ],
+    "content": "1"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13306,
+        "length": 6
+      }
+    ],
+    "content": "Survei"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13313,
+        "length": 16
+      }
+    ],
+    "content": "Handi Cahya Iman"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13330,
+        "length": 1
+      }
+    ],
+    "content": "2"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13332,
+        "length": 8
+      }
+    ],
+    "content": "Analisis"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13341,
+        "length": 25
+      }
+    ],
+    "content": "Muhammad Hafiid Nurichsan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13367,
+        "length": 16
+      }
+    ],
+    "content": "Handi Cahya Iman"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13384,
+        "length": 1
+      }
+    ],
+    "content": "3"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13386,
+        "length": 6
+      }
+    ],
+    "content": "Desain"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13393,
+        "length": 39
+      }
+    ],
+    "content": "Muhammad Hafiid Nurichsan Gilang Doresa"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13433,
+        "length": 1
+      }
+    ],
+    "content": "4"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13435,
+        "length": 26
+      }
+    ],
+    "content": "Perancangan pembuatan meja"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13462,
+        "length": 25
+      }
+    ],
+    "content": "Muhammad Hafiid Nurichsan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13488,
+        "length": 13
+      }
+    ],
+    "content": "Gilang Doresa"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13502,
+        "length": 16
+      }
+    ],
+    "content": "Handi Cahya Iman"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13519,
+        "length": 11
+      }
+    ],
+    "content": "Ari Pratama"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13531,
+        "length": 1
+      }
+    ],
+    "content": "5"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13533,
+        "length": 22
+      }
+    ],
+    "content": "Pengujian keberhasilan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13556,
+        "length": 11
+      }
+    ],
+    "content": "Ari Pratama"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13568,
+        "length": 1
+      }
+    ],
+    "content": "6"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13570,
+        "length": 10
+      }
+    ],
+    "content": "Kesimpulan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13581,
+        "length": 25
+      }
+    ],
+    "content": "Muhammad Hafiid Nurichsan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13607,
+        "length": 11
+      }
+    ],
+    "content": "Ari Pratama"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13619,
+        "length": 14
+      }
+    ],
+    "content": "DAFTAR PUSTAKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 13634,
+        "length": 164
+      }
+    ],
+    "content": "Azis, M. N. (2021). Analisa Laju Aliran Kalor Pada Inkubator Penetas Telur Ayam Otomatis Menggunakan Thermostats Digital. skripsi. Universitas Islam Riau Pekanbaru."
+  },
+  {
+    "spans": [
+      {
+        "offset": 13799,
+        "length": 245
+      }
+    ],
+    "content": "Haryudo, S. I., Kartini, U. T., Joko, & Almadani, I. F. (2021). Rancang Bangun Sistem Automatic Transfer Switch Antara Listrik PLN Dan PLTS Skala Kecil Untuk Alat Penetas Telur Berbasis Internet Of Things. Jurnal Teknik Elektro, 10(03), 565-575."
+  },
+  {
+    "spans": [
+      {
+        "offset": 14045,
+        "length": 181
+      }
+    ],
+    "content": "Jaelani, A., Widaningsih, N., & Firman, M. (2017, April 2). Mesin Tetas Tenaga Surya Pada Peternakan Itik Alabio Di Kecamatan Gambut Kabupaten Banjar. Jurnal Al-Ikhlas, 2(2), 68-75."
+  },
+  {
+    "spans": [
+      {
+        "offset": 14227,
+        "length": 127
+      }
+    ],
+    "content": "Mawazir, A. (2019). Rancang Bangun Inkubator Penetas Telur Bekapasitas Kecil. skripsi. Universitas Muhammadiyah Sumatera Utara."
+  },
+  {
+    "spans": [
+      {
+        "offset": 14355,
+        "length": 134
+      }
+    ],
+    "content": "Ramadhana, R. R., M, M. I., Hafid, A., & Adriani. (2022, Februari). Analisis PLTS On GRID. Jurnal Tekni Elektro UNISMUH, 14(1), 12-25."
+  },
+  {
+    "spans": [
+      {
+        "offset": 14490,
+        "length": 175
+      }
+    ],
+    "content": "Sugita, I. W., Firmansah, F., Sobirin, R., & Ardianto, M. R. (2019, April). Rancang Bangun Mesin Penetas Telur Tenaga Hybrid. Jurnal Konversi Energi dan Manufaktur UNJ, 30-36."
+  },
+  {
+    "spans": [
+      {
+        "offset": 14666,
+        "length": 210
+      }
+    ],
+    "content": "Susetyo, F. B., Sugita, I. W., Basori, Rifqi, M. N., Wardiana, R., & Prasetyo, J. (2020, November). Rancang Bangun Rak Penetas Telur Otomatis Pada Mesin Tetas Bertenaga Hybrid. Jurnal Ilmiah GIGA, 23(2), 69-75."
+  },
+  {
+    "spans": [
+      {
+        "offset": 14877,
+        "length": 168
+      }
+    ],
+    "content": "Zulhajji. (2020, Desember). Analisis Perbandingan Temperatur Dalam Dan Luar Serta Kelembaban Relatif Pada Mesin Penetas Telur Tenaga Listrik. Media Elektrik, 18, 69-75."
+  },
+  {
+    "spans": [
+      {
+        "offset": 15046,
+        "length": 226
+      }
+    ],
+    "content": "Bayu, D. 2022. Penduduk RI Konsumsi Daging Ayam 0,14 Kg per Minggu pada 2021. URL: https://dataindonesia.id/Sektor%20Riil/detail/penduduk-ri-konsumsi-daging-ayam-014-kg-per-minggu-pada-2021 diakses pada tanggal 29 Januari 2023"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15273,
+        "length": 31
+      }
+    ],
+    "content": "Identitas Diri Dosen Pendamping"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15305,
+        "length": 1
+      }
+    ],
+    "content": "1"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15307,
+        "length": 27
+      }
+    ],
+    "content": "Nama Lengkap (dengan gelar)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15335,
+        "length": 25
+      }
+    ],
+    "content": "Muhammad Firman, S.T, M.T"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15361,
+        "length": 1
+      }
+    ],
+    "content": "2"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15363,
+        "length": 13
+      }
+    ],
+    "content": "Jenis Kelamin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15377,
+        "length": 9
+      }
+    ],
+    "content": "Laki-laki"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15387,
+        "length": 1
+      }
+    ],
+    "content": "3"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15389,
+        "length": 13
+      }
+    ],
+    "content": "Program Studi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15403,
+        "length": 12
+      }
+    ],
+    "content": "Teknik Mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15416,
+        "length": 1
+      }
+    ],
+    "content": "4"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15418,
+        "length": 8
+      }
+    ],
+    "content": "NIP/NIDN"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15427,
+        "length": 32
+      }
+    ],
+    "content": "19720226 2005 011 003/0026027201"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15460,
+        "length": 1
+      }
+    ],
+    "content": "5"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15462,
+        "length": 24
+      }
+    ],
+    "content": "Tempat dan Tanggal Lahir"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15487,
+        "length": 29
+      }
+    ],
+    "content": "Banjarmasin, 26 Februari 1972"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15517,
+        "length": 1
+      }
+    ],
+    "content": "6"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15519,
+        "length": 13
+      }
+    ],
+    "content": "Alamat E-mail"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15533,
+        "length": 24
+      }
+    ],
+    "content": "firmanuniska99@gmail.com"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15558,
+        "length": 1
+      }
+    ],
+    "content": "7"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15560,
+        "length": 16
+      }
+    ],
+    "content": "Nomor Telepon/HP"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15577,
+        "length": 12
+      }
+    ],
+    "content": "081349354898"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15590,
+        "length": 18
+      }
+    ],
+    "content": "Riwayat Pendidikan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15609,
+        "length": 3
+      }
+    ],
+    "content": "No."
+  },
+  {
+    "spans": [
+      {
+        "offset": 15613,
+        "length": 14
+      }
+    ],
+    "content": "Gelar akademik"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15628,
+        "length": 11
+      }
+    ],
+    "content": "Bidang Ilmu"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15640,
+        "length": 9
+      }
+    ],
+    "content": "Institusi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15650,
+        "length": 11
+      }
+    ],
+    "content": "Tahun Lulus"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15662,
+        "length": 1
+      }
+    ],
+    "content": "1"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15664,
+        "length": 11
+      }
+    ],
+    "content": "Sarjana(S1)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15676,
+        "length": 12
+      }
+    ],
+    "content": "Teknik Mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15689,
+        "length": 31
+      }
+    ],
+    "content": "Universitas Muhammadiyah Malang"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15721,
+        "length": 4
+      }
+    ],
+    "content": "1996"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15726,
+        "length": 1
+      }
+    ],
+    "content": "2"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15728,
+        "length": 12
+      }
+    ],
+    "content": "Magister(S2)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15741,
+        "length": 12
+      }
+    ],
+    "content": "Teknik Mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15754,
+        "length": 29
+      }
+    ],
+    "content": "Universitas Pancasila Jakarta"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15784,
+        "length": 4
+      }
+    ],
+    "content": "2012"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15789,
+        "length": 1
+      }
+    ],
+    "content": "3"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15791,
+        "length": 10
+      }
+    ],
+    "content": "Doktor(S3)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15802,
+        "length": 1
+      }
+    ],
+    "content": "-"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15804,
+        "length": 1
+      }
+    ],
+    "content": "-"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15806,
+        "length": 1
+      }
+    ],
+    "content": "-"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15808,
+        "length": 25
+      }
+    ],
+    "content": "Rekam Jejak Tri Dharma PT"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15834,
+        "length": 21
+      }
+    ],
+    "content": "Pendidikan/Pengajaran"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15856,
+        "length": 3
+      }
+    ],
+    "content": "No."
+  },
+  {
+    "spans": [
+      {
+        "offset": 15860,
+        "length": 16
+      }
+    ],
+    "content": "Nama Mata Kuliah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15877,
+        "length": 13
+      }
+    ],
+    "content": "Wajib/Pilihan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15891,
+        "length": 3
+      }
+    ],
+    "content": "SKS"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15895,
+        "length": 2
+      }
+    ],
+    "content": "1."
+  },
+  {
+    "spans": [
+      {
+        "offset": 15898,
+        "length": 15
+      }
+    ],
+    "content": "Mekanika Teknik"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15914,
+        "length": 5
+      }
+    ],
+    "content": "Wajib"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15920,
+        "length": 1
+      }
+    ],
+    "content": "2"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15922,
+        "length": 2
+      }
+    ],
+    "content": "2."
+  },
+  {
+    "spans": [
+      {
+        "offset": 15925,
+        "length": 17
+      }
+    ],
+    "content": "Perpindahan Panas"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15943,
+        "length": 5
+      }
+    ],
+    "content": "Wajib"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15949,
+        "length": 1
+      }
+    ],
+    "content": "2"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15951,
+        "length": 10
+      }
+    ],
+    "content": "Penelitian"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15962,
+        "length": 3
+      }
+    ],
+    "content": "No."
+  },
+  {
+    "spans": [
+      {
+        "offset": 15966,
+        "length": 16
+      }
+    ],
+    "content": "Judul Penelitian"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15983,
+        "length": 15
+      }
+    ],
+    "content": "Penyandang Dana"
+  },
+  {
+    "spans": [
+      {
+        "offset": 15999,
+        "length": 5
+      }
+    ],
+    "content": "Tahun"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16005,
+        "length": 2
+      }
+    ],
+    "content": "1."
+  },
+  {
+    "spans": [
+      {
+        "offset": 16008,
+        "length": 103
+      }
+    ],
+    "content": "Optimasi Sudut Kemiringan Solar Cell Untuk Mesin Penetas Telur Itik Alabio Dengan Daya 100 Watt (Ketua)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16112,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16119,
+        "length": 4
+      }
+    ],
+    "content": "2015"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16124,
+        "length": 2
+      }
+    ],
+    "content": "2."
+  },
+  {
+    "spans": [
+      {
+        "offset": 16127,
+        "length": 63
+      }
+    ],
+    "content": "Pengembangan Turbin Angin Horisontal Kapasitas 1000 W (Anggota)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16191,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16198,
+        "length": 4
+      }
+    ],
+    "content": "2015"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16203,
+        "length": 2
+      }
+    ],
+    "content": "3."
+  },
+  {
+    "spans": [
+      {
+        "offset": 16206,
+        "length": 130
+      }
+    ],
+    "content": "Perencanaan Sistem Hybrid Pembangkit Listrik Tenaga Surya Dengan Genset Pada LaboratoriumLapangan UNISKA Bentok Bati- Bati (Ketua)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16337,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16344,
+        "length": 4
+      }
+    ],
+    "content": "2016"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16349,
+        "length": 2
+      }
+    ],
+    "content": "4."
+  },
+  {
+    "spans": [
+      {
+        "offset": 16352,
+        "length": 72
+      }
+    ],
+    "content": "Optimasi Sudu Turbin Angin Vertikal Empat Sudu Kapasitas 125 W (Anggota)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16425,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16432,
+        "length": 4
+      }
+    ],
+    "content": "2016"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16437,
+        "length": 2
+      }
+    ],
+    "content": "5."
+  },
+  {
+    "spans": [
+      {
+        "offset": 16440,
+        "length": 76
+      }
+    ],
+    "content": "Analisis Penghematan Air Untuk Wudhu Pada Mesjid Di Kota Banjarmasin (Ketua)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16517,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16524,
+        "length": 4
+      }
+    ],
+    "content": "2017"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16529,
+        "length": 2
+      }
+    ],
+    "content": "6."
+  },
+  {
+    "spans": [
+      {
+        "offset": 16532,
+        "length": 83
+      }
+    ],
+    "content": "Pengaruh Penambahan Sudu Tipe V Pada Sudu Naca 4412 Turbin Angin Vertikal (Anggota)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16616,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16623,
+        "length": 4
+      }
+    ],
+    "content": "2017"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16628,
+        "length": 2
+      }
+    ],
+    "content": "7."
+  },
+  {
+    "spans": [
+      {
+        "offset": 16631,
+        "length": 77
+      }
+    ],
+    "content": "Perancangan Perahu Pembersih Sampah Di Aliran Sungai Kota Banjarmasin (Ketua)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16709,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16716,
+        "length": 4
+      }
+    ],
+    "content": "2019"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16721,
+        "length": 2
+      }
+    ],
+    "content": "8."
+  },
+  {
+    "spans": [
+      {
+        "offset": 16724,
+        "length": 94
+      }
+    ],
+    "content": "Perancangan Sistem Hybrid Pembangkit Listrik Tenaga Surya Dengan Turbin Angin Terapung (Ketua)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16819,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16826,
+        "length": 4
+      }
+    ],
+    "content": "2020"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16831,
+        "length": 2
+      }
+    ],
+    "content": "9."
+  },
+  {
+    "spans": [
+      {
+        "offset": 16834,
+        "length": 93
+      }
+    ],
+    "content": "Pengaruh Variasi Suhu Destilasi Oli Bekas Terhadap Kuantitas Dan Kualitas Destilatnya (Ketua)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16928,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16935,
+        "length": 4
+      }
+    ],
+    "content": "2021"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16940,
+        "length": 28
+      }
+    ],
+    "content": "Pengabdian Kepada Masyarakat"
+  },
+  {
+    "spans": [
+      {
+        "offset": 16969,
+        "length": 3
+      }
+    ],
+    "content": "No."
+  },
+  {
+    "spans": [
+      {
+        "offset": 16973,
+        "length": 34
+      }
+    ],
+    "content": "Judul Pengabdian Kepada Masyarakat"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17008,
+        "length": 15
+      }
+    ],
+    "content": "Penyandang Dana"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17024,
+        "length": 5
+      }
+    ],
+    "content": "Tahun"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17030,
+        "length": 2
+      }
+    ],
+    "content": "1."
+  },
+  {
+    "spans": [
+      {
+        "offset": 17033,
+        "length": 166
+      }
+    ],
+    "content": "Pelatihan Komputer Dengan Program Microsoft Office, Excell, Power Point Sebagai Penunjang Media Pembelajaran Bagi Siswa/i Dan Guru MTS Al Furqon Banjarmasin (Anggota)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17200,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17207,
+        "length": 4
+      }
+    ],
+    "content": "2015"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17212,
+        "length": 2
+      }
+    ],
+    "content": "2."
+  },
+  {
+    "spans": [
+      {
+        "offset": 17215,
+        "length": 120
+      }
+    ],
+    "content": "Pelatihan Perakitan Dan Perawatan Pembangkit Listrik Tenaga Surya (PLTS) Di DesaJejangkit Muara Kabupaten Batola (Ketua)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17336,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17343,
+        "length": 4
+      }
+    ],
+    "content": "2016"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17348,
+        "length": 2
+      }
+    ],
+    "content": "3."
+  },
+  {
+    "spans": [
+      {
+        "offset": 17351,
+        "length": 89
+      }
+    ],
+    "content": "IBm Kelompok Pembibitan Ternak Itik Alabio Di Kecamatan Gambut Kabupaten Banjar (Anggota)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17441,
+        "length": 5
+      }
+    ],
+    "content": "DIKTI"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17447,
+        "length": 4
+      }
+    ],
+    "content": "2016"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17452,
+        "length": 2
+      }
+    ],
+    "content": "4."
+  },
+  {
+    "spans": [
+      {
+        "offset": 17455,
+        "length": 69
+      }
+    ],
+    "content": "Desain Ulang Instalasi Perpipaan Pada Mesjid Noor Banjarmasin (Ketua)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17525,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17532,
+        "length": 4
+      }
+    ],
+    "content": "2017"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17537,
+        "length": 2
+      }
+    ],
+    "content": "5."
+  },
+  {
+    "spans": [
+      {
+        "offset": 17540,
+        "length": 94
+      }
+    ],
+    "content": "Pelatihan Perakitan Gabungan Sistem Pembangkit Listrik Tenaga Angin Dan Tenaga Surya (Anggota)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17635,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17642,
+        "length": 4
+      }
+    ],
+    "content": "2017"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17647,
+        "length": 2
+      }
+    ],
+    "content": "6."
+  },
+  {
+    "spans": [
+      {
+        "offset": 17650,
+        "length": 84
+      }
+    ],
+    "content": "Pengolahan Air Di Desa Karang Buah Kecamatan Belawang Kabupaten Barito Kuala (Ketua)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17735,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17742,
+        "length": 4
+      }
+    ],
+    "content": "2018"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17747,
+        "length": 2
+      }
+    ],
+    "content": "7."
+  },
+  {
+    "spans": [
+      {
+        "offset": 17750,
+        "length": 105
+      }
+    ],
+    "content": "Pelatihan Modernisasi Menggambar Mesin Dengan Solidwork Di SMK Syuhada Teknologi Kota Banjarmasin (Ketua)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17856,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17863,
+        "length": 4
+      }
+    ],
+    "content": "2019"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17868,
+        "length": 2
+      }
+    ],
+    "content": "8."
+  },
+  {
+    "spans": [
+      {
+        "offset": 17871,
+        "length": 123
+      }
+    ],
+    "content": "Peningkatan Keterampilan Pengelasan Bagi Masyrakat Di Desa Muara Halayung Kecamatan Beruntung Baru Kabupaten Banjar (Ketua)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 17995,
+        "length": 6
+      }
+    ],
+    "content": "UNISKA"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18002,
+        "length": 4
+      }
+    ],
+    "content": "2020"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18007,
+        "length": 41
+      }
+    ],
+    "content": "Lampiran 2. Justifikasi Anggaran Kegiatan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18049,
+        "length": 3
+      }
+    ],
+    "content": "No."
+  },
+  {
+    "spans": [
+      {
+        "offset": 18053,
+        "length": 17
+      }
+    ],
+    "content": "Jenis pengeluaran"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18071,
+        "length": 6
+      }
+    ],
+    "content": "Volume"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18078,
+        "length": 17
+      }
+    ],
+    "content": "Harga Satuan (Rp)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18096,
+        "length": 10
+      }
+    ],
+    "content": "Total (Rp)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18107,
+        "length": 1
+      }
+    ],
+    "content": "1"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18109,
+        "length": 25
+      }
+    ],
+    "content": "Belanja Bahan (maks. 60%)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18135,
+        "length": 14
+      }
+    ],
+    "content": "Kertas A4 70gr"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18150,
+        "length": 5
+      }
+    ],
+    "content": "1 rim"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18156,
+        "length": 9
+      }
+    ],
+    "content": "Rp 40.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18166,
+        "length": 9
+      }
+    ],
+    "content": "Rp 40.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18176,
+        "length": 3
+      }
+    ],
+    "content": "ATK"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18180,
+        "length": 5
+      }
+    ],
+    "content": "1 set"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18186,
+        "length": 10
+      }
+    ],
+    "content": "Rp 300.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18197,
+        "length": 10
+      }
+    ],
+    "content": "Rp 300.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18208,
+        "length": 27
+      }
+    ],
+    "content": "Kayu reng 2 x 3 panjang 4 m"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18236,
+        "length": 6
+      }
+    ],
+    "content": "4 buah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18243,
+        "length": 9
+      }
+    ],
+    "content": "Rp 40.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18253,
+        "length": 10
+      }
+    ],
+    "content": "Rp 160.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18264,
+        "length": 27
+      }
+    ],
+    "content": "Kayu reng 3 x 4 panajng 4 m"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18292,
+        "length": 6
+      }
+    ],
+    "content": "4 buah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18299,
+        "length": 9
+      }
+    ],
+    "content": "Rp 50.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18309,
+        "length": 10
+      }
+    ],
+    "content": "Rp 200.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18320,
+        "length": 26
+      }
+    ],
+    "content": "Triplek meranti tebal 4 mm"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18347,
+        "length": 8
+      }
+    ],
+    "content": "3 lembar"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18356,
+        "length": 10
+      }
+    ],
+    "content": "Rp 150.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18367,
+        "length": 10
+      }
+    ],
+    "content": "Rp 450.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18378,
+        "length": 27
+      }
+    ],
+    "content": "Triplek meranti tebal 18 mm"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18406,
+        "length": 8
+      }
+    ],
+    "content": "2 lembar"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18415,
+        "length": 10
+      }
+    ],
+    "content": "Rp 250.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18426,
+        "length": 10
+      }
+    ],
+    "content": "Rp 500.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18437,
+        "length": 22
+      }
+    ],
+    "content": "Sekrup kayu SIP ½” x 6"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18460,
+        "length": 5
+      }
+    ],
+    "content": "1 set"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18466,
+        "length": 9
+      }
+    ],
+    "content": "Rp 25.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18476,
+        "length": 9
+      }
+    ],
+    "content": "Rp 25.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18486,
+        "length": 16
+      }
+    ],
+    "content": "Paku kayu 2,5 cm"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18503,
+        "length": 5
+      }
+    ],
+    "content": "1 set"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18509,
+        "length": 9
+      }
+    ],
+    "content": "Rp 20.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18519,
+        "length": 9
+      }
+    ],
+    "content": "Rp 20.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18529,
+        "length": 14
+      }
+    ],
+    "content": "Paku kayu 4 cm"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18544,
+        "length": 5
+      }
+    ],
+    "content": "1 set"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18550,
+        "length": 9
+      }
+    ],
+    "content": "Rp 30.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18560,
+        "length": 9
+      }
+    ],
+    "content": "Rp.30.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18570,
+        "length": 19
+      }
+    ],
+    "content": "Lem aica aibon 70 G"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18590,
+        "length": 6
+      }
+    ],
+    "content": "3 buah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18597,
+        "length": 9
+      }
+    ],
+    "content": "Rp 20.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18607,
+        "length": 9
+      }
+    ],
+    "content": "Rp 60.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18617,
+        "length": 15
+      }
+    ],
+    "content": "Stand holder HP"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18633,
+        "length": 6
+      }
+    ],
+    "content": "2 buah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18640,
+        "length": 10
+      }
+    ],
+    "content": "Rp 125.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18651,
+        "length": 10
+      }
+    ],
+    "content": "Rp 250.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18662,
+        "length": 18
+      }
+    ],
+    "content": "Cooling pad laptop"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18681,
+        "length": 6
+      }
+    ],
+    "content": "1 buah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18688,
+        "length": 10
+      }
+    ],
+    "content": "RP 500.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18699,
+        "length": 10
+      }
+    ],
+    "content": "Rp 500.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18710,
+        "length": 13
+      }
+    ],
+    "content": "Lampu belajar"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18724,
+        "length": 6
+      }
+    ],
+    "content": "1 buah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18731,
+        "length": 10
+      }
+    ],
+    "content": "Rp 200.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18742,
+        "length": 10
+      }
+    ],
+    "content": "Rp 200.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18753,
+        "length": 3
+      }
+    ],
+    "content": "Cat"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18757,
+        "length": 6
+      }
+    ],
+    "content": "3 buah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18764,
+        "length": 9
+      }
+    ],
+    "content": "Rp 30.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18774,
+        "length": 9
+      }
+    ],
+    "content": "Rp 90.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18784,
+        "length": 4
+      }
+    ],
+    "content": "Kuas"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18789,
+        "length": 6
+      }
+    ],
+    "content": "2 buah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18796,
+        "length": 9
+      }
+    ],
+    "content": "Rp 20.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18806,
+        "length": 9
+      }
+    ],
+    "content": "Rp 40.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18816,
+        "length": 16
+      }
+    ],
+    "content": "Amplas roll kayu"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18833,
+        "length": 5
+      }
+    ],
+    "content": "1 set"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18839,
+        "length": 9
+      }
+    ],
+    "content": "Rp 10.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18849,
+        "length": 9
+      }
+    ],
+    "content": "Rp 10.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18859,
+        "length": 17
+      }
+    ],
+    "content": "Mata gerinda kayu"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18877,
+        "length": 6
+      }
+    ],
+    "content": "2 buah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18884,
+        "length": 9
+      }
+    ],
+    "content": "Rp 50.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18894,
+        "length": 10
+      }
+    ],
+    "content": "Rp 100.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18905,
+        "length": 24
+      }
+    ],
+    "content": "Mata gerinda amplas kayu"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18930,
+        "length": 6
+      }
+    ],
+    "content": "1 buah"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18937,
+        "length": 10
+      }
+    ],
+    "content": "Rp 125.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18948,
+        "length": 10
+      }
+    ],
+    "content": "Rp 125.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18959,
+        "length": 9
+      }
+    ],
+    "content": "SUB TOTAL"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18969,
+        "length": 12
+      }
+    ],
+    "content": "Rp 3.100.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18982,
+        "length": 1
+      }
+    ],
+    "content": "2"
+  },
+  {
+    "spans": [
+      {
+        "offset": 18984,
+        "length": 24
+      }
+    ],
+    "content": "Belanja Sewa (maks. 15%)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19009,
+        "length": 101
+      }
+    ],
+    "content": "Sewa alat-alat (seperti gerinda tangan, bor tangan, gergaji, meteran, dan alat yang hanya dibutuhkan)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19111,
+        "length": 6
+      }
+    ],
+    "content": "8 kali"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19118,
+        "length": 9
+      }
+    ],
+    "content": "Rp 50.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19128,
+        "length": 10
+      }
+    ],
+    "content": "Rp 400.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19139,
+        "length": 25
+      }
+    ],
+    "content": "Biaya sewa jasa pembuatan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19165,
+        "length": 7
+      }
+    ],
+    "content": "1 orang"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19173,
+        "length": 10
+      }
+    ],
+    "content": "Rp 650.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19184,
+        "length": 10
+      }
+    ],
+    "content": "Rp 650.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19195,
+        "length": 9
+      }
+    ],
+    "content": "SUB TOTAL"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19205,
+        "length": 12
+      }
+    ],
+    "content": "Rp 1.050.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19218,
+        "length": 1
+      }
+    ],
+    "content": "3"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19220,
+        "length": 28
+      }
+    ],
+    "content": "Perjalanan Lokal (maks. 30%)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19249,
+        "length": 17
+      }
+    ],
+    "content": "Perjalanan survei"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19267,
+        "length": 6
+      }
+    ],
+    "content": "4 kali"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19274,
+        "length": 9
+      }
+    ],
+    "content": "Rp 60.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19284,
+        "length": 10
+      }
+    ],
+    "content": "Rp 240.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19295,
+        "length": 68
+      }
+    ],
+    "content": "perjalanan untuk pembimbingan atau berkonsultasi ke dosen pendamping"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19364,
+        "length": 6
+      }
+    ],
+    "content": "8 kali"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19371,
+        "length": 9
+      }
+    ],
+    "content": "Rp 20.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19381,
+        "length": 10
+      }
+    ],
+    "content": "Rp 160.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19392,
+        "length": 35
+      }
+    ],
+    "content": "Perjalanan pembelian alat dan bahan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19428,
+        "length": 6
+      }
+    ],
+    "content": "4 kali"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19435,
+        "length": 9
+      }
+    ],
+    "content": "Rp 80.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19445,
+        "length": 10
+      }
+    ],
+    "content": "Rp 320.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19456,
+        "length": 26
+      }
+    ],
+    "content": "Perjalanan untuk perakitan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19483,
+        "length": 6
+      }
+    ],
+    "content": "8 kali"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19490,
+        "length": 10
+      }
+    ],
+    "content": "Rp 100.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19501,
+        "length": 10
+      }
+    ],
+    "content": "Rp 800.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19512,
+        "length": 29
+      }
+    ],
+    "content": "Perjalanan untuk administrasi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19542,
+        "length": 6
+      }
+    ],
+    "content": "4 kali"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19549,
+        "length": 9
+      }
+    ],
+    "content": "Rp 50.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19559,
+        "length": 10
+      }
+    ],
+    "content": "Rp 200.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19570,
+        "length": 18
+      }
+    ],
+    "content": "perjalanan ujicoba"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19589,
+        "length": 6
+      }
+    ],
+    "content": "1 kali"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19596,
+        "length": 9
+      }
+    ],
+    "content": "Rp 80.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19606,
+        "length": 9
+      }
+    ],
+    "content": "Rp 80.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19616,
+        "length": 9
+      }
+    ],
+    "content": "SUB TOTAL"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19626,
+        "length": 12
+      }
+    ],
+    "content": "Rp 1.800.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19639,
+        "length": 1
+      }
+    ],
+    "content": "4"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19641,
+        "length": 21
+      }
+    ],
+    "content": "Lain-lain (maks. 15%)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19663,
+        "length": 43
+      }
+    ],
+    "content": "Protokol Kesehatan (masker, sanitizer, dll)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19707,
+        "length": 5
+      }
+    ],
+    "content": "1 set"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19713,
+        "length": 10
+      }
+    ],
+    "content": "Rp 250.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19724,
+        "length": 10
+      }
+    ],
+    "content": "Rp 250.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19735,
+        "length": 21
+      }
+    ],
+    "content": "Biaya akses publikasi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19757,
+        "length": 6
+      }
+    ],
+    "content": "1 kali"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19764,
+        "length": 10
+      }
+    ],
+    "content": "Rp 800.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19775,
+        "length": 10
+      }
+    ],
+    "content": "Rp 800.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19786,
+        "length": 9
+      }
+    ],
+    "content": "SUB TOTAL"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19796,
+        "length": 12
+      }
+    ],
+    "content": "Rp 1.050.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19809,
+        "length": 11
+      }
+    ],
+    "content": "GRAND TOTAL"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19821,
+        "length": 12
+      }
+    ],
+    "content": "Rp 7.000.000"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19834,
+        "length": 31
+      }
+    ],
+    "content": "GRAND TOTAL (Tujuh Juta Rupiah)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19866,
+        "length": 63
+      }
+    ],
+    "content": "Lampiran 3. Susunan Organisasi Tim Kegiatan dan Pembagian Tugas"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19930,
+        "length": 2
+      }
+    ],
+    "content": "No"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19933,
+        "length": 8
+      }
+    ],
+    "content": "Nama/NPM"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19942,
+        "length": 13
+      }
+    ],
+    "content": "Program Studi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19956,
+        "length": 11
+      }
+    ],
+    "content": "Bidang Ilmu"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19968,
+        "length": 7
+      }
+    ],
+    "content": "Alokasi"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19976,
+        "length": 5
+      }
+    ],
+    "content": "Waktu"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19982,
+        "length": 13
+      }
+    ],
+    "content": "(jam/ minggu)"
+  },
+  {
+    "spans": [
+      {
+        "offset": 19996,
+        "length": 12
+      }
+    ],
+    "content": "Uraian Tugas"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20009,
+        "length": 1
+      }
+    ],
+    "content": "1"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20011,
+        "length": 35
+      }
+    ],
+    "content": "Muhammad Hafiid Nurichsan/ 19620179"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20047,
+        "length": 12
+      }
+    ],
+    "content": "Teknik Mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20060,
+        "length": 12
+      }
+    ],
+    "content": "Teknik Mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20073,
+        "length": 2
+      }
+    ],
+    "content": "20"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20076,
+        "length": 112
+      }
+    ],
+    "content": "Bertugas sebagai ketua yang dapat mengkoordinir setiap anggota, memberi arahan kerja, dan mengerjakan rangkaian."
+  },
+  {
+    "spans": [
+      {
+        "offset": 20189,
+        "length": 1
+      }
+    ],
+    "content": "2"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20191,
+        "length": 14
+      }
+    ],
+    "content": "Gilang Doresa/"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20206,
+        "length": 8
+      }
+    ],
+    "content": "19620214"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20215,
+        "length": 12
+      }
+    ],
+    "content": "Teknik Mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20228,
+        "length": 12
+      }
+    ],
+    "content": "Teknik Mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20241,
+        "length": 2
+      }
+    ],
+    "content": "20"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20244,
+        "length": 90
+      }
+    ],
+    "content": "Bertugas untuk membuat sebuah desain, membuat pembagian jadwal, dan mengerjakan rangkaian."
+  },
+  {
+    "spans": [
+      {
+        "offset": 20335,
+        "length": 1
+      }
+    ],
+    "content": "3"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20337,
+        "length": 26
+      }
+    ],
+    "content": "Handi Cahya Iman/ 19620042"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20364,
+        "length": 12
+      }
+    ],
+    "content": "Teknik Mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20377,
+        "length": 12
+      }
+    ],
+    "content": "Teknik Mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20390,
+        "length": 2
+      }
+    ],
+    "content": "20"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20393,
+        "length": 109
+      }
+    ],
+    "content": "Bertugas dalam mensurvei, menganalisis dan membeli bahan yang akan digunakan. Dan juga mengerjakan rangkaian."
+  },
+  {
+    "spans": [
+      {
+        "offset": 20503,
+        "length": 1
+      }
+    ],
+    "content": "4"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20505,
+        "length": 21
+      }
+    ],
+    "content": "Ari Pratama/ 19620220"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20527,
+        "length": 12
+      }
+    ],
+    "content": "Teknik Mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20540,
+        "length": 12
+      }
+    ],
+    "content": "Teknik Mesin"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20553,
+        "length": 2
+      }
+    ],
+    "content": "20"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20556,
+        "length": 96
+      }
+    ],
+    "content": "Bertugas dalam menganalisa hasil dari rangkaian, membuat dokumentasi, dan mengerjakan rangkaian."
+  },
+  {
+    "spans": [
+      {
+        "offset": 20653,
+        "length": 45
+      }
+    ],
+    "content": "Lampiran 4. Surat Pernyataan Ketua Pelaksanan"
+  },
+  {
+    "spans": [
+      {
+        "offset": 20699,
+        "length": 2
+      }
+    ],
+    "content": "ii"
+  }
+]

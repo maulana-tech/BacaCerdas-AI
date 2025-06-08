@@ -3,7 +3,6 @@
 import { Download, Search, PlusCircle, Users, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 
-
 import { HeroSection } from "./hero-section";
 import { AppCard } from "../cards/app-card"; 
 import { Button } from "@/components/ui/button";
@@ -15,10 +14,17 @@ import { FileRow } from "../cards/file-row";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@radix-ui/react-progress";
 import { StudentProjectCard } from "../cards/student-project-card";
+import { StoryFileRow } from "../cards/story-file-row";
+import { useStories } from "../../hooks/use-stories";
+import { Skeleton } from "@/components/ui/skeleton";
+import { RecentStoryCard } from "../../generate/siswa/component/recent-story-card";
 
 export function AppsSection() {
   const { data: session, status } = useSession(); 
   const userRole = status === "loading" ? null : session?.user.role; 
+  
+  // Menggunakan React Query untuk mengambil data cerita
+  const { data: stories, isLoading: isStoriesLoading, refetch: refetchStories } = useStories();
 
   const getVisibleApps = (appList: App[]): App[] => {
     if (status === "loading" || !userRole) return []; // Tunggu role jelas
@@ -39,6 +45,24 @@ export function AppsSection() {
   if (status === "loading") {
       return <div className="text-center py-12"><p>Memuat aplikasi...</p></div>;
   }
+
+  const deleteStory = async (id: string) => {
+    try {
+      const response = await fetch(`/api/stories/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete story');
+      }
+
+      // Refresh stories after deletion
+      refetchStories();
+    } catch (error) {
+      console.error('Error deleting story:', error);
+      throw error;
+    }
+  };
 
   return (
     <div className="space-y-8">
@@ -90,10 +114,39 @@ export function AppsSection() {
             <Button variant="ghost" className="rounded-2xl text-primary">Lihat Semua</Button>
           </div>
           <div className="rounded-3xl border">
-            <div className="grid grid-cols-1 divide-y">
-              {recentFiles.slice(0, 4).map((file) => ( <FileRow key={file.name} file={file} /> ))}
-            </div>
-            {recentFiles.length === 0 && <p className="p-4 text-muted-foreground">Tidak ada file terbaru.</p>}
+            {isStoriesLoading ? (
+              // Tampilkan skeleton loading saat data sedang dimuat
+              <div className="p-4 space-y-4">
+                {[...Array(4)].map((_, index) => (
+                  <div key={index} className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Skeleton className="h-10 w-10 rounded-2xl" />
+                      <div className="space-y-2">
+                        <Skeleton className="h-4 w-40" />
+                        <Skeleton className="h-3 w-24" />
+                      </div>
+                    </div>
+                    <Skeleton className="h-8 w-16 rounded-xl" />
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="divide-y">
+                {stories?.data.map((story) => (
+                  <RecentStoryCard 
+                    key={story.attributes.id} 
+                    story={story}
+                    showDetails={true}
+                    onDelete={deleteStory}
+                  />
+                ))}
+                {stories?.data.length === 0 && (
+                  <p className="p-4 text-center text-muted-foreground">
+                    No stories found
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </section>
 

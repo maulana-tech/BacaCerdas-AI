@@ -1,13 +1,19 @@
-// app/layout/default-layout.tsx
-import { SettingsProvider } from "@/app/dashboard/settings/contexts/settings-context";
-import { TooltipProvider } from "@radix-ui/react-tooltip"; // Atau "@/components/ui/tooltip"
+'use client';
 
-export default function HomeLayout({ children }: DefaultPageProps) {
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { useState } from 'react';
+import { SettingsProvider } from '../dashboard/settings/contexts/settings-context';
+
+export default function HomeLayout({ children }: { children: React.ReactNode }) {
+  const [queryClient] = useState(() => new QueryClient());
+
   return (
     <SettingsProvider>
-      <TooltipProvider delayDuration={0}>
-        {children}
-      </TooltipProvider>
+    <QueryClientProvider client={queryClient}>
+      {children}
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
     </SettingsProvider>
   );
 }

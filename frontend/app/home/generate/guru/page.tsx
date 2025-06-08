@@ -2,19 +2,21 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button"; //
-import { Input } from "@/components/ui/input"; //
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"; //
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"; //
-import TipTapEditor from "@/components/tiptap-editor"; //
-import StoryAIAssistant from "@/components/story-ai-assistant"; //
-import { generateStoryPDF } from "@/lib/pdf-utils"; //
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import TipTapEditor from "@/components/tiptap-editor";
+import StoryAIAssistant from "@/components/story-ai-assistant";
+import { generateStoryPDF, generateStoryPDFFromEditor } from "@/lib/pdf-utils"; 
 import { Save, Download, Home, Eye, Sparkles, Edit } from "lucide-react";
 import Link from "next/link";
-import { HomeAppLayout } from "@/app/home/components/home-app-layout"; // Import the new layout
+import { HomeAppLayout } from "@/app/home/components/home-app-layout"; 
 import useTiptapEditor from "@/hooks/use-tiptap-editor";
 
-export default function StoryPageGuru() { // Consider a more specific name if "StoryPage" is generic
+import TurndownService from "turndown";
+
+export default function StoryPageGuru() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [saving, setSaving] = useState(false);
@@ -23,7 +25,10 @@ export default function StoryPageGuru() { // Consider a more specific name if "S
   const [activeTab, setActiveTab] = useState("ai-assistant");
   const searchParams = useSearchParams();
   const router = useRouter();
-
+  
+  // Hapus konfigurasi TurndownService
+  // const turndownService = new TurndownService({...});
+  
   const editor = useTiptapEditor({
     options: {
       content,
@@ -52,8 +57,17 @@ export default function StoryPageGuru() { // Consider a more specific name if "S
     if (aiTitle && !title.trim()) {
       setTitle(aiTitle);
     }
-    setContent(aiContent);
+
+    const cleanedContent = aiContent.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+      .replace(/style=\"[^\"]*\"/gi, '');
+
+    // Simpan langsung HTML ke content (bukan markdown)
+    setContent(cleanedContent);
     setActiveTab("editor");
+
+    if (editor) {
+      editor.commands.setContent(cleanedContent, false);
+    }
   };
 
   const handleSave = async () => {
@@ -64,23 +78,37 @@ export default function StoryPageGuru() { // Consider a more specific name if "S
     setSaving(true);
     try {
       console.log("Simulating story save (Supabase logic removed)...");
-      // Actual save logic would go here
       await new Promise(resolve => setTimeout(resolve, 1000));
       // alert("Story saved successfully! (Simulation)");
     } catch (error) {
       console.error("Error during simulated save:", error);
-      // alert("Failed to save story (database operations disabled).");
     } finally {
       setSaving(false);
     }
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (!title.trim()) {
       alert("Story title cannot be empty.");
       return;
     }
-    generateStoryPDF(title, content); //
+
+    try {
+      // Set loading state
+      setLoading(true);
+
+      const htmlContent = editor ? editor.getHTML() : content;
+      if (!htmlContent) {
+        throw new Error("Konten cerita kosong");
+      }
+
+      await generateStoryPDF(title, htmlContent);
+    } catch (error) {
+      console.error("Error in handleDownload:", error);
+      alert(error instanceof Error ? error.message : "Gagal memproses konten. Silakan coba lagi.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   if (loading) {
@@ -220,3 +248,18 @@ export default function StoryPageGuru() { // Consider a more specific name if "S
     </HomeAppLayout>
   );
 }
+
+// Di bagian atas file, setelah deklarasi turndownService
+const turndownService = new TurndownService({
+  headingStyle: 'atx',      // Gunakan # untuk heading
+  codeBlockStyle: 'fenced', // Gunakan ``` untuk blok kode
+  emDelimiter: '_'          // Gunakan _ untuk italic
+});
+
+// Hapus tag body dan atribut CSS yang tidak diinginkan
+turndownService.addRule('removeBodyTag', {
+  filter: ['body'],
+  replacement: function(content) {
+    return content;
+  }
+});

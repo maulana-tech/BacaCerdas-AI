@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useSearchParams, useRouter } from "next/navigation"
+import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -10,19 +10,17 @@ import { generateQuizPDF } from "@/lib/pdf-utils" //
 import type { QuizQuestion } from "@/lib/types" //
 import { Save, Download, Home, Plus, Trash2, Eye } from "lucide-react"
 import Link from "next/link"
-import FileUpload from "@/components/ui/file-upload" //
 import { Textarea } from "@/components/ui/textarea" //
 import { HomeAppLayout } from "@/app/home/components/home-app-layout" 
+import UploadFileGenerateByAI from "./component/upload-file-generate-quizz-by-ai"
 
 export default function QuizPageGuru() {
   const [title, setTitle] = useState("")
   const [questions, setQuestions] = useState<QuizQuestion[]>([])
-  const [generating, setGenerating] = useState(false)
   const [saving, setSaving] = useState(false)
   const [quizId, setQuizId] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState("upload")
   const searchParams = useSearchParams()
-  const router = useRouter()
 
   useEffect(() => {
     const id = searchParams.get("id")
@@ -36,42 +34,6 @@ export default function QuizPageGuru() {
     console.log(
       `loadQuiz called for ID: ${id}, but database fetching is disabled.`
     )
-  }
-
-  const handleFileUpload = async (file: File) => {
-    setGenerating(true)
-    try {
-      const formData = new FormData()
-      formData.append("file", file)
-
-      const parseResponse = await fetch("/api/parse-document", {
-        method: "POST",
-        body: formData,
-      })
-
-      if (!parseResponse.ok) throw new Error("Failed to parse document")
-
-      const { content, filename } = await parseResponse.json()
-
-      const quizResponse = await fetch("/api/generate-quiz", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content, title: filename }),
-      })
-
-      if (!quizResponse.ok) throw new Error("Failed to generate quiz")
-
-      const { questions: generatedQuestions } = await quizResponse.json()
-
-      setQuestions(generatedQuestions)
-      setTitle(`Quiz from ${filename}`)
-      setActiveTab("edit")
-    } catch (error) {
-      console.error("Error generating quiz:", error)
-      alert("Failed to generate quiz from document.")
-    } finally {
-      setGenerating(false)
-    }
   }
 
   const addQuestion = () => {
@@ -157,19 +119,7 @@ export default function QuizPageGuru() {
                 </TabsList>
 
                 <TabsContent value="upload" className="space-y-4 mt-4">
-                  <div>
-                    <h3 className="text-lg font-medium mb-2">Upload Document for AI</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                      Upload PDF or Word files to generate quizzes automatically.
-                    </p>
-                    <FileUpload onFileSelect={handleFileUpload} /> {/* */}
-                    {generating && (
-                      <div className="mt-4 text-center">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Generating quiz with AI...</p>
-                      </div>
-                    )}
-                  </div>
+                  <UploadFileGenerateByAI />
                 </TabsContent>
 
                 <TabsContent value="edit" className="space-y-4 mt-4">
