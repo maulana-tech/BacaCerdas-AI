@@ -17,13 +17,14 @@ import { StudentProjectCard } from "../cards/student-project-card";
 import { StoryFileRow } from "../cards/story-file-row";
 import { useStories } from "../../hooks/use-stories";
 import { Skeleton } from "@/components/ui/skeleton";
+import { RecentStoryCard } from "../../generate/siswa/component/recent-story-card";
 
 export function AppsSection() {
   const { data: session, status } = useSession(); 
   const userRole = status === "loading" ? null : session?.user.role; 
   
   // Menggunakan React Query untuk mengambil data cerita
-  const { data: stories, isLoading: isStoriesLoading } = useStories();
+  const { data: stories, isLoading: isStoriesLoading, refetch: refetchStories } = useStories();
 
   const getVisibleApps = (appList: App[]): App[] => {
     if (status === "loading" || !userRole) return []; // Tunggu role jelas
@@ -44,6 +45,24 @@ export function AppsSection() {
   if (status === "loading") {
       return <div className="text-center py-12"><p>Memuat aplikasi...</p></div>;
   }
+
+  const deleteStory = async (id: string) => {
+    try {
+      const response = await fetch(`/api/stories/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete story');
+      }
+
+      // Refresh stories after deletion
+      refetchStories();
+    } catch (error) {
+      console.error('Error deleting story:', error);
+      throw error;
+    }
+  };
 
   return (
     <div className="space-y-8">
@@ -112,8 +131,21 @@ export function AppsSection() {
                 ))}
               </div>
             ) : (
-              // Tampilkan data cerita jika sudah tersedia
-              <StoryFileRow stories={stories?.data || []} />
+              <div className="divide-y">
+                {stories?.data.map((story) => (
+                  <RecentStoryCard 
+                    key={story.attributes.id} 
+                    story={story}
+                    showDetails={true}
+                    onDelete={deleteStory}
+                  />
+                ))}
+                {stories?.data.length === 0 && (
+                  <p className="p-4 text-center text-muted-foreground">
+                    No stories found
+                  </p>
+                )}
+              </div>
             )}
           </div>
         </section>
