@@ -45,4 +45,25 @@ export default class StoryRepository extends Repository {
       },
     });
   }
+
+  async update(id: string, data: Prisma.StoryUpdateArgs["data"]) {
+    return await this.model.update({
+      where: { id },
+      data,
+      include: {
+        User: {
+          omit: {
+            password: true,
+          },
+        },
+        Tag: true,
+      },
+    });
+  }
+
+  async delete(id: string) {
+    return await this.model.delete({
+      where: { id },
+    });
+  }
 }

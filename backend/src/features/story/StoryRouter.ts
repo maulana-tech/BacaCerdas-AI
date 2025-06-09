@@ -21,6 +21,21 @@ export default class StoryRouter implements APIRouter {
         ],
         expressAsyncHandler(new StoryController().store),
       )
-      .get("/stories/:id", expressAsyncHandler(new StoryController().show));
+      .get("/stories/:id", expressAsyncHandler(new StoryController().show))
+      .put(
+        "/stories/:id",
+        [
+          isUserAllowed([Role.ROOT, Role.TEACHER]),
+          validator.validateBody(StorySchema.store()),
+        ],
+        expressAsyncHandler(new StoryController().update),
+      )
+      .delete(
+        "/stories/:id",
+        [
+          isUserAllowed([Role.ROOT, Role.TEACHER]),
+        ],
+        expressAsyncHandler(new StoryController().destroy),
+      );
   }
 }

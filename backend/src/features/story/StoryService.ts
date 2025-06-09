@@ -49,4 +49,42 @@ export default class StoryService {
       .setRelationships(["User", "Tag"])
       .build("stories");
   }
+
+  async updateStory(id: string, body: StoryStoreSchema) {
+    const existingStory = await this.storyRepository.findById(id);
+    
+    if (!existingStory) {
+      throw new NotFoundException(`Story with id ${id} not found`);
+    }
+
+    const { data, relationships } = body;
+    const updatedStory = await this.storyRepository.update(id, {
+      ...data,
+      User: {
+        connect: {
+          id: relationships.user.data.id,
+        },
+      },
+      Tag: {
+        connect: {
+          id: relationships.tag.data.id,
+        },
+      },
+    });
+
+    return new ResponseBuilder(updatedStory)
+      .setExcludedFields(["userId", "tagId"])
+      .setRelationships(["User", "Tag"])
+      .build("stories");
+  }
+
+  async deleteStory(id: string) {
+    const existingStory = await this.storyRepository.findById(id);
+    
+    if (!existingStory) {
+      throw new NotFoundException(`Story with id ${id} not found`);
+    }
+
+    await this.storyRepository.delete(id);
+  }
 }
