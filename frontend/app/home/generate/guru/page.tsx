@@ -17,6 +17,11 @@ import { useSession } from "next-auth/react";
 import ApiClient from "@/lib/api";
 
 import TurndownService from "turndown";
+import { useSession } from "next-auth/react";
+import { saveStoryAction } from "./action";
+import { toast } from "sonner";
+import { StoryTagApiResponse } from "../siswa/action";
+import ApiClient from "@/lib/api";
 
 export default function StoryPageGuru() {
   const [title, setTitle] = useState("");
@@ -26,6 +31,7 @@ export default function StoryPageGuru() {
   const [storyId, setStoryId] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState("ai-assistant");
   const searchParams = useSearchParams();
+  const { data: session } = useSession();
   const router = useRouter();
   const { data: session } = useSession();
   
@@ -92,9 +98,14 @@ export default function StoryPageGuru() {
 
   const handleSave = async () => {
     if (!title.trim()) {
-      alert("Story title cannot be empty.");
+      toast.error("Judul cerita tidak boleh kosong");
       return;
     }
+
+
+    if (!session?.user?.id) {
+        toast.error("Anda harus login untuk bisa menyimpan.");
+        return;
 
     if (!content.trim()) {
       alert("Story content cannot be empty.");
@@ -104,10 +115,42 @@ export default function StoryPageGuru() {
     if (!session?.user) {
       alert("You must be logged in to save a story.");
       return;
+
     }
 
     setSaving(true);
     try {
+
+      // Get available tags from story-tags endpoint instead of tags
+      const apiClient = new ApiClient();
+      const tagsResponse = await apiClient.instance.get('/story-tags');
+      
+      // Find the "Umum" tag as default, or use the first available tag
+      const defaultTag = tagsResponse.data.data.find((tag: StoryTagApiResponse) => 
+        tag.attributes.tag.toLowerCase() === "umum"
+      ) || tagsResponse.data.data[0];
+
+      if (!defaultTag) {
+        throw new Error("No story tags available");
+      }
+
+      const storyData = {
+        title: title.trim(),
+        content: content,
+        tags: [defaultTag.id],
+      };
+
+      const savedStory = await saveStoryAction(storyData, session.user.id, storyId);
+      toast.success("Cerita berhasil disimpan!");
+
+      if (!storyId && savedStory?.data?.id) {
+        router.push(`/home/generate/guru?id=${savedStory.data.id}`);
+      }
+
+    } catch (error: any) {
+      console.error("Error saving story:", error);
+      toast.error(error.response?.data?.message || "Gagal menyimpan cerita");
+
       const apiClient = new ApiClient();
       
       // Prepare the request body according to the backend schema
@@ -164,6 +207,7 @@ export default function StoryPageGuru() {
       } else {
         alert("Failed to save story. Please try again.");
       }
+
     } finally {
       setSaving(false);
     }
@@ -176,7 +220,6 @@ export default function StoryPageGuru() {
     }
 
     try {
-      // Set loading state
       setLoading(true);
 
       const htmlContent = editor ? editor.getHTML() : content;
@@ -253,11 +296,10 @@ export default function StoryPageGuru() {
                       Story Title
                     </label>
                     <Input
-                      id="title"
-                      value={title}
+                      type="text"
+                      placeholder="Masukkan judul cerita..."value={title}
                       onChange={(e) => setTitle(e.target.value)}
-                      placeholder="Enter story title..."
-                      className="w-full"
+                      className="text-lg"
                     />
                   </div>
 
@@ -283,7 +325,7 @@ export default function StoryPageGuru() {
                     </Button>
                     <Button variant="outline" onClick={handleDownload}>
                       <Download className="h-4 w-4 mr-2" />
-                      Download PDF
+                      Download
                     </Button>
                     {!storyId && (
                       <Button variant="outline" onClick={() => setActiveTab("ai-assistant")}>
@@ -313,12 +355,12 @@ export default function StoryPageGuru() {
                 {content ? (
                   <div className="prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: content }} />
                 ) : (
-                  <div className="text-center py-12">
+                  <div className="text-center flex flex-col justify-center items-center h-[350px]">
                     <Sparkles className="h-12 w-12 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
                     <p className="text-gray-500 dark:text-gray-400 italic">
                       {activeTab === "ai-assistant"
-                        ? "Use the AI Assistant to generate story ideas..."
-                        : "Story preview will appear here as you type..."}
+                        ? "Gunakan Asisten AI untuk menghasilkan ide cerita..."
+                        : "Pratinjau cerita akan muncul di sini saat Anda mengetik..."}
                     </p>
                   </div>
                 )}
@@ -330,15 +372,12 @@ export default function StoryPageGuru() {
     </HomeAppLayout>
   );
 }
-
-// Di bagian atas file, setelah deklarasi turndownService
 const turndownService = new TurndownService({
   headingStyle: 'atx',      // Gunakan # untuk heading
   codeBlockStyle: 'fenced', // Gunakan ``` untuk blok kode
   emDelimiter: '_'          // Gunakan _ untuk italic
 });
 
-// Hapus tag body dan atribut CSS yang tidak diinginkan
 turndownService.addRule('removeBodyTag', {
   filter: ['body'],
   replacement: function(content) {

@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import { auth } from '@/auth';
 
 export default class ApiClient {
@@ -14,29 +13,37 @@ export default class ApiClient {
     return axiosInstance;
   }
 
+  // ======================= AWAL BLOK YANG DIPERBAIKI =======================
   async withAuthServer() {
     const session = await auth();
 
-    this.instance.interceptors.request.use(
+    // 1. Buat instance axios HANYA SEKALI dan simpan di variabel.
+    const axiosInstanceWithAuth = this.instance;
+
+    // 2. Tambahkan interceptor ke instance tersebut.
+    axiosInstanceWithAuth.interceptors.request.use(
       (config) => {
-        if (session?.user) {
+        if (session?.user?.token) {
           config.headers['Authorization'] = `Bearer ${session.user.token}`;
+          // Baris log ini untuk memastikan header terpasang di log server Anda
+          console.log("Memasang header Authorization...");
+        } else {
+          console.warn("withAuthServer: Sesi atau token tidak ditemukan.");
         }
         return config;
-      }
-    );
-    this.instance.interceptors.response.use(
-      (response) => {
-        return response;
+      },
+      (error) => {
+        return Promise.reject(error);
       }
     );
 
-    return this.instance;
+    // 3. Kembalikan instance YANG SAMA yang sudah memiliki interceptor.
+    return axiosInstanceWithAuth;
   }
-
-
+  // ======================= AKHIR BLOK YANG DIPERBAIKI =======================
 }
 
+// Bagian bawah file ini tidak perlu diubah
 // Fungsi untuk mendapatkan token dari localStorage
 const getAuthToken = (): string | null => {
   if (typeof window !== 'undefined') {
