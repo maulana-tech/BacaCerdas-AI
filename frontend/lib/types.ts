@@ -77,6 +77,7 @@ export interface Story {
   content: string;
   type: string;
   userId: string;
+  tagId: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -88,11 +89,24 @@ export interface StoryResponse {
 }
 
 export interface StoryTag {
-  id: string
-  tag: string
-  createdAt: string
-  updatedAt: string
+  id: string;
+  tag: string;
+  // Add other fields if present in your model
 }
+
+// Available tags from seed.ts
+export const STORY_TAGS = [
+  "Umum",
+  "Anak-anak",
+  "Remaja",
+  "Pertualangan",
+  "Fiksi",
+  "Non-fiksi",
+  "Teknologi",
+  "Pendidikan",
+] as const;
+
+export type StoryTagType = typeof STORY_TAGS[number];
 
 export interface Quiz {
   id: string
@@ -124,4 +138,9 @@ export enum ItemType {
   QUIZ = 'QUIZ',
   SUMMARY = 'SUMMARY'
 }
+
+export type StoryTagApiResponse = APIResponse<"story-tags", {
+  id: string;
+  tag: string;
+}>;
 

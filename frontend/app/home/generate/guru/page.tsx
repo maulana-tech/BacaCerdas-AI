@@ -18,6 +18,8 @@ import TurndownService from "turndown";
 import { useSession } from "next-auth/react";
 import { saveStoryAction } from "./action";
 import { toast } from "sonner";
+import { StoryTagApiResponse } from "../siswa/action";
+import ApiClient from "@/lib/api";
 
 export default function StoryPageGuru() {
   const [title, setTitle] = useState("");
@@ -87,29 +89,35 @@ export default function StoryPageGuru() {
 
     setSaving(true);
     try {
+      // Get available tags from story-tags endpoint instead of tags
+      const apiClient = new ApiClient();
+      const tagsResponse = await apiClient.instance.get('/story-tags');
+      
+      // Find the "Umum" tag as default, or use the first available tag
+      const defaultTag = tagsResponse.data.data.find((tag: StoryTagApiResponse) => 
+        tag.attributes.tag.toLowerCase() === "umum"
+      ) || tagsResponse.data.data[0];
+
+      if (!defaultTag) {
+        throw new Error("No story tags available");
+      }
+
       const storyData = {
         title: title.trim(),
-        content: content, // Kita asumsikan 'content' sudah bersih
-        tags: ['Cerita Guru', 'AI Generated'],
+        content: content,
+        tags: [defaultTag.id],
       };
 
-      // Panggil server action dengan storyId (bisa null jika cerita baru)
-      const savedStory = await saveStoryAction(
-        storyData,
-        session.user.id,
-        storyId
-      );
-
+      const savedStory = await saveStoryAction(storyData, session.user.id, storyId);
       toast.success("Cerita berhasil disimpan!");
 
-      // Jika ini adalah cerita baru, redirect ke halaman edit
       if (!storyId && savedStory?.data?.id) {
         router.push(`/home/generate/guru?id=${savedStory.data.id}`);
       }
 
     } catch (error: any) {
       console.error("Error saving story:", error);
-      toast.error(error.message || "Gagal menyimpan cerita");
+      toast.error(error.response?.data?.message || "Gagal menyimpan cerita");
     } finally {
       setSaving(false);
     }

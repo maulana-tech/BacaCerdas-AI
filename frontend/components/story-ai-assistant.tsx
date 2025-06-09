@@ -24,15 +24,16 @@ interface StoryAIAssistantProps {
 export default function StoryAIAssistant({ onUseStory }: StoryAIAssistantProps) {
   const [storyType, setStoryType] = useState("umum")
   const [quickPrompts] = useState([
-    "Kisah inspiratif tentang mengejar mimpi",
     "Dongeng modern untuk anak-anak",
+    "Cerita petualangan yang menegangkan",
   ])
 
   const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages } = useChat({
-    api: "/api/generate-story",
-    body: {
+    api: "/api/ai/story",
+    body: ({ input }: { input: string }) => ({
+      prompt: input,
       storyType,
-    },
+    }),
   })
 
   const scrollAreaRef = useRef<HTMLDivElement>(null)
@@ -57,16 +58,26 @@ export default function StoryAIAssistant({ onUseStory }: StoryAIAssistantProps) 
     }, 100)
   }
 
-  const extractStoryContent = (content: string) => {
-    const titleMatch = content.match(/<h[1-3]>(.*?)<\/h[1-3]>/)
-    const title = titleMatch ? titleMatch[1].replace(/<[^>]*>/g, "") : ""
+  const cleanContent = (content: string) => {
+    return content
+      .replace(/```html\s*/g, '') // Remove opening ```html
+      .replace(/```\s*/g, '')     // Remove closing ```
+      .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+      .replace(/style="[^"]*"/gi, '')
+      .trim();
+  };
 
-    return { content, title }
+  const extractStoryContent = (content: string) => {
+    const cleanedContent = cleanContent(content);
+    const titleMatch = cleanedContent.match(/<h[1-3]>(.*?)<\/h[1-3]>/);
+    const title = titleMatch ? titleMatch[1].replace(/<[^>]*>/g, "") : "";
+
+    return { content: cleanedContent, title };
   }
 
   const handleUseStory = (messageContent: string) => {
-    const { content, title } = extractStoryContent(messageContent)
-    onUseStory(content, title)
+    const { content, title } = extractStoryContent(messageContent);
+    onUseStory(content, title);
   }
 
   const clearChat = () => {
@@ -156,7 +167,9 @@ export default function StoryAIAssistant({ onUseStory }: StoryAIAssistantProps) 
                         <div>
                           <div
                             className="prose prose-sm max-w-none"
-                            dangerouslySetInnerHTML={{ __html: message.content }}
+                            dangerouslySetInnerHTML={{ 
+                              __html: cleanContent(message.content) 
+                            }}
                           />
                           <div className="flex gap-2 mt-3 pt-3 border-t border-gray-200">
                             <Button
