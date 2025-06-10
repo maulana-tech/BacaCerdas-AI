@@ -25,6 +25,6 @@ export function useTeacherStories() {
     staleTime: 5 * 60 * 1000, // Data stays fresh for 5 minutes
     refetchOnWindowFocus: true, // Refetch when window gains focus
     retry: 1, // Only retry once on failure
-    placeholderData: { data: [] }
+    initialData: { data: [] } // Show empty array initially and on error
   });
 }
