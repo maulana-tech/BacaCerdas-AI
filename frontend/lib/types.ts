@@ -91,10 +91,9 @@ export interface StoryResponse {
 export interface StoryTag {
   id: string;
   tag: string;
-  // Add other fields if present in your model
 }
 
-// Available tags from seed.ts
+
 export const STORY_TAGS = [
   "Umum",
   "Anak-anak",

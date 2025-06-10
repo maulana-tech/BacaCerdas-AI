@@ -2,6 +2,8 @@
 
 import { Download, Search, PlusCircle, Users, FileText } from "lucide-react";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
+import ApiClient from "@/lib/api";
 
 import { HeroSection } from "./hero-section";
 import { AppCard } from "../cards/app-card"; 
@@ -21,7 +23,8 @@ import { RecentStoryCard } from "../../generate/siswa/component/recent-story-car
 
 export function AppsSection() {
   const { data: session, status } = useSession(); 
-  const userRole = status === "loading" ? null : session?.user.role; 
+  const userRole = status === "loading" ? null : session?.user.role;
+  const router = useRouter();
   
   // Menggunakan React Query untuk mengambil data cerita
   const { data: stories, isLoading: isStoriesLoading, refetch: refetchStories } = useStories();
@@ -48,11 +51,12 @@ export function AppsSection() {
 
   const deleteStory = async (id: string) => {
     try {
-      const response = await fetch(`/api/stories/${id}`, {
-        method: 'DELETE',
-      });
+      const apiClient = new ApiClient();
+      const api = await apiClient.withAuthServer();
+      
+      const response = await api.delete(`/stories/${id}`);
 
-      if (!response.ok) {
+      if (!response.data) {
         throw new Error('Failed to delete story');
       }
 
@@ -71,7 +75,7 @@ export function AppsSection() {
         description={heroDescription}
         primaryAction={
           // Tombol ini selalu untuk Teacher karena section ini untuk Teacher
-          <Button className="rounded-2xl">
+          <Button className="rounded-2xl" onClick={() => router.push('/home/generate/guru')}>
             <PlusCircle className="mr-2 h-4 w-4" /> Buat Konten Baru
           </Button>
         }
@@ -142,7 +146,7 @@ export function AppsSection() {
                 ))}
                 {stories?.data.length === 0 && (
                   <p className="p-4 text-center text-muted-foreground">
-                    No stories found
+                    Belum ada cerita yang dibuat
                   </p>
                 )}
               </div>
@@ -192,7 +196,7 @@ export function AppsSection() {
             <p className="text-sm text-muted-foreground">Explore projects created by students and instructors</p>
           </div>
           <div className="flex items-center space-x-2">
-            <Button variant="outline" className="rounded-2xl">Newest First</Button>
+            <Button variant="outline" className="rounded-2xl text-foreground">Newest First</Button>
             <Button variant="outline" className="rounded-2xl p-2">
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="24" height="24" fill="white"/>

@@ -13,14 +13,11 @@ export default class ApiClient {
     return axiosInstance;
   }
 
-  // ======================= AWAL BLOK YANG DIPERBAIKI =======================
   async withAuthServer() {
     const session = await auth();
 
-    // 1. Buat instance axios HANYA SEKALI dan simpan di variabel.
     const axiosInstanceWithAuth = this.instance;
 
-    // 2. Tambahkan interceptor ke instance tersebut.
     axiosInstanceWithAuth.interceptors.request.use(
       (config) => {
         if (session?.user?.token) {
@@ -37,14 +34,10 @@ export default class ApiClient {
       }
     );
 
-    // 3. Kembalikan instance YANG SAMA yang sudah memiliki interceptor.
     return axiosInstanceWithAuth;
   }
-  // ======================= AKHIR BLOK YANG DIPERBAIKI =======================
 }
 
-// Bagian bawah file ini tidak perlu diubah
-// Fungsi untuk mendapatkan token dari localStorage
 const getAuthToken = (): string | null => {
   if (typeof window !== 'undefined') {
     return localStorage.getItem('token');
@@ -59,7 +52,6 @@ const defaultOptions: RequestInit = {
   },
 };
 
-// Fungsi untuk melakukan permintaan API dengan autentikasi
 export const fetchWithAuth = async (
   url: string,
   options: RequestInit = {}
