@@ -44,7 +44,7 @@ export async function saveStoryAction(
         },
         relationships: {
           user: { data: { id: authorId } },
-          tag: { data: { id: storyData.tags[0] || 'General' } },
+          tag: { data: { id: storyData.tags[0] || 'cmbhl1yh80003fuc2mjyxnk14' } }, // Use 'Umum' tag as default
         },
       };
       response = await api.post('/stories', createPayload);
