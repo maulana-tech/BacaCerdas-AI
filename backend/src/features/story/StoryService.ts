@@ -52,7 +52,7 @@ export default class StoryService {
 
   async updateStory(id: string, body: StoryStoreSchema) {
     const existingStory = await this.storyRepository.findById(id);
-    
+
     if (!existingStory) {
       throw new NotFoundException(`Story with id ${id} not found`);
     }
@@ -80,7 +80,7 @@ export default class StoryService {
 
   async deleteStory(id: string) {
     const existingStory = await this.storyRepository.findById(id);
-    
+
     if (!existingStory) {
       throw new NotFoundException(`Story with id ${id} not found`);
     }

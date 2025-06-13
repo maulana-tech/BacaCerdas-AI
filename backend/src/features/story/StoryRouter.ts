@@ -32,9 +32,7 @@ export default class StoryRouter implements APIRouter {
       )
       .delete(
         "/stories/:id",
-        [
-          isUserAllowed([Role.ROOT, Role.TEACHER]),
-        ],
+        [isUserAllowed([Role.ROOT, Role.TEACHER])],
         expressAsyncHandler(new StoryController().destroy),
       );
   }

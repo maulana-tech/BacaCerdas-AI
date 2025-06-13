@@ -35,9 +35,18 @@ export default function QuizPageGuru() {
   }, [searchParams])
 
   const loadQuiz = async (id: string) => {
-    console.log(
-      `loadQuiz called for ID: ${id}, but database fetching is disabled.`
-    )
+    try {
+      const response = await fetch(`/api/quiz/${id}`);
+      if (!response.ok) throw new Error('Failed to load quiz');
+      
+      const quiz = await response.json();
+      setTitle(quiz.title);
+      setQuestions(quiz.content);
+      setActiveTab('edit');
+    } catch (error) {
+      console.error('Error loading quiz:', error);
+      alert('Gagal memuat kuis');
+    }
   }
 
   const handleFileUpload = async (file: File) => {
@@ -115,19 +124,53 @@ export default function QuizPageGuru() {
 
   const handleSave = async () => {
     if (!title.trim()) {
-      alert("Quiz title cannot be empty.")
+      alert("Judul kuis tidak boleh kosong.")
       return
     }
     if (questions.length === 0) {
-      alert("Quiz must have at least 1 question.")
+      alert("Kuis harus memiliki minimal 1 pertanyaan.")
       return
     }
     setSaving(true)
     try {
-      console.log("Simulating quiz save (database logic removed)...");
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const quizData = {
+        title,
+        courseId: "default", // You should get this from course context/props
+        description: "", // Optional
+        content: questions.map(q => ({
+          question: q.question,
+          type: q.type,
+          options: q.type === 'multiple_choice' ? q.options?.map((text, id) => ({
+            id,
+            text,
+            is_correct: q.correct_answer === id
+          })) : undefined,
+          correct_answer: q.type === 'multiple_choice' ? undefined : q.correct_answer,
+          explanation: q.explanation || "",
+          points: q.points || 1
+        }))
+      }
+
+      const response = await fetch('/api/quiz', {
+        method: quizId ? 'PUT' : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(quizData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Gagal menyimpan kuis')
+      }
+
+      const savedQuiz = await response.json()
+      if (!quizId) {
+        setQuizId(savedQuiz.id)
+      }
+      alert('Kuis berhasil disimpan!')
     } catch (error) {
-      console.error("Error during simulated save:", error);
+      console.error("Error saving quiz:", error);
+      alert("Terjadi kesalahan saat menyimpan kuis.");
     } finally {
       setSaving(false)
     }
@@ -135,10 +178,23 @@ export default function QuizPageGuru() {
 
   const handleDownload = () => {
     if (!title.trim()) {
-      alert("Quiz title cannot be empty.")
+      alert("Judul kuis tidak boleh kosong.")
       return
     }
-    generateQuizPDF(title, questions)
+    if (questions.length === 0) {
+      alert("Kuis harus memiliki minimal 1 pertanyaan.")
+      return
+    }
+    try {
+      generateQuizPDF(title, questions.map(q => ({
+        ...q,
+        explanation: q.explanation || "",
+        points: q.points || 1
+      })))
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      alert("Terjadi kesalahan saat mengunduh PDF.");
+    }
   }
 
   const getTotalPoints = () => {

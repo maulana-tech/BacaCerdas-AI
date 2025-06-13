@@ -22,8 +22,11 @@ export default class StoryController {
   }
 
   async store(
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    req: Request<{}, {}, StoryStoreSchema>,
+    req: Request<
+      Record<string, never>,
+      Record<string, never>,
+      StoryStoreSchema
+    >,
     res: Response,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: NextFunction,
@@ -45,7 +48,7 @@ export default class StoryController {
   }
 
   async update(
-    req: Request<{ id: string }, {}, StoryStoreSchema>,
+    req: Request<{ id: string }, Record<string, never>, StoryStoreSchema>,
     res: Response,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     next: NextFunction,
