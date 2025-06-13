@@ -1,6 +1,7 @@
 // PDF generation functions using jsPDF and html2canvas
 import jsPDF from 'jspdf';
 import { Editor } from '@tiptap/react';
+import { QuizQuestion } from './types';
 
 /**
  * Generate PDF file from story content
@@ -63,36 +64,59 @@ export const generateStoryPDFFromEditor = (title: string, editor: Editor) => {
 };
 
 // Export fungsi lain yang masih digunakan
-export const generateQuizPDF = (title: string, questions: any[]) => {
+export const generateQuizPDF = (title: string, questions: QuizQuestion[]) => {
   try {
-    let content = `${title}\n\n`;
+    let content = `${title}\n\n`
 
     questions.forEach((question, index) => {
-      content += `${index + 1}. ${question.question}\n`;
-      question.options.forEach((option: string, optIndex: number) => {
-        const marker = question.correct_answer === optIndex ? "✓" : "○";
-        content += `${marker} ${String.fromCharCode(65 + optIndex)}. ${option}\n`;
-      });
-      if (question.explanation) {
-        content += `Penjelasan: ${question.explanation}\n`;
-      }
-      content += "\n";
-    });
+      content += `${index + 1}. ${question.question}`
 
-    const blob = new Blob([content], { type: "text/plain" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${title}.txt`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+      if (question.points && question.points > 1) {
+        content += ` (${question.points} poin)`
+      }
+      content += "\n"
+
+      if (question.type === "multiple_choice" && question.options) {
+        question.options.forEach((option: string, optIndex: number) => {
+          const marker = question.correct_answer === optIndex ? "✓" : "○"
+          content += `${marker} ${String.fromCharCode(65 + optIndex)}. ${option}\n`
+        })
+      } else if (question.type === "essay") {
+        content += "[Pertanyaan Essay - Jawaban dalam bentuk teks]\n"
+      }
+
+      if (question.explanation) {
+        const label = question.type === "essay" ? "Panduan Penilaian" : "Penjelasan"
+        content += `${label}: ${question.explanation}\n`
+      }
+      content += "\n"
+    })
+
+    // Add summary
+    const mcCount = questions.filter((q) => q.type === "multiple_choice").length
+    const essayCount = questions.filter((q) => q.type === "essay").length
+    const totalPoints = questions.reduce((sum, q) => sum + (q.points || 1), 0)
+
+    content += `\n--- RINGKASAN KUIS ---\n`
+    content += `Total Pertanyaan: ${questions.length}\n`
+    content += `Pilihan Ganda: ${mcCount}\n`
+    content += `Essay: ${essayCount}\n`
+    content += `Total Poin: ${totalPoints}\n`
+
+    const blob = new Blob([content], { type: "text/plain" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `${title}.txt`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
   } catch (error) {
-    console.error("Error generating text file:", error);
-    alert("Gagal mengunduh file. Silakan coba lagi.");
+    console.error("Error generating PDF:", error)
+    alert("Gagal mengunduh file. Silakan coba lagi.")
   }
-};
+}
 
 export const generateSummaryPDF = (title: string, content: string) => {
   try {

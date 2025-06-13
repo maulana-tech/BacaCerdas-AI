@@ -118,9 +118,17 @@ export interface Quiz {
 
 export interface QuizQuestion {
   question: string
-  options: string[]
-  correct_answer: number
+  type: "multiple_choice" | "essay"
+  options?: string[]
+  correct_answer?: number | undefined
   explanation?: string
+  points?: number
+}
+
+export interface QuizAnswer {
+  questionIndex: number
+  type: "multiple_choice" | "essay"
+  answer: number | string // number for MC, string for essay
 }
 
 export interface Summary {
