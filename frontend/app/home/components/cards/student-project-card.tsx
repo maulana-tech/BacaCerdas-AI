@@ -12,10 +12,7 @@ interface StudentProjectCardProps {
   showCategory?: boolean
 }
 
-/**
- * Student Project card component for displaying tutorial/project information
- * Shows duration, level, instructor, and view count
- */
+
 export function StudentProjectCard({ tutorial, showCategory = true }: StudentProjectCardProps) {
   const getLevelColor = (level: string) => {
     switch (level.toLowerCase()) {

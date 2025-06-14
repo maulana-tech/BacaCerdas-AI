@@ -96,7 +96,12 @@ export default function QuizPageGuru() {
     const newQuestion: QuizQuestion = {
       question: "",
       type: type,
-      options: type === "multiple_choice" ? ["", "", "", ""] : undefined,
+      options: type === "multiple_choice" ? [
+        { id: 0, text: "", is_correct: false },
+        { id: 1, text: "", is_correct: false },
+        { id: 2, text: "", is_correct: false },
+        { id: 3, text: "", is_correct: false }
+      ] : undefined,
       correct_answer: type === "multiple_choice" ? 0 : undefined,
       explanation: "",
       points: 1
@@ -113,7 +118,9 @@ export default function QuizPageGuru() {
   const updateOption = (questionIndex: number, optionIndex: number, value: string) => {
     const updatedQuestions = [...questions]
     if (updatedQuestions[questionIndex].options) {
-      updatedQuestions[questionIndex].options![optionIndex] = value
+      updatedQuestions[questionIndex].options = updatedQuestions[questionIndex].options!.map((opt, idx) => 
+        idx === optionIndex ? { ...opt, text: value } : opt
+      )
     }
     setQuestions(updatedQuestions)
   }
@@ -140,10 +147,10 @@ export default function QuizPageGuru() {
         content: questions.map(q => ({
           question: q.question,
           type: q.type,
-          options: q.type === 'multiple_choice' ? q.options?.map((text, id) => ({
-            id,
-            text,
-            is_correct: q.correct_answer === id
+          options: q.type === 'multiple_choice' && q.options ? q.options.map((opt, idx) => ({
+            id: idx,
+            text: opt.text,
+            is_correct: q.correct_answer === idx
           })) : undefined,
           correct_answer: q.type === 'multiple_choice' ? undefined : q.correct_answer,
           explanation: q.explanation || "",
@@ -208,7 +215,7 @@ export default function QuizPageGuru() {
             <h1 className="text-3xl font-bold text-gray-900">{quizId ? "Edit Kuis" : "Buat Kuis Baru"}</h1>
             <p className="text-gray-600">Buat kuis dari dokumen atau secara manual</p>
           </div>
-          <Link href="/">
+          <Link href="/home">
             <Button variant="outline">
               <Home className="h-4 w-4 mr-2" />
               Beranda
@@ -345,7 +352,7 @@ export default function QuizPageGuru() {
                                       onChange={() => updateQuestion(qIndex, "correct_answer", oIndex)}
                                     />
                                     <Input
-                                      value={option}
+                                      value={option.text}
                                       onChange={(e) => updateOption(qIndex, oIndex, e.target.value)}
                                       placeholder={`Pilihan ${String.fromCharCode(65 + oIndex)}`}
                                     />
@@ -425,7 +432,7 @@ export default function QuizPageGuru() {
                                       : "bg-gray-50"
                                   }`}
                                 >
-                                  {String.fromCharCode(65 + optIndex)}. {option || "Pilihan belum diisi"}
+                                  {String.fromCharCode(65 + optIndex)}. {option.text || "Pilihan belum diisi"}
                                   {question.correct_answer === optIndex && (
                                     <span className="ml-2 text-green-600 font-medium">✓</span>
                                   )}

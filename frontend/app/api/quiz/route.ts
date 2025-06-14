@@ -13,9 +13,22 @@ export async function POST(request: NextRequest) {
     const apiClient = new ApiClient();
     const result = await (await apiClient.withAuthServer()).post('/quizzes', {
       data: {
-        ...data,
+        title: data.title,
+        courseId: data.courseId || "default",
         userId: session.user.id,
-        courseId: data.courseId || "default"
+        description: data.description || "",
+        content: data.content.map((question: any) => ({
+          question: question.question,
+          type: question.type,
+          options: question.type === 'multiple_choice' ? question.options.map((opt: any, index: number) => ({
+            id: index,
+            text: opt.text,
+            is_correct: question.correct_answer === index
+          })) : undefined,
+          correct_answer: question.type === 'multiple_choice' ? undefined : question.correct_answer,
+          explanation: question.explanation || "",
+          points: question.points || 1
+        }))
       }
     });
     return Response.json(result.data, { status: 201 });
@@ -61,21 +74,23 @@ export async function GET(request: NextRequest) {
       return Response.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const id = request.url.split('/').pop();
-    if (!id) {
-      return Response.json(
-        { error: 'Quiz ID is required' },
-        { status: 400 }
-      );
-    }
-    
+    const url = new URL(request.url);
+    const id = url.searchParams.get('id');
+
     const apiClient = new ApiClient();
-    const result = await (await apiClient.withAuthServer()).get(`/quiz/${id}`);
-    return Response.json(result.data);
+    if (id) {
+      // Fetch single quiz
+      const response = await (await apiClient.withAuthServer()).get(`/quizzes/${id}`);
+      return Response.json(response.data, { status: 200 });
+    } else {
+      // Fetch all quizzes
+      const response = await (await apiClient.withAuthServer()).get('/quizzes');
+      return Response.json(response.data, { status: 200 });
+    }
   } catch (error) {
-    console.error('Error loading quiz:', error);
+    console.error('Error fetching quiz(zes):', error);
     return Response.json(
-      { error: 'Failed to load quiz' },
+      { error: 'Failed to fetch quiz(zes)' },
       { status: 500 }
     );
   }
