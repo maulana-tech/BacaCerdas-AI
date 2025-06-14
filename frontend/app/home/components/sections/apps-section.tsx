@@ -11,28 +11,73 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { apps as allAppsData, projects, recentFiles, tutorials } from "@/lib/data/sample-data";
 import { useSession } from "next-auth/react";
-import type { App } from "@/lib/types";
+import type { App, Quiz } from "@/lib/types";
 import { FileRow } from "../cards/file-row";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@radix-ui/react-progress";
+import { TeacherQuizCard } from "../cards/teacher-quiz-card";
 import { StudentProjectCard } from "../cards/student-project-card";
 import { StoryFileRow } from "../cards/story-file-row";
 import { useStories } from "../../hooks/use-stories";
 import { Skeleton } from "@/components/ui/skeleton";
 import { RecentStoryCard } from "../../generate/siswa/component/recent-story-card";
+import { useState, useEffect } from "react";
 
 export function AppsSection() {
   const { data: session, status } = useSession(); 
-  const userRole = status === "loading" ? null : session?.user.role;
+  const userRole = status === "loading" ? null : session?.user?.role;
   const router = useRouter();
+  const [quizzes, setQuizzes] = useState<Quiz[]>([]);
+  const [isQuizzesLoading, setIsQuizzesLoading] = useState(true);
   
   // Menggunakan React Query untuk mengambil data cerita
   const { data: stories, isLoading: isStoriesLoading, refetch: refetchStories } = useStories();
 
-  const getVisibleApps = (appList: App[]): App[] => {
-    if (status === "loading" || !userRole) return []; // Tunggu role jelas
+  useEffect(() => {
+    fetchQuizzes();
+  }, []);
 
-    if (userRole === "TEACHER" || userRole === "ROOT") { // Asumsi ROOT adalah peran admin lain
+  const fetchQuizzes = async () => {
+    setIsQuizzesLoading(true);
+    try {
+      const response = await fetch('/api/quiz', {
+        method: 'GET',
+        cache: 'no-store'
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch quizzes');
+      }
+
+      const result = await response.json();
+      // Make sure we have the expected data structure
+      const quizData = Array.isArray(result.data) ? result.data : [];
+      // Validate each quiz has the required structure
+      const validQuizzes = quizData.filter((quiz: any) => 
+        quiz && 
+        typeof quiz === 'object' && 
+        quiz.id && 
+        quiz.title && 
+        Array.isArray(quiz.content)
+      );
+      setQuizzes(validQuizzes);
+    } catch (error) {
+      console.error("Error fetching quizzes:", error);
+      setQuizzes([]);
+    } finally {
+      setIsQuizzesLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (userRole === 'TEACHER') {
+      fetchQuizzes();
+    }
+  }, [userRole]);
+
+  const getVisibleApps = (appList: App[]): App[] => {
+    if (status === "loading" || !userRole) return []; 
+    if (userRole === "TEACHER" || userRole === "ROOT") {
       return appList;
     }
     return []; 
@@ -41,12 +86,11 @@ export function AppsSection() {
   const newReleaseApps = getVisibleApps(allAppsData.filter(app => app.new));
   const currentAllApps = getVisibleApps(allAppsData);
 
-  // Judul dan deskripsi bisa statis karena ini untuk Teacher
   const heroTitle = "Kelola dan Buat Aplikasi Edukasi";
   const heroDescription = "Gunakan template di bawah untuk membuat materi, kuis, atau ringkasan baru untuk siswa Anda.";
 
   if (status === "loading") {
-      return <div className="text-center py-12"><p>Memuat aplikasi...</p></div>;
+    return <div className="text-center py-12"><p>Memuat aplikasi...</p></div>;
   }
 
   const deleteStory = async (id: string) => {
@@ -55,16 +99,30 @@ export function AppsSection() {
       const api = await apiClient.withAuthServer();
       
       const response = await api.delete(`/stories/${id}`);
-
       if (!response.data) {
         throw new Error('Failed to delete story');
       }
-
-      // Refresh stories after deletion
       refetchStories();
     } catch (error) {
       console.error('Error deleting story:', error);
       throw error;
+    }
+  };
+
+  const handleQuizDelete = async (id: string) => {
+    try {
+      const response = await fetch(`/api/quiz/${id}`, {
+        method: "DELETE",
+      });
+      
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to delete quiz');
+      }
+      
+      await fetchQuizzes(); // Refresh the quiz list after deletion
+    } catch (error) {
+      console.error("Error deleting quiz:", error);
     }
   };
 
@@ -74,7 +132,6 @@ export function AppsSection() {
         title={heroTitle}
         description={heroDescription}
         primaryAction={
-          // Tombol ini selalu untuk Teacher karena section ini untuk Teacher
           <Button className="rounded-2xl" onClick={() => router.push('/home/generate/guru')}>
             <PlusCircle className="mr-2 h-4 w-4" /> Buat Konten Baru
           </Button>
@@ -97,7 +154,7 @@ export function AppsSection() {
         </div>
       </div>
 
-      <section className="space-y-4">
+     <section className="space-y-4">
         <h2 className="text-2xl font-semibold text-foreground">Template Rilisan Terbaru</h2>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {newReleaseApps.length > 0 ? (
@@ -111,6 +168,7 @@ export function AppsSection() {
         </div>
       </section>
 
+      {/* Grid Layout for Recent Files and Active Projects */}
       <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
         <section className="space-y-4">
           <div className="flex items-center justify-between">
@@ -119,7 +177,6 @@ export function AppsSection() {
           </div>
           <div className="rounded-3xl border">
             {isStoriesLoading ? (
-              // Tampilkan skeleton loading saat data sedang dimuat
               <div className="p-4 space-y-4">
                 {[...Array(4)].map((_, index) => (
                   <div key={index} className="flex items-center justify-between">
@@ -163,7 +220,6 @@ export function AppsSection() {
             <div className="grid grid-cols-1 divide-y">
               {projects.slice(0, 3).map((project) => (
                 <motion.div key={project.name} whileHover={{ backgroundColor: "rgba(0,0,0,0.02)" }} className="p-4">
-                  {/* ... detail proyek ... */}
                   <div className="flex items-center justify-between mb-2">
                     <h3 className="font-medium text-foreground">{project.name}</h3>
                     <Badge variant="outline" className="rounded-xl">Tenggat {project.dueDate}</Badge>
@@ -183,63 +239,53 @@ export function AppsSection() {
                 </motion.div>
               ))}
             </div>
-             {projects.length === 0 && <p className="p-4 text-muted-foreground">Tidak ada proyek aktif.</p>}
+            {projects.length === 0 && <p className="p-4 text-muted-foreground">Tidak ada proyek aktif.</p>}
           </div>
         </section>
       </div>
 
-      {/* Section Student Projects */}
-      <section className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2 className="text-2xl font-semibold text-foreground">Student Projects</h2>
-            <p className="text-sm text-muted-foreground">Explore projects created by students and instructors</p>
-          </div>
-          <div className="flex items-center space-x-2">
-            <Button variant="outline" className="rounded-2xl text-foreground">Newest First</Button>
-            <Button variant="outline" className="rounded-2xl p-2">
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" fill="white"/>
-                <path d="M4 4H8V8H4V4Z" fill="currentColor"/>
-                <path d="M10 4H14V8H10V4Z" fill="currentColor"/>
-                <path d="M16 4H20V8H16V4Z" fill="currentColor"/>
-                <path d="M4 10H8V14H4V10Z" fill="currentColor"/>
-                <path d="M10 10H14V14H10V10Z" fill="currentColor"/>
-                <path d="M16 10H20V14H16V10Z" fill="currentColor"/>
-                <path d="M4 16H8V20H4V16Z" fill="currentColor"/>
-                <path d="M10 16H14V20H10V16Z" fill="currentColor"/>
-                <path d="M16 16H20V20H16V16Z" fill="currentColor"/>
-              </svg>
-            </Button>
-            <Button variant="outline" className="rounded-2xl p-2">
-              <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="24" height="24" fill="white"/>
-                <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-              </svg>
-            </Button>
-          </div>
-        </div>
-        
-        <div className="flex flex-col md:flex-row gap-6">
-          
-          {/* Projects grid */}
-          <div className="flex-1">
-            <div className="flex flex-wrap gap-2 mb-4">
-              <Button size="sm" variant="outline" className="rounded-full">All</Button>
-              <Button size="sm" variant="outline" className="rounded-full">Featured</Button>
-              <Button size="sm" variant="outline" className="rounded-full">Recent</Button>
-              <Button size="sm" variant="outline" className="rounded-full">Popular</Button>
-              <Button size="sm" variant="outline" className="rounded-full">Following</Button>
+       {/* Teacher Quizzes Section */}
+      {userRole === "TEACHER" && (
+        <section className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-2xl font-semibold text-foreground">Kuis Saya</h2>
+              <p className="text-sm text-muted-foreground">Kelola dan pantau kuis yang Anda buat</p>
             </div>
-            
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {tutorials.slice(0, 8).map((tutorial) => (
-                <StudentProjectCard key={tutorial.title} tutorial={tutorial} />
+            <Button 
+              variant="outline" 
+              className="rounded-2xl"
+              onClick={() => router.push('/home/quiz/guru')}
+            >
+              <PlusCircle className="mr-2 h-4 w-4" />
+              Buat Kuis Baru
+            </Button>
+          </div>
+          
+          {isQuizzesLoading ? (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {[1, 2, 3].map((i) => (
+                <Skeleton key={i} className="h-[200px] rounded-3xl" />
               ))}
             </div>
-          </div>
-        </div>
-      </section>
+          ) : (
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.isArray(quizzes) ? quizzes.map((quiz) => (
+                <TeacherQuizCard
+                  key={quiz.id}
+                  quiz={quiz}
+                  onDelete={() => handleQuizDelete(quiz.id)}
+                />
+              )) : null}
+              {quizzes.length === 0 && (
+                <div className="col-span-full text-center py-8 text-muted-foreground">
+                  Belum ada kuis yang dibuat. Klik "Buat Kuis Baru" untuk memulai.
+                </div>
+              )}
+            </div>
+          )}
+        </section>
+      )}
     </div>
   );
 }

@@ -107,22 +107,28 @@ export const STORY_TAGS = [
 
 export type StoryTagType = typeof STORY_TAGS[number];
 
-export interface Quiz {
-  id: string
-  title: string
-  content: QuizQuestion[]
-  source_document?: string
-  createdAt: string
-  updatedAt: string
-}
-
 export interface QuizQuestion {
   question: string
   type: "multiple_choice" | "essay"
-  options?: string[]
-  correct_answer?: number | undefined
+  options?: Array<{
+    id: number
+    text: string
+    is_correct: boolean
+  }>
+  correct_answer?: number | string
   explanation?: string
   points?: number
+}
+
+export interface Quiz {
+  id: string
+  title: string
+  description?: string
+  content: QuizQuestion[]
+  created_at: string
+  updated_at: string
+  courseId: string;
+  userId: string;
 }
 
 export interface QuizAnswer {
