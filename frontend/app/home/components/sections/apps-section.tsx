@@ -20,8 +20,9 @@ import { StudentProjectCard } from "../cards/student-project-card";
 import { StoryFileRow } from "../cards/story-file-row";
 import { useStories } from "../../hooks/use-stories";
 import { Skeleton } from "@/components/ui/skeleton";
-import { RecentStoryCard } from "../../generate/siswa/component/recent-story-card";
+
 import { useState, useEffect } from "react";
+import { RecentStoryCard } from "../../generate/siswa/component/recent-story-card";
 
 export function AppsSection() {
   const { data: session, status } = useSession(); 
@@ -194,7 +195,7 @@ export function AppsSection() {
             ) : (
               <div className="divide-y">
                 {stories?.data.map((story) => (
-                  <RecentStoryCard 
+                  <RecentStoryCard
                     key={story.attributes.id} 
                     story={story}
                     showDetails={true}

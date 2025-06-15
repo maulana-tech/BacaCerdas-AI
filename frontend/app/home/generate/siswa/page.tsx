@@ -14,19 +14,21 @@ import {
 import StoryCard from "./component/story-card"
 import { Search, Filter, ArrowUpDown, AlertCircle } from "lucide-react"
 
-
-import type { Story, StoryTag } from "@/lib/types" // Pastikan path ini benar
+// Impor tipe dan layout
+import type { Story, StoryTag } from "@/lib/types"
 import { HomeAppLayout } from "../../components/home-app-layout"
-import { AlertDialog, AlertDialogDescription } from "@/components/ui/alert-dialog"
 
+// Impor data dummy kita
 import { studentStories } from "@/lib/data/student-stories-data"
 import { storyTags } from "@/lib/data/story-tags-data"
+// --- PERBAIKAN: Pastikan nama file ini benar ---
+import { dummyUsers } from "@/lib/data/user-data" 
 
-import { dummyUsers } from "@/lib/data/user-data"
 
-
+// --- SAKLAR PENGONTROL DATA ---
 const USE_DUMMY_DATA = true;
 
+// --- TIPE DATA LOKAL (sebaiknya dipindah ke lib/types.ts nanti) ---
 interface UserAttributes {
   id: string;
   name: string;
@@ -36,7 +38,7 @@ export interface StoryApiResponse {
   attributes: Story & { thumbnailUrl: string };
   relationships: {
     Tag?: { attributes: StoryTag };
-    User?: { attributes: UserAttributes }; // User sekarang menjadi bagian dari relationships
+    User?: { attributes: UserAttributes };
   };
 }
 
@@ -56,7 +58,7 @@ export default function SiswaStoriesPage() {
   const router = useRouter()
 
   const fetchTags = async () => {
-
+    // ... (kode fetch API asli Anda)
     try {
       const response = await fetch("/api/story/tags", {
         method: "GET",
@@ -76,7 +78,7 @@ export default function SiswaStoriesPage() {
   }
 
   const fetchStories = async () => {
-
+    // ... (kode fetch API asli Anda)
     try {
       setError(null)
       const response = await fetch("/api/story", {
@@ -101,10 +103,9 @@ export default function SiswaStoriesPage() {
   const loadDummyData = () => {
     console.log("Memuat data dummy...");
     const timer = setTimeout(() => {
-        // Adaptasi data untuk menyertakan Tag dan User
         const adaptedStories: StoryApiResponse[] = studentStories.map(story => {
             const tagData = storyTags.find(t => t.id === story.tagId);
-            const userData = dummyUsers.find(u => u.id === story.userId); // Cari user
+            const userData = dummyUsers.find(u => u.id === story.userId);
 
             return {
                 attributes: story,
@@ -112,7 +113,7 @@ export default function SiswaStoriesPage() {
                     Tag: {
                         attributes: tagData || { id: 'tag-unknown', tag: 'Tanpa Tag' }
                     },
-                    User: { // Tambahkan data user ke relationships
+                    User: {
                         attributes: userData || { id: 'user-unknown', name: 'Penulis Anonim' }
                     }
                 }
@@ -142,11 +143,10 @@ export default function SiswaStoriesPage() {
       fetchStories();
       fetchTags();
     }
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session, status])
 
   
-  // Logika filter dan sort (tidak ada perubahan, akan berfungsi dengan data baru)
   const filteredAndSortedStories = stories
     .filter(story => {
         if (selectedTag !== "all") {
@@ -167,7 +167,6 @@ export default function SiswaStoriesPage() {
   return (
     <HomeAppLayout>
       <div className="container mx-auto px-4 py-8">
-        {/* Header Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-slate-900 dark:text-slate-100 mb-4">
             Cerita Pembelajaran
@@ -184,7 +183,6 @@ export default function SiswaStoriesPage() {
           </div>
         )}
 
-        {/* Search and Filter Section (tidak ada perubahan) */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="relative flex-grow">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
@@ -228,7 +226,6 @@ export default function SiswaStoriesPage() {
           </div>
         </div>
 
-        {/* Story Grid (tidak ada perubahan) */}
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[1, 2, 3, 4].map((i) => (
