@@ -1,5 +1,10 @@
 import type React from "react"
 
+export interface UserAttributes {
+  id: string;
+  name: string;
+}
+
 export type APIResponse<
   Type extends string,
   Attributes,
@@ -83,8 +88,10 @@ export interface Story {
 }
 
 export interface StoryResponse {
-  data: {
-    attributes: Story;
+  attributes: Story & { thumbnailUrl: string };
+  relationships: {
+    Tag?: { attributes: StoryTag };
+    User?: { attributes: UserAttributes };
   };
 }
 
@@ -151,6 +158,7 @@ export enum ItemType {
   QUIZ = 'QUIZ',
   SUMMARY = 'SUMMARY'
 }
+
 
 export type StoryTagApiResponse = APIResponse<"story-tags", {
   id: string;

@@ -12,6 +12,11 @@ import type { Quiz, QuizQuestion, QuizAnswer } from "@/lib/types"
 import { ArrowLeft, Check as CheckCircle, X as XCircle, RotateCw as RotateCcw, Share2, Download as DownloadIcon, Pencil as Edit, FileText, Clock as TimeIcon } from "lucide-react"
 import Link from "next/link"
 
+
+import { studentQuizzes } from "@/lib/data/student-quizzes-data"
+
+const USE_DUMMY_DATA = true;
+
 export default function ReadQuizPage() {
   const [quiz, setQuiz] = useState<Quiz | null>(null)
   const [loading, setLoading] = useState(true)
@@ -32,23 +37,40 @@ export default function ReadQuizPage() {
     }
   }, [quizId])
 
-  const loadQuiz = async (id: string) => {
-    try {
-      const response = await fetch(`/api/quiz/${id}`, {
-        method: "GET",
-        cache: "no-store"
-      });
 
-      if (!response.ok) {
-        throw new Error("Kuis tidak ditemukan");
+  const loadQuiz = async (id: string) => {
+    setLoading(true);
+    try {
+      let quizData: Quiz | null = null;
+
+      if (USE_DUMMY_DATA) {
+        // Mode Dummy: Cari kuis dari data lokal
+        console.log(`Memuat kuis dummy dengan ID: ${id}`);
+        await new Promise(resolve => setTimeout(resolve, 500)); // Simulasi jeda jaringan
+        const foundQuiz = studentQuizzes.find(q => q.id === id);
+        if (foundQuiz) {
+          quizData = foundQuiz;
+        } else {
+          throw new Error("Kuis dummy tidak ditemukan");
+        }
+      } else {
+        // Mode API: Fetch dari internet (kode asli Anda)
+        const response = await fetch(`/api/quiz/${id}`, {
+          method: "GET",
+          cache: "no-store"
+        });
+
+        if (!response.ok) {
+          throw new Error("Kuis tidak ditemukan di API");
+        }
+        const result = await response.json();
+        quizData = result.data;
       }
 
-      const result = await response.json();
-      const quizData = result.data;
-
+      // Proses data kuis yang ditemukan (baik dari dummy maupun API)
       if (quizData) {
         setQuiz(quizData);
-        // Initialize answers array
+        // Inisialisasi jawaban
         const initialAnswers: QuizAnswer[] = quizData.content.map((question: QuizQuestion, index: number) => ({
           questionIndex: index,
           type: question.type || "multiple_choice",
@@ -58,6 +80,7 @@ export default function ReadQuizPage() {
       } else {
         throw new Error("Data kuis tidak valid");
       }
+
     } catch (error) {
       console.error("Error loading quiz:", error);
       setError(error instanceof Error ? error.message : "Gagal memuat kuis");
@@ -65,6 +88,7 @@ export default function ReadQuizPage() {
       setLoading(false);
     }
   }
+
 
   const handleAnswerSelect = (answerValue: number | string) => {
     const newAnswers = [...answers]
@@ -99,15 +123,18 @@ export default function ReadQuizPage() {
       totalPoints += points
 
       if (question.type === "multiple_choice") {
-        if (answers[index].answer === question.correct_answer) {
+        // Gunakan 'options' untuk mencari jawaban yang benar
+        const correctAnswerIndex = question.options?.findIndex(opt => opt.is_correct) ?? -1;
+        if (answers[index].answer === correctAnswerIndex) {
           correctPoints += points
         }
       } else {
         essayCount++
       }
     })
-
-    const mcScore = totalPoints > 0 ? Math.round((correctPoints / totalPoints) * 100) : 0
+    
+    const mcTotalPoints = totalPoints - (quiz.content.filter(q => q.type === 'essay').reduce((sum, q) => sum + (q.points || 1), 0));
+    const mcScore = mcTotalPoints > 0 ? Math.round((correctPoints / mcTotalPoints) * 100) : 0;
 
     return {
       score: mcScore,
@@ -116,7 +143,7 @@ export default function ReadQuizPage() {
       essayCount,
     }
   }
-
+  
   const resetQuiz = () => {
     setCurrentQuestion(0)
     const initialAnswers: QuizAnswer[] = quiz!.content.map((question: QuizQuestion, index: number) => ({
@@ -152,7 +179,7 @@ export default function ReadQuizPage() {
       return currentAnswer.answer !== -1
     }
   }
-
+  
   const handleShare = async () => {
     if (navigator.share && quiz) {
       try {
@@ -177,7 +204,7 @@ export default function ReadQuizPage() {
       content += `${index + 1}. ${question.question} (${question.points || 1} poin)\n`
       if (question.type === "multiple_choice") {
         question.options?.forEach((option, optIndex: number) => {
-          const marker = question.correct_answer === optIndex ? "✓" : "○"
+          const marker = option.is_correct ? "✓" : "○"
           content += `${marker} ${String.fromCharCode(65 + optIndex)}. ${option.text}\n`
         })
       } else {
@@ -222,7 +249,6 @@ export default function ReadQuizPage() {
         throw new Error("Gagal menyimpan jawaban");
       }
 
-      // Show results after successful submission
       setShowResults(true);
     } catch (error) {
       console.error("Error submitting quiz:", error);
@@ -244,14 +270,14 @@ export default function ReadQuizPage() {
   if (error || !quiz) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+        <div className="text-center p-4">
           <p className="text-red-600 mb-4">{error}</p>
           <Button onClick={() => router.back()}>Kembali</Button>
         </div>
       </div>
     )
   }
-
+  
   if (!quizStarted) {
     const mcCount = quiz.content.filter((q) => q.type === "multiple_choice").length
     const essayCount = quiz.content.filter((q) => q.type === "essay").length
@@ -290,7 +316,7 @@ export default function ReadQuizPage() {
                       </div>
                     )}
                   </div>
-                  <p>Estimasi waktu: {Math.ceil(quiz.content.length * 2)} menit</p>
+                  {quiz.content.length > 0 && <p>Estimasi waktu: {Math.ceil(quiz.content.length * 1.5)} menit</p>}
                 </div>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -298,20 +324,6 @@ export default function ReadQuizPage() {
                   <Button onClick={startQuiz} size="lg">
                     Mulai Kuis
                   </Button>
-                  <Button variant="outline" onClick={handleShare}>
-                    <Share2 className="h-4 w-4 mr-2" />
-                    Share
-                  </Button>
-                  <Button variant="outline" onClick={handleDownload}>
-                    <DownloadIcon className="h-4 w-4 mr-2" />
-                    Download
-                  </Button>
-                  <Link href={`/quiz?id=${quiz.id}`}>
-                    <Button variant="outline">
-                      <Edit className="h-4 w-4 mr-2" />
-                      Edit
-                    </Button>
-                  </Link>
                 </div>
               </CardContent>
             </Card>
@@ -324,6 +336,7 @@ export default function ReadQuizPage() {
   if (showResults) {
     const { score, totalPoints, mcScore, essayCount } = calculateScore()
     const timeTaken = getTimeTaken()
+    const mcTotalPoints = totalPoints - (quiz.content.filter(q => q.type === 'essay').reduce((sum, q) => sum + (q.points || 1), 0));
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
@@ -336,8 +349,7 @@ export default function ReadQuizPage() {
                   <div className="text-6xl font-bold text-green-600">{score}%</div>
                   <div className="space-y-2 text-gray-600">
                     <p className="text-xl">
-                      Pilihan Ganda: {mcScore} dari{" "}
-                      {totalPoints - essayCount * (quiz.content.find((q) => q.type === "essay")?.points || 1)} poin
+                      Pilihan Ganda: {mcScore} dari {mcTotalPoints} poin
                     </p>
                     {essayCount > 0 && (
                       <p className="text-lg text-blue-600">{essayCount} jawaban essay perlu diperiksa manual</p>
@@ -364,11 +376,11 @@ export default function ReadQuizPage() {
               </CardContent>
             </Card>
 
-            {/* Detailed Results */}
             <div className="space-y-6">
               {quiz.content.map((question: QuizQuestion, index: number) => {
                 const userAnswer = answers[index]
-                const isCorrect = question.type === "multiple_choice" && userAnswer.answer === question.correct_answer
+                const correctAnswerIndex = question.options?.findIndex(opt => opt.is_correct) ?? -1;
+                const isCorrect = question.type === "multiple_choice" && userAnswer.answer === correctAnswerIndex;
 
                 return (
                   <Card key={index}>
@@ -394,7 +406,7 @@ export default function ReadQuizPage() {
                         <div className="space-y-2">
                           {question.options?.map((option, optIndex: number) => {
                             let className = "p-3 rounded border "
-                            if (optIndex === question.correct_answer) {
+                            if (option.is_correct) {
                               className += "bg-green-100 border-green-300 text-green-800"
                             } else if (optIndex === userAnswer.answer && !isCorrect) {
                               className += "bg-red-100 border-red-300 text-red-800"
@@ -405,10 +417,10 @@ export default function ReadQuizPage() {
                             return (
                               <div key={optIndex} className={className}>
                                 {String.fromCharCode(65 + optIndex)}. {option.text}
-                                {optIndex === question.correct_answer && (
+                                {option.is_correct && (
                                   <span className="ml-2 font-medium">✓ Jawaban Benar</span>
                                 )}
-                                {optIndex === userAnswer.answer && !isCorrect && (
+                                {optIndex === userAnswer.answer && !option.is_correct && (
                                   <span className="ml-2 font-medium">✗ Jawaban Anda</span>
                                 )}
                               </div>
@@ -420,17 +432,17 @@ export default function ReadQuizPage() {
                           <div className="p-3 bg-blue-50 rounded border border-blue-200">
                             <strong className="text-blue-800">Jawaban Anda:</strong>
                             <p className="text-blue-700 mt-1 whitespace-pre-wrap">
-                              {userAnswer.answer || "Tidak ada jawaban"}
+                              {userAnswer.answer as string || "Tidak ada jawaban"}
                             </p>
                           </div>
                         </div>
                       )}
                       {question.explanation && (
-                        <div className="mt-4 p-3 bg-blue-50 rounded border border-blue-200">
-                          <strong className="text-blue-800">
+                        <div className="mt-4 p-3 bg-yellow-50 rounded border border-yellow-200">
+                          <strong className="text-yellow-800">
                             {question.type === "essay" ? "Panduan Penilaian:" : "Penjelasan:"}
                           </strong>
-                          <p className="text-blue-700 mt-1">{question.explanation}</p>
+                          <p className="text-yellow-700 mt-1">{question.explanation}</p>
                         </div>
                       )}
                     </CardContent>
@@ -484,9 +496,9 @@ export default function ReadQuizPage() {
             <CardContent>
               {currentQ.type === "multiple_choice" ? (
                 <div className="space-y-3">
-                  {currentQ.options?.map((option, index: number) => (
+                  {currentQ.options?.map((option, index) => (
                     <button
-                      key={index}
+                      key={option.id}
                       onClick={() => handleAnswerSelect(index)}
                       className={`w-full p-4 text-left rounded-lg border transition-colors ${
                         currentAnswer.answer === index
@@ -508,7 +520,6 @@ export default function ReadQuizPage() {
                     rows={6}
                     className="w-full"
                   />
-                  <p className="text-xs text-gray-500">Minimal 10 karakter untuk melanjutkan</p>
                 </div>
               )}
 
