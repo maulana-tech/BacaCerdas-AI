@@ -12,6 +12,7 @@ import { generateSummaryPDF } from "@/lib/pdf-utils" //
 import { Save, Download, Home, Eye } from "lucide-react"
 import Link from "next/link"
 import { HomeAppLayout } from "@/app/home/components/home-app-layout"
+import useTiptapEditor from "@/hooks/use-tiptap-editor"
 
 export default function SummaryPageGuru() { 
   const [title, setTitle] = useState("")
@@ -30,6 +31,15 @@ export default function SummaryPageGuru() {
       loadSummary(id)
     }
   }, [searchParams])
+
+  const editor = useTiptapEditor({
+    options: {
+      content,
+      onUpdate: ({ editor }) => {
+        setContent(editor.getHTML());
+      },
+    }
+  });
 
   const loadSummary = async (id: string) => {
     console.log(
@@ -155,12 +165,18 @@ export default function SummaryPageGuru() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Summary Content</label>
-                    <TipTapEditor
-                      content={content}
-                      onChange={setContent}
-                      placeholder="Start writing your summary here..."
-                    /> {/* */}
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Story Content</label>
+                    {
+                      editor ? (
+                        <TipTapEditor
+                          editor={editor}
+                        />
+                      ) : (
+                        <div className="border rounded-lg p-4 min-h-[400px] bg-gray-100 dark:bg-slate-800">
+                          <p className="text-gray-500 dark:text-gray-400 italic">Loading editor...</p>
+                        </div>
+                      )
+                    }
                   </div>
 
                   <div className="flex gap-2">
