@@ -14,9 +14,35 @@ import {
 import StoryCard from "./component/story-card"
 import { Search, Filter, ArrowUpDown, AlertCircle } from "lucide-react"
 
-import type { StoryApiResponse, StoryTagApiResponse } from "./action"
+
+import type { Story, StoryTag } from "@/lib/types" // Pastikan path ini benar
 import { HomeAppLayout } from "../../components/home-app-layout"
 import { AlertDialog, AlertDialogDescription } from "@/components/ui/alert-dialog"
+
+import { studentStories } from "@/lib/data/student-stories-data"
+import { storyTags } from "@/lib/data/story-tags-data"
+
+import { dummyUsers } from "@/lib/data/user-data"
+
+
+const USE_DUMMY_DATA = true;
+
+interface UserAttributes {
+  id: string;
+  name: string;
+}
+
+export interface StoryApiResponse {
+  attributes: Story & { thumbnailUrl: string };
+  relationships: {
+    Tag?: { attributes: StoryTag };
+    User?: { attributes: UserAttributes }; // User sekarang menjadi bagian dari relationships
+  };
+}
+
+export interface StoryTagApiResponse {
+  attributes: StoryTag;
+}
 
 export default function SiswaStoriesPage() {
   const [stories, setStories] = useState<StoryApiResponse[]>([])
@@ -29,17 +55,8 @@ export default function SiswaStoriesPage() {
   const { data: session, status } = useSession()
   const router = useRouter()
 
-  useEffect(() => {
-    if (status === "loading") return
-    if (!session) {
-      router.push("/login")
-      return
-    }
-    fetchStories()
-    fetchTags()
-  }, [session, status, sortBy, selectedTag])
-
   const fetchTags = async () => {
+
     try {
       const response = await fetch("/api/story/tags", {
         method: "GET",
@@ -59,6 +76,7 @@ export default function SiswaStoriesPage() {
   }
 
   const fetchStories = async () => {
+
     try {
       setError(null)
       const response = await fetch("/api/story", {
@@ -71,25 +89,7 @@ export default function SiswaStoriesPage() {
       }
 
       const data = await response.json()
-      let filteredStories = data.data
-
-      // Sort stories based on creation date
-      filteredStories = filteredStories.sort((a: StoryApiResponse, b: StoryApiResponse) => {
-        if (sortBy === "newest") {
-          return new Date(b.attributes.createdAt).getTime() - new Date(a.attributes.createdAt).getTime()
-        } else {
-          return new Date(a.attributes.createdAt).getTime() - new Date(b.attributes.createdAt).getTime()
-        }
-      })
-
-      // Filter by tag if selected
-      if (selectedTag !== "all") {
-        filteredStories = filteredStories.filter(
-          (story: StoryApiResponse) => story.relationships?.Tag?.attributes.tag === selectedTag
-        )
-      }
-
-      setStories(filteredStories)
+      setStories(data.data)
     } catch (error) {
       console.error("Error fetching stories:", error)
       setError("Failed to load stories. Please try again later.")
@@ -97,12 +97,72 @@ export default function SiswaStoriesPage() {
       setIsLoading(false)
     }
   }
+  
+  const loadDummyData = () => {
+    console.log("Memuat data dummy...");
+    const timer = setTimeout(() => {
+        // Adaptasi data untuk menyertakan Tag dan User
+        const adaptedStories: StoryApiResponse[] = studentStories.map(story => {
+            const tagData = storyTags.find(t => t.id === story.tagId);
+            const userData = dummyUsers.find(u => u.id === story.userId); // Cari user
 
-  // Filter stories based on search term
-  const filteredStories = stories.filter(story => 
-    story.attributes.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    story.attributes.content.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+            return {
+                attributes: story,
+                relationships: {
+                    Tag: {
+                        attributes: tagData || { id: 'tag-unknown', tag: 'Tanpa Tag' }
+                    },
+                    User: { // Tambahkan data user ke relationships
+                        attributes: userData || { id: 'user-unknown', name: 'Penulis Anonim' }
+                    }
+                }
+            };
+        });
+        const adaptedTags: StoryTagApiResponse[] = storyTags.map(tag => ({
+            attributes: tag
+        }));
+
+        setStories(adaptedStories);
+        setTags(adaptedTags);
+        setIsLoading(false);
+    }, 1000);
+    return () => clearTimeout(timer);
+  }
+
+  useEffect(() => {
+    if (status === "loading") return
+    if (!session && !USE_DUMMY_DATA) {
+      router.push("/login")
+      return
+    }
+
+    if (USE_DUMMY_DATA) {
+      loadDummyData();
+    } else {
+      fetchStories();
+      fetchTags();
+    }
+
+  }, [session, status])
+
+  
+  // Logika filter dan sort (tidak ada perubahan, akan berfungsi dengan data baru)
+  const filteredAndSortedStories = stories
+    .filter(story => {
+        if (selectedTag !== "all") {
+            return story.relationships?.Tag?.attributes.tag === selectedTag;
+        }
+        return true;
+    })
+    .filter(story => 
+        story.attributes.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        story.attributes.content.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .sort((a, b) => {
+        const dateA = new Date(a.attributes.createdAt).getTime();
+        const dateB = new Date(b.attributes.createdAt).getTime();
+        return sortBy === "newest" ? dateB - dateA : dateA - dateB;
+    });
 
   return (
     <HomeAppLayout>
@@ -118,15 +178,13 @@ export default function SiswaStoriesPage() {
         </div>
 
         {error && (
-          <div className="mb-6">
-            <AlertDialog open={true}>
+          <div className="mb-6 flex items-center gap-2 text-red-500 bg-red-100 p-3 rounded-lg">
             <AlertCircle className="h-4 w-4" />
-            <AlertDialogDescription>{error}</AlertDialogDescription>
-          </AlertDialog>
+            <p>{error}</p>
           </div>
         )}
 
-        {/* Search and Filter Section */}
+        {/* Search and Filter Section (tidak ada perubahan) */}
         <div className="flex flex-col sm:flex-row gap-4 mb-8">
           <div className="relative flex-grow">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 h-4 w-4" />
@@ -170,7 +228,7 @@ export default function SiswaStoriesPage() {
           </div>
         </div>
 
-        {/* Story Grid */}
+        {/* Story Grid (tidak ada perubahan) */}
         {isLoading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[1, 2, 3, 4].map((i) => (
@@ -180,17 +238,17 @@ export default function SiswaStoriesPage() {
               />
             ))}
           </div>
-        ) : filteredStories.length === 0 ? (
+        ) : filteredAndSortedStories.length === 0 ? (
           <div className="text-center py-12">
             <p className="text-slate-600 dark:text-slate-300">
               {searchTerm ? "Tidak ada cerita yang sesuai dengan pencarian Anda" : 
-               selectedTag !== "all" ? `Tidak ada cerita dengan tag ${selectedTag}` :
+               selectedTag !== "all" ? `Tidak ada cerita dengan tag '${selectedTag}'` :
                "Belum ada cerita yang tersedia"}
             </p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {filteredStories.map((story) => (
+            {filteredAndSortedStories.map((story) => (
               <StoryCard key={story.attributes.id} {...story} />
             ))}
           </div>
