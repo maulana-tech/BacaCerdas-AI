@@ -1,192 +1,533 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
-import { HomeAppLayout } from "@/app/home/components/home-app-layout"
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card"
+import { useParams, useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Calendar, Clock, Search, BookOpen, Award } from "lucide-react"
-import ApiClient from "@/lib/api"
-import type { Quiz } from "@/lib/types"
+import { Progress } from "@/components/ui/progress"
+import { Textarea } from "@/components/ui/textarea"
 
-export default function QuizPageSiswa() {
-  const [quizzes, setQuizzes] = useState<Quiz[]>([])
-  const [filteredQuizzes, setFilteredQuizzes] = useState<Quiz[]>([])
-  const [isLoading, setIsLoading] = useState(true)
-  const [searchQuery, setSearchQuery] = useState("")
+import type { Quiz, QuizQuestion, QuizAnswer } from "@/lib/types"
+import { ArrowLeft, Check as CheckCircle, X as XCircle, RotateCw as RotateCcw, Share2, Download as DownloadIcon, Pencil as Edit, FileText, Clock as TimeIcon } from "lucide-react"
+import Link from "next/link"
+
+export default function ReadQuizPage() {
+  const [quiz, setQuiz] = useState<Quiz | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [answers, setAnswers] = useState<QuizAnswer[]>([])
+  const [showResults, setShowResults] = useState(false)
+  const [quizStarted, setQuizStarted] = useState(false)
+  const [startTime, setStartTime] = useState<Date | null>(null)
+  const [endTime, setEndTime] = useState<Date | null>(null)
+  const params = useParams()
   const router = useRouter()
+  const quizId = params.id as string
 
   useEffect(() => {
-    fetchQuizzes()
-  }, [])
-
-  useEffect(() => {
-    if (searchQuery.trim() === "") {
-      setFilteredQuizzes(quizzes)
-    } else {
-      const filtered = quizzes.filter(quiz =>
-        quiz.title.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-      setFilteredQuizzes(filtered)
+    if (quizId) {
+      loadQuiz(quizId)
     }
-  }, [searchQuery, quizzes])
+  }, [quizId])
 
-  const fetchQuizzes = async () => {
-    setIsLoading(true)
+  const loadQuiz = async (id: string) => {
     try {
-      // Simulasi data karena API belum diimplementasikan
-      // Dalam implementasi nyata, gunakan ApiClient untuk mengambil data
-      // const apiClient = new ApiClient()
-      // const response = await apiClient.instance.get('/quizzes')
-      // const data = response.data
-      
-      // Data simulasi
-      const mockQuizzes: Quiz[] = [
-        {
-          id: "1",
-          title: "Quiz Bahasa Indonesia",
-          content: [
-            {
-              question: "Apa yang dimaksud dengan paragraf?",
-              options: [
-                "Kumpulan kalimat yang saling berhubungan",
-                "Kumpulan kata yang membentuk kalimat",
-                "Bagian dari bab dalam buku",
-                "Tanda baca dalam tulisan"
-              ],
-              correct_answer: 0,
-              explanation: "Paragraf adalah kumpulan kalimat yang saling berhubungan dan membentuk satu kesatuan ide."
-            }
-          ],
-          created_at: "2023-06-15T08:30:00Z",
-          updated_at: "2023-06-15T08:30:00Z"
-        },
-        {
-          id: "2",
-          title: "Quiz Matematika Dasar",
-          content: [
-            {
-              question: "Berapakah hasil dari 7 x 8?",
-              options: ["54", "56", "58", "60"],
-              correct_answer: 1,
-              explanation: "7 x 8 = 56"
-            }
-          ],
-          created_at: "2023-06-16T10:15:00Z",
-          updated_at: "2023-06-16T10:15:00Z"
-        },
-        {
-          id: "3",
-          title: "Quiz Pengetahuan Umum",
-          content: [
-            {
-              question: "Apa ibukota Indonesia?",
-              options: ["Jakarta", "Bandung", "Surabaya", "Yogyakarta"],
-              correct_answer: 0,
-              explanation: "Jakarta adalah ibukota Indonesia."
-            }
-          ],
-          created_at: "2023-06-17T14:45:00Z",
-          updated_at: "2023-06-17T14:45:00Z"
-        }
-      ]
-      
-      setQuizzes(mockQuizzes)
-      setFilteredQuizzes(mockQuizzes)
+      const response = await fetch(`/api/quiz/${id}`, {
+        method: "GET",
+        cache: "no-store"
+      });
+
+      if (!response.ok) {
+        throw new Error("Kuis tidak ditemukan");
+      }
+
+      const result = await response.json();
+      const quizData = result.data;
+
+      if (quizData) {
+        setQuiz(quizData);
+        // Initialize answers array
+        const initialAnswers: QuizAnswer[] = quizData.content.map((question: QuizQuestion, index: number) => ({
+          questionIndex: index,
+          type: question.type || "multiple_choice",
+          answer: question.type === "essay" ? "" : -1,
+        }));
+        setAnswers(initialAnswers);
+      } else {
+        throw new Error("Data kuis tidak valid");
+      }
     } catch (error) {
-      console.error("Error fetching quizzes:", error)
+      console.error("Error loading quiz:", error);
+      setError(error instanceof Error ? error.message : "Gagal memuat kuis");
     } finally {
-      setIsLoading(false)
+      setLoading(false);
     }
   }
 
-  const handleStartQuiz = (quizId: string) => {
-    router.push(`/home/quiz/siswa/attempt?id=${quizId}`)
+  const handleAnswerSelect = (answerValue: number | string) => {
+    const newAnswers = [...answers]
+    newAnswers[currentQuestion].answer = answerValue
+    setAnswers(newAnswers)
   }
 
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString)
-    return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })
+  const handleNext = () => {
+    if (currentQuestion < quiz!.content.length - 1) {
+      setCurrentQuestion(currentQuestion + 1)
+    } else {
+      setEndTime(new Date())
+      setShowResults(true)
+    }
   }
 
-  return (
-    <HomeAppLayout>
-      <div className="flex justify-between items-center mb-6">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Daftar Quiz</h1>
-          <p className="text-gray-600 dark:text-gray-300">Pilih quiz yang ingin kamu kerjakan</p>
+  const handlePrevious = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1)
+    }
+  }
+
+  const calculateScore = () => {
+    if (!quiz) return { score: 0, totalPoints: 0, mcScore: 0, essayCount: 0 }
+
+    let correctPoints = 0
+    let totalPoints = 0
+    let essayCount = 0
+
+    quiz.content.forEach((question: QuizQuestion, index: number) => {
+      const points = question.points || 1
+      totalPoints += points
+
+      if (question.type === "multiple_choice") {
+        if (answers[index].answer === question.correct_answer) {
+          correctPoints += points
+        }
+      } else {
+        essayCount++
+      }
+    })
+
+    const mcScore = totalPoints > 0 ? Math.round((correctPoints / totalPoints) * 100) : 0
+
+    return {
+      score: mcScore,
+      totalPoints,
+      mcScore: correctPoints,
+      essayCount,
+    }
+  }
+
+  const resetQuiz = () => {
+    setCurrentQuestion(0)
+    const initialAnswers: QuizAnswer[] = quiz!.content.map((question: QuizQuestion, index: number) => ({
+      questionIndex: index,
+      type: question.type || "multiple_choice",
+      answer: question.type === "essay" ? "" : -1,
+    }))
+    setAnswers(initialAnswers)
+    setShowResults(false)
+    setQuizStarted(false)
+    setStartTime(null)
+    setEndTime(null)
+  }
+
+  const startQuiz = () => {
+    setQuizStarted(true)
+    setStartTime(new Date())
+  }
+
+  const getTimeTaken = () => {
+    if (!startTime || !endTime) return ""
+    const diffMs = endTime.getTime() - startTime.getTime()
+    const minutes = Math.floor(diffMs / 60000)
+    const seconds = Math.floor((diffMs % 60000) / 1000)
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`
+  }
+
+  const isCurrentAnswerValid = () => {
+    const currentAnswer = answers[currentQuestion]
+    if (currentAnswer.type === "essay") {
+      return typeof currentAnswer.answer === "string" && currentAnswer.answer.trim().length > 0
+    } else {
+      return currentAnswer.answer !== -1
+    }
+  }
+
+  const handleShare = async () => {
+    if (navigator.share && quiz) {
+      try {
+        await navigator.share({
+          title: quiz.title,
+          text: `Coba kuis: ${quiz.title}`,
+          url: window.location.href,
+        })
+      } catch (error) {
+        console.log("Error sharing:", error)
+      }
+    } else {
+      navigator.clipboard.writeText(window.location.href)
+      alert("Link berhasil disalin ke clipboard!")
+    }
+  }
+
+  const handleDownload = () => {
+    if (!quiz) return
+    let content = `${quiz.title}\n\n`
+    quiz.content.forEach((question: QuizQuestion, index: number) => {
+      content += `${index + 1}. ${question.question} (${question.points || 1} poin)\n`
+      if (question.type === "multiple_choice") {
+        question.options?.forEach((option, optIndex: number) => {
+          const marker = question.correct_answer === optIndex ? "✓" : "○"
+          content += `${marker} ${String.fromCharCode(65 + optIndex)}. ${option.text}\n`
+        })
+      } else {
+        content += "[Pertanyaan Essay]\n"
+      }
+      if (question.explanation) {
+        content += `${question.type === "essay" ? "Panduan Penilaian" : "Penjelasan"}: ${question.explanation}\n`
+      }
+      content += "\n"
+    })
+
+    const blob = new Blob([content], { type: "text/plain" })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = `${quiz.title}.txt`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
+
+  const submitQuiz = async () => {
+    if (!quiz || !startTime) return;
+    
+    setEndTime(new Date());
+    
+    try {
+      const response = await fetch(`/api/quiz/${quiz.id}/submit`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          answers,
+          startTime: startTime.toISOString(),
+          endTime: new Date().toISOString(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Gagal menyimpan jawaban");
+      }
+
+      // Show results after successful submission
+      setShowResults(true);
+    } catch (error) {
+      console.error("Error submitting quiz:", error);
+      alert("Gagal menyimpan jawaban. Mohon coba lagi.");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
+          <p>Memuat kuis...</p>
         </div>
       </div>
+    )
+  }
 
-      <div className="mb-6">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500 dark:text-gray-400" />
-          <Input
-            placeholder="Cari quiz..."
-            className="pl-10"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+  if (error || !quiz) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-red-600 mb-4">{error}</p>
+          <Button onClick={() => router.back()}>Kembali</Button>
         </div>
       </div>
+    )
+  }
 
-      {isLoading ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
-            <Card key={i} className="animate-pulse">
-              <CardContent className="p-6">
-                <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2 w-3/4"></div>
-                <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      ) : filteredQuizzes.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredQuizzes.map((quiz) => (
-            <Card key={quiz.id} className="overflow-hidden transition-all hover:shadow-md">
-              <CardHeader>
-                <CardTitle>{quiz.title}</CardTitle>
-                <CardDescription>
-                  <div className="flex items-center mt-2">
-                    <Calendar className="h-4 w-4 mr-1 text-gray-500" />
-                    <span className="text-sm text-gray-500">{formatDate(quiz.created_at)}</span>
+  if (!quizStarted) {
+    const mcCount = quiz.content.filter((q) => q.type === "multiple_choice").length
+    const essayCount = quiz.content.filter((q) => q.type === "essay").length
+    const totalPoints = quiz.content.reduce((sum, q) => sum + (q.points || 1), 0)
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-2xl mx-auto">
+            <Button variant="ghost" onClick={() => router.back()} className="mb-6">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Kembali
+            </Button>
+
+            <Card className="text-center">
+              <CardHeader className="pb-4">
+                <Badge variant="secondary" className="w-fit mx-auto mb-4">
+                  Kuis
+                </Badge>
+                <CardTitle className="text-3xl mb-4">{quiz.title}</CardTitle>
+                <div className="space-y-2 text-gray-600">
+                  <p>
+                    {quiz.content.length} pertanyaan total ({totalPoints} poin)
+                  </p>
+                  <div className="flex justify-center gap-4 text-sm">
+                    {mcCount > 0 && (
+                      <div className="flex items-center gap-1">
+                        <CheckCircle className="h-4 w-4" />
+                        {mcCount} Pilihan Ganda
+                      </div>
+                    )}
+                    {essayCount > 0 && (
+                      <div className="flex items-center gap-1">
+                        <FileText className="h-4 w-4" />
+                        {essayCount} Essay
+                      </div>
+                    )}
                   </div>
-                </CardDescription>
+                  <p>Estimasi waktu: {Math.ceil(quiz.content.length * 2)} menit</p>
+                </div>
               </CardHeader>
-              <CardContent>
-                <div className="flex items-center space-x-4 mb-4">
-                  <Badge variant="outline" className="flex items-center gap-1">
-                    <BookOpen className="h-3 w-3" />
-                    <span>{quiz.content.length} Pertanyaan</span>
-                  </Badge>
+              <CardContent className="space-y-6">
+                <div className="flex justify-center gap-4">
+                  <Button onClick={startQuiz} size="lg">
+                    Mulai Kuis
+                  </Button>
+                  <Button variant="outline" onClick={handleShare}>
+                    <Share2 className="h-4 w-4 mr-2" />
+                    Share
+                  </Button>
+                  <Button variant="outline" onClick={handleDownload}>
+                    <DownloadIcon className="h-4 w-4 mr-2" />
+                    Download
+                  </Button>
+                  <Link href={`/quiz?id=${quiz.id}`}>
+                    <Button variant="outline">
+                      <Edit className="h-4 w-4 mr-2" />
+                      Edit
+                    </Button>
+                  </Link>
                 </div>
               </CardContent>
-              <CardFooter className="flex justify-between border-t p-4">
-                <Button 
-                  onClick={() => handleStartQuiz(quiz.id)}
-                  className="w-full"
-                >
-                  Mulai Quiz
-                </Button>
-              </CardFooter>
             </Card>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center py-12">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-100 dark:bg-gray-800 mb-4">
-            <Search className="h-8 w-8 text-gray-500 dark:text-gray-400" />
           </div>
-          <h3 className="text-lg font-medium text-gray-900 dark:text-white mb-2">Tidak ada quiz ditemukan</h3>
-          <p className="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
-            Tidak ada quiz yang sesuai dengan pencarian Anda. Coba kata kunci lain atau hapus filter pencarian.
-          </p>
         </div>
-      )}
-    </HomeAppLayout>
+      </div>
+    )
+  }
+
+  if (showResults) {
+    const { score, totalPoints, mcScore, essayCount } = calculateScore()
+    const timeTaken = getTimeTaken()
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+        <div className="container mx-auto px-4 py-8">
+          <div className="max-w-4xl mx-auto">
+            <Card className="text-center mb-8">
+              <CardHeader>
+                <CardTitle className="text-3xl mb-4">Hasil Kuis</CardTitle>
+                <div className="space-y-4">
+                  <div className="text-6xl font-bold text-green-600">{score}%</div>
+                  <div className="space-y-2 text-gray-600">
+                    <p className="text-xl">
+                      Pilihan Ganda: {mcScore} dari{" "}
+                      {totalPoints - essayCount * (quiz.content.find((q) => q.type === "essay")?.points || 1)} poin
+                    </p>
+                    {essayCount > 0 && (
+                      <p className="text-lg text-blue-600">{essayCount} jawaban essay perlu diperiksa manual</p>
+                    )}
+                    {timeTaken && (
+                      <div className="flex items-center justify-center gap-2 text-sm">
+                        <TimeIcon className="h-4 w-4" />
+                        Waktu: {timeTaken}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <div className="flex justify-center gap-4">
+                  <Button onClick={resetQuiz}>
+                    <RotateCcw className="h-4 w-4 mr-2" />
+                    Ulangi Kuis
+                  </Button>
+                  <Button variant="outline" onClick={() => router.back()}>
+                    Kembali
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Detailed Results */}
+            <div className="space-y-6">
+              {quiz.content.map((question: QuizQuestion, index: number) => {
+                const userAnswer = answers[index]
+                const isCorrect = question.type === "multiple_choice" && userAnswer.answer === question.correct_answer
+
+                return (
+                  <Card key={index}>
+                    <CardHeader>
+                      <div className="flex items-center gap-2">
+                        {question.type === "multiple_choice" ? (
+                          isCorrect ? (
+                            <CheckCircle className="h-5 w-5 text-green-600" />
+                          ) : (
+                            <XCircle className="h-5 w-5 text-red-600" />
+                          )
+                        ) : (
+                          <FileText className="h-5 w-5 text-blue-600" />
+                        )}
+                        <CardTitle className="text-lg">
+                          Pertanyaan {index + 1}: {question.question}
+                        </CardTitle>
+                        <Badge variant="outline">{question.points || 1} poin</Badge>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      {question.type === "multiple_choice" ? (
+                        <div className="space-y-2">
+                          {question.options?.map((option, optIndex: number) => {
+                            let className = "p-3 rounded border "
+                            if (optIndex === question.correct_answer) {
+                              className += "bg-green-100 border-green-300 text-green-800"
+                            } else if (optIndex === userAnswer.answer && !isCorrect) {
+                              className += "bg-red-100 border-red-300 text-red-800"
+                            } else {
+                              className += "bg-gray-50"
+                            }
+
+                            return (
+                              <div key={optIndex} className={className}>
+                                {String.fromCharCode(65 + optIndex)}. {option.text}
+                                {optIndex === question.correct_answer && (
+                                  <span className="ml-2 font-medium">✓ Jawaban Benar</span>
+                                )}
+                                {optIndex === userAnswer.answer && !isCorrect && (
+                                  <span className="ml-2 font-medium">✗ Jawaban Anda</span>
+                                )}
+                              </div>
+                            )
+                          })}
+                        </div>
+                      ) : (
+                        <div className="space-y-3">
+                          <div className="p-3 bg-blue-50 rounded border border-blue-200">
+                            <strong className="text-blue-800">Jawaban Anda:</strong>
+                            <p className="text-blue-700 mt-1 whitespace-pre-wrap">
+                              {userAnswer.answer || "Tidak ada jawaban"}
+                            </p>
+                          </div>
+                        </div>
+                      )}
+                      {question.explanation && (
+                        <div className="mt-4 p-3 bg-blue-50 rounded border border-blue-200">
+                          <strong className="text-blue-800">
+                            {question.type === "essay" ? "Panduan Penilaian:" : "Penjelasan:"}
+                          </strong>
+                          <p className="text-blue-700 mt-1">{question.explanation}</p>
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                )
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  const currentQ = quiz.content[currentQuestion]
+  const progress = ((currentQuestion + 1) / quiz.content.length) * 100
+  const currentAnswer = answers[currentQuestion]
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50">
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-3xl mx-auto">
+          {/* Progress Header */}
+          <div className="mb-8">
+            <div className="flex justify-between items-center mb-4">
+              <Button variant="ghost" onClick={() => router.back()}>
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Keluar
+              </Button>
+              <div className="text-right">
+                <span className="text-sm text-gray-600">
+                  Pertanyaan {currentQuestion + 1} dari {quiz.content.length}
+                </span>
+                <div className="flex items-center gap-2 mt-1">
+                  <Badge variant={currentQ.type === "essay" ? "secondary" : "default"}>
+                    {currentQ.type === "essay" ? "Essay" : "Pilihan Ganda"}
+                  </Badge>
+                  <Badge variant="outline">{currentQ.points || 1} poin</Badge>
+                </div>
+              </div>
+            </div>
+            <Progress value={progress} className="h-2" />
+          </div>
+
+          {/* Question Card */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-xl">
+                {currentQuestion + 1}. {currentQ.question}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              {currentQ.type === "multiple_choice" ? (
+                <div className="space-y-3">
+                  {currentQ.options?.map((option, index: number) => (
+                    <button
+                      key={index}
+                      onClick={() => handleAnswerSelect(index)}
+                      className={`w-full p-4 text-left rounded-lg border transition-colors ${
+                        currentAnswer.answer === index
+                          ? "bg-blue-100 border-blue-300 text-blue-800"
+                          : "bg-white border-gray-200 hover:bg-gray-50"
+                      }`}
+                    >
+                      <span className="font-medium">{String.fromCharCode(65 + index)}.</span> {option.text}
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  <label className="block text-sm font-medium text-gray-700">Tulis jawaban Anda:</label>
+                  <Textarea
+                    value={currentAnswer.answer as string}
+                    onChange={(e) => handleAnswerSelect(e.target.value)}
+                    placeholder="Ketik jawaban essay Anda di sini..."
+                    rows={6}
+                    className="w-full"
+                  />
+                  <p className="text-xs text-gray-500">Minimal 10 karakter untuk melanjutkan</p>
+                </div>
+              )}
+
+              <div className="flex justify-between mt-8">
+                <Button variant="outline" onClick={handlePrevious} disabled={currentQuestion === 0}>
+                  Sebelumnya
+                </Button>
+                <Button
+                  onClick={handleNext}
+                  disabled={!isCurrentAnswerValid()}
+                  className={currentQuestion === quiz.content.length - 1 ? "bg-green-600 hover:bg-green-700" : ""}
+                >
+                  {currentQuestion === quiz.content.length - 1 ? "Selesai" : "Selanjutnya"}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
   )
 }
