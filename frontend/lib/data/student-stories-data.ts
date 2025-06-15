@@ -7,12 +7,12 @@ export const studentStories: StoryWithThumbnail[] = [
     id: 'story-001',
     title: 'Kancil dan Buaya yang Cerdik',
     content: 'Kisah klasik tentang si kancil yang menggunakan kecerdikannya untuk menyeberangi sungai yang penuh dengan buaya lapar.',
-    type: 'Fabel', // Properti 'type' ditambahkan
-    userId: 'user-guru-alpha', // ID pembuat cerita
-    tagId: 'tag-01', // Merujuk ke tag "Fabel"
+    type: 'Fabel',
+    userId: 'user-guru-alpha',
+    tagId: 'tag-01',
     createdAt: new Date('2025-06-10T09:00:00Z'),
     updatedAt: new Date('2025-06-10T09:00:00Z'),
-    thumbnailUrl: '/images/thumbnails/kancil-dan-buaya.png',
+    thumbnailUrl: '/images/thumbnails/kancil-dan-buaya.jpg',
   },
   {
     id: 'story-002',
@@ -20,10 +20,10 @@ export const studentStories: StoryWithThumbnail[] = [
     content: 'Cerita rakyat dari Sumatera Barat tentang seorang anak yang durhaka pada ibunya dan dikutuk menjadi batu.',
     type: 'Legenda',
     userId: 'user-guru-alpha',
-    tagId: 'tag-02', // Merujuk ke tag "Legenda"
+    tagId: 'tag-02',
     createdAt: new Date('2025-06-11T14:00:00Z'),
     updatedAt: new Date('2025-06-11T14:00:00Z'),
-    thumbnailUrl: '/images/thumbnails/malin-kundang.png',
+    thumbnailUrl: '/images/thumbnails/malin-kundang.jpg',
   },
   {
     id: 'story-003',
@@ -31,9 +31,9 @@ export const studentStories: StoryWithThumbnail[] = [
     content: 'Kisah tentang dua saudara tiri dengan sifat yang bertolak belakang dan pelajaran tentang kebaikan dan kejahatan.',
     type: 'Dongeng',
     userId: 'user-guru-bravo',
-    tagId: 'tag-03', // Merujuk ke tag "Dongeng"
+    tagId: 'tag-03',
     createdAt: new Date('2025-06-12T11:00:00Z'),
     updatedAt: new Date('2025-06-12T11:00:00Z'),
-    thumbnailUrl: '/images/thumbnails/bawang-merah-putih.png',
+    thumbnailUrl: '/images/thumbnails/bawang-merah-putih.jpg',
   },
 ];
