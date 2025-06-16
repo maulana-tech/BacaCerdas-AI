@@ -30,7 +30,7 @@ export default class Router {
     this.router.use(new UserRouter().routes);
     this.router.use(new UserStoryRouter().routes);
     this.router.use(new QuizzRouter().routes);
-    this.router.use(new SummaryRouter().getRouter());
+    this.router.use(new SummaryRouter().routes);
 
     app.use((req: Request, res: Response, next: NextFunction) => {
       // Handle 404 errors
