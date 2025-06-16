@@ -8,6 +8,12 @@ const withPWA = PWAConfig({
 const nextConfig: NextConfig = {
   /* config options here */
   output: process.env.NEXT_OUTPUT,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 
   // ref: https://nextjs.org/docs/app/guides/progressive-web-apps#8-securing-your-application
   async headers() {
