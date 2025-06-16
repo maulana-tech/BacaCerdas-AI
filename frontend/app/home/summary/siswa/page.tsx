@@ -1,170 +1,170 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useSearchParams, useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button" //
-import { Input } from "@/components/ui/input" //
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card" //
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs" //
-import TipTapEditor from "@/components/tiptap-editor" //
-import FileUpload from "@/components/ui/file-upload" //
-import { generateSummaryPDF } from "@/lib/pdf-utils" //
-import { Save, Download, Home, Eye } from "lucide-react"
 import Link from "next/link"
-import { HomeAppLayout } from "@/app/home/components/home-app-layout"
+import {
+  getStudentSummaries,
+  getSummaryById,
+  saveSummaryAction,
+  getCourses,
+} from "./action"
+
+// Hooks
 import useTiptapEditor from "@/hooks/use-tiptap-editor"
 
-export default function SummaryPageGuru() { 
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
-  const [generating, setGenerating] = useState(false)
-  const [saving, setSaving] = useState(false)
-  const [summaryId, setSummaryId] = useState<string | null>(null)
-  const [activeTab, setActiveTab] = useState("upload")
-  const searchParams = useSearchParams()
-  const router = useRouter()
+// Komponen UI & Layout
+import { HomeAppLayout } from "@/app/home/components/home-app-layout"
+import { Button } from "@/components/ui/button"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import TipTapEditor from "@/components/tiptap-editor"
+import { Skeleton } from "@/components/ui/skeleton"
+import { toast } from "sonner"
 
-  useEffect(() => {
-    const id = searchParams.get("id")
-    if (id) {
-      setSummaryId(id)
-      loadSummary(id)
-    }
-  }, [searchParams])
+// Tipe Data
+import type { SummarizedCourse, Course } from "@/lib/types"
+
+// Icons
+import { BookOpen, Edit, Eye, PlusCircle, Save, ArrowLeft } from "lucide-react"
+
+type ViewMode = "list" | "editor"
+
+const SummaryEditorView = ({
+  summaryData,
+  onBack,
+  onSaveSuccess,
+}: {
+  summaryData: SummarizedCourse | null
+  onBack: () => void
+  onSaveSuccess: () => void
+}) => {
+  const [summaryContent, setSummaryContent] = useState("")
+  const [courses, setCourses] = useState<Course[]>([])
+  const [selectedCourseId, setSelectedCourseId] = useState<string>("")
+  const [saving, setSaving] = useState(false)
 
   const editor = useTiptapEditor({
     options: {
-      content,
-      onUpdate: ({ editor }) => {
-        setContent(editor.getHTML());
-      },
+      content: summaryContent,
+      onUpdate: ({ editor }) => setSummaryContent(editor.getHTML()),
+    },
+  })
+
+  useEffect(() => {
+    // Ambil daftar course untuk dropdown
+    const fetchCourses = async () => {
+      const courseList = await getCourses()
+      setCourses(courseList)
     }
-  });
+    fetchCourses()
 
-  const loadSummary = async (id: string) => {
-    console.log(
-      `loadSummary called for ID: ${id}, but database fetching is disabled.`
-    )
-  }
-
-  const handleFileUpload = async (file: File) => {
-    setGenerating(true)
-    try {
-      const formData = new FormData()
-      formData.append("file", file)
-
-      const parseResponse = await fetch("/api/parse-document", {
-        method: "POST",
-        body: formData,
-      })
-
-      if (!parseResponse.ok) throw new Error("Failed to parse document")
-
-      const { content: documentContent, filename } = await parseResponse.json()
-
-      const summaryResponse = await fetch("/api/generate-summary", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: documentContent, title: filename }),
-      })
-
-      if (!summaryResponse.ok) throw new Error("Failed to generate summary")
-
-      const { summary } = await summaryResponse.json()
-
-      setContent(summary)
-      setTitle(`Summary of ${filename}`)
-      setActiveTab("edit")
-    } catch (error) {
-      console.error("Error generating summary:", error)
-      alert("Failed to generate summary from document.")
-    } finally {
-      setGenerating(false)
+    if (summaryData) {
+      // Mode Edit: Isi form dengan data yang ada
+      setSummaryContent(summaryData.summary)
+      setSelectedCourseId(summaryData.courseId)
+    } else {
+      // Mode Create: Kosongkan form
+      setSummaryContent("")
+      setSelectedCourseId("")
     }
-  }
+  }, [summaryData])
+
+  useEffect(() => {
+
+    if (editor && !editor.isDestroyed && summaryContent !== editor.getHTML()) {
+      editor.commands.setContent(summaryContent)
+    }
+  }, [summaryContent, editor])
 
   const handleSave = async () => {
-    if (!title.trim()) {
-      alert("Summary title cannot be empty.")
+    if (!selectedCourseId) {
+      toast.error("Silakan pilih mata pelajaran terlebih dahulu.")
       return
     }
+    if (!summaryContent.trim()) {
+      toast.error("Konten rangkuman tidak boleh kosong.")
+      return
+    }
+
     setSaving(true)
     try {
-      console.log("Simulating summary save (database logic removed)...");
-      await new Promise(resolve => setTimeout(resolve, 1000));
-    } catch (error) {
-      console.error("Error during simulated save:", error);
+      await saveSummaryAction(
+        { summary: summaryContent, courseId: selectedCourseId },
+        summaryData?.id || null,
+      )
+      toast.success("Rangkuman berhasil disimpan.")
+      onSaveSuccess()
+    } catch (error: any) {
+      toast.error(error.message || "Gagal menyimpan rangkuman.")
     } finally {
       setSaving(false)
     }
   }
 
-  const handleDownload = () => {
-    if (!title.trim()) {
-      alert("Summary title cannot be empty.")
-      return
-    }
-    generateSummaryPDF(title, content) //
-  }
+  const courseTitle =
+    courses.find(c => c.id === selectedCourseId)?.name ||
+    summaryData?.Course?.name ||
+    "Pratinjau Rangkuman"
 
   return (
-    <HomeAppLayout> 
+    <div>
       <div className="flex justify-between items-center mb-6">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{summaryId ? "Edit Summary" : "Create New Summary"}</h1>
-          <p className="text-gray-600 dark:text-gray-300">Create summaries from documents or manually.</p>
-        </div>
-        <Link href="/home">
-          <Button variant="default">
-            <Home className="h-4 w-4 mr-2" />
-            Home
-          </Button>
-        </Link>
+        <h1 className="text-3xl font-bold">
+          {summaryData ? "Edit Rangkuman" : "Buat Rangkuman Baru"}
+        </h1>
+        <Button variant="outline" onClick={onBack}>
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Kembali ke Daftar
+        </Button>
       </div>
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div>
           <Card>
             <CardHeader>
-              <CardTitle>Summary Editor</CardTitle>
+              <CardTitle>Editor</CardTitle>
             </CardHeader>
-            <CardContent>
-              <Tabs value={activeTab} onValueChange={setActiveTab}>
-                <TabsList className="grid w-full grid-cols-2">
-                  <TabsTrigger value="upload">Upload Document</TabsTrigger>
-                  <TabsTrigger value="edit">Manual Edit</TabsTrigger>
-                </TabsList>
-
-                <TabsContent value="upload" className="space-y-4 mt-4">
-                  <div>
-                    <h3 className="text-lg font-medium mb-2">Upload Document for AI</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                      Upload PDF or Word files to generate summaries automatically.
-                    </p>
-                    <FileUpload onFileSelect={handleFileUpload} /> {/* */}
-                    {generating && (
-                      <div className="mt-4 text-center">
-                        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-2"></div>
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Generating summary with AI...</p>
-                      </div>
-                    )}
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="edit" className="space-y-4 mt-4">
-                  <div>
-                    <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Summary Title
-                    </label>
-                    <Input
-                      id="title"
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
-                      placeholder="Enter summary title..."
-                    />
-                  </div>
-
-                  <div>
+            <CardContent className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-2">
+                  Mata Pelajaran (Course)
+                </label>
+                <Select
+                  value={selectedCourseId}
+                  onValueChange={setSelectedCourseId}
+                  disabled={!!summaryData} // Nonaktifkan jika sedang mode edit
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Pilih mata pelajaran yang akan dirangkum..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {courses.map(course => (
+                      <SelectItem key={course.id} value={course.id}>
+                        {course.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {summaryData && (
+                  <p className="text-xs text-muted-foreground mt-1">
+                    Mata pelajaran tidak dapat diubah saat mengedit.
+                  </p>
+                )}
+              </div>
+              <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Story Content</label>
                     {
                       editor ? (
@@ -178,45 +178,192 @@ export default function SummaryPageGuru() {
                       )
                     }
                   </div>
-
-                  <div className="flex gap-2">
-                    <Button onClick={handleSave} disabled={saving}>
-                      <Save className="h-4 w-4 mr-2" />
-                      {saving ? "Saving..." : "Save"}
-                    </Button>
-                    <Button variant="outline" onClick={handleDownload}>
-                      <Download className="h-4 w-4 mr-2" />
-                      Download PDF
-                    </Button>
-                  </div>
-                </TabsContent>
-              </Tabs>
+              <Button onClick={handleSave} disabled={saving}>
+                <Save className="h-4 w-4 mr-2" />
+                {saving ? "Menyimpan..." : "Simpan Rangkuman"}
+              </Button>
             </CardContent>
           </Card>
         </div>
-
-        {/* Preview Section */}
         <div>
           <Card className="h-full">
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Eye className="h-5 w-5 mr-2" />
-                Real-time Preview
+                {courseTitle}
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="border rounded-lg p-4 min-h-[400px] bg-white dark:bg-slate-800">
-                {title && <h1 className="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{title}</h1>}
-                {content ? (
-                  <div className="prose prose-sm dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: content }} />
-                ) : (
-                  <p className="text-gray-500 dark:text-gray-400 italic">Summary preview will appear here as you type...</p>
-                )}
+              <div className="border rounded-lg p-4 min-h-[500px] bg-white">
+                <div
+                  className="prose prose-sm max-w-none"
+                  dangerouslySetInnerHTML={{ __html: summaryContent }}
+                />
               </div>
             </CardContent>
           </Card>
         </div>
       </div>
+    </div>
+  )
+}
+
+
+const SummaryListView = ({
+  summaries,
+  onEdit,
+  onCreate,
+  loading,
+}: {
+  summaries: SummarizedCourse[]
+  onEdit: (summary: SummarizedCourse) => void
+  onCreate: () => void
+  loading: boolean
+}) => {
+  const formatDate = (dateString: string) =>
+    new Date(dateString).toLocaleDateString("id-ID", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
+
+  const createSnippet = (content: string, maxLength: number = 100) => {
+    const textContent = content.replace(/<[^>]*>/g, "")
+    return textContent.length > maxLength
+      ? textContent.slice(0, maxLength) + "..."
+      : textContent
+  }
+
+  return (
+    <div>
+      <div className="flex items-center justify-between space-y-2 mb-6">
+        <h2 className="text-3xl font-bold tracking-tight">Daftar Rangkuman Saya</h2>
+        <Button onClick={onCreate}>
+          <PlusCircle className="mr-2 h-4 w-4" />
+          Buat Rangkuman Baru
+        </Button>
+      </div>
+
+      {loading ? (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Card key={i}>
+              <CardHeader>
+                <Skeleton className="h-6 w-3/4" />
+                <Skeleton className="h-4 w-1/2 mt-2" />
+              </CardHeader>
+              <CardContent>
+                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-full mt-2" />
+              </CardContent>
+              <CardFooter>
+                <Skeleton className="h-10 w-full" />
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      ) : summaries.length === 0 ? (
+        <div className="text-center py-10">
+          <p>Anda belum membuat rangkuman. Klik "Buat Rangkuman Baru" untuk memulai.</p>
+        </div>
+      ) : (
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {summaries.map(summary => (
+            <Card key={summary.id} className="flex flex-col">
+              <CardHeader>
+                <CardTitle className="leading-tight">
+                  {summary.Course?.name || "Rangkuman"}
+                </CardTitle>
+                <CardDescription>
+                  Dibuat pada {formatDate(summary.createdAt)}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex-grow">
+                <p className="text-sm text-gray-600">{createSnippet(summary.summary)}</p>
+              </CardContent>
+              <CardFooter className="flex gap-2">
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  asChild
+                >
+                   <Link href={`/home/summary/siswa/${summary.id}`}><BookOpen className="mr-2 h-4 w-4" />Baca</Link>
+                </Button>
+                <Button className="w-full" onClick={() => onEdit(summary)}>
+                  <Edit className="mr-2 h-4 w-4" />
+                  Edit
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      )}
+    </div>
+  )
+}
+
+
+export default function SiswaSummaryPage() {
+  const [viewMode, setViewMode] = useState<ViewMode>("list")
+  const [summaries, setSummaries] = useState<SummarizedCourse[]>([])
+  const [loading, setLoading] = useState(true)
+  const [currentSummary, setCurrentSummary] = useState<SummarizedCourse | null>(null)
+
+  const fetchSummaries = async () => {
+    setLoading(true)
+    try {
+      const data = await getStudentSummaries()
+      setSummaries(data)
+    } catch (error: any) {
+      toast.error(error.message || "Gagal memuat daftar rangkuman.")
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchSummaries()
+  }, [])
+
+  const handleCreate = () => {
+    setCurrentSummary(null)
+    setViewMode("editor")
+  }
+
+  const handleEdit = (summary: SummarizedCourse) => {
+    setCurrentSummary(summary)
+    setViewMode("editor")
+  }
+
+  const handleBack = () => {
+    setViewMode("list")
+    setCurrentSummary(null)
+  }
+
+  const handleSaveSuccess = () => {
+    fetchSummaries()
+    setViewMode("list")
+    setCurrentSummary(null)
+  }
+
+  return (
+    <HomeAppLayout>
+      <ScrollArea className="h-full p-4 md:p-8 pt-6">
+        {viewMode === "list" ? (
+          <SummaryListView
+            summaries={summaries}
+            onEdit={handleEdit}
+            onCreate={handleCreate}
+            loading={loading}
+          />
+        ) : (
+          <SummaryEditorView
+            summaryData={currentSummary}
+            onBack={handleBack}
+            onSaveSuccess={handleSaveSuccess}
+          />
+        )}
+      </ScrollArea>
     </HomeAppLayout>
-  );
+  )
 }

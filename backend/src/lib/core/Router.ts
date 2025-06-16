@@ -15,6 +15,7 @@ import UserStoryRouter from "../../features/user-story/UserStoryRouter";
 import QuizzRouter from "../../features/quizz/QuizzRouter";
 
 import { NotFoundException } from "../exceptions";
+import SummaryRouter from "../../features/summary/SummaryRouter";
 
 export default class Router {
   static router = ExpressRouter();
@@ -29,6 +30,7 @@ export default class Router {
     this.router.use(new UserRouter().routes);
     this.router.use(new UserStoryRouter().routes);
     this.router.use(new QuizzRouter().routes);
+    this.router.use(new SummaryRouter().getRouter());
 
     app.use((req: Request, res: Response, next: NextFunction) => {
       // Handle 404 errors

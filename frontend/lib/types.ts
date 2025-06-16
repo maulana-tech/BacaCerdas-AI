@@ -141,8 +141,35 @@ export interface Quiz {
 export interface QuizAnswer {
   questionIndex: number
   type: "multiple_choice" | "essay"
-  answer: number | string // number for MC, string for essay
+  answer: number | string 
 }
+
+export type Course = {
+  id: string;
+  slug: string;
+  teacherId: string;
+  courseAssetId: string;
+  name: string;
+  description: string | null;
+  type: string; 
+  tags: string[];
+  createdAt: string; 
+  updatedAt: string;
+};
+
+export type SummarizedCourse = {
+  id: string;
+  courseId: string;
+  userId: string;
+  summary: string;
+  rating: number | null;
+  feedback: string | null;
+  createdAt: string;
+  updatedAt: string;
+
+  Course?: Course;
+  User?: UserAttributes;
+};
 
 export interface Summary {
   id: string
