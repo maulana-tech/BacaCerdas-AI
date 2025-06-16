@@ -308,23 +308,21 @@ const SummaryListView = ({
                   Dibuat pada {formatDate(summary.createdAt)}
                 </CardDescription>
               </CardHeader>
-              <CardContent className="flex-grow">
+              <CardContent className="space-y-4 flex-grow">
                 <p className="text-sm text-gray-600 dark:text-gray-400">{createSnippet(summary.summary)}</p>
               </CardContent>
-              <CardFooter className="flex gap-2">
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  asChild
-                >
-                   <Link href={`/home/summary/siswa/${summary.id}`}>
-                     <BookOpen className="mr-2 h-4 w-4" />
-                     Baca
-                   </Link>
+              <CardFooter className="flex items-center gap-2">
+                <Button variant="outline" className="w-full" asChild>
+                  <Link
+                    href={`/home/summary/siswa/${summary.id}`}
+                  >
+                    <BookOpen className="mr-2 h-4 w-4" />
+                    <span>Baca</span>
+                  </Link>
                 </Button>
                 <Button className="w-full" onClick={() => onEdit(summary)}>
                   <Edit className="mr-2 h-4 w-4" />
-                  Edit
+                  <span>Edit</span>
                 </Button>
               </CardFooter>
             </Card>
@@ -351,7 +349,7 @@ export default function SiswaSummaryPage() {
       console.log("API failed, using dummy data for demo")
       await simulateApiDelay(1000)
       setSummaries(dummySummarizedCourses)
-      toast.success("Data loaded in demo mode")
+      toast.info("Gagal memuat data asli, menampilkan data contoh.")
     } finally {
       setLoading(false)
     }
